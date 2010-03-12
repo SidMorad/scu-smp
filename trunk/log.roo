@@ -2,3 +2,4 @@
 hint
 project --topLevelPackage au.edu.scu.smp --projectName smp
 hint
+persistence setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE 
