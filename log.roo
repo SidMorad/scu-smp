@@ -3,3 +3,8 @@ hint
 project --topLevelPackage au.edu.scu.smp --projectName smp
 hint
 persistence setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE 
+hint
+entity --class ~.domain.Student
+hint
+field string --fieldName email --notNull --sizeMin 8 
+hint
