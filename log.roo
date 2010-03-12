@@ -8,3 +8,6 @@ entity --class ~.domain.Student
 hint
 field string --fieldName email --notNull --sizeMin 8 
 hint
+controller scaffold --class ~.web.controller.StudentController --entity ~.domain.Student
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-12 16:39:40
