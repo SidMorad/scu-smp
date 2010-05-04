@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<!-- HTTP security configurations -->
+    <http auto-config="true" use-expressions="true">
+    	<form-login login-processing-url="/static/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t"/>
+        <logout logout-url="/static/j_spring_security_logout"/>
+        
+        <!-- Configure these elements to secure URIs in your application -->
+        <intercept-url pattern="/coordinator/**" access="hasRole('ROLE_COORDINATOR')"/>
+        <intercept-url pattern="/member/**" access="isAuthenticated()" />
+        <intercept-url pattern="/resources/**" access="permitAll" />
+        <intercept-url pattern="/static/**" access="permitAll" />
+        <intercept-url pattern="/**" access="permitAll" />
+    </http>
+
+	<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
+
+	<beans:bean id="userService" class="au.edu.scu.smp.service.impl.UserServiceImpl"/>
+
+	<!-- Configure Authentication mechanism -->
+    <authentication-manager alias="authenticationManager">
+    	<authentication-provider user-service-ref="userService">
+	    	<password-encoder ref="passwordEncoder"/>
+    	</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

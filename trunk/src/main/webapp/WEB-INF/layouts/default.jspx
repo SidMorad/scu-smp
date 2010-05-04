@@ -6,8 +6,8 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" >  
 	
+    <jsp:output omit-xml-declaration="yes"/>		
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
-		
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=8" />		
@@ -57,7 +57,13 @@
 						    <a href="${logout}"><spring:message code="security.logout" /></a>
 					    </span>					    
 					</c:if>			    
-				    
+   				    <c:if test="${pageContext.request.userPrincipal == null}">	
+				    	<c:out value=" | "/>
+				    	<span>			    
+						    <c:url var="login" value="/login" />
+						    <a href="${login}"><spring:message code="label.login" /></a>
+					    </span>					    
+					</c:if>
 				    <roo:language />
 				    <roo:theme />
 				    				    

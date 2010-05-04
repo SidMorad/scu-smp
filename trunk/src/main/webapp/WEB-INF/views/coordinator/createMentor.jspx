@@ -1,0 +1,396 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+<script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+<spring:url value="/coordinator/mentor" var="form_url"/>
+<form:form action="${form_url}" method="POST" modelAttribute="newMentorFormBean">
+<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+
+<div id="_user_title_div">
+<spring:message code="label.user" var="entity_label"/>
+<spring:message arguments="${entity_label}" code="entity.info" var="title_msg"/>
+<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_user_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}', open : true}})); </script>
+	<div id="roo_user_username">
+	<label for="_username_id">Username:</label>
+	<form:input cssStyle="width:250px" id="_username_id" maxlength="30" path="user.username" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_username_error_id" path="user.username"/>
+	<spring:message arguments="Username" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Username,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_username_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_user_password">
+	<label for="_password_id">Password:</label>
+	<form:password cssStyle="width:250px" id="_password_id" maxlength="30" path="user.password" size="0" />
+	<br/>
+	<form:errors cssClass="errors" id="_password_error_id" path="user.password"/>
+	<spring:message arguments="Password" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Password,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_password_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_user_confirmPassword">
+	<label for="_confirmPassword_id">Confirm Password:</label>
+	<form:password cssStyle="width:250px" id="_confirmPassword_id" maxlength="30" path="user.confirmPassword" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_confirmPassword_error_id" path="user.confirmPassword"/>
+	<spring:message arguments="Confirm Password" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Confirm Password," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_confirmPassword_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_user_email">
+	<label for="_email_id">Email:</label>
+	<form:input cssStyle="width:250px" id="_email_id" maxlength="30" path="user.email" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_email_error_id" path="user.email"/>
+	<spring:message code="field.invalid.email" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Email," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_email_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_user_enabled">
+	<label for="_enabled_id">Enabled:</label>
+	<form:checkbox id="_enabled_id" path="user.enabled"/>
+	</div>
+<br/>
+	<div id="roo_user_accountExpired">
+	<label for="_accountExpired_id">Account Expired:</label>
+	<form:checkbox id="_accountExpired_id" path="user.accountExpired"/>
+	</div>
+<br/>
+	<div id="roo_user_accountLocked">
+	<label for="_accountLocked_id">Account Locked:</label>
+	<form:checkbox id="_accountLocked_id" path="user.accountLocked"/>
+	</div>
+<br/>
+	<div id="roo_user_credentialsExpired">
+	<label for="_credentialsExpired_id">Credentials Expired:</label>
+	<form:checkbox id="_credentialsExpired_id" path="user.credentialsExpired"/>
+	</div>
+</div>
+
+<div id="_student_title_div">
+<spring:message code="label.student" var="entity_label"/>
+<spring:message arguments="${entity_label}" code="entity.info" var="title_msg"/>
+<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_student_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}', open : false}})); </script>
+	<div id="roo_student_firstname">
+	<label for="_firstname_id">Firstname:</label>
+	<form:input cssStyle="width:250px" id="_firstname_id" maxlength="30" path="student.firstname" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_firstname_error_id" path="student.firstname"/>
+	<spring:message arguments="Firstname" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Firstname,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_firstname_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_lastname">
+	<label for="_lastname_id">Lastname:</label>
+	<form:input cssStyle="width:250px" id="_lastname_id" maxlength="30" path="student.lastname" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_lastname_error_id" path="student.lastname"/>
+	<spring:message arguments="Lastname" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Lastname,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_lastname_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_gender">
+	<label for="_gender_id">Gender:</label>
+	<form:errors cssClass="errors" id="_gender_error_id" path="student.gender"/>
+	<form:select cssStyle="width:250px" id="_gender_id" items="${gender_enum}" path="student.gender"/>
+	<br/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_gender_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_ageRange">
+	<label for="_ageRange_id">Age Range:</label>
+	<form:errors cssClass="errors" id="_ageRange_error_id" path="student.ageRange"/>
+	<form:select cssStyle="width:250px" id="_ageRange_id" items="${agerange_enum}" path="student.ageRange"/>
+	<br/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_ageRange_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_studentNumber">
+	<label for="_studentNumber_id">Student Number:</label>
+	<form:input cssStyle="width:250px" id="_studentNumber_id" maxlength="8" path="student.studentNumber" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_studentNumber_error_id" path="student.studentNumber"/>
+	<spring:message code="field.invalid.integer" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Student Number,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_studentNumber_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]{8}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_studentType">
+	<label for="_studentType_id">Student Type:</label>
+	<form:errors cssClass="errors" id="_studentType_error_id" path="student.studentType"/>
+	<form:select cssStyle="width:250px" id="_studentType_id" items="${studenttype_enum}" path="student.studentType"/>
+	<br/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_studentType_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_studyMode">
+	<label for="_studyMode_id">Study Mode:</label>
+	<form:errors cssClass="errors" id="_studyMode_error_id" path="student.studyMode"/>
+	<form:select cssStyle="width:250px" id="_studyMode_id" items="${studymode_enum}" path="student.studyMode"/>
+	<br/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_studyMode_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_course">
+	<label for="_course_id">Course:</label>
+	<form:input cssStyle="width:250px" id="_course_id" maxlength="30" path="student.course" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_course_error_id" path="student.course"/>
+	<spring:message arguments="Course" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Course,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_course_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_major">
+	<label for="_major_id">Major:</label>
+	<form:input cssStyle="width:250px" id="_major_id" maxlength="30" path="student.major" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_major_error_id" path="student.major"/>
+	<spring:message arguments="Major" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Major," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_major_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_firstYearComplete">
+	<label for="_firstYearComplete_id">First Year Complete:</label>
+	<form:checkbox id="_firstYearComplete_id" path="student.firstYearComplete"/>
+	</div>
+<br/>
+	<div id="roo_student_recommendedByStaff">
+	<label for="_recommendedByStaff_id">Recommended By Staff:</label>
+	<form:input cssStyle="width:250px" id="_recommendedByStaff_id" maxlength="30" path="student.recommendedByStaff" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_recommendedByStaff_error_id" path="student.recommendedByStaff"/>
+	<spring:message arguments="Recommended By Staff" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Recommended By Staff," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_recommendedByStaff_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_semestersCompeleted">
+	<label for="_semestersCompeleted_id">Semesters Compeleted:</label>
+	<form:input cssStyle="width:250px" id="_semestersCompeleted_id" maxlength="1" path="student.semestersCompeleted" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_semestersCompeleted_error_id" path="student.semestersCompeleted"/>
+	<spring:message code="field.invalid.integer" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Semesters Compeleted,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_semestersCompeleted_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', regExp: '-?[0-9]{1}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_student_international">
+	<label for="_international_id">International:</label>
+	<form:checkbox id="_international_id" path="student.international"/>
+	</div>
+<br/>
+	<div id="roo_student_trained">
+	<label for="_trained_id">Trained:</label>
+	<form:checkbox id="_trained_id" path="student.trained"/>
+	</div>
+<br/>
+	<div id="roo_student_myscuActivated">
+	<label for="_myscuActivated_id">Myscu Activated:</label>
+	<form:checkbox id="_myscuActivated_id" path="student.myscuActivated"/>
+	</div>
+</div>
+
+<div id="_contact_title_div">
+<spring:message code="label.contact" var="entity_label"/>
+<spring:message arguments="${entity_label}" code="entity.info" var="title_msg"/>
+<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_contact_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}', open : false}})); </script>
+	<div id="roo_contact_address">
+	<label for="_address_id">Address:</label>
+	<form:input cssStyle="width:250px" id="_address_id" path="contact.address" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_address_error_id" path="contact.address"/>
+	<spring:message arguments="Address" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Address,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_address_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_contact_city">
+	<label for="_city_id">City:</label>
+	<form:input cssStyle="width:250px" id="_city_id" maxlength="30" path="contact.city" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_city_error_id" path="contact.city"/>
+	<spring:message arguments="City" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="City,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_city_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_contact_postcode">
+	<label for="_postcode_id">Postcode:</label>
+	<form:input cssStyle="width:250px" id="_postcode_id" maxlength="30" path="contact.postcode" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_postcode_error_id" path="contact.postcode"/>
+	<spring:message arguments="Postcode" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Postcode,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_postcode_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_contact_phoneHome">
+	<label for="_phoneHome_id">Phone Home:</label>
+	<form:input cssStyle="width:250px" id="_phoneHome_id" maxlength="30" path="contact.phoneHome" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_phoneHome_error_id" path="contact.phoneHome"/>
+	<spring:message arguments="Phone Home" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Phone Home," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_phoneHome_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_contact_phoneWork">
+	<label for="_phoneWork_id">Phone Work:</label>
+	<form:input cssStyle="width:250px" id="_phoneWork_id" maxlength="30" path="contact.phoneWork" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_phoneWork_error_id" path="contact.phoneWork"/>
+	<spring:message arguments="Phone Work" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Phone Work," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_phoneWork_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_contact_mobile">
+	<label for="_mobile_id">Mobile:</label>
+	<form:input cssStyle="width:250px" id="_mobile_id" maxlength="30" path="contact.mobile" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_mobile_error_id" path="contact.mobile"/>
+	<spring:message arguments="Mobile" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Mobile," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_mobile_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_contact_email">
+	<label for="_email_id">Email:</label>
+	<form:input cssStyle="width:250px" id="_email_id" maxlength="30" path="contact.email" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_email_error_id" path="contact.email"/>
+	<spring:message code="field.invalid.email" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Email," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_email_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+</div>
+
+<div id="_matching_title_div">
+<spring:message code="label.matching" var="entity_label"/>
+<spring:message arguments="${entity_label}" code="entity.info" var="title_msg"/>
+<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_matching_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}', open: false}})); </script>
+	<div id="roo_matching_genderPrefer">
+	<label for="_genderPrefer_id">Gender Prefer:</label>
+	<form:errors cssClass="errors" id="_genderPrefer_error_id" path="matching.genderPrefer"/>
+	<form:select cssStyle="width:250px" id="_genderPrefer_id" items="${genderprefer_enum}" path="matching.genderPrefer"/>
+	<br/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_genderPrefer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_matching_workStatus">
+	<label for="_workStatus_id">Work Status:</label>
+	<form:errors cssClass="errors" id="_workStatus_error_id" path="matching.workStatus"/>
+	<form:select cssStyle="width:250px" id="_workStatus_id" items="${workstatus_enum}" path="matching.workStatus"/>
+	<br/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_workStatus_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	</div>
+<br/>
+	<div id="roo_matching_familyResponsibilities">
+	<label for="_familyResponsibilities_id">Family Responsibilities:</label>
+	<form:checkbox id="_familyResponsibilities_id" path="matching.familyResponsibilities"/>
+	</div>
+<br/>
+	<div id="roo_matching_tertiaryStudies">
+	<label for="_tertiaryStudies_id">Tertiary Studies:</label>
+	<form:checkbox id="_tertiaryStudies_id" path="matching.tertiaryStudies"/>
+	</div>
+<br/>
+	<div id="roo_matching_interests">
+	<label for="_interests_id">Interests:</label>
+	<form:input cssStyle="width:250px" id="_interests_id" path="matching.interests" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_interests_error_id" path="matching.interests"/>
+	<spring:message arguments="Interests" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Interests," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_interests_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_matching_comments">
+	<label for="_comments_id">Comments:</label>
+	<form:input cssStyle="width:250px" id="_comments_id" path="matching.comments" size="0"/>
+	<br/>
+	<form:errors cssClass="errors" id="_comments_error_id" path="matching.comments"/>
+	<spring:message arguments="Comments" code="field.invalid" var="field_invalid"/>
+	<spring:message code="field.required" var="field_required"/>
+	<spring:message argumentSeparator="," arguments="Comments," code="field.simple.validation" var="field_validation"/>
+	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_comments_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	</div>
+<br/>
+	<div id="roo_matching_preferOnCampus">
+	<label for="_preferOnCampus_id">Prefer On Campus:</label>
+	<form:checkbox id="_preferOnCampus_id" path="matching.preferOnCampus"/>
+	</div>
+<br/>
+	<div id="roo_matching_preferDistance">
+	<label for="_preferDistance_id">Prefer Distance:</label>
+	<form:checkbox id="_preferDistance_id" path="matching.preferDistance"/>
+	</div>
+<br/>
+	<div id="roo_matching_preferAustralian">
+	<label for="_preferAustralian_id">Prefer Australian:</label>
+	<form:checkbox id="_preferAustralian_id" path="matching.preferAustralian"/>
+	</div>
+<br/>
+	<div id="roo_matching_preferInternational">
+	<label for="_preferInternational_id">Prefer International:</label>
+	<form:checkbox id="_preferInternational_id" path="matching.preferInternational"/>
+	</div>
+<br/>
+	<div id="roo_matching_isRegional">
+	<label for="_isRegional_id">Is Regional:</label>
+	<form:checkbox id="_isRegional_id" path="matching.isRegional"/>
+	</div>
+<br/>
+	<div id="roo_matching_isDisability">
+	<label for="_isDisability_id">Is Disability:</label>
+	<form:checkbox id="_isDisability_id" path="matching.isDisability"/>
+	</div>
+<br/>
+	<div id="roo_matching_isSocioeconomic">
+	<label for="_isSocioeconomic_id">Is Socioeconomic:</label>
+	<form:checkbox id="_isSocioeconomic_id" path="matching.isSocioeconomic"/>
+	</div>
+<br/>
+	<div id="roo_matching_isNonEnglish">
+	<label for="_isNonEnglish_id">Is Non English:</label>
+	<form:checkbox id="_isNonEnglish_id" path="matching.isNonEnglish"/>
+	</div>
+<br/>
+	<div id="roo_matching_isIndigenous">
+	<label for="_isIndigenous_id">Is Indigenous:</label>
+	<form:checkbox id="_isIndigenous_id" path="matching.isIndigenous"/>
+	</div>
+</div>
+<div class="submit" id="roo_student_submit">
+<spring:message code="button.save" var="save_button"/>
+<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+<input id="proceed" type="submit" value="${save_button}"/>
+</div>
+</form:form>
+</div>

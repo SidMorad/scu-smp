@@ -11,3 +11,154 @@ hint
 controller scaffold --class ~.web.controller.StudentController --entity ~.domain.Student
 q
 // Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-12 16:39:40
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-15 15:19:15
+addon install --url https://anonsvn.springframework.org/svn/cloudfoundry_plugins/roo/com.cloudfoundry.roo.addon/trunk/releases/com.cloudfoundry.roo.addon-1.0.0.M1.zip
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-15 15:22:25
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-15 15:22:33
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-15 15:23:17
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-15 15:23:21
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-15 17:14:32
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-22 16:22:58
+persistence setup --database MYSQL --provider HIBERNATE  --userName root --password none --databaseName smp
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-22 16:34:46
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-22 16:42:37
+logging setup --level DEBUG 
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-22 17:13:26
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-22 17:13:37
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-22 17:18:02
+controller scaffold --class ~.web.controller.UserController --entity ~.domain.User
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-22 17:20:50
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-22 19:45:01
+field string --fieldName firstname --class ~.domain.Student --notNull
+field string --fieldName lastname --notNull
+entity --class ~.domain.Contact
+field string --fieldName address --notNull 
+field string --fieldName city --notNull
+field string --fieldName postcode --notNull 
+field string --fieldName phoneHome
+field string --fieldName phoneWork
+field string --fieldName mobile
+field string --fieldName email
+// [failed] field reference --type ~.domain.User --fieldName User --class ~.domain.Student --joinColumnName user_id
+field reference --type ~.domain.User --fieldName User --class ~.domain.Student --joinColumnName user_id --permitReservedWords 
+entity --class ~.domain.Study
+field number --type java.lang.Integer --fieldName studentNumber --max 8 --min  8 --notNull 
+enum type --class ~.domain.enums.StudyMode
+enum constant --name lismore
+enum constant --name coffs
+enum constant --name tweed
+enum constant --name port
+enum constant --name distance
+field enum --type ~.domain.enums.StudyMode --fieldName studyMode --class ~.domain.Study --enumType STRING --notNull
+field string --fieldName course --notNull
+field string --fieldName major
+field boolean --fieldName firstYearComplete
+field string --fieldName recommendedByStaff
+field string --fieldName semestersCompeleted --notNull true
+field boolean --fieldName international
+entity --class ~.domain.Matching
+enum type --class ~.domain.enums.AgeRange
+enum constant --name under25
+enum constant --name age25to30
+enum constant --name age30to40
+enum constant --name over40
+field enum --type ~.domain.enums.AgeRange --fieldName ageRange --class ~.domain.Matching --enumType STRING  --notNull
+enum type --class ~.domain.enums.Gender
+enum constant --name male
+enum constant --name female
+field enum --fieldName gender --type ~.domain.enums.Gender --class ~.domain.Matching --enumType STRING  --notNull 
+enum type --class ~.domain.enums.GenderPrefer
+enum constant --name doNotCare
+enum constant --name yes
+// [failed] enum constant --name no
+enum constant --name no --permitReservedWords 
+field enum --fieldName genderPrefer --type ~.domain.enums.GenderPrefer --class ~.domain.Matching --enumType STRING --notNull 
+enum type --class ~.domain.enums.WorkStatus
+enum constant --name full-time
+// [failed] enum constant --name part-time
+enum constant --name parttime
+enum constant --name casual
+enum constant --name donotwork
+field enum --type  ~.domain.enums.WorkStatus --fieldName workStatus --enumType STRING  --notNull 
+field enum --type  ~.domain.enums.WorkStatus --fieldName workStatus --enumType STRING  --notNull --class ~.domain.Matching
+field boolean --fieldName familyResponsibilities
+field boolean --fieldName tertiaryStudies
+field string --fieldName interests
+field string --fieldName comments
+field boolean --fieldName notDistance
+field boolean --fieldName notInternational
+field boolean --fieldName isRegional
+field boolean --fieldName isDisability
+field boolean --fieldName isSocioeconomic
+field boolean --fieldName isNonEnglish
+field boolean --fieldName isIndigenous
+field reference --type ~.domain.Contact --fieldName contact --class ~.domain.Student --joinColumnName contact_id
+field reference --type ~.domain.Study --fieldName study --class ~.domain.Student --joinColumnName study_id
+field reference --type ~.domain.Matching --fieldName matching --joinColumnName matching_id
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-22 20:54:10
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-03-22 20:54:20
+controller scaffold --class ~.web.controller.RoleController --entity ~.domain.Role
+controller scaffold --class ~.web.controller.ContactController
+// [failed] controller scaffold --class ~.web.controller.ContactController --entity ~.domain.Contact
+controller scaffold --class ~.web.controller.ContactController --entity ~.domain.Contact
+controller scaffold --class ~.web.controller.StudyController --entity ~.domain.Study
+controller scaffold --class ~.web.controller.MatchingController --entity ~.domain.Matching
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-03-22 20:58:56
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-04-23 17:25:38
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-04-23 17:26:05
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-04-23 17:27:44
+persistence setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE 
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-04-23 17:30:39
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-04-23 18:32:33
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-04-23 18:34:01
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-04-23 19:46:46
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-04-23 19:47:04
+// Spring Roo ENGINEERING BUILD [rev unknown] log opened at 2010-05-02 19:00:06
+q
+// Spring Roo ENGINEERING BUILD [rev unknown] log closed at 2010-05-02 19:01:02
+// Spring Roo ENGINEERING BUILD [rev unknown] log opened at 2010-05-02 19:01:15
+// Spring Roo 1.0.0.RELEASE [rev 564] log opened at 2010-05-02 19:04:35
+q
+// Spring Roo 1.0.0.RELEASE [rev 564] log closed at 2010-05-02 19:04:48
+// Spring Roo ENGINEERING BUILD [rev unknown] log opened at 2010-05-02 19:16:03
+q
+// Spring Roo ENGINEERING BUILD [rev unknown] log closed at 2010-05-02 19:38:15
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 10:04:29
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 10:05:57
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 11:03:06
+hint
+security setup
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 11:03:49
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 17:25:38
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 17:25:59
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 17:27:54
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 17:28:04
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 20:31:49
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 20:32:13
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 20:43:23
+hint
+finder list --class ~.domain.Matching
+finder list --class ~.domain.Matching --filter student
+finder list --class ~.domain.Matching
+finder list --class ~.domain.Matching --filter student
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 20:46:00
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 20:56:57
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 20:58:01
