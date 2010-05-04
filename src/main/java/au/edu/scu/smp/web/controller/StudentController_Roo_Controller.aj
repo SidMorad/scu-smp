@@ -1,6 +1,13 @@
 package au.edu.scu.smp.web.controller;
 
+import au.edu.scu.smp.domain.Contact;
+import au.edu.scu.smp.domain.Matching;
 import au.edu.scu.smp.domain.Student;
+import au.edu.scu.smp.domain.User;
+import au.edu.scu.smp.domain.enums.AgeRange;
+import au.edu.scu.smp.domain.enums.Gender;
+import au.edu.scu.smp.domain.enums.StudentType;
+import au.edu.scu.smp.domain.enums.StudyMode;
 import java.lang.Long;
 import java.lang.String;
 import javax.validation.Valid;
@@ -18,6 +25,13 @@ privileged aspect StudentController_Roo_Controller {
         if (student == null) throw new IllegalArgumentException("A student is required");
         if (result.hasErrors()) {
             modelMap.addAttribute("student", student);
+            modelMap.addAttribute("contacts", Contact.findAllContacts());
+            modelMap.addAttribute("matchings", Matching.findAllMatchings());
+            modelMap.addAttribute("users", User.findAllUsers());
+            modelMap.addAttribute("agerange_enum", AgeRange.class.getEnumConstants());
+            modelMap.addAttribute("gender_enum", Gender.class.getEnumConstants());
+            modelMap.addAttribute("studenttype_enum", StudentType.class.getEnumConstants());
+            modelMap.addAttribute("studymode_enum", StudyMode.class.getEnumConstants());
             return "student/create";
         }
         student.persist();
@@ -27,6 +41,13 @@ privileged aspect StudentController_Roo_Controller {
     @RequestMapping(value = "/student/form", method = RequestMethod.GET)
     public String StudentController.createForm(ModelMap modelMap) {
         modelMap.addAttribute("student", new Student());
+        modelMap.addAttribute("contacts", Contact.findAllContacts());
+        modelMap.addAttribute("matchings", Matching.findAllMatchings());
+        modelMap.addAttribute("users", User.findAllUsers());
+        modelMap.addAttribute("agerange_enum", AgeRange.class.getEnumConstants());
+        modelMap.addAttribute("gender_enum", Gender.class.getEnumConstants());
+        modelMap.addAttribute("studenttype_enum", StudentType.class.getEnumConstants());
+        modelMap.addAttribute("studymode_enum", StudyMode.class.getEnumConstants());
         return "student/create";
     }
     
@@ -55,6 +76,13 @@ privileged aspect StudentController_Roo_Controller {
         if (student == null) throw new IllegalArgumentException("A student is required");
         if (result.hasErrors()) {
             modelMap.addAttribute("student", student);
+            modelMap.addAttribute("contacts", Contact.findAllContacts());
+            modelMap.addAttribute("matchings", Matching.findAllMatchings());
+            modelMap.addAttribute("users", User.findAllUsers());
+            modelMap.addAttribute("agerange_enum", AgeRange.class.getEnumConstants());
+            modelMap.addAttribute("gender_enum", Gender.class.getEnumConstants());
+            modelMap.addAttribute("studenttype_enum", StudentType.class.getEnumConstants());
+            modelMap.addAttribute("studymode_enum", StudyMode.class.getEnumConstants());
             return "student/update";
         }
         student.merge();
@@ -65,6 +93,13 @@ privileged aspect StudentController_Roo_Controller {
     public String StudentController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
         modelMap.addAttribute("student", Student.findStudent(id));
+        modelMap.addAttribute("contacts", Contact.findAllContacts());
+        modelMap.addAttribute("matchings", Matching.findAllMatchings());
+        modelMap.addAttribute("users", User.findAllUsers());
+        modelMap.addAttribute("agerange_enum", AgeRange.class.getEnumConstants());
+        modelMap.addAttribute("gender_enum", Gender.class.getEnumConstants());
+        modelMap.addAttribute("studenttype_enum", StudentType.class.getEnumConstants());
+        modelMap.addAttribute("studymode_enum", StudyMode.class.getEnumConstants());
         return "student/update";
     }
     
