@@ -1,140 +1,140 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
-<jsp:output omit-xml-declaration="yes"/>
-<script type="text/javascript">dojo.require('dijit.TitlePane');</script>
-<div id="_title_div">
-<spring:message code="label.student" var="entity_label"/>
-<spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-<c:if test="${not empty student}">
-<div id="roo_student_firstname">
-<label for="_firstname_id">Firstname:</label>
-<div class="box" id="_firstname_id">
-<c:out value="${student.firstname}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_lastname">
-<label for="_lastname_id">Lastname:</label>
-<div class="box" id="_lastname_id">
-<c:out value="${student.lastname}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_gender">
-<label for="_gender_id">Gender:</label>
-<div class="box" id="_gender_id">
-<c:out value="${student.gender}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_ageRange">
-<label for="_ageRange_id">Age Range:</label>
-<div class="box" id="_ageRange_id">
-<c:out value="${student.ageRange}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_studentNumber">
-<label for="_studentNumber_id">Student Number:</label>
-<div class="box" id="_studentNumber_id">
-<c:out value="${student.studentNumber}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_studentType">
-<label for="_studentType_id">Student Type:</label>
-<div class="box" id="_studentType_id">
-<c:out value="${student.studentType}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_studyMode">
-<label for="_studyMode_id">Study Mode:</label>
-<div class="box" id="_studyMode_id">
-<c:out value="${student.studyMode}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_course">
-<label for="_course_id">Course:</label>
-<div class="box" id="_course_id">
-<c:out value="${student.course}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_major">
-<label for="_major_id">Major:</label>
-<div class="box" id="_major_id">
-<c:out value="${student.major}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_firstYearComplete">
-<label for="_firstYearComplete_id">First Year Complete:</label>
-<div class="box" id="_firstYearComplete_id">
-<c:out value="${student.firstYearComplete}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_recommendedByStaff">
-<label for="_recommendedByStaff_id">Recommended By Staff:</label>
-<div class="box" id="_recommendedByStaff_id">
-<c:out value="${student.recommendedByStaff}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_semestersCompeleted">
-<label for="_semestersCompeleted_id">Semesters Compeleted:</label>
-<div class="box" id="_semestersCompeleted_id">
-<c:out value="${student.semestersCompeleted}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_international">
-<label for="_international_id">International:</label>
-<div class="box" id="_international_id">
-<c:out value="${student.international}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_trained">
-<label for="_trained_id">Trained:</label>
-<div class="box" id="_trained_id">
-<c:out value="${student.trained}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_myscuActivated">
-<label for="_myscuActivated_id">Myscu Activated:</label>
-<div class="box" id="_myscuActivated_id">
-<c:out value="${student.myscuActivated}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_user">
-<label for="_user_id">User:</label>
-<div class="box" id="_user_id">
-<c:out value="${student.user}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_matching">
-<label for="_matching_id">Matching:</label>
-<div class="box" id="_matching_id">
-<c:out value="${student.matching}"/>
-</div>
-</div>
-<br/>
-<div id="roo_student_contact">
-<label for="_contact_id">Contact:</label>
-<div class="box" id="_contact_id">
-<c:out value="${student.contact}"/>
-</div>
-</div>
-<br/>
-</c:if>
-<c:if test="${empty student}">
-<spring:message arguments="${entity_label}" code="entity.not.found.single"/>
-</c:if>
-</div>
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.student" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty student}">
+            <div id="roo_student_firstname">
+                <label for="_firstname_id">Firstname:</label>
+                <div class="box" id="_firstname_id">
+                    <c:out value="${student.firstname}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_lastname">
+                <label for="_lastname_id">Lastname:</label>
+                <div class="box" id="_lastname_id">
+                    <c:out value="${student.lastname}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_gender">
+                <label for="_gender_id">Gender:</label>
+                <div class="box" id="_gender_id">
+                    <c:out value="${student.gender}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_ageRange">
+                <label for="_ageRange_id">Age Range:</label>
+                <div class="box" id="_ageRange_id">
+                    <c:out value="${student.ageRange}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_studentNumber">
+                <label for="_studentNumber_id">Student Number:</label>
+                <div class="box" id="_studentNumber_id">
+                    <c:out value="${student.studentNumber}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_studentType">
+                <label for="_studentType_id">Student Type:</label>
+                <div class="box" id="_studentType_id">
+                    <c:out value="${student.studentType}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_studyMode">
+                <label for="_studyMode_id">Study Mode:</label>
+                <div class="box" id="_studyMode_id">
+                    <c:out value="${student.studyMode}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_course">
+                <label for="_course_id">Course:</label>
+                <div class="box" id="_course_id">
+                    <c:out value="${student.course}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_major">
+                <label for="_major_id">Major:</label>
+                <div class="box" id="_major_id">
+                    <c:out value="${student.major}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_firstYearComplete">
+                <label for="_firstYearComplete_id">First Year Complete:</label>
+                <div class="box" id="_firstYearComplete_id">
+                    <c:out value="${student.firstYearComplete}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_recommendedByStaff">
+                <label for="_recommendedByStaff_id">Recommended By Staff:</label>
+                <div class="box" id="_recommendedByStaff_id">
+                    <c:out value="${student.recommendedByStaff}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_semestersCompeleted">
+                <label for="_semestersCompeleted_id">Semesters Compeleted:</label>
+                <div class="box" id="_semestersCompeleted_id">
+                    <c:out value="${student.semestersCompeleted}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_international">
+                <label for="_international_id">International:</label>
+                <div class="box" id="_international_id">
+                    <c:out value="${student.international}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_trained">
+                <label for="_trained_id">Trained:</label>
+                <div class="box" id="_trained_id">
+                    <c:out value="${student.trained}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_myscuActivated">
+                <label for="_myscuActivated_id">Myscu Activated:</label>
+                <div class="box" id="_myscuActivated_id">
+                    <c:out value="${student.myscuActivated}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_user">
+                <label for="_user_id">User:</label>
+                <div class="box" id="_user_id">
+                    <c:out value="${student.user}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_matching">
+                <label for="_matching_id">Matching:</label>
+                <div class="box" id="_matching_id">
+                    <c:out value="${student.matching}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_student_contact">
+                <label for="_contact_id">Contact:</label>
+                <div class="box" id="_contact_id">
+                    <c:out value="${student.contact}"/>
+                </div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty student}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
 </div>

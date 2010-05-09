@@ -1,126 +1,126 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
-<jsp:output omit-xml-declaration="yes"/>
-<script type="text/javascript">dojo.require('dijit.TitlePane');</script>
-<div id="_title_div">
-<spring:message code="label.matching" var="entity_label"/>
-<spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-<c:if test="${not empty matching}">
-<div id="roo_matching_genderPrefer">
-<label for="_genderPrefer_id">Gender Prefer:</label>
-<div class="box" id="_genderPrefer_id">
-<c:out value="${matching.genderPrefer}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_workStatus">
-<label for="_workStatus_id">Work Status:</label>
-<div class="box" id="_workStatus_id">
-<c:out value="${matching.workStatus}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_familyResponsibilities">
-<label for="_familyResponsibilities_id">Family Responsibilities:</label>
-<div class="box" id="_familyResponsibilities_id">
-<c:out value="${matching.familyResponsibilities}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_tertiaryStudies">
-<label for="_tertiaryStudies_id">Tertiary Studies:</label>
-<div class="box" id="_tertiaryStudies_id">
-<c:out value="${matching.tertiaryStudies}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_interests">
-<label for="_interests_id">Interests:</label>
-<div class="box" id="_interests_id">
-<c:out value="${matching.interests}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_comments">
-<label for="_comments_id">Comments:</label>
-<div class="box" id="_comments_id">
-<c:out value="${matching.comments}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_preferOnCampus">
-<label for="_preferOnCampus_id">Prefer On Campus:</label>
-<div class="box" id="_preferOnCampus_id">
-<c:out value="${matching.preferOnCampus}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_preferDistance">
-<label for="_preferDistance_id">Prefer Distance:</label>
-<div class="box" id="_preferDistance_id">
-<c:out value="${matching.preferDistance}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_preferAustralian">
-<label for="_preferAustralian_id">Prefer Australian:</label>
-<div class="box" id="_preferAustralian_id">
-<c:out value="${matching.preferAustralian}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_preferInternational">
-<label for="_preferInternational_id">Prefer International:</label>
-<div class="box" id="_preferInternational_id">
-<c:out value="${matching.preferInternational}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_isRegional">
-<label for="_isRegional_id">Is Regional:</label>
-<div class="box" id="_isRegional_id">
-<c:out value="${matching.isRegional}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_isDisability">
-<label for="_isDisability_id">Is Disability:</label>
-<div class="box" id="_isDisability_id">
-<c:out value="${matching.isDisability}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_isSocioeconomic">
-<label for="_isSocioeconomic_id">Is Socioeconomic:</label>
-<div class="box" id="_isSocioeconomic_id">
-<c:out value="${matching.isSocioeconomic}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_isNonEnglish">
-<label for="_isNonEnglish_id">Is Non English:</label>
-<div class="box" id="_isNonEnglish_id">
-<c:out value="${matching.isNonEnglish}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_isIndigenous">
-<label for="_isIndigenous_id">Is Indigenous:</label>
-<div class="box" id="_isIndigenous_id">
-<c:out value="${matching.isIndigenous}"/>
-</div>
-</div>
-<br/>
-<div id="roo_matching_student">
-<label for="_student_id">Student:</label>
-<div class="box" id="_student_id">
-<c:out value="${matching.student}"/>
-</div>
-</div>
-<br/>
-</c:if>
-<c:if test="${empty matching}">
-<spring:message arguments="${entity_label}" code="entity.not.found.single"/>
-</c:if>
-</div>
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');</script>
+    <div id="_title_div">
+        <spring:message code="label.matching" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.show" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <c:if test="${not empty matching}">
+            <div id="roo_matching_genderPrefer">
+                <label for="_genderPrefer_id">Gender Prefer:</label>
+                <div class="box" id="_genderPrefer_id">
+                    <c:out value="${matching.genderPrefer}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_workStatus">
+                <label for="_workStatus_id">Work Status:</label>
+                <div class="box" id="_workStatus_id">
+                    <c:out value="${matching.workStatus}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_familyResponsibilities">
+                <label for="_familyResponsibilities_id">Family Responsibilities:</label>
+                <div class="box" id="_familyResponsibilities_id">
+                    <c:out value="${matching.familyResponsibilities}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_tertiaryStudies">
+                <label for="_tertiaryStudies_id">Tertiary Studies:</label>
+                <div class="box" id="_tertiaryStudies_id">
+                    <c:out value="${matching.tertiaryStudies}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_interests">
+                <label for="_interests_id">Interests:</label>
+                <div class="box" id="_interests_id">
+                    <c:out value="${matching.interests}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_comments">
+                <label for="_comments_id">Comments:</label>
+                <div class="box" id="_comments_id">
+                    <c:out value="${matching.comments}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_preferOnCampus">
+                <label for="_preferOnCampus_id">Prefer On Campus:</label>
+                <div class="box" id="_preferOnCampus_id">
+                    <c:out value="${matching.preferOnCampus}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_preferDistance">
+                <label for="_preferDistance_id">Prefer Distance:</label>
+                <div class="box" id="_preferDistance_id">
+                    <c:out value="${matching.preferDistance}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_preferAustralian">
+                <label for="_preferAustralian_id">Prefer Australian:</label>
+                <div class="box" id="_preferAustralian_id">
+                    <c:out value="${matching.preferAustralian}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_preferInternational">
+                <label for="_preferInternational_id">Prefer International:</label>
+                <div class="box" id="_preferInternational_id">
+                    <c:out value="${matching.preferInternational}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_isRegional">
+                <label for="_isRegional_id">Is Regional:</label>
+                <div class="box" id="_isRegional_id">
+                    <c:out value="${matching.isRegional}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_isDisability">
+                <label for="_isDisability_id">Is Disability:</label>
+                <div class="box" id="_isDisability_id">
+                    <c:out value="${matching.isDisability}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_isSocioeconomic">
+                <label for="_isSocioeconomic_id">Is Socioeconomic:</label>
+                <div class="box" id="_isSocioeconomic_id">
+                    <c:out value="${matching.isSocioeconomic}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_isNonEnglish">
+                <label for="_isNonEnglish_id">Is Non English:</label>
+                <div class="box" id="_isNonEnglish_id">
+                    <c:out value="${matching.isNonEnglish}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_isIndigenous">
+                <label for="_isIndigenous_id">Is Indigenous:</label>
+                <div class="box" id="_isIndigenous_id">
+                    <c:out value="${matching.isIndigenous}"/>
+                </div>
+            </div>
+            <br/>
+            <div id="roo_matching_student">
+                <label for="_student_id">Student:</label>
+                <div class="box" id="_student_id">
+                    <c:out value="${matching.student}"/>
+                </div>
+            </div>
+            <br/>
+        </c:if>
+        <c:if test="${empty matching}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
 </div>

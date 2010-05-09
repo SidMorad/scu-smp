@@ -1,121 +1,121 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
-<jsp:output omit-xml-declaration="yes"/>
-<script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
-<div id="_title_div">
-<spring:message code="label.matching" var="entity_label"/>
-<spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
-<spring:url value="/matching" var="form_url"/>
-<form:form action="${form_url}" method="POST" modelAttribute="matching">
-<form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
-<div id="roo_matching_genderPrefer">
-<label for="_genderPrefer_id">Gender Prefer:</label>
-<form:errors cssClass="errors" id="_genderPrefer_error_id" path="genderPrefer"/>
-<form:select cssStyle="width:250px" id="_genderPrefer_id" items="${genderprefer_enum}" path="genderPrefer"/>
-<br/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_genderPrefer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-</div>
-<br/>
-<div id="roo_matching_workStatus">
-<label for="_workStatus_id">Work Status:</label>
-<form:errors cssClass="errors" id="_workStatus_error_id" path="workStatus"/>
-<form:select cssStyle="width:250px" id="_workStatus_id" items="${workstatus_enum}" path="workStatus"/>
-<br/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_workStatus_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-</div>
-<br/>
-<div id="roo_matching_familyResponsibilities">
-<label for="_familyResponsibilities_id">Family Responsibilities:</label>
-<form:checkbox id="_familyResponsibilities_id" path="familyResponsibilities"/>
-</div>
-<br/>
-<div id="roo_matching_tertiaryStudies">
-<label for="_tertiaryStudies_id">Tertiary Studies:</label>
-<form:checkbox id="_tertiaryStudies_id" path="tertiaryStudies"/>
-</div>
-<br/>
-<div id="roo_matching_interests">
-<label for="_interests_id">Interests:</label>
-<form:input cssStyle="width:250px" id="_interests_id" maxlength="30" path="interests" size="0"/>
-<br/>
-<form:errors cssClass="errors" id="_interests_error_id" path="interests"/>
-<spring:message arguments="Interests" code="field.invalid" var="field_invalid"/>
-<spring:message code="field.required" var="field_required"/>
-<spring:message argumentSeparator="," arguments="Interests," code="field.simple.validation" var="field_validation"/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_interests_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
-</div>
-<br/>
-<div id="roo_matching_comments">
-<label for="_comments_id">Comments:</label>
-<form:input cssStyle="width:250px" id="_comments_id" maxlength="30" path="comments" size="0"/>
-<br/>
-<form:errors cssClass="errors" id="_comments_error_id" path="comments"/>
-<spring:message arguments="Comments" code="field.invalid" var="field_invalid"/>
-<spring:message code="field.required" var="field_required"/>
-<spring:message argumentSeparator="," arguments="Comments," code="field.simple.validation" var="field_validation"/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_comments_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
-</div>
-<br/>
-<div id="roo_matching_preferOnCampus">
-<label for="_preferOnCampus_id">Prefer On Campus:</label>
-<form:checkbox id="_preferOnCampus_id" path="preferOnCampus"/>
-</div>
-<br/>
-<div id="roo_matching_preferDistance">
-<label for="_preferDistance_id">Prefer Distance:</label>
-<form:checkbox id="_preferDistance_id" path="preferDistance"/>
-</div>
-<br/>
-<div id="roo_matching_preferAustralian">
-<label for="_preferAustralian_id">Prefer Australian:</label>
-<form:checkbox id="_preferAustralian_id" path="preferAustralian"/>
-</div>
-<br/>
-<div id="roo_matching_preferInternational">
-<label for="_preferInternational_id">Prefer International:</label>
-<form:checkbox id="_preferInternational_id" path="preferInternational"/>
-</div>
-<br/>
-<div id="roo_matching_isRegional">
-<label for="_isRegional_id">Is Regional:</label>
-<form:checkbox id="_isRegional_id" path="isRegional"/>
-</div>
-<br/>
-<div id="roo_matching_isDisability">
-<label for="_isDisability_id">Is Disability:</label>
-<form:checkbox id="_isDisability_id" path="isDisability"/>
-</div>
-<br/>
-<div id="roo_matching_isSocioeconomic">
-<label for="_isSocioeconomic_id">Is Socioeconomic:</label>
-<form:checkbox id="_isSocioeconomic_id" path="isSocioeconomic"/>
-</div>
-<br/>
-<div id="roo_matching_isNonEnglish">
-<label for="_isNonEnglish_id">Is Non English:</label>
-<form:checkbox id="_isNonEnglish_id" path="isNonEnglish"/>
-</div>
-<br/>
-<div id="roo_matching_isIndigenous">
-<label for="_isIndigenous_id">Is Indigenous:</label>
-<form:checkbox id="_isIndigenous_id" path="isIndigenous"/>
-</div>
-<br/>
-<div id="roo_matching_student">
-<c:if test="${not empty students}">
-<label for="_student_id">Student:</label>
-<form:select cssStyle="width:250px" id="_student_id" path="student">
-<form:options itemValue="id" items="${students}"/>
-</form:select>
-<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_student_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
-</c:if>
-</div>
-<br/>
-<div class="submit" id="roo_matching_submit">
-<spring:message code="button.save" var="save_button"/>
-<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-<input id="proceed" type="submit" value="${save_button}"/>
-</div>
-</form:form>
-</div>
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require('dijit.TitlePane');dojo.require('dijit.form.FilteringSelect');</script>
+    <div id="_title_div">
+        <spring:message code="label.matching" var="entity_label"/>
+        <spring:message arguments="${entity_label}" code="entity.create" var="title_msg"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_title_div', widgetType : 'dijit.TitlePane', widgetAttrs : {title: '${title_msg}'}})); </script>
+        <spring:url value="/matching" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="matching">
+            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_matching_genderPrefer">
+                <label for="_genderPrefer_id">Gender Prefer:</label>
+                <form:errors cssClass="errors" id="_genderPrefer_error_id" path="genderPrefer"/>
+                <form:select cssStyle="width:250px" id="_genderPrefer_id" items="${genderprefer_enum}" path="genderPrefer"/>
+                <br/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_genderPrefer_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_matching_workStatus">
+                <label for="_workStatus_id">Work Status:</label>
+                <form:errors cssClass="errors" id="_workStatus_error_id" path="workStatus"/>
+                <form:select cssStyle="width:250px" id="_workStatus_id" items="${workstatus_enum}" path="workStatus"/>
+                <br/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_workStatus_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_matching_familyResponsibilities">
+                <label for="_familyResponsibilities_id">Family Responsibilities:</label>
+                <form:checkbox id="_familyResponsibilities_id" path="familyResponsibilities"/>
+            </div>
+            <br/>
+            <div id="roo_matching_tertiaryStudies">
+                <label for="_tertiaryStudies_id">Tertiary Studies:</label>
+                <form:checkbox id="_tertiaryStudies_id" path="tertiaryStudies"/>
+            </div>
+            <br/>
+            <div id="roo_matching_interests">
+                <label for="_interests_id">Interests:</label>
+                <form:input cssStyle="width:250px" id="_interests_id" maxlength="30" path="interests" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_interests_error_id" path="interests"/>
+                <spring:message arguments="Interests" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Interests," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_interests_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_matching_comments">
+                <label for="_comments_id">Comments:</label>
+                <form:input cssStyle="width:250px" id="_comments_id" maxlength="30" path="comments" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_comments_error_id" path="comments"/>
+                <spring:message arguments="Comments" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="Comments," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_comments_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+            </div>
+            <br/>
+            <div id="roo_matching_preferOnCampus">
+                <label for="_preferOnCampus_id">Prefer On Campus:</label>
+                <form:checkbox id="_preferOnCampus_id" path="preferOnCampus"/>
+            </div>
+            <br/>
+            <div id="roo_matching_preferDistance">
+                <label for="_preferDistance_id">Prefer Distance:</label>
+                <form:checkbox id="_preferDistance_id" path="preferDistance"/>
+            </div>
+            <br/>
+            <div id="roo_matching_preferAustralian">
+                <label for="_preferAustralian_id">Prefer Australian:</label>
+                <form:checkbox id="_preferAustralian_id" path="preferAustralian"/>
+            </div>
+            <br/>
+            <div id="roo_matching_preferInternational">
+                <label for="_preferInternational_id">Prefer International:</label>
+                <form:checkbox id="_preferInternational_id" path="preferInternational"/>
+            </div>
+            <br/>
+            <div id="roo_matching_isRegional">
+                <label for="_isRegional_id">Is Regional:</label>
+                <form:checkbox id="_isRegional_id" path="isRegional"/>
+            </div>
+            <br/>
+            <div id="roo_matching_isDisability">
+                <label for="_isDisability_id">Is Disability:</label>
+                <form:checkbox id="_isDisability_id" path="isDisability"/>
+            </div>
+            <br/>
+            <div id="roo_matching_isSocioeconomic">
+                <label for="_isSocioeconomic_id">Is Socioeconomic:</label>
+                <form:checkbox id="_isSocioeconomic_id" path="isSocioeconomic"/>
+            </div>
+            <br/>
+            <div id="roo_matching_isNonEnglish">
+                <label for="_isNonEnglish_id">Is Non English:</label>
+                <form:checkbox id="_isNonEnglish_id" path="isNonEnglish"/>
+            </div>
+            <br/>
+            <div id="roo_matching_isIndigenous">
+                <label for="_isIndigenous_id">Is Indigenous:</label>
+                <form:checkbox id="_isIndigenous_id" path="isIndigenous"/>
+            </div>
+            <br/>
+            <div id="roo_matching_student">
+                <c:if test="${not empty students}">
+                    <label for="_student_id">Student:</label>
+                    <form:select cssStyle="width:250px" id="_student_id" path="student">
+                        <form:options itemValue="id" items="${students}"/>
+                    </form:select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_student_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div class="submit" id="roo_matching_submit">
+                <spring:message code="button.save" var="save_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${save_button}"/>
+            </div>
+        </form:form>
+    </div>
 </div>
