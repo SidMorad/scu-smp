@@ -162,3 +162,21 @@ q
 // Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-04 20:56:57
 q
 // Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-04 20:58:01
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-09 18:48:11
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-09 18:49:09
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-09 18:50:24
+entity --class ~.domain.GroupTraining
+field date --type java.util.Date --fieldName trainingDate
+field string --fieldName location
+field string --fieldName status 
+field set --fieldName mentors --element ~.domain.Student
+entity --class ~.domain.OnlineTraining
+field date --type java.util.Date --fieldName trainingDate
+field reference --type ~.domain.Student --fieldName mentor
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-09 18:58:22
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2010-05-09 19:12:27
+persistence setup --database MYSQL --provider HIBERNATE 
+q
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2010-05-09 19:13:58
