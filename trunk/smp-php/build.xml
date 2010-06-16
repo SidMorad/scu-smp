@@ -1,0 +1,14 @@
+<project name="SCU_SMP" default="build">
+	<target name="build" depends="phpunit" />
+
+	<target name="phpunit">
+		<phpunit printsummary="true" haltonfailure="true" haltonerror="true">
+			<formatter type="plain" useFile="false" />
+			<batchtest>
+				<fileset dir="./test">
+					<include name="**/*Test.php" />
+				</fileset>
+			</batchtest>
+		</phpunit>
+	</target>
+</project>
