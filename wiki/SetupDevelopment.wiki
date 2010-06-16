@@ -1,0 +1,25 @@
+#summary This wiki shows how to configure your computer for development.
+
+= Required software =
+
+For start developing this project you need to have these software installed in your computer:
+  * Apache-2.2.x
+  * PHP-5.2.x
+  * MySQL-5.x
+
+Note: 'x' stands for any number, but if you want have exact number then find it from [http://infotech.scu.edu.au/~smp/info.php here]
+
+Note2: For easy installation, you may want use XAMP for windows ([http://www.apachefriends.org/en/xampp-windows.html link]). 
+ 
+= Required configuration =
+== MySQL ==
+Run below commands in MySQL console 
+{{{
+CREATE USER smp@localhost IDENTIFIED BY 'smp';
+CREATE DATABASE smp;
+GRANT ALL ON smp.* to smp@localhost;
+\. /path/to/your/db/schema.sql
+}}}
+
+== Others ==
+We may have more configuration in continue , I will promises to mentioned them here ;-) 
