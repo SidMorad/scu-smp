@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <calendar>
 	
-		<event id="3">
+		<event id="1">
 		<date>June 10,2010</date>
 		<title>Mentor Training</title>
 		<caption>Mentor training online or Mentor training with groups, it is just an example event.</caption>
 		<time>All Day</time>
 	</event>
-		<event id="4">
+		<event id="2">
 		<date>June 28, 2010</date>
 		<title>example event 2</title>
 		<caption>it is just an example event,it is just an example event,it is just an example event,it is just an example event,</caption>
 		<time>8am-10pm</time>
 	</event>
-		<event id="5">
+		<event id="3">
 		<date>June 31, 2010</date>
 		<title>example event 3</title>
 		<caption>it is just an example event,it is just an example event,it is just an example event,it is just an example event,</caption>
