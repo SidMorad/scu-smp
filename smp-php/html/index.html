@@ -68,14 +68,70 @@ body {
 
 	-->
 	</style>
+    <script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+    <script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+    <script src="SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+    <link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+    <link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+    <link href="SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
 </head>
 	<body>
 	<div id="container">
       <div id="header"><img src="images/ou_logo.gif" width="210" height="41" alt="ou" /></div>
-      <div id="menu">Add menu here </div>
+      <div id="menu">
+        <ul id="MenuBar1" class="MenuBarHorizontal">
+          <li><a class="MenuBarItemSubmenu" href="#">Item 1</a>
+            <ul>
+              <li><a href="#">Item 1.1</a></li>
+              <li><a href="#">Item 1.2</a></li>
+              <li><a href="#">Item 1.3</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Item 2</a></li>
+          <li><a class="MenuBarItemSubmenu" href="#">Item 3</a>
+            <ul>
+              <li><a class="MenuBarItemSubmenu" href="#">Item 3.1</a>
+                <ul>
+                  <li><a href="#">Item 3.1.1</a></li>
+                  <li><a href="#">Item 3.1.2</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Item 3.2</a></li>
+              <li><a href="#">Item 3.3</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Item 4</a></li>
+        </ul>
+      </div>
       <div id="sidebar">
 
-<p>(accordion here)</p>
+<div id="Accordion1" class="Accordion" tabindex="0">
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Label 1</div>
+    <div class="AccordionPanelContent">
+      <ul>
+      	<li>link1</li>
+        <li>link2</li>
+        <li>link3</li>
+        <li>link4</li>
+        <li>link5</li>
+      </ul>
+    </div>
+  </div>
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Label 2</div>
+    <div class="AccordionPanelContent">Content 2</div>
+  </div>
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Label 3</div>
+    <div class="AccordionPanelContent">Content 3</div>
+  </div>
+  <div class="AccordionPanel">
+    <div class="AccordionPanelTab">Label 4</div>
+    <div class="AccordionPanelContent">Content 4</div>
+  </div>
+</div>
+<p>&nbsp;</p>
         <p><span class="headline">events<br />
         </span>{calendar here}</p>
         <p>{email signup box here}</p>
@@ -89,21 +145,26 @@ body {
       </div>
       <div id="content">
         <h1 >welcome to Mentoring Program </h1>
-        <p >(tabbed panels here)</p>
+        <div id="TabbedPanels1" class="TabbedPanels">
+          <ul class="TabbedPanelsTabGroup">
+            <li class="TabbedPanelsTab" tabindex="0">Tab 1</li>
+            <li class="TabbedPanelsTab" tabindex="0">Tab 2</li>
+            <li class="TabbedPanelsTab" tabindex="0">Tab 3</li>
+          </ul>
+          <div class="TabbedPanelsContentGroup">
+            <div class="TabbedPanelsContent">this is content of tab1/images/</div>
+            <div class="TabbedPanelsContent">this is image of content2/sound</div>
+            <div class="TabbedPanelsContent">this is content of tab3</div>
+          </div>
+        </div>
+        <p >&nbsp;</p>
        
-              <h2>Shop in the green! </h2>
-              <p><img src="images/recycle_bag.gif" alt="Recycle Bag" width="81" height="101" hspace="10" vspace="5" align="left" />We have added recyclable shopping bags, which eliminate the need for the age-old question &quot;paper or plastic?&quot;. These bags are tough, stylish, and eco-friendly! Pick from 2 sizes with the OU logo!</p>
-            
+  <h2>&nbsp;</h2>
+              <p>&nbsp;</p>
+      </div>
            
-              <h2>Cool new stuff! </h2>
-      <img src="images/couch.gif" alt="Couch" width="107" height="73" hspace="5" vspace="5" align="left" />A whole new line of green living products has just hit the shelves! Try our new recyclable office furniture - imagine a couch that dissolves on its own back into Mother Earth! We also have a whole new line of natural cosmetics made from the finest ingredients that are gentle on your skin!</div>
-           
-              <h2>Our loyal customers...</h2>
-              <p>&quot;organic Utopia is the place to shop - i wouldn't buy my stuff anywhere else...EVER!&quot; <br />
-                - Jeff A., Boston, MA</p>
-              <p>&quot;The best place for healthy, organic and green living..everything from food to furniture, all in one place!&quot; -  Fred G., Long Beach, NY </p>
-        
-        <p>&nbsp;</p>
+              <h2>&nbsp;</h2>
+<p>&nbsp;</p>
         <h2>&nbsp;</h2>
 <h2>&nbsp;</h2>
         <h2>&nbsp;</h2>
@@ -112,5 +173,12 @@ body {
     </div>
     <div id="footer"><em>&copy;2010.footer goes here</em></div>
 	</div>
+    <script type="text/javascript">
+<!--
+var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+//-->
+    </script>
 </body>
 </html>
