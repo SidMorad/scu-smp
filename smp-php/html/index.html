@@ -14,6 +14,9 @@ body {
 	margin: 0;
 	padding: 0;
 }
+p {
+	max-width: 600px;
+}
 #container {
 	background-color: #FFF;
 	background-image: url(images/column_background.jpg);
@@ -80,6 +83,13 @@ body {
 	font-size: xx-large;
 	font-style: normal;
 	font-family: "Comic Sans MS", cursive;
+}
+#content #TabbedPanels1 .TabbedPanelsContentGroup .TabbedPanelsContent.TabbedPanelsContentVisible img  {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+	margin-left: 0px;
 }
 
 	-->
@@ -168,15 +178,25 @@ var events = new Spry.Data.XMLDataSet("data/events.xml", "calendar/event");
           </ul>
           <div class="TabbedPanelsContentGroup">
             <div class="TabbedPanelsContent">
-              <p>The Student Mentoring Program is all about students helping students.</p>
+              <p><img src="images/littlementor.jpg" width="33" height="130" alt="little mentor" />The <span style="color:#009"><strong>Student Mentoring Program</strong></span> is all about students helping students.</p>
               <p>It connects a student commencing their first semester of undergraduate study with another student who is further along in the same course. This helps the new student, studying either on-campus or at distance, to quickly and successfully settle into university life and there is no charge involved.</p>
               <p>New students benefit from the experience of their mentor, who help the new student adjust and guide them to appropriate support services available at Southern Cross University.</p>
               <p>The program is available for all new undergraduate students, studying by distance or on-campus at Lismore, Coffs Harbour or Tweed Gold Coast.</p>
             </div>
-            <div class="TabbedPanelsContent">this is image of content2/sound</div>
-            <div class="TabbedPanelsContent">this is content of tab3</div>
+            <div class="TabbedPanelsContent">
+              <p><img src="images/whatMentorSay.png" width="596" height="107" alt="whatMentorSay" />Listen to what a previous Student Mentor says about the program.</p>
+              <p>more text mentor say</p>
+<p>more text mentee say</p>
+              <p>more pages</p>
+            </div>
+            <div class="TabbedPanelsContent">
+              <p><img src="images/mentor.jpg" width="209" height="204" alt="mentor" />We aim to  match you with someone studying the same course and, preferably, of a  similar age range. Where possible, similarities in your work situation,  family circumstances, hobbies and interests will also be considered.              </p>
+              <p>We  do our best to match people. But if you find that, for whatever  reason, the relationship is not working out, please don’t hesitate to  contact your coordinator. We’ll try to make another match as soon as  possible.</p>
+            </div>
             <div class="TabbedPanelsContent">Content 4</div>
-            <div class="TabbedPanelsContent">Content 5</div>
+            <div class="TabbedPanelsContent">
+              <p>If you have any suggestions for this site, we would love to hear from you. Please <a href="mailto:mentor@scu.edu.au?subject=Student%20e-Mentor%20Blackboard%20site%20suggestion%20or%20feedback"><em>contact us</em></a>.</p>
+            </div>
           </div>
         </div>
         <p >&nbsp;</p>
