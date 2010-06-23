@@ -214,7 +214,10 @@ var events = new Spry.Data.XMLDataSet("data/events.xml", "calendar/event");
         <h2>&nbsp;</h2>
 <p>&nbsp;</p>
     </div>
-    <div id="footer"><em>&copy;2010.footer goes here</em></div>
+    <div id="footer"><em>&copy;2010.footer goes here</em>
+    <?php
+    	print date('g:i a l F j');
+    ?></div>
 	</div>
     <script type="text/javascript">
 <!--
