@@ -216,6 +216,9 @@ var events = new Spry.Data.XMLDataSet("data/events.xml", "calendar/event");
     </div>
     <div id="footer"><em>&copy;2010.footer goes here</em>
     <?php
+		//Set the timeZone:
+	date_default_timezone_set('Australia/NSW');
+	 //print the London date and time:
     	print date('g:i a l F j');
     ?></div>
 	</div>
