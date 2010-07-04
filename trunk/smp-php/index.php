@@ -1,7 +1,4 @@
 <?php
-$pageTitle= "Home Page";
-include dirname(__FILE__).'/application/common/header.php';
+require('smp/controller/Controller.php');
 
-print "CONTENT OF PAGE HERE!!! + HELLO WORLD :D";
-
-include dirname(__FILE__).'/application/common/footer.php';
+smp_controller_Controller::run();
