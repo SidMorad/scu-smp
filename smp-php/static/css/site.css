@@ -1,0 +1,31 @@
+/*
+	Custom CSS for SMP website
+
+*/
+body {
+	background-color: #739112;
+}
+
+#header {
+	height:90px;
+	background-color: #9FCC41;
+	background-image: url(../images/mentoring.jpg);
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+#header img {
+	margin: 0px;
+	padding: 2em;
+}
+
+#menu {
+	background-color: #1A6116;
+	color: #FFF;
+	height: 34px;
+}
+
+#content {
+	background-color: white;
+	min-height: 600px;
+}
