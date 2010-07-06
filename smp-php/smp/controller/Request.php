@@ -10,9 +10,10 @@ class smp_controller_Request {
 	private $properties;
 	private $title;
 	private $command;
+	private $view;
 	
 	/**
-	 * default constructor
+	 * constructor
 	 */
 	function __construct() {
 		$this->init();
@@ -56,6 +57,17 @@ class smp_controller_Request {
 	}
 	
 	/**
+	 * isPost method for check if request type is post
+	 */
+	public function isPost() {
+		if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
 	 * set title for page
 	 * @param $title
 	 */
@@ -84,7 +96,30 @@ class smp_controller_Request {
 	 * @return $command
 	 */
 	function getCommand() {
-		$this->command;
+		return $this->command;
 	}
+	
+	/**
+	 * 
+	 * @param $view
+	 */
+	function setView($view) {
+		$this->view = $view;
+	}
+	
+	/**
+	 * @return $view
+	 */
+	function getView() {
+		return $this->view;
+	}
+	
+	/**
+	 * Forward to view 
+	 * @param $view
+	 */
+	function forward($view) {
+		$this->setView($view);
+	}	
 	
 }

@@ -8,6 +8,6 @@
 			<!--
 			var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"static/css/menu/images/SpryMenuBarDownHover.gif", imgRight:"static/css/menu/images/SpryAssets/SpryMenuBarRightHover.gif"});
 			//-->
-    	</script>	
+		</script>
 	</body>	
 </html>

@@ -6,8 +6,26 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  */
 require_once('smp/base/RequestRegistry.php');
+require_once('smp/base/SessionRegistry.php');
+require_once('smp/util/Security.php');
 class VH {
 	static function getRequest() {
 		return smp_base_RequestRegistry::getRequest();
+	}
+	
+	static function getValidator() {
+		return smp_base_RequestRegistry::getValidator();
+	}
+	
+	static function getCurrentUser() {
+		return smp_util_Security::getCurrentUser();
+	}
+	
+	static function isUserAuthenticated() {
+		return smp_util_Security::isUserAuthenticated();
+	}
+	
+	static function isUserGrantedWith($ROLE_NAME) {
+		return smp_util_Security::isUserGrantedWith($ROLE_NAME);
 	}
 }

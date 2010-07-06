@@ -40,4 +40,13 @@ class smp_base_RequestRegistry extends smp_base_Registry {
 	static function setRequest(smp_controller_Request $request) {
 		return self::instance()->set('request', $request);
 	}
+	
+	static function getValidator() {
+		return self::instance()->get('validator');
+	}
+	
+	static function setValidator(smp_util_Validator $validator) {
+		return self::instance()->set('validator', $validator);
+	}	
+	
 }
