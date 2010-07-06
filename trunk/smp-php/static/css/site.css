@@ -1,5 +1,5 @@
 /*
-	Custom CSS for SMP website
+	CSS for SMP website
 
 */
 body {
@@ -17,6 +17,12 @@ body {
 #header img {
 	margin: 0px;
 	padding: 2em;
+	float: left;
+}
+
+#header h6 {
+	padding-top: 70px;
+	padding-left: 400px;
 }
 
 #menu {

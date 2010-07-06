@@ -7,6 +7,7 @@
  */
 require_once('smp/controller/Request.php');
 require_once('smp/controller/AppController.php');
+require_once('smp/controller/ApplicationHelper.php');
 class smp_controller_Controller {
 
 	/**
@@ -28,7 +29,8 @@ class smp_controller_Controller {
 	 * Initalize required configuration of application
 	 */
 	function init() {
-		// init configuration 
+		$applicationHelper = smp_controller_ApplicationHelper::instance();
+		$applicationHelper->init();
 	}
 	
 	/**
@@ -38,8 +40,10 @@ class smp_controller_Controller {
 		$request = new smp_controller_Request();
 		$appController = new smp_controller_AppController();
 		$cmd = $appController->getCommand($request);
+		// set default view for request before execute command;
+		$request->setView($appController->getView($request));
 		$cmd->execute($request);
-		$this->invokeView($appController->getView($request));
+		$this->invokeView($request->getView());
 	}
 
 	/**

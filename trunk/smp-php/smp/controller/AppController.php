@@ -25,9 +25,7 @@ class smp_controller_AppController {
 			// no cmd property - returning default view
 			return "default";
 		}
-		// replace '_' with '/' for mapping to right view directory. 
-		$view = str_replace("_","/",$cmd_str);
-		return $view;
+		return $cmd_str;
 	}
 	
 	function getCommand(smp_controller_Request $req) {
@@ -45,8 +43,8 @@ class smp_controller_AppController {
 	}
 	
 	function resolveCommand($cmd_str) {
-		$classroot = substr($cmd_str, strpos($cmd_str, '_')+1);
-		$classpack = substr($cmd_str, 0,strpos($cmd_str, '_'));
+		$classroot = substr($cmd_str, strpos($cmd_str, '/')+1);
+		$classpack = substr($cmd_str, 0,strpos($cmd_str, '/'));
 		$Class = ucfirst($classroot). "Command";
 		$filepath = "smp/command/$classpack/$Class.php";
 		$classname = "smp_command_$classpack"."_".$Class;

@@ -1,0 +1,21 @@
+/*
+	CSS for FormBuilder.php
+*/
+.ulForm {
+	list-style: none;
+	float: left;
+}
+
+.ulForm li {
+	padding: 3px;
+	text-align: right;
+}
+
+.ulError {
+	margin:0;
+	padding:5px;
+	width:470px;
+	background:#FFF0F0;
+	border:1px solid #cc0000;
+	color:#cc0000;
+}
