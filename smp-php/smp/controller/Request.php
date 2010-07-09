@@ -3,7 +3,9 @@
  * Created at 04/07/2010 4:57:42 PM
  * smp_controller_Request
  *
+ * This class is a part of 'Front Controller' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
+ * @version 1.0
  */
 require_once('smp/base/RequestRegistry.php');
 class smp_controller_Request {

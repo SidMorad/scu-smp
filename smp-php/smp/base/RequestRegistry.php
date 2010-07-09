@@ -3,7 +3,9 @@
  * Created at 04/07/2010 8:13:46 PM
  * smp_base_RequestRegistry
  *
+ * This class is a part of 'Registry' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
+ * @version 1.0
  */
 require_once('smp/base/Registry.php');
 class smp_base_RequestRegistry extends smp_base_Registry {

@@ -3,6 +3,7 @@
  * Created at 06/07/2010 2:24:18 PM
  * smp_controller_ApplicationHelper
  *
+ * This class is a part of 'Front Controller' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */

@@ -3,7 +3,7 @@
  * Created at 09/07/2010 12:19:19 PM
  * smp_base_MemApplicationRegistry
  *
- * This class is a part of Registry patterns. see Reference#1
+ * This class is a part of 'Registry' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */

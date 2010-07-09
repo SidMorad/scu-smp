@@ -3,7 +3,9 @@
  * Created at 04/07/2010 5:12:12 PM
  * smp_controller_AppController
  *
+ * This class is a part of 'Front Controller' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
+ * @version 1.0
  */
 require_once('smp/command/Command.php');
 require_once('smp/command/DefaultCommand.php');
