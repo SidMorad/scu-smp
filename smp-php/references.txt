@@ -1,0 +1,13 @@
+
+The aim of this text file is including all references 
+that we used in this project (SMP - Student Mentoring Program) 
+
+#1 
+'PHP Objects, Patterns, and Practice' eBook by Matt Zandstra 2007, second eidtion.
+	* 'Front Controller' pattern
+	* 'Command' pattern
+	* 'Mapper' pattern
+	* 'Registry' pattern
+
+Note: Comments on the codes shows the parts that we used from this book.   
+	   

@@ -11,7 +11,6 @@ require_once('library/adodb511/adodb.inc.php');
 class smp_controller_ApplicationHelper {
 	private static $instance;
 	private $configXmlFile = "smp/config/smp_config.xml";
-	private $falg = false;
 	private function __construct() {}
 	
 	static function instance() {
@@ -22,10 +21,12 @@ class smp_controller_ApplicationHelper {
 	}
 	
 	function init() {
-//		if (!self::$instance->falg) {
-//			return;
-//		}
+		$dsn = smp_base_ApplicationRegistry::getDSN();
+		if (!is_null($dsn)) {
+			return;
+		}
 		$this->loadXmlConfiguration();
+		throw new Exception("Hi there !!!");
 	}
 	
 	private function loadXmlConfiguration() {
@@ -43,7 +44,6 @@ class smp_controller_ApplicationHelper {
 //		$this->ensure($dbConnection, "Database connection faild!");
 //		smp_base_ApplicationRegistry::setADODB($dbConnection);
 		// set other values
-		self::$instance->falg = true;
 	}	
 	
 	private function ensure($expr, $message) {
