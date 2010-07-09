@@ -1,8 +1,0 @@
-.|SMP Home page|index.php|SMP Student Mentoring Program is Rock!|shortcut_icon_phplm.png
-.|Level 1 |||||1
-..|Level 2.1|||||1
-...|Level 2.1.1|index.php?view=level211&action=list|
-...|Level 2.1.2|index.php?view=level212&action=list|
-..|Level 2.2|||||1
-...|Level 2.2.1|index.php?view=level221&action=list|
-...|Level 2.2.2|index.php?view=level222&action=list|

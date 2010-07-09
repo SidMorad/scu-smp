@@ -1,9 +1,11 @@
 <?php
 /**
  * Created at 04/07/2010 4:41:26 PM
- * smp_controller_Controller is part of 'Front Controller' pattern.
+ * smp_controller_Controller
  *
+ * This class is a part of 'Front Controller' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
+ * @version 1.0
  */
 require_once('smp/controller/Request.php');
 require_once('smp/controller/AppController.php');

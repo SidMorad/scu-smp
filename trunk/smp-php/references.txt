@@ -4,10 +4,10 @@ that we used in this project (SMP - Student Mentoring Program)
 
 #1 
 'PHP Objects, Patterns, and Practice' eBook by Matt Zandstra 2007, second eidtion.
-	* 'Front Controller' pattern
-	* 'Command' pattern
-	* 'Mapper' pattern
-	* 'Registry' pattern
+	* 'Front Controller' pattern, Part 3 Chapter 12 (Enterprise Patterns)
+	* 'Command' pattern, Part 3 Chapter 11 (Performing and Representing Tasks)
+	* 'Mapper' pattern, Part 3 Chapter 13 (Database Patterns)
+	* 'Registry' pattern, Part 3 Chapter 12 (Enterprise Patterns)
 
 Note: Comments on the codes shows the parts that we used from this book.   
 	   

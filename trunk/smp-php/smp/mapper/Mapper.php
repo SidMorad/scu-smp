@@ -3,6 +3,7 @@
  * Created at 06/07/2010 4:47:20 PM
  * smp_mapper_Mapper
  *
+ * This class is a part of 'Mapper' pattern. see Reference#1
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
