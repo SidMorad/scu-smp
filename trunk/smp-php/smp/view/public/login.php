@@ -20,18 +20,17 @@ if ($objLoginForm->isPost()) {
 	if ($validator->isInvalid()) {
 		$objLoginForm->setErrors($validator->getErrors());
 		print $validator->getErrorMessagesString($objLoginForm->strIndent);
-//		$validator->printProperties();
 	}
 }
 
 print $objLoginForm->open("loginForm");
 print $objLoginForm->hidden("cmd", "public/login");
-print $objLoginForm->label("", "Username:","grid_1");
-print $objLoginForm->textBox("username", "","","text",20,1, "grid_11");
-print $objLoginForm->label("", "Password:","grid_1");
-print $objLoginForm->textBox("password", "","","password",20,2,"grid_11");
+print $objLoginForm->label("", "Username:","grid_1",true);
+print $objLoginForm->textBox("username", "","",1,"grid_11","input",20,"text");
+print $objLoginForm->label("", "Password:","grid_1",true);
+print $objLoginForm->textBox("password", "","",2,"grid_11","input",20,"password");
 print $objLoginForm->label("", "&nbsp;", "grid_1");
-print $objLoginForm->submit("submit", "Login", 3, "grid_11");
+print $objLoginForm->button("submit", "Login","submit", 3, "grid_11");
 print $objLoginForm->close();
 
 print $objLoginForm->strIndent."<br /><p> These Username / Password for testing:</p>\r\n";

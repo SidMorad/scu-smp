@@ -59,31 +59,81 @@
 
 .form_container .label {
 	text-align:right;
-	float: left;
+	float: right;
 }
 
-.form_container .input {
+.form_container input {
 	border:1px solid #666666;
-	padding:5px;
-	margin-bottom:1px;
+	padding:5px 0px 5px 0px;
+	margin-bottom:2px;
 	font:bold 16px inherit;
+}
+
+.form_container .input,
+.form_container .biginput,
+.form_container .smallinput,
+.form_container .button,
+.form_container .combo {
+	border-color:#666666; 
 	color:#666666;
 }
 
-.form_container .selected {
-	border:1px solid #006699;
-	padding:5px;
-	margin-bottom:1px;
-	font:bold 16px inherit;
+.form_container .selected_input,
+.form_container .selected_biginput,
+.form_container .selected_smallinput,
+.form_container .selected_button,
+.form_container .selected_combo {
+	border-color: #006699;
 	background:#E4F5FA;
 }
 
-.form_container .error {
-	border:1px solid #cc0000;
-	padding:5px;
-	margin-bottom:1px;
-	font:bold 16px inherit;
+.form_container .error_input,
+.form_container .error_biginput,
+.form_container .error_smallinput,
+.form_container .error_combo {
+	border-color: #cc0000;
 	background:#FFF0F0;
+}
+
+.form_container .input,
+.form_container .selected_input,
+.form_container .error_input {
+	width: 180px;
+}
+
+.form_container .biginput,
+.form_container .selected_biginput,
+.form_container .error_biginput {
+	width: 500px;
+}
+
+.form_container .smallinput,
+.form_container .selected_smallinput,
+.form_container .error_smallinput {
+	width: 85px;
+}
+
+.form_container .button,
+.form_container .selected_button,
+.form_container .error_button {
+	width: 85px;
+}
+
+.form_container .combo,
+.form_container .selected_combo,
+.form_container .error_combo {
+	width: 180px;
+	height: 30px;
+	top: 5px;
+}
+
+.form_container h3 {
+	padding-left: 60px;
+}
+
+.form_container hr {
+	float:left;
+	width: 940px;
 }
 
 .ulError {
@@ -93,4 +143,10 @@
 	background:#FFF0F0;
 	border:1px solid #cc0000;
 	color:#cc0000;
+}
+
+.required {
+	color:red;
+	font-weight: bold;
+	font-size: 16px;
 }
