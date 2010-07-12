@@ -10,6 +10,7 @@
 		<title>SMP | <?php print $request->getTitle()?></title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<link type="text/css" rel="Stylesheet" media="all" href="static/css/theme.css" />
+		<script language="JavaScript" type="text/javascript" src="static/js/util.js"></script>
 		<script language="JavaScript" type="text/javascript" src="static/js/menu/SpryMenuBar.js"></script>
 	</head>	
 	<body>

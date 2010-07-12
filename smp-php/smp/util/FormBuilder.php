@@ -10,7 +10,10 @@ class smp_util_FormBuilder {
 
 	var $strFileName = "";
 	var $strIndent   = "";
-
+	var $blnLocator = false;
+	var $values = array();
+	var $errors = array();
+	
 	function __construct() {
 		preg_match("/[^\/]*$/", $_SERVER['PHP_SELF'], $arrSub);
 		$this->strFileName = $arrSub[0];
@@ -45,26 +48,47 @@ class smp_util_FormBuilder {
 				$strEnctype = "multipart/form-data";
 				break;
 		}
-		return $this->strIndent."<form ".$strId." action=\"".$strAction."\" method=\"".$strMethod."\"".$strOtherAttributes." enctype=\"".$strEnctype."\">\r\n";
+		$openString = $this->strIndent."<div class=\"form_container\">\r\n";
+		$openString .=$this->strIndent."<form ".$strId." action=\"".$strAction."\" method=\"".$strMethod."\"".$strOtherAttributes." enctype=\"".$strEnctype."\">\r\n"; 
+		return $openString; 
 	}
 
 	function close() {
-		return $this->strIndent."</form>\r\n";
+		$closeString = $this->strIndent."</form>\r\n";
+		$closeString .= $this->strIndent."</div>\r\n";
+		return $closeString;
 	}
 
-	function textBox($strId, $strLabel, $strValue, $strType="text", $intMaxLength = 0, $intTabIndex = null, $arrOtherAttributes = array()) {
+	function textBox($strId, $strLabel, $strValue, $strType="text", $intMaxLength = 0, $intTabIndex = null, $grid_X = "grid_12", $arrOtherAttributes = array(), $classCSS = "input") {
 		$strMaxLength = $this->getHtmlAttributeString($intMaxLength > 0 , "maxlength", $intMaxLength);
 		$strTabIndex  = $this->getHtmlAttributeString($intTabIndex != NULL, "tabindex", $intTabIndex);
+		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
+		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
+		$strLocator = $this->getLocatorString($strId, $classCSS);
+		$strValue = $this->getValueIfIsSet($strId);
+		$strValue = (($strType == "password") ? "" : $strValue);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
-		$strField = "<input id=\"".$strId."\" name =\"".$strId."\" type=\"".$strType."\" value =\"".$strValue."\"".$strOtherAttributes.$strMaxLength.$strTabIndex." />";
-		return $this->getHtmlTagString($strLabel, $strField, $strId);
+		$strField = "<input id=\"".$strId."\" name =\"".$strId."\" type=\"".$strType."\" value =\"".$strValue."\"".$strOtherAttributes.$strMaxLength.$strTabIndex.$strClassCSS.$strLocator." />";
+		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
+	}
+	
+	function label($strId, $strLabel, $grid_X = "grid_1", $arrOtherAttributes = array()) {
+		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
+		$forAttribute = (($strId != NULL) ? " for=\"".$strId."\" " : "");
+		$strLabelTag = "<label$forAttribute$strOtherAttributes> $strLabel </label>";
+		$labelString = $this->strIndent. "	<div class=\"".$grid_X."\" >\r\n";
+		$labelString .= $this->strIndent. "		".$strLabelTag . "\r\n";	
+		$labelString .= $this->strIndent."	</div>\r\n";
+		return $labelString;
 	}
 
-	function submit($strId, $strCaption, $intTabIndex = NULL ,$arrOtherAttributes = array()) {
+	function submit($strId, $strCaption, $intTabIndex = NULL ,$grid_X= "grid_12", $arrOtherAttributes = array(), $classCSS = "input") {
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != NULL, "tabindex", $intTabIndex);
+		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
-		$strField = "<input id=\"".$strId."\" type=\"submit\" value=\"".$strCaption."\"".$strTabIndex.$strOtherAttributes. " />";
-		return $this->getHtmlTagString("", $strField, $strId);
+		$strLocator = $this->getLocatorString($strId, "input");
+		$strField = "<input id=\"".$strId."\" type=\"submit\" value=\"".$strCaption."\"".$strTabIndex.$strOtherAttributes.$strClassCSS.$strLocator." />";
+		return $this->getHtmlTagString("", $strField, $strId, $grid_X);
 	}
 	
 	function hidden($strId, $strValue) {
@@ -82,16 +106,26 @@ class smp_util_FormBuilder {
 			return false;
 		}
 	}
+	
+	function useLocator() {
+		$this->blnLocator = true;
+	}
 
-	private function getHtmlTagString($strLabel, $strField, $strId) {
-		$strPlaceHolder = "";
+	private function getLocatorString($strId, $strClassCSS) {
+		$strLocator = (($this->blnLocator) ?  " onfocus=\"javascript:ChangeClassName('".$strId."', 'selected');\" onblur=\"javascript:ChangeClassName('".$strId."', '".$strClassCSS."');\"" : "" );
+		return $strLocator;
+	}
+	
+	private function getHtmlTagString($strLabel, $strField, $strId, $grid_X = "grid_12") {
+		$htmlTagString = $this->strIndent. "	<div class=\"".$grid_X."\">\r\n";
 		if ($strLabel != "") {
-			$strPlaceHolder .= $this->strIndent."	".(($strId != NULL) ? "<label for=\"".$strId."\">" : "").$strLabel.(($strId != NULL) ? "</label>" : "" ). "\r\n";
-			$strPlaceHolder .= $this->strIndent."	".$strField."\r\n";
+			$htmlTagString .= $this->strIndent."		".(($strId != NULL) ? "<label for=\"".$strId."\">" : "").$strLabel.(($strId != NULL) ? "</label>" : "" ). "\r\n";
+			$htmlTagString .= $this->strIndent."		".$strField."\r\n";
 		} else {
-			$strPlaceHolder .= $this->strIndent."	".$strField."\r\n";
+			$htmlTagString .= $this->strIndent."		".$strField."\r\n";
 		}
-		return $strPlaceHolder;
+		$htmlTagString .= $this->strIndent."	</div>\r\n";	
+		return $htmlTagString;
 	}
 
 	private function getHtmlAttributeString($condition, $attribute , $value) {
@@ -118,4 +152,27 @@ class smp_util_FormBuilder {
 		return $strOtherAttributes;
 	}
 
+	function getCSSclassIsError($strId, $defaultCSS) {
+		if (isset($this->errors[$strId])) {
+			return "error";
+		} else {
+			return $defaultCSS;
+		}
+	}
+	
+	function getValueIfIsSet($strId) {
+		if (isset($this->values[$strId])) {
+			return $this->values[$strId];
+		} else {
+			return "";
+		}
+	}
+	
+	function setErrors($errorArray) {
+		$this->errors = $errorArray;
+	}
+	
+	function setValues($valueArray) {
+		$this->values = $valueArray;
+	}
 }

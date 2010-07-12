@@ -7,6 +7,7 @@
  * @version 1.0
  */
 require_once('smp/base/RequestRegistry.php');
+require_once('library/htmLawed/htmLawed.php');
 class smp_util_Validator {
 	private $properties;
 	private $errors;
@@ -20,12 +21,34 @@ class smp_util_Validator {
 	}
 	
 	/**
-	 * Initalize properties from $_REQUEST or $_SERVER['argv']
+	 * Initalize properties from $_REQUEST
 	 */
 	function init() {
 		if(isset($_SERVER['REQUEST_METHOD'])) {
-			$this->properties = $_REQUEST;
+			while (list($strKey, $value) = each($_REQUEST)) {
+				if (is_array($value)) {
+					$this->properties[$strKey] = $value;
+				} else {
+					$strVal = trim($value);
+					$strVal = $this->validateByHtmLawed($strVal);
+					$this->properties[$strKey] = $strVal;
+				}				
+			}
 		}
+	}
+	/**
+	 * Validate submitted values by htmLawed 
+	 *  TODO: The return value in not correct at this time!!!  
+	 *  
+	 * @param string $strVal
+	 * @return string $strSafe
+	 */
+	function validateByHtmLawed($strVal) {
+		if (get_magic_quotes_gpc()) {
+			$strVal = stripslashes($strVal);
+		}
+		$strSafe = htmLawed($strVal, array('safe'=>1));
+		return $strSafe;		
 	}
 	
 	function checkEmptiness($strKey, $strErrorMessage) {
@@ -37,6 +60,12 @@ class smp_util_Validator {
 	function checkCustomVal($strKey, $strMessage, $blnValidation) {
 		if (!$blnValidation) {
 			$this->setError($strKey, $strMessage);
+		}
+	}
+	
+	function checkWithRegex($strKey, $strMessage, $strPattern) {
+		if (preg_match($strPattern, $this->properties[$strKey]) === 0) {
+			$this->errors[$strKey] = $strMessage;
 		}
 	}
 	
@@ -54,6 +83,7 @@ class smp_util_Validator {
 				$strErrMsgs .= $strIndent."	<li>".$strErrMsg."</li>\r\n";
 			}
 			$strErrMsgs .= $strIndent."</ul>\r\n";
+			$strErrMsgs .= $strIndent."<br/>\r\n";
 		}
 		return $strErrMsgs;
 	}
@@ -77,4 +107,15 @@ class smp_util_Validator {
 		return null;
 	}	
 	
+	function getValues() {
+		return $this->properties;
+	}
+	
+	function getErrors() {
+		return $this->errors;
+	}
+	
+	function printProperties () {
+		return print_r($this->properties);
+	}
 }

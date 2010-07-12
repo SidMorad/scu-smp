@@ -17,15 +17,18 @@ class smp_command_public_LoginCommand extends smp_command_Command {
 		if ($request->isPost()) {
 			$validator = new smp_util_Validator();
 			$validator->checkEmptiness("username", "Username is empty.");
+			$validator->checkWithRegex("username", "Username has invalid caracter.", "/^([a-zA-Z0-9_\\.\\-])*$/");
 			$validator->checkEmptiness("password", "Password is empty.");
 			
 			if ($validator->isValid()) {
 				$userService = new smp_service_UserService(new smp_mapper_UserMapper());
-				$user = $userService->findByUsername($validator->getProperty('username'));
+				$username = $validator->getProperty('username');
+				//TODO change findByUsername to return user object with 'case sensetive' username 
+				$user = $userService->findByUsername($username);
 				if (!is_null($user)) {
-					$validator->checkCustomVal("username", "Password is incorrect", $user->getPassword() == $validator->getProperty('password'));
+					$validator->checkCustomVal("password", "Password is incorrect", $user->getPassword() === $validator->getProperty('password'));
 				} else {
-					$validator->setError("username", "Username is incorrect");
+					$validator->setError("username", "Username ($username) does not exist.");
 				}
 				if ($validator->isValid()) {
 					$user = $userService->findUserRoles($user);
