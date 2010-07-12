@@ -59,7 +59,7 @@ class smp_util_FormBuilder {
 		return $closeString;
 	}
 
-	function textBox($strId, $strLabel, $strValue, $strType="text", $intMaxLength = 0, $intTabIndex = null, $grid_X = "grid_12", $arrOtherAttributes = array(), $classCSS = "input") {
+	function textBox($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = "grid_12", $classCSS = "input", $intMaxLength = 0, $strType="text", $arrOtherAttributes = array()) {
 		$strMaxLength = $this->getHtmlAttributeString($intMaxLength > 0 , "maxlength", $intMaxLength);
 		$strTabIndex  = $this->getHtmlAttributeString($intTabIndex != NULL, "tabindex", $intTabIndex);
 		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
@@ -72,25 +72,81 @@ class smp_util_FormBuilder {
 		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
 	}
 	
-	function label($strId, $strLabel, $grid_X = "grid_1", $arrOtherAttributes = array()) {
+	function comboBox($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = "grid_12", $classCSS = "combo", $arrOptions, $intSize = 0, $blnMultiSelect = false, $arrOtherAttributes = array()) {
+		$strOptions = "";
+		$strSelected = "";
+		while (list($strKey, $strVal) = each ($arrOptions)) {
+			$newStrId = ($blnMultiSelect ? str_replace("[]", "", $strId) : $strId);
+			if (isset($this->values[$newStrId])) {
+				if ($blnMultiSelect) {
+					$strSelected = ((in_array($strKey, $this->values[$newStrId])) ? "selected=\"selected\"" : "");
+				} else {
+					$strSelected = (($this->values[$newStrId] == $strKey) ? "selected=\"selected\"" : "");
+				}
+			} else {
+				if($blnMultiSelect) {
+					$strSelected = ((in_array($strKey, $strValue)) ? " selected=\"selected\"" : "" );
+				} else {
+					$strSelected = (($strValue == $strKey) ? " selected=\"selected\"" : "" );
+				}
+			}
+			$strOptions .= $this->strIndent."        		<option value=\"$strKey\" $strSelected>$strVal</option>\r\n";
+		}
+		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
+		$strSize = $this->getHtmlAttributeString($intSize > 0, "size", $intSize);
+		$strMultiSelect = $this->getHtmlAttributeString($blnMultiSelect, "multiple", "multiple");
+		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
+		$strLocator = $this->getLocatorString($strId, $classCSS);
+		$strField = "\r\n".$this->strIndent."		<select id=\"$strId\" name=\"$strId\"".$strTabIndex.$strClassCSS.$strSize.$strMultiSelect.$strLocator.">\r\n";
+		$strField .= $strOptions;
+		$strField .= $this->strIndent."		</select>\r\n";
+		return $this->getHtmlTagString("", $strField, $strId,$grid_X);
+	}
+	
+	function redioBox($strId, $arrItems , $intTabIndex = null, $grid_X, $classCSS = "input", $strCheckedItem = "", $arrOtherAttributes = array()) {
+		$strFieldCombined = "";
+		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
+		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
+		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
+		while (list($strKey, $strVal) = each($arrItems)) {
+			$strChecked = "";
+			if ($this->isPost()) {
+				$strChecked = (((isset($this->values[$strId])? $this->values[$strId]: "") == $strKey) ? " checked=\"checked\"" : "");
+			} else {
+				$strChecked = (($strCheckedItem == $strKey) ? " checked=\checked\"" : "");
+			}
+			$strField = "<input id=\"".$strId."-".$strKey."\" name=\"$strId\" type=\"radio\" value=\"$strKey\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." >$strVal</input>\r\n";
+			$strFieldCombined .= $this->getHtmlTagString("", $strField, $strId."-".$strKey);
+		}
+		return $this->getHtmlTagString("", $strFieldCombined, $strId, $grid_X);
+	}
+	
+	function label($strId, $strLabel, $grid_X = "grid_1", $blnRequired = false, $arrOtherAttributes = array()) {
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
 		$forAttribute = (($strId != NULL) ? " for=\"".$strId."\" " : "");
-		$strLabelTag = "<label$forAttribute$strOtherAttributes> $strLabel </label>";
+		$strRequired = ($blnRequired ? "<span class=\"required\">*</span>" : "");
+		$strLabelTag = "<label class=\"label\" $forAttribute$strOtherAttributes> ".$strLabel.$strRequired."</label>";
 		$labelString = $this->strIndent. "	<div class=\"".$grid_X."\" >\r\n";
 		$labelString .= $this->strIndent. "		".$strLabelTag . "\r\n";	
 		$labelString .= $this->strIndent."	</div>\r\n";
 		return $labelString;
 	}
 
-	function submit($strId, $strCaption, $intTabIndex = NULL ,$grid_X= "grid_12", $arrOtherAttributes = array(), $classCSS = "input") {
+	function button($strId, $strCaption,$strType= "submit", $intTabIndex = NULL ,$grid_X= null, $classCSS = "button", $arrOtherAttributes = array()) {
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != NULL, "tabindex", $intTabIndex);
 		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
-		$strLocator = $this->getLocatorString($strId, "input");
-		$strField = "<input id=\"".$strId."\" type=\"submit\" value=\"".$strCaption."\"".$strTabIndex.$strOtherAttributes.$strClassCSS.$strLocator." />";
+		$strLocator = $this->getLocatorString($strId, $classCSS);
+		$strField = "<input id=\"".$strId."\" type=\"$strType\" value=\"".$strCaption."\"".$strTabIndex.$strOtherAttributes.$strClassCSS.$strLocator." />";
 		return $this->getHtmlTagString("", $strField, $strId, $grid_X);
 	}
 	
+	function submitAndResetButton($strId,$strSubmitCaption,$strResetCaption, $intTabIndex = null, $grid_X = null, $classCSS = "button", $arrOtherAttributes = array()) {
+		$strFieldCombined = $this->button($strId."1", $strSubmitCaption, "submit", $intTabIndex,null,$classCSS, $arrOtherAttributes);
+		$strFieldCombined .= $this->button($strId."2", $strResetCaption, "reset", $intTabIndex,null,$classCSS, $arrOtherAttributes);
+		return $this->getHtmlTagString("", $strFieldCombined, $strId, $grid_X);
+	}
+		
 	function hidden($strId, $strValue) {
 		return $this->strIndent."	<input id=\"".$strId."\" name=\"".$strId."\" type=\"hidden\" value=\"".$strValue."\" />\r\n";
 	}
@@ -112,19 +168,19 @@ class smp_util_FormBuilder {
 	}
 
 	private function getLocatorString($strId, $strClassCSS) {
-		$strLocator = (($this->blnLocator) ?  " onfocus=\"javascript:ChangeClassName('".$strId."', 'selected');\" onblur=\"javascript:ChangeClassName('".$strId."', '".$strClassCSS."');\"" : "" );
+		$strLocator = (($this->blnLocator) ?  " onfocus=\"javascript:ChangeClassName('".$strId."', 'selected_".$strClassCSS."');\" onblur=\"javascript:ChangeClassName('".$strId."', '".$strClassCSS."');\"" : "" );
 		return $strLocator;
 	}
 	
-	private function getHtmlTagString($strLabel, $strField, $strId, $grid_X = "grid_12") {
-		$htmlTagString = $this->strIndent. "	<div class=\"".$grid_X."\">\r\n";
+	private function getHtmlTagString($strLabel, $strField, $strId, $grid_X = null) {
+		$htmlTagString = ($grid_X != null ? $this->strIndent. "	<div class=\"".$grid_X."\">\r\n" : "");
 		if ($strLabel != "") {
 			$htmlTagString .= $this->strIndent."		".(($strId != NULL) ? "<label for=\"".$strId."\">" : "").$strLabel.(($strId != NULL) ? "</label>" : "" ). "\r\n";
 			$htmlTagString .= $this->strIndent."		".$strField."\r\n";
 		} else {
 			$htmlTagString .= $this->strIndent."		".$strField."\r\n";
 		}
-		$htmlTagString .= $this->strIndent."	</div>\r\n";	
+		$htmlTagString .= ($grid_X != null ? $this->strIndent."	</div>\r\n" : "");	
 		return $htmlTagString;
 	}
 
@@ -154,7 +210,7 @@ class smp_util_FormBuilder {
 
 	function getCSSclassIsError($strId, $defaultCSS) {
 		if (isset($this->errors[$strId])) {
-			return "error";
+			return "error_".$defaultCSS;
 		} else {
 			return $defaultCSS;
 		}

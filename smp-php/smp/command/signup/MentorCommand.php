@@ -5,8 +5,20 @@
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  */
+require_once('smp/util/Validator.php');
 class smp_command_signup_MentorCommand extends smp_command_Command {
 	function doExecute(smp_controller_Request $request) {
 		$request->setTitle("Signup Mentor");
+		
+		if ($request->isPost()) {
+			$validator = new smp_util_Validator();
+			$validator->checkEmptiness("username", "Username is empty.");
+			
+			if ($validator->isValid()) {
+				
+				$request->setTitle("Login, First time!");
+				$request->forward("public/login");
+			}
+		}
 	}
 }

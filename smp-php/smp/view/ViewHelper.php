@@ -8,6 +8,7 @@
 require_once('smp/base/RequestRegistry.php');
 require_once('smp/base/SessionRegistry.php');
 require_once('smp/util/Security.php');
+require_once('smp/util/OptionProvider.php');
 class VH {
 	static function getRequest() {
 		return smp_base_RequestRegistry::getRequest();
@@ -27,5 +28,9 @@ class VH {
 	
 	static function isUserGrantedWith($ROLE_NAME) {
 		return smp_util_Security::isUserGrantedWith($ROLE_NAME);
+	}
+	
+	static function getStaticOptionArray($arrayType) {
+		return smp_util_OptionProvider::getStaticOptionArray($arrayType);
 	}
 }
