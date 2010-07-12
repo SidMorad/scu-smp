@@ -27,14 +27,13 @@ class smp_controller_ApplicationHelper {
 			return;
 		}
 		$this->loadXmlConfiguration();
-		throw new Exception("Hi there !!!");
 	}
 	
 	private function loadXmlConfiguration() {
 		$this->ensure( file_exists( $this->configXmlFile), "Could not find config file");
 		
 		$options = @simplexml_load_file($this->configXmlFile);
-		$this->ensure($options instanceof SimpleXMLElement, "Could noe resolve config file");
+		$this->ensure($options instanceof SimpleXMLElement, "Could not resolve config file");
 		// set DSN value
 		$dsn = (string)$options->dsn;
 		$this->ensure($dsn, "No dsn tag found");

@@ -11,31 +11,30 @@ require_once("smp/util/FormBuilder.php");
 
 $objLoginForm = new smp_util_FormBuilder();
 $objLoginForm->setIndent("				");
+$objLoginForm->useLocator();
+$validator = VH::getValidator();
 print $objLoginForm->strIndent."<h1>Login</h1>\r\n";
 
 if ($objLoginForm->isPost()) {
-	$validator = VH::getValidator();
-	print $validator->getErrorMessagesString($objLoginForm->strIndent);
+	$objLoginForm->setValues($validator->getValues());
+	if ($validator->isInvalid()) {
+		$objLoginForm->setErrors($validator->getErrors());
+		print $validator->getErrorMessagesString($objLoginForm->strIndent);
+//		$validator->printProperties();
+	}
 }
 
-
-print $objLoginForm->strIndent."<fieldset>\r\n";
-print $objLoginForm->strIndent."<ul class=\"ulForm\">\r\n";
 print $objLoginForm->open("loginForm");
 print $objLoginForm->hidden("cmd", "public/login");
-print $objLoginForm->strIndent."<li>\r\n";
-print $objLoginForm->textBox("username", "Username:","","text",20,1);
-print $objLoginForm->strIndent."</li>\r\n";
-print $objLoginForm->strIndent."<li>\r\n";
-print $objLoginForm->textBox("password", "Password:","","password",20,2);
-print $objLoginForm->strIndent."</li>\r\n";
-print $objLoginForm->strIndent."<li style=\"padding-right:127px;\">\r\n";
-print $objLoginForm->submit("submit", "Login", 3);
-print $objLoginForm->strIndent."</li>\r\n";
+print $objLoginForm->label("", "Username:","grid_1");
+print $objLoginForm->textBox("username", "","","text",20,1, "grid_11");
+print $objLoginForm->label("", "Password:","grid_1");
+print $objLoginForm->textBox("password", "","","password",20,2,"grid_11");
+print $objLoginForm->label("", "&nbsp;", "grid_1");
+print $objLoginForm->submit("submit", "Login", 3, "grid_11");
 print $objLoginForm->close();
-print $objLoginForm->strIndent."</ul>\r\n";
-print $objLoginForm->strIndent."</fieldset>\r\n";
-print $objLoginForm->strIndent."<p style=\padding-top:30px;\"> These Username / Password for testing:</p>\r\n";
+
+print $objLoginForm->strIndent."<br /><p> These Username / Password for testing:</p>\r\n";
 print $objLoginForm->strIndent."<ul>\r\n";
 print $objLoginForm->strIndent."	<li>admin / admin</li>\r\n";
 print $objLoginForm->strIndent."	<li>manager / manager</li>\r\n";

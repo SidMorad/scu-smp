@@ -1,14 +1,89 @@
 /*
-	CSS for FormBuilder.php
+ *	CSS for FormBuilder.php
+ *	FormBuilder is using Grid 960 CSS Framework for lay out forms.
+ * 	
 */
-.ulForm {
-	list-style: none;
+.form_container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+}
+.form_container .grid_1 {
+	width: 60px;
+}
+
+.form_container .grid_2 {
+	width: 140px;
+}
+
+
+.form_container .grid_3 {
+	width: 220px;
+}
+
+.form_container .grid_4 {
+	width: 300px;
+}
+
+.form_container .grid_5 {
+	width: 380px;
+}
+
+.form_container .grid_6 {
+	width: 460px;
+}
+
+.form_container .grid_7 {
+	width: 540px;
+}
+
+.form_container .grid_8 {
+	width: 620px;
+}
+
+.form_container .grid_9 {
+	width: 700px;
+}
+
+.form_container .grid_10 {
+	width: 780px;
+}
+
+.form_container .grid_11 {
+	width: 860px;
+}
+
+.form_container .grid_12 {
+	width: 940px;
+}
+
+.form_container .label {
+	text-align:right;
 	float: left;
 }
 
-.ulForm li {
-	padding: 3px;
-	text-align: right;
+.form_container .input {
+	border:1px solid #666666;
+	padding:5px;
+	margin-bottom:1px;
+	font:bold 16px inherit;
+	color:#666666;
+}
+
+.form_container .selected {
+	border:1px solid #006699;
+	padding:5px;
+	margin-bottom:1px;
+	font:bold 16px inherit;
+	background:#E4F5FA;
+}
+
+.form_container .error {
+	border:1px solid #cc0000;
+	padding:5px;
+	margin-bottom:1px;
+	font:bold 16px inherit;
+	background:#FFF0F0;
 }
 
 .ulError {
