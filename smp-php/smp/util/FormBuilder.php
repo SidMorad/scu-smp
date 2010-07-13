@@ -59,9 +59,9 @@ class smp_util_FormBuilder {
 		return $closeString;
 	}
 
-	function textBox($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = "grid_12", $classCSS = "input", $intMaxLength = 0, $strType="text", $arrOtherAttributes = array()) {
+	function textBox($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = null, $classCSS = "input", $intMaxLength = 0, $strType="text", $arrOtherAttributes = array()) {
 		$strMaxLength = $this->getHtmlAttributeString($intMaxLength > 0 , "maxlength", $intMaxLength);
-		$strTabIndex  = $this->getHtmlAttributeString($intTabIndex != NULL, "tabindex", $intTabIndex);
+		$strTabIndex  = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
 		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
 		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strLocator = $this->getLocatorString($strId, $classCSS);
@@ -72,7 +72,7 @@ class smp_util_FormBuilder {
 		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
 	}
 	
-	function comboBox($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = "grid_12", $classCSS = "combo", $arrOptions, $intSize = 0, $blnMultiSelect = false, $arrOtherAttributes = array()) {
+	function selectBox($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = null, $arrOptions, $classCSS = "select", $intSize = 0, $blnMultiSelect = false, $arrOtherAttributes = array()) {
 		$strOptions = "";
 		$strSelected = "";
 		while (list($strKey, $strVal) = each ($arrOptions)) {
@@ -95,16 +95,17 @@ class smp_util_FormBuilder {
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
 		$strSize = $this->getHtmlAttributeString($intSize > 0, "size", $intSize);
 		$strMultiSelect = $this->getHtmlAttributeString($blnMultiSelect, "multiple", "multiple");
+		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
 		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strLocator = $this->getLocatorString($strId, $classCSS);
 		$strField = "\r\n".$this->strIndent."		<select id=\"$strId\" name=\"$strId\"".$strTabIndex.$strClassCSS.$strSize.$strMultiSelect.$strLocator.">\r\n";
 		$strField .= $strOptions;
 		$strField .= $this->strIndent."		</select>\r\n";
-		return $this->getHtmlTagString("", $strField, $strId,$grid_X);
+		return $this->getHtmlTagString($strLabel, $strField, $strId,$grid_X);
 	}
 	
-	function redioBox($strId, $arrItems , $intTabIndex = null, $grid_X, $classCSS = "input", $strCheckedItem = "", $arrOtherAttributes = array()) {
-		$strFieldCombined = "";
+	function redioBox($strId, $intTabIndex = null, $grid_X = null, $arrItems, $classCSS = "input", $strCheckedItem = "", $arrOtherAttributes = array()) {
+		$strFieldCombined = $this->strIndent."\r\n";
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
 		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
@@ -115,25 +116,67 @@ class smp_util_FormBuilder {
 			} else {
 				$strChecked = (($strCheckedItem == $strKey) ? " checked=\checked\"" : "");
 			}
-			$strField = "<input id=\"".$strId."-".$strKey."\" name=\"$strId\" type=\"radio\" value=\"$strKey\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." >$strVal</input>\r\n";
+			$strField = "<input id=\"".$strId."-".$strKey."\" name=\"$strId\" type=\"radio\" value=\"$strKey\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." >$strVal</input>";
 			$strFieldCombined .= $this->getHtmlTagString("", $strField, $strId."-".$strKey);
 		}
 		return $this->getHtmlTagString("", $strFieldCombined, $strId, $grid_X);
 	}
 	
-	function label($strId, $strLabel, $grid_X = "grid_1", $blnRequired = false, $arrOtherAttributes = array()) {
+	function checkBox($strId, $strLabel, $intTabIndex = null, $grid_X = null, $classCSS = "checkbox", $blnChecked = false, $strValue="1", $arrOtherOptions = array()) {
+		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex );
+		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
+		$strOtherAttributes = $this->getOtherAttributes($arrOtherOptions);
+		if ($this->isPost()) {
+			$strChecked = ((isset($this->values[$strId])) ? "checked=\"checked\"" : "");
+		} else {
+			$strChecked = (($blnChecked) ? "checked=\"checked\"" : "");
+		}
+		$strField = "<input id=\"$strId\" name=\"$strId\" type=\"checkbox\" value=\"$strValue\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." />";
+		return $this->getHtmlTagString($strLabel, $strField,$strId, $grid_X);
+	}
+	
+	function textArea($strId, $strLabel, $strValue, $intTabIndex = null, $grid_X = null, $intCols = 23, $intRows = 3, $classCSS = "textarea") {
+		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
+		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
+		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
+		$strLocator = $this->getLocatorString($strId, $classCSS);
+		$strField = "<textarea id=\"$strId\" name=\"$strId\" rows=\"$intRows\" cols=\"$intCols\"".$strTabIndex.$strClassCSS.$strLocator.">$strValue</textarea>";
+		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
+	}
+	
+	function label($strId, $strLabel, $grid_X = null, $blnRequired = false, $arrOtherAttributes = array()) {
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
-		$forAttribute = (($strId != NULL) ? " for=\"".$strId."\" " : "");
+		$forAttribute = (($strId != null) ? " for=\"".$strId."\" " : "");
 		$strRequired = ($blnRequired ? "<span class=\"required\">*</span>" : "");
-		$strLabelTag = "<label class=\"label\" $forAttribute$strOtherAttributes> ".$strLabel.$strRequired."</label>";
+		$strLabelTag = "<label class=\"label\"$forAttribute$strOtherAttributes>".$strLabel.$strRequired."</label>";
 		$labelString = $this->strIndent. "	<div class=\"".$grid_X."\" >\r\n";
 		$labelString .= $this->strIndent. "		".$strLabelTag . "\r\n";	
 		$labelString .= $this->strIndent."	</div>\r\n";
 		return $labelString;
 	}
+	
+	function note($grid_X = null, $string) {
+		$strNote = "";
+		$strNote .= ($grid_X != null ? $this->strIndent . "	<div class=\"".$grid_X."\" >\r\n" : "");
+		$strNote .= $this->strIndent. "	<p>$string</p>\r\n";
+		$strNote .= ($grid_X != null ? $this->strIndent . "	</div>\r\n" : "");
+		return $strNote;
+	} 
 
-	function button($strId, $strCaption,$strType= "submit", $intTabIndex = NULL ,$grid_X= null, $classCSS = "button", $arrOtherAttributes = array()) {
-		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != NULL, "tabindex", $intTabIndex);
+	function hx($hx, $grid_X = null, $string) {
+		$strNote = "";
+		$strNote .= ($grid_X != null ? $this->strIndent . "	<div class=\"".$grid_X."\" >\r\n" : "");
+		$strNote .= $this->strIndent. "	<$hx>$string</$hx>\r\n";
+		$strNote .= ($grid_X != null ? $this->strIndent . "	</div>\r\n" : "");
+		return $strNote;
+	} 
+	
+	function hr() {
+		return $this->strIndent. "	<hr/>\r\n";
+	}
+
+	function button($strId, $strCaption,$strType= "submit", $intTabIndex = null ,$grid_X= null, $classCSS = "button", $arrOtherAttributes = array()) {
+		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
 		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
 		$strLocator = $this->getLocatorString($strId, $classCSS);
@@ -142,7 +185,7 @@ class smp_util_FormBuilder {
 	}
 	
 	function submitAndResetButton($strId,$strSubmitCaption,$strResetCaption, $intTabIndex = null, $grid_X = null, $classCSS = "button", $arrOtherAttributes = array()) {
-		$strFieldCombined = $this->button($strId."1", $strSubmitCaption, "submit", $intTabIndex,null,$classCSS, $arrOtherAttributes);
+		$strFieldCombined = $this->strIndent. "\r\n".$this->button($strId."1", $strSubmitCaption, "submit", $intTabIndex,null,$classCSS, $arrOtherAttributes);
 		$strFieldCombined .= $this->button($strId."2", $strResetCaption, "reset", $intTabIndex,null,$classCSS, $arrOtherAttributes);
 		return $this->getHtmlTagString("", $strFieldCombined, $strId, $grid_X);
 	}
@@ -175,7 +218,7 @@ class smp_util_FormBuilder {
 	private function getHtmlTagString($strLabel, $strField, $strId, $grid_X = null) {
 		$htmlTagString = ($grid_X != null ? $this->strIndent. "	<div class=\"".$grid_X."\">\r\n" : "");
 		if ($strLabel != "") {
-			$htmlTagString .= $this->strIndent."		".(($strId != NULL) ? "<label for=\"".$strId."\">" : "").$strLabel.(($strId != NULL) ? "</label>" : "" ). "\r\n";
+			$htmlTagString .= $this->strIndent."		".(($strId != null) ? "<label for=\"".$strId."\">" : "").$strLabel.(($strId != null) ? "</label>" : "" ). "\r\n";
 			$htmlTagString .= $this->strIndent."		".$strField."\r\n";
 		} else {
 			$htmlTagString .= $this->strIndent."		".$strField."\r\n";

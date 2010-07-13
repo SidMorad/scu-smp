@@ -73,7 +73,8 @@
 .form_container .biginput,
 .form_container .smallinput,
 .form_container .button,
-.form_container .combo {
+.form_container .select,
+.form_container .textarea {
 	border-color:#666666; 
 	color:#666666;
 }
@@ -82,7 +83,8 @@
 .form_container .selected_biginput,
 .form_container .selected_smallinput,
 .form_container .selected_button,
-.form_container .selected_combo {
+.form_container .selected_select,
+.form_container .selected_textarea {
 	border-color: #006699;
 	background:#E4F5FA;
 }
@@ -90,7 +92,8 @@
 .form_container .error_input,
 .form_container .error_biginput,
 .form_container .error_smallinput,
-.form_container .error_combo {
+.form_container .error_select,
+.form_container .error_textarea {
 	border-color: #cc0000;
 	background:#FFF0F0;
 }
@@ -119,21 +122,32 @@
 	width: 85px;
 }
 
-.form_container .combo,
-.form_container .selected_combo,
-.form_container .error_combo {
+.form_container .select,
+.form_container .selected_select,
+.form_container .error_select {
 	width: 180px;
 	height: 30px;
 	top: 5px;
 }
 
+.form_container .textarea,
+.form_container .selected_textarea,
+.form_container .error_textarea {
+}
+
+.form_container .checkbox {
+	margin: 0px;
+}
+
 .form_container h3 {
-	padding-left: 60px;
+	padding-top: 30px;
+	padding-left: 20px;
 }
 
 .form_container hr {
 	float:left;
 	width: 940px;
+	margin-top: 0px;
 }
 
 .ulError {

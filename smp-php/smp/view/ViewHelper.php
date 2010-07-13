@@ -30,7 +30,7 @@ class VH {
 		return smp_util_Security::isUserGrantedWith($ROLE_NAME);
 	}
 	
-	static function getStaticOptionArray($arrayType) {
-		return smp_util_OptionProvider::getStaticOptionArray($arrayType);
+	static function getFixArray($type) {
+		return smp_util_OptionProvider::getFixArray($type);
 	}
 }
