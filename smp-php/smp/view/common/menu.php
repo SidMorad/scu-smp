@@ -6,10 +6,8 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Admin</a>
 						<ul>
-							<li><a href="#">SubAdmin1</a></li>
-							<li><a href="#">SubAdmin2</a></li>
-							<li><a href="#">SubAdmin3</a></li>
-							<li><a href="#">SubAdmin...</a></li>
+							<li><a href="#">List all users</a></li>
+							<li><a href="#">Add new User</a></li>
 						</ul>
 					</li>
 	<?php		
@@ -18,10 +16,10 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Manager</a>
 						<ul>
-							<li><a href="#">Manager1</a></li>
-							<li><a href="#">Manager2</a></li>
-							<li><a href="#">Manager3</a></li>
-							<li><a href="#">Manager...</a></li>
+							<li><a href="#">All Coordinators</a></li>
+							<li><a href="#">List all Mentors</a></li>
+							<li><a href="#">List all Mentees</a></li>
+							<li><a href="#">ReportPerCampus</a></li>
 						</ul>
 					</li>
 	<?php		
@@ -30,10 +28,11 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Coordinator</a>
 						<ul>
-							<li><a href="#">Coordinator1</a></li>
-							<li><a href="#">Coordinator2</a></li>
-							<li><a href="#">Coordinator3</a></li>
-							<li><a href="#">Coordinator...</a></li>
+							<li><a href="#">Current Mentors</a></li>
+							<li><a href="#">Current Mentees</a></li>
+							<li><a href="#">Active Mentors</a></li>
+							<li><a href="#">Matching Mentee</a></li>
+							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>
 	<?php		
@@ -42,10 +41,9 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Mentor</a>
 						<ul>
-							<li><a href="#">Mentor1</a></li>
-							<li><a href="#">Mentor2</a></li>
-							<li><a href="#">Mentor3</a></li>
-							<li><a href="#">Mentor...</a></li>
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">my Mentee(s) info</a></li>
+							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>
 	<?php		
@@ -54,10 +52,9 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Mentee</a>
 						<ul>
-							<li><a href="#">Mentee1</a></li>
-							<li><a href="#">Mentee2</a></li>
-							<li><a href="#">Mentee3</a></li>
-							<li><a href="#">Mentee...</a></li>
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">my Mentor info</a></li>
+							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>
 	<?php		
