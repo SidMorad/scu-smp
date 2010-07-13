@@ -12,7 +12,11 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 		
 		if ($request->isPost()) {
 			$validator = new smp_util_Validator();
-			$validator->checkEmptiness("username", "Username is empty.");
+			$validator->checkEmptiness("username", "Username is required.");
+			$validator->checkEmptiness("scuEmail", "SCU-Email address is required.");
+			$validator->checkEmptiness("studyMode", "Study mode need to be selected.");
+			$validator->checkEmptiness("studentNumber", "Student number is required.");
+			$validator->checkEmptiness("argument", "For successful registration, you need to accept Agreement.");
 			
 			if ($validator->isValid()) {
 				
