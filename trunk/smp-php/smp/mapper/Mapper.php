@@ -29,9 +29,7 @@ abstract class smp_mapper_Mapper {
 		self::$ADODB->Execute($this->selectStmt(),array($param));
 	}	
 	
-	abstract function update( smp_domain_DomainObject $object);
 	protected abstract function doCreateObject(array $array);
 	protected abstract function doInsert(smp_domain_DomainObject $object);
 	protected abstract function targetClass();
-	protected abstract function selectStmt();
 }

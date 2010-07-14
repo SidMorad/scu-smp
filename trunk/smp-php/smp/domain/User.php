@@ -11,12 +11,15 @@ class smp_domain_User extends smp_domain_DomainObject {
 
 	private $username;
 	private $password;
+	private $scuEmail;
 	
 	private $roles = array();
 	
-	function __construct($id, $username) {
+	function __construct($id =-1, $username, $password = null, $scuEmail = null) {
 		parent::__construct($id);
 		$this->username = $username;
+		$this->password = $password;
+		$this->scuEmail = $scuEmail;
 	}
 	
 	function getUsername() {
@@ -35,6 +38,14 @@ class smp_domain_User extends smp_domain_DomainObject {
 		$this->password = $password;
 	}
 	
+	function setScuEmail($scuEmail) {
+		$this->scuEmail = $scuEmail;
+	}
+	
+	function getScuEmail() {
+		return $this->scuEmail;
+	}
+	
 	function getRoles() {
 		return $this->roles;
 	}
@@ -42,5 +53,11 @@ class smp_domain_User extends smp_domain_DomainObject {
 	function addToRoles($roleName) {
 		$this->roles[] = $roleName;
 	}
-	
+
+	function __toString() {
+		$userString = $this->getUsername();
+		$userString .= ", " . $this->getScuEmail();
+		return $userString;	
+	}
+
 }
