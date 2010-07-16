@@ -1,9 +1,45 @@
 USE smp;
 
+DROP TABLE IF EXISTS smp_student;
 DROP TABLE IF EXISTS smp_user_role;
 DROP TABLE IF EXISTS smp_user;
 DROP TABLE IF EXISTS smp_role;
 DROP TABLE IF EXISTS smp_log;
+
+CREATE TABLE smp_student (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	firstname VARCHAR(100),
+	lastname VARCHAR(100),
+	gender VARCHAR(20),
+	student_number VARCHAR(10),
+	age_range VARCHAR(20),
+	course VARCHAR(100),
+	major VARCHAR(100),
+	study_mode VARCHAR(50),
+	recommended_by_staff VARCHAR(100),
+	semesters_completed VARCHAR(3),
+	family_status VARCHAR(5),
+	work_status VARCHAR(50),
+	tertiary_study_status VARCHAR(5),
+	is_first_year VARCHAR(5),
+	is_trained BOOLEAN,
+	is_international BOOLEAN,
+	is_disability BOOLEAN,
+	is_indigenous BOOLEAN,
+	is_non_english BOOLEAN,
+	is_regional BOOLEAN,
+	is_socioeconomic BOOLEAN,
+	prefer_gender VARCHAR(20),
+	prefer_australian BOOLEAN,
+	prefer_distance BOOLEAN,
+	prefer_international BOOLEAN,
+	prefer_on_campus BOOLEAN,
+	interests VARCHAR(255),
+	comments VARCHAR(255),
+	user_id BIGINT,	
+	CONSTRAINT smp_fk_student_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	PRIMARY KEY(id)
+);
 
 CREATE TABLE smp_log (
 	id BIGINT NOT NULL AUTO_INCREMENT,
