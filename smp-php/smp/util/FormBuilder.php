@@ -104,7 +104,7 @@ class smp_util_FormBuilder {
 		return $this->getHtmlTagString($strLabel, $strField, $strId,$grid_X);
 	}
 	
-	function redioBox($strId, $intTabIndex = null, $grid_X = null, $arrItems, $classCSS = "input", $strCheckedItem = "", $arrOtherAttributes = array()) {
+	function redioBox($strId, $intTabIndex = null, $grid_X = null, $arrItems, $classCSS = "redio", $strCheckedItem = "", $arrOtherAttributes = array()) {
 		$strFieldCombined = $this->strIndent."\r\n";
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
 		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);

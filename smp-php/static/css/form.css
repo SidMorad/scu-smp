@@ -137,6 +137,12 @@
 
 .form_container .checkbox {
 	margin: 0px;
+	border: none;
+}
+
+.form_container .redio {
+	margin: 0px;
+	border: none;
 }
 
 .form_container h3 {

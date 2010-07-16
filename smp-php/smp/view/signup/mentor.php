@@ -104,13 +104,13 @@ print $objForm->hr();
 print $objForm->note("grid_12", "Do you have any preference about the student(s) you would like to mentor (tick all that apply):");
 print $objForm->label("preferOnCampus"		, "On-campus student:",	"grid_6");
 print $objForm->checkBox("preferOnCampus"	, "", 	  30, 			"grid_6");
-print $objForm->label(""					, "&nbsp;" , 			"grid_6");
+print $objForm->label(""					, "&nbsp;" , 			"grid_12");
 print $objForm->label("preferDistance"		, "Distance study student:","grid_6");
 print $objForm->checkBox("preferDistance"	, "",     31, 			"grid_6");
-print $objForm->label(""					, "&nbsp;" , 			"grid_6");
+print $objForm->label(""					, "&nbsp;" , 			"grid_12");
 print $objForm->label("preferInternational"	, "International student (studying in Australia):","grid_6");
 print $objForm->checkBox("preferInternational", "",   32, 			"grid_6");
-print $objForm->label(""					, "&nbsp;" , 			"grid_6");
+print $objForm->label(""					, "&nbsp;" , 			"grid_12");
 print $objForm->label("preferAustralian" 	, "Domestic (Australian) student:","grid_6");
 print $objForm->checkBox("preferAustralian"	, "",     33, 			"grid_6");
 
