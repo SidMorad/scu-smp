@@ -10,8 +10,8 @@ require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/Student.php');
 require_once('smp/mapper/LogMapper.php');
 class smp_mapper_StudentMapper extends smp_mapper_Mapper {
-	protected $logMapper; 
-	
+	protected $logMapper;
+
 	function __construct() {
 		parent::__construct();
 		$strInsertQuery = "INSERT INTO smp_student (user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff";
@@ -54,12 +54,13 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$obj->setPreferOnCampus($array['prefer_on_campus']);
 		$obj->setInterests($array['interests']);
 		$obj->setComments($array['comments']);
+		return $obj;
 	}
 
 	protected function doInsert(smp_domain_DomainObject $obj) {
-		$values = array($obj->getUserId(), $obj->getFirstname(), $obj->getLastname(), $obj->getGender(), $obj->getStudentNumber(), $obj->getAgeRange(), $obj->getCourse(), $obj->getMajor(), 
+		$values = array($obj->getUserId(), $obj->getFirstname(), $obj->getLastname(), $obj->getGender(), $obj->getStudentNumber(), $obj->getAgeRange(), $obj->getCourse(), $obj->getMajor(),
 		$obj->getStudyMode(), $obj->getRecommendedByStaff(), $obj->getSemestersCompleted(), $obj->getFamilyStatus(), $obj->getWorkStatus(), $obj->getTertiaryStudyStatus(), $obj->getIsFirstYear(), $obj->getIsTrained(),
-		$obj->getIsInternational(), $obj->getIsDisability(), $obj->getIsIndigenous(), $obj->getIsNonEnglish(), $obj->getIsRegional(), $obj->getIsSocioeconomic(), $obj->getPreferGender(), 
+		$obj->getIsInternational(), $obj->getIsDisability(), $obj->getIsIndigenous(), $obj->getIsNonEnglish(), $obj->getIsRegional(), $obj->getIsSocioeconomic(), $obj->getPreferGender(),
 		$obj->getPreferAustralian(), $obj->getPreferDistance(), $obj->getPreferInternational(), $obj->getPreferOnCampus(), $obj->getInterests(), $obj->getComments());
 		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
@@ -80,4 +81,14 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		}
 	}
 
+	function listMentors() {
+		// TODO Change selectStmt to filter studnet by type 'Mentor'
+		$selectStmt = self::$ADODB->Prepare("SELECT firstname, lastname, gender, student_number, study_mode FROM smp_student;");
+		$rs = self::$ADODB->Execute($selectStmt);
+		$list = array();
+		while ($row = $rs->FetchRow()) {
+			$list[] = self::doCreateObject($row);
+		}
+		return $list;
+	}
 }

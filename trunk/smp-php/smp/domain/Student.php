@@ -216,6 +216,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 		return $this->interests;
 	}
 	function getComments() {	
-		return $this->comment;
+		return $this->comments;
 	}
 }
