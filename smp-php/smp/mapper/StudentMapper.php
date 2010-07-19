@@ -83,7 +83,7 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 
 	function listMentors() {
 		// TODO Change selectStmt to filter studnet by type 'Mentor'
-		$selectStmt = self::$ADODB->Prepare("SELECT firstname, lastname, gender, student_number, study_mode FROM smp_student;");
+		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student;");
 		$rs = self::$ADODB->Execute($selectStmt);
 		$list = array();
 		while ($row = $rs->FetchRow()) {
