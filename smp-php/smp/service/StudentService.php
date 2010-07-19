@@ -18,4 +18,7 @@ class smp_service_StudentService {
 		return $this->studentMapper->save($student);
 	}
 	
+	function listMentors() {
+		return $this->studentMapper->listMentors();
+	}
 }

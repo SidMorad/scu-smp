@@ -17,7 +17,7 @@
 					<li><a href="#" class="MenuBarItemSubmenu">Manager</a>
 						<ul>
 							<li><a href="#">All Coordinators</a></li>
-							<li><a href="#">List all Mentors</a></li>
+							<li><a href="index.php?cmd=student/listMentor">List all Mentors</a></li>
 							<li><a href="#">List all Mentees</a></li>
 							<li><a href="#">ReportPerCampus</a></li>
 						</ul>

@@ -13,6 +13,7 @@ class smp_controller_Request {
 	private $title;
 	private $command;
 	private $view;
+	private $list = array();
 	
 	/**
 	 * constructor
@@ -124,4 +125,18 @@ class smp_controller_Request {
 		$this->setView($view);
 	}	
 	
+	/**
+	 * 
+	 * @param $list
+	 */
+	function setList($list) {
+		$this->list = $list;
+	}
+	
+	/**
+	 * @return $list whcih is array of object
+	 */
+	function getList() {
+		return $this->list;
+	}	
 }
