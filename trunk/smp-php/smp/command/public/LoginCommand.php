@@ -21,10 +21,10 @@ class smp_command_public_LoginCommand extends smp_command_Command {
 			$validator->checkEmptiness("password", "Password is empty.");
 			
 			if ($validator->isValid()) {
-				$userService = new smp_service_UserService(new smp_mapper_UserMapper());
+				$userService = new smp_service_UserService();
 				$username = $validator->getProperty('username');
 				//TODO change findByUsername to return user object with 'case sensetive' username 
-				$user = $userService->findByUsername($username);
+				$user = $userService->findUserByUsername($username);
 				if (!is_null($user)) {
 					$validator->checkCustomVal("password", "Password is incorrect", $user->getPassword() === $validator->getProperty('password'));
 				} else {

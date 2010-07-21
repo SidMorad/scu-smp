@@ -8,13 +8,18 @@
  * @version 1.0
  */
 require_once('library/adodb511/adodb.inc.php');
+require_once('smp/mapper/Logger.php');
 abstract class smp_mapper_Mapper {
 	protected static $ADODB;
 	protected $selectStmt;
 	protected $updateStmt;
 	protected $insertStmt;
+	protected $logger;
 	
-	function __construct() {
+	function __construct($adodb = null) {
+		if (!is_null($adodb)) {
+			self::$ADODB = $adodb;
+		}
 		if (! isset(self::$ADODB)) {
 			$dsn = smp_base_ApplicationRegistry::getDSN();
 			if (is_null($dsn)) {
@@ -22,6 +27,10 @@ abstract class smp_mapper_Mapper {
 			}
 			self::$ADODB = NewADOConnection($dsn);
 			self::$ADODB->debug = false;
+			self::$ADODB->autoRollback = true;
+		}
+		if (! isset($this->logger)) {
+			$this->logger = new smp_mapper_Logger();
 		}
 	}
 	

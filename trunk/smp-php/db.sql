@@ -1,10 +1,44 @@
+CREATE DATABASE IF NOT EXISTS smp;
 USE smp;
 
+DROP TABLE IF EXISTS smp_contact;
 DROP TABLE IF EXISTS smp_student;
 DROP TABLE IF EXISTS smp_user_role;
+DROP TABLE IF EXISTS smp_log;
 DROP TABLE IF EXISTS smp_user;
 DROP TABLE IF EXISTS smp_role;
-DROP TABLE IF EXISTS smp_log;
+
+CREATE TABLE smp_user (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50) NOT NULL UNIQUE,
+	password VARCHAR(50) NOT NULL,
+	scu_email VARCHAR(100) NOT NULL UNIQUE, 
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE smp_role(
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) NOT NULL UNIQUE,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE smp_user_role(
+	user_id BIGINT,
+	role_id INT(11),
+	CONSTRAINT smp_fk_user_role FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_role_user FOREIGN KEY (role_id) REFERENCES smp_role(id) ON DELETE CASCADE,
+	PRIMARY KEY(user_id, role_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE smp_log (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	msg VARCHAR(255),
+	title VARCHAR(50),
+	user_id BIGINT,
+	CONSTRAINT smp_fk_log_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE smp_student (
 	id BIGINT NOT NULL AUTO_INCREMENT,
@@ -39,39 +73,22 @@ CREATE TABLE smp_student (
 	user_id BIGINT,	
 	CONSTRAINT smp_fk_student_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
 	PRIMARY KEY(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE smp_log (
+CREATE TABLE smp_contact (
 	id BIGINT NOT NULL AUTO_INCREMENT,
-	time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	msg VARCHAR(255),
-	title VARCHAR(50),
+	address VARCHAR(255),
+	city VARCHAR(100),
+	postcode VARCHAR(20),
+	phone_home VARCHAR(20),
+	phone_work VARCHAR(20),
+	email VARCHAR(100),
 	user_id BIGINT,
-	CONSTRAINT smp_fk_log_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	student_id BIGINT,
+	CONSTRAINT smp_fk_contact_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_contact_student FOREIGN KEY (student_id) REFERENCES smp_student(id) ON DELETE CASCADE,
 	PRIMARY KEY(id)
-);
-
-CREATE TABLE smp_user (
-	id BIGINT NOT NULL AUTO_INCREMENT,
-	username VARCHAR(50) NOT NULL UNIQUE,
-	password VARCHAR(50) NOT NULL,
-	scu_email VARCHAR(100) NOT NULL UNIQUE, 
-	PRIMARY KEY(id)
-);
-
-CREATE TABLE smp_role(
-	id INT(11) NOT NULL AUTO_INCREMENT,
-	name VARCHAR(50) NOT NULL UNIQUE,
-	PRIMARY KEY(id)
-);
-
-CREATE TABLE smp_user_role(
-	user_id BIGINT,
-	role_id INT(11),
-	CONSTRAINT smp_fk_user_role FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
-	CONSTRAINT smp_fk_role_user FOREIGN KEY (role_id) REFERENCES smp_role(id) ON DELETE CASCADE,
-	PRIMARY KEY(user_id, role_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into smp_role values(1, 'ROLE_ADMIN');
 insert into smp_role values(2, 'ROLE_MANAGER');

@@ -9,16 +9,13 @@
 require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/User.php');
 require_once('smp/domain/Log.php');
-require_once('smp/mapper/LogMapper.php');
 class smp_mapper_UserMapper extends smp_mapper_Mapper {
-	protected $logMapper;
 	
-	function __construct() {
-		parent::__construct();
+	function __construct($adodb = null) {
+		parent::__construct($adodb);
 		$this->selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_user WHERE username=?");
 		$this->updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET password=?, WHERE id=?");
 		$this->insertStmt = self::$ADODB->Prepare("INSERT into smp_user (username, password, scu_email) values(?,?,?) ");
-		$this->logMapper = new smp_mapper_LogMapper();
 	}
 	
 	protected function doCreateObject(array $array) {
@@ -38,11 +35,12 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 	function save(smp_domain_User $user) {
 		$rs = self::doInsert($user);
 		if ($rs === false) {
-			$this->logMapper->save(new smp_domain_Log("user.save", "User save failed, message:".self::$ADODB->ErrorMsg()));
+			$this->logger->save(new smp_domain_Log("user.save", "User save failed, message:".self::$ADODB->ErrorMsg()));
 			return null;
 		} else {
-			$this->logMapper->save(new smp_domain_Log("user.save", "User saved successfully, user:".$user));
-			return self::findByUsername($user->getUsername());
+			$user->setId(self::$ADODB->Insert_ID());
+			$this->logger->save(new smp_domain_Log("user.save", "User saved successfully, user:".$user));
+			return $user;
 		}
 	}
 
@@ -59,8 +57,18 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		return self::$ADODB->Execute($stmt, array($userId));
 	}
 	
-	function findByUsername ($username) {
+	function findUserByUsername ($username) {
 		$rs = self::$ADODB->Execute($this->selectStmt, array($username));
+		$arr = $rs->FetchRow();
+		if (!is_array($arr)) {
+			return null;
+		}
+		return $this->doCreateObject($arr);
+	}
+	
+	function findUserByScuEmail ($scuEmail) {
+		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_user WHERE scu_email=?");
+		$rs = self::$ADODB->Execute($selectStmt, array($scuEmail));
 		$arr = $rs->FetchRow();
 		if (!is_array($arr)) {
 			return null;

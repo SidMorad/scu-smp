@@ -8,9 +8,7 @@
  */
 require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/Student.php');
-require_once('smp/mapper/LogMapper.php');
 class smp_mapper_StudentMapper extends smp_mapper_Mapper {
-	protected $logMapper;
 
 	function __construct() {
 		parent::__construct();
@@ -19,7 +17,6 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$strInsertQuery .= ",is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments)";
 		$strInsertQuery .= "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->insertStmt = self::$ADODB->Prepare($strInsertQuery);
-		$this->logMapper = new smp_mapper_LogMapper();
 	}
 
 	protected function doCreateObject(array $array) {
@@ -72,11 +69,11 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	function save(smp_domain_Student $student) {
 		$rs = self::doInsert($student);
 		if ($rs === false) {
-			$this->logMapper->save(new smp_domain_Log("student.save", "Student save failed, message:".self::$ADODB->ErrorMsg()));
+			$this->logger->save(new smp_domain_Log("student.save", "Student save failed, message:".self::$ADODB->ErrorMsg()));
 			return null;
 		} else {
-			$this->logMapper->save(new smp_domain_Log("student.save", "Student save successfully, message:".self::$ADODB->ErrorMsg()));
-			// TODO we need to set inserted Id for Student object. and then return it!
+			$student->setId(self::$ADODB->Insert_ID());
+			$this->logger->save(new smp_domain_Log("student.save", "Student save successfully, student:".$student));
 			return $student;
 		}
 	}
@@ -86,8 +83,10 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student;");
 		$rs = self::$ADODB->Execute($selectStmt);
 		$list = array();
-		while ($row = $rs->FetchRow()) {
-			$list[] = self::doCreateObject($row);
+		if ($rs) {
+			while ($row = $rs->FetchRow()) {
+				$list[] = self::doCreateObject($row);
+			}
 		}
 		return $list;
 	}

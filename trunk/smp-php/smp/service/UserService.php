@@ -12,8 +12,8 @@ class smp_service_UserService {
 	private $userMapper;
 	private $roleService;
 	
-	function __construct(smp_mapper_UserMapper $userMapper) {
-		$this->userMapper = $userMapper;
+	function __construct() {
+		$this->userMapper = new smp_mapper_UserMapper();
 		$this->roleService = new smp_service_RoleService();
 	}
 	
@@ -22,8 +22,17 @@ class smp_service_UserService {
 	 * @param $username
 	 * @return smp_domain_User  
 	 */
-	function findByUsername($username) {
-		return $this->userMapper->findByUsername($username);	
+	function findUserByUsername($username) {
+		return $this->userMapper->findUserByUsername($username);	
+	}
+
+	/**
+	 * Find User by scu email address
+	 * @param $scuEmail
+	 * @return smp_domain_User  
+	 */
+	function findUserByScuEmail($username) {
+		return $this->userMapper->findUserByScuEmail($username);	
 	}
 	
 	/**
