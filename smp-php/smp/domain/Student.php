@@ -218,4 +218,11 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function getComments() {	
 		return $this->comments;
 	}
+	
+	function __toString() {
+		$studentString = $this->getId(); 
+		$studentString .= ", " . $this->getFirstname();
+		$studentString .= ", " . $this->getLastname();
+		return $studentString;
+	}	
 }

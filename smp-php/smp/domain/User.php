@@ -55,7 +55,8 @@ class smp_domain_User extends smp_domain_DomainObject {
 	}
 
 	function __toString() {
-		$userString = $this->getUsername();
+		$userString = $this->getId();
+		$userString .= ", " . $this->getUsername();
 		$userString .= ", " . $this->getScuEmail();
 		return $userString;	
 	}

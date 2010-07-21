@@ -1,17 +1,24 @@
 <?php
 /**
  * Created at 14/07/2010 8:39:37 PM
- * smp_mapper_LogMapper
+ * smp_mapper_Logger
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-class smp_mapper_LogMapper extends smp_mapper_Mapper {
+class smp_mapper_Logger {
+	protected static $ADODB;
 	
 	function __construct() {
-		parent::__construct();
-		$this->selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_log");
-		$this->insertStmt = self::$ADODB->Prepare("INSERT INTO smp_log (title, msg, user_id) values(?,?,?)");
+		if (! isset(self::$ADODB)) {
+			$dsn = smp_base_ApplicationRegistry::getDSN();
+			if (is_null($dsn)) {
+				throw new smp_base_AppException("No DSN founded!");
+			}
+			self::$ADODB = NewADOConnection($dsn);
+			self::$ADODB->debug = false;
+			self::$ADODB->autoRollback = false;
+		}
 	}
 	
 	protected function doCreateObject(array $array) {}
@@ -21,8 +28,9 @@ class smp_mapper_LogMapper extends smp_mapper_Mapper {
 	}
 
 	protected function doInsert(smp_domain_DomainObject $obj) {
+		$insertStmt = self::$ADODB->Prepare("INSERT INTO smp_log (title, msg, user_id) values(?,?,?)");
 		$values = array($obj->getTitle(), $obj->getMsg(), $obj->getUserId());
-		return self::$ADODB->Execute($this->insertStmt, $values);
+		return self::$ADODB->Execute($insertStmt, $values);
 	}
 
 	public function save(smp_domain_Log $log) {

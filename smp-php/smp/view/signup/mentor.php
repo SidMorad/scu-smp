@@ -28,8 +28,6 @@ if ($objForm->isPost()) {
 
 print $objForm->open("signupMentorForm");
 print $objForm->hidden("cmd"		, "signup/mentor");
-//print $objForm->label("", "&nbsp;", "grid_2");
-//print $objForm->submitAndResetButton("button", "Register", "Reset", 39, "grid_10", "button");
 print $objForm->hx("h3", "grid_12"	, "Contact Information");
 print $objForm->hr();
 print $objForm->label("username"	, "Username:"	, "grid_2", true);
@@ -40,9 +38,9 @@ print $objForm->label("password"	, "Password:"	, "grid_2", true);
 print $objForm->textBox("password"	, "", "", 3		, "grid_2", "input", 50, "password");
 print $objForm->label("password2"	, "Confirm Password:", "grid_2", true);
 print $objForm->textBox("password2"	, "", "", 4		, "grid_6", "input", 50, "password");
-print $objForm->label("firstname"	, "First Name:"	, "grid_2");
+print $objForm->label("firstname"	, "First Name:"	, "grid_2", true);
 print $objForm->textBox("firstname"	, "", "", 5		, "grid_2", "input", 50);
-print $objForm->label("lastname"	, "Last Name:"	, "grid_2");
+print $objForm->label("lastname"	, "Last Name:"	, "grid_2", true);
 print $objForm->textBox("lastname"	, "", "", 6		, "grid_6", "input", 50);
 print $objForm->label("address"		, "Address:"	, "grid_2");
 print $objForm->textBox("address"	, "", "", 7		, "grid_10", "biginput", 150);
