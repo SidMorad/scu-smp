@@ -1,7 +1,7 @@
 <?php
 /**
- * Created at 19/07/2010 9:59:02 AM
- * smp/view/student/listMentor.php
+ * Created at 23/07/2010 12:57:58 PM
+ * smp/view/student/listMentee.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -9,7 +9,7 @@
 include('smp/view/common/header.php');
 
 $indent = "				";
-print $indent."<br/><h1>List of Mentors</h1><br/>\r\n";
+print $indent."<br><h1>List of Mentees</h1><br>\r\n";
 
 print $indent."<table class=\"table\">\r\n";
 print $indent."	<th>Firstname</th>\r\n";	
@@ -25,5 +25,6 @@ print $indent."	<tr>\r\n";
 print $indent."	</tr>\r\n";
 }
 print $indent."</table>\r\n";
+
 
 include('smp/view/common/footer.php');

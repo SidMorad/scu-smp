@@ -38,6 +38,7 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $preferOnCampus;
 	var $interests;
 	var $comments;
+	var $accountStatus;
 	
 	function __construct($id = -1) {
 		parent::__construct($id);
@@ -130,6 +131,9 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function setComments ($comments) {
 		$this->comments = $comments;
 	}
+	function setAccountStatus ($accountStatus) {
+		$this->accountStatus = $accountStatus;
+	}
 
 	function getUserId() {
 		return $this->userId;
@@ -217,6 +221,9 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function getComments() {	
 		return $this->comments;
+	}
+	function getAccountStatus() {
+		return $this->accountStatus;
 	}
 	
 	function __toString() {

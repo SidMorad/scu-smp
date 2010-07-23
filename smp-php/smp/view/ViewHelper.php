@@ -33,4 +33,9 @@ class VH {
 	static function getFixArray($type) {
 		return smp_util_OptionProvider::getFixArray($type);
 	}
+	
+	static function getValueFromFixArray($type, $key) {
+		$array = smp_util_OptionProvider::getFixArray($type);
+		return $array[$key];
+	}
 }

@@ -21,4 +21,16 @@ class smp_service_StudentService {
 	function listMentors() {
 		return $this->studentMapper->listMentors();
 	}
+
+	function listMentees() {
+		return $this->studentMapper->listMentees();
+	}
+	
+	function listStudentWithAccountStatus($accountStatus) {
+		return $this->studentMapper->listStudentWithAccountStatus($accountStatus);
+	}
+	
+	function find($id) {
+		return $this->studentMapper->find($id);
+	}
 }
