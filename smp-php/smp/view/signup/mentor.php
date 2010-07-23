@@ -14,7 +14,7 @@ $objForm->setIndent("			");
 $validator = VH::getValidator();
 
 print $objForm->strIndent."<h1>Became a Mentor Application Form</h1>\r\n";
-print $objForm->strIndent."<p style=\padding-left:30px;\">Use this form if you have successfully completed at least two semesters of undergraduate study at Southern Cross University and<br/> you want <b>to become a Student Mentor.</b></p>\r\n";
+print $objForm->strIndent."<p style=\"padding-left:30px;\">Use this form if you have successfully completed at least two semesters of undergraduate study at Southern Cross University and<br/> you want <b>to become a Student Mentor.</b></p>\r\n";
 
 if ($objForm->isPost()) {
 	$objForm->setValues($validator->getValues());
