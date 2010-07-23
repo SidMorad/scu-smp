@@ -29,7 +29,7 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 			$validator->checkEmptiness("firstname", "First Name is compulsory.");
 			$validator->checkEmptiness("lastname", "Last Name is compulsory.");
 			
-			$validator->checkCustomVal("password" , "Password and Confim Password need to be same", $validator->getProperty('password') == $validator->getProperty('password2'));
+			$validator->checkCustomVal("password" , "Password and Confirm Password need to be same", $validator->getProperty('password') == $validator->getProperty('password2'));
 			$validator->checkWithRegex("scuEmail", "SCU-Email is not valid SCU account. e.g. fbar12@scu.edu.au", "/^[a-z0-9_\\.\\-]+@scu.edu.au$/");
 			$validator->checkWithRegex("studentNumber", "Student number is incorrect.", "/^[0-9]{8}$/");
 //			$validator->checkWithRegex("email"	, "Email is Invalid.", "/^[a-z0-9_\\.\\-]+@+[a-z0-9_\\.\\-]+(\\.[a-z]{2,4})$/");
