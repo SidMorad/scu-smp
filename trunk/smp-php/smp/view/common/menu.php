@@ -2,7 +2,7 @@
 				<ul id="MenuBar1" class="MenuBarHorizontal">
 					<li><a href="index.php?cmd=public/home">Home</a></li>
 	<?php 
-		if (VH::isUserGrantedWith('ROLE_ADMIN')) {
+		if (VH::isUserGrantedWith(Constants::ROLE_ADMIN)) {
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Admin</a>
 						<ul>
@@ -12,32 +12,32 @@
 					</li>
 	<?php		
 		}
-		if (VH::isUserGrantedWith('ROLE_MANAGER')) {
+		if (VH::isUserGrantedWith(Constants::ROLE_MANAGER)) {
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Manager</a>
 						<ul>
 							<li><a href="#">All Coordinators</a></li>
 							<li><a href="index.php?cmd=student/listMentor">List all Mentors</a></li>
-							<li><a href="#">List all Mentees</a></li>
+							<li><a href="index.php?cmd=student/listMentee">List all Mentees</a></li>
 							<li><a href="#">ReportPerCampus</a></li>
 						</ul>
 					</li>
 	<?php		
 		}
-		if (VH::isUserGrantedWith('ROLE_COORDINATOR')) {
+		if (VH::isUserGrantedWith(Constants::ROLE_COORDINATOR)) {
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Coordinator</a>
 						<ul>
 							<li><a href="#">Current Mentors</a></li>
 							<li><a href="#">Current Mentees</a></li>
 							<li><a href="#">Active Mentors</a></li>
-							<li><a href="#">Matching Mentee</a></li>
+							<li><a href="index.php?cmd=matching/listNewMentees">Matching Mentee</a></li>
 							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>
 	<?php		
 		}
-		if (VH::isUserGrantedWith('ROLE_MENTOR')) {
+		if (VH::isUserGrantedWith(Constants::ROLE_MENTOR)) {
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Mentor</a>
 						<ul>
@@ -48,7 +48,7 @@
 					</li>
 	<?php		
 		}
-		if (VH::isUserGrantedWith('ROLE_MENTEE')) {
+		if (VH::isUserGrantedWith(Constants::ROLE_MENTEE)) {
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Mentee</a>
 						<ul>

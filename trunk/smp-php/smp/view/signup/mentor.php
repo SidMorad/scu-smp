@@ -63,7 +63,7 @@ print $objForm->hr();
 print $objForm->label("studyMode"			, "Your study mode:",	"grid_6", true);
 print $objForm->selectBox("studyMode"		, "", "", 14, 			"grid_6", VH::getFixArray('study_mode'));
 print $objForm->label("studentNumber"		, "Student number:", 	"grid_6", true);
-print $objForm->textBox("studentNumber"		, "", "", 15, 			"grid_6", "input", 10);
+print $objForm->textBox("studentNumber"		, "", "", 15, 			"grid_6", "input", 8);
 print $objForm->label("course"				, "Course:", 			"grid_6");
 print $objForm->textBox("course"			, "", "", 16, 			"grid_6");
 print $objForm->label("major"				, "If you are studying a Major, which one?:", "grid_6");

@@ -1,5 +1,6 @@
 <?php
 	require_once('smp/view/ViewHelper.php'); 
+	require_once('smp/Constants.php'); 
 	$request = VH::getRequest();
 	$user = VH::getCurrentUser();
 ?>	
@@ -22,5 +23,18 @@
 			<div  id="menu" class="grid_12">
 				<?php include("menu.php");?>
 			</div>
-			<div id="content" class="grid_12">
-			
+			<div id="content" class="grid_12">			
+				<?php
+					print "\r\n";
+					$feedbacks = $request->getFeedbacks(); 
+					if (isset($feedbacks)) {
+						$indent = "					";
+						print $indent."<div id=\"feedbacks\" class=\"grid_12\">\r\n";
+						print $indent."	<ul class=\"ulInfo\">\r\n";	
+						foreach ($feedbacks as $feedback) {
+							print $indent."		<li>$feedback</li>\r\n";						
+						}	
+						print $indent."	</ul>\r\n";	
+						print $indent."</div>\r\n";	
+						print "\r\n";
+					}?>

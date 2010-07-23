@@ -14,6 +14,8 @@ class smp_controller_Request {
 	private $command;
 	private $view;
 	private $list = array();
+	private $feedbacks;
+	private $entity;
 	
 	/**
 	 * constructor
@@ -48,6 +50,7 @@ class smp_controller_Request {
 		if (isset($this->properties[$key])) {
 			return $this->properties[$key];
 		}
+		return null;
 	}
 
 	/**
@@ -138,5 +141,36 @@ class smp_controller_Request {
 	 */
 	function getList() {
 		return $this->list;
-	}	
+	}
+
+	/**
+	 * @return $feedbacks whcih is array of string
+	 */
+	function getFeedbacks() {
+		return $this->feedbacks;
+	}
+	
+	/**
+	 * 
+	 * @param $feedback
+	 */
+	function addFeedback ( $feedback) {
+		$this->feedbacks[] = $feedback;
+	} 	
+
+	/**
+	 * 
+	 * @param smp_domain_DomainObject $entity
+	 */
+	function setEntity ($entity) {
+		$this->entity = $entity;
+	}
+	
+	/**
+	 * @return smp_domain_DomainObject entity
+	 */
+	function getEntity() {
+		return $this->entity;
+	}
+	
 }

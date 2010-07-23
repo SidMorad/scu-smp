@@ -16,9 +16,9 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 	
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
-		$this->userMapper = new smp_mapper_UserMapper();
-		$this->studentMapper = new smp_mapper_StudentMapper();
-		$this->contactMapper = new smp_mapper_ContactMapper();
+		$this->userMapper = new smp_mapper_UserMapper(self::$ADODB);
+		$this->studentMapper = new smp_mapper_StudentMapper(self::$ADODB);
+		$this->contactMapper = new smp_mapper_ContactMapper(self::$ADODB);
 	}
 	
 	protected function targetClass() {}
@@ -27,16 +27,39 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 	
 	function saveMentor($user, $student, $contact) {
 		self::$ADODB->StartTrans();
+		$ok = true;
+		$msg = "";
 		
 		$user = $this->userMapper->save($user);	
+		if (is_null($user)) {
+			$ok = false;
+			$msg = "Save User failed, Error message:" . self::$ADODB->ErrorMsg();
+		}
 		
-		$student->setUserId($user->getId());
-		$student = $this->studentMapper->save($student);
+		if ($ok) {
+			$student->setUserId($user->getId());
+			$student = $this->studentMapper->save($student);
+			if (is_null($student)) {
+				$ok = false;
+				$msg = "Save Student failed, Error message:" . self::$ADODB->ErrorMsg();
+			}
+		}
 		
-		$contact->setUserId($user->getId());
-		$contact->setStudentId($student->getId());
-		$contact = $this->contactMapper->save($contact);
+		if ($ok) {
+			$contact->setUserId($user->getId());
+			$contact->setStudentId($student->getId());
+			$contact = $this->contactMapper->save($contact);
+			if (is_null($contact)) {
+				$ok = false;
+				$msg = "Save Contact failed, Error message:" . self::$ADODB->ErrorMsg();
+			}
+		}
+		$ok = self::$ADODB->CompleteTrans();
 		
-		return self::$ADODB->CompleteTrans();
+		if (! $ok) {
+			$this->logger->save(new smp_domain_Log("signup.save.mentor", "Error occoured on Save New Mentor: ". $msg));
+		}
+		
+		return $ok;
 	}
 }

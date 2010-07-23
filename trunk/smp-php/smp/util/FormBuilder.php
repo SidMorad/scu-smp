@@ -10,7 +10,7 @@ class smp_util_FormBuilder {
 
 	var $strFileName = "";
 	var $strIndent   = "";
-	var $blnLocator = false;
+	var $blnLocator = true;
 	var $values = array();
 	var $errors = array();
 	
@@ -48,7 +48,7 @@ class smp_util_FormBuilder {
 				$strEnctype = "multipart/form-data";
 				break;
 		}
-		$openString = $this->strIndent."<div class=\"form_container\">\r\n";
+		$openString = "\r\n".$this->strIndent."<div class=\"form_container\">\r\n";
 		$openString .=$this->strIndent."<form ".$strId." action=\"".$strAction."\" method=\"".$strMethod."\"".$strOtherAttributes." enctype=\"".$strEnctype."\">\r\n"; 
 		return $openString; 
 	}
@@ -114,7 +114,7 @@ class smp_util_FormBuilder {
 			if ($this->isPost()) {
 				$strChecked = (((isset($this->values[$strId])? $this->values[$strId]: "") == $strKey) ? " checked=\"checked\"" : "");
 			} else {
-				$strChecked = (($strCheckedItem == $strKey) ? " checked=\checked\"" : "");
+				$strChecked = (($strCheckedItem == $strKey) ? " checked=\"checked\"" : "");
 			}
 			$strField = "<input id=\"".$strId."-".$strKey."\" name=\"$strId\" type=\"radio\" value=\"$strKey\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." >$strVal</input>";
 			$strFieldCombined .= $this->getHtmlTagString("", $strField, $strId."-".$strKey);
@@ -140,6 +140,7 @@ class smp_util_FormBuilder {
 		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
 		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strLocator = $this->getLocatorString($strId, $classCSS);
+		$strValue = $this->getValueIfIsSet($strId);
 		$strField = "<textarea id=\"$strId\" name=\"$strId\" rows=\"$intRows\" cols=\"$intCols\"".$strTabIndex.$strClassCSS.$strLocator.">$strValue</textarea>";
 		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
 	}

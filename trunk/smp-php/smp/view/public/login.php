@@ -35,11 +35,11 @@ print $objLoginForm->close();
 
 print $objLoginForm->strIndent."<br /><p> These Username / Password for testing:</p>\r\n";
 print $objLoginForm->strIndent."<ul>\r\n";
-print $objLoginForm->strIndent."	<li>admin / admin</li>\r\n";
-print $objLoginForm->strIndent."	<li>manager / manager</li>\r\n";
-print $objLoginForm->strIndent."	<li>coordinator / coordinator</li>\r\n";
-print $objLoginForm->strIndent."	<li>mentor / mentor</li>\r\n";
-print $objLoginForm->strIndent."	<li>mentee / mentee</li>\r\n";
+print $objLoginForm->strIndent."	<li>admin / admin <span style=\"padding-left: 45px;\"> Role Admin</span></li>\r\n";
+print $objLoginForm->strIndent."	<li>rob / rob  <span style=\"padding-left: 80px;\"> Role Manager</span></li>\r\n";
+print $objLoginForm->strIndent."	<li>jo / jo  <span style=\"padding-left: 95px;\">Role Coordinator</span></li>\r\n";
+print $objLoginForm->strIndent."	<li>jiya / jiya <span style=\"padding-left: 75px;\">Role Mentor</span></li>\r\n";
+print $objLoginForm->strIndent."	<li>bruce / bruce <span style=\"padding-left: 50px;\">Role Mentee</span></li>\r\n";
 print $objLoginForm->strIndent."</ul>\r\n";
 
 include("smp/view/common/footer.php");

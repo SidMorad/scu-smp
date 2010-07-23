@@ -5,6 +5,7 @@
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  */
+require_once('smp/Constants.php');
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
@@ -46,7 +47,7 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 				} else {
 					$user = new smp_domain_User(-1, $validator->getProperty('username'), $validator->getProperty('password'), $validator->getProperty('scuEmail'));
 					// Add ROLE_MENTOR to user.
-					$user->addToRoles('ROLE_MENTOR');
+					$user->addToRoles(Constants::ROLE_MENTOR);
 
 					$student = new smp_domain_Student();
 					$student->setUserId($user->getId());
@@ -78,7 +79,9 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$student->setPreferOnCampus($validator->getProperty('preferOnCampus'));
 					$student->setInterests($validator->getProperty('interests'));
 					$student->setComments($validator->getProperty('comments'));
-
+					// Set account status for new registered Mentor
+					$student->setAccountStatus(Constants::AS_NEW_MENTOR);	
+					
 					$contact = new smp_domain_Contact();
 					$contact->setAddrees($validator->getProperty('address'));
 					$contact->setCity($validator->getProperty('city'));
