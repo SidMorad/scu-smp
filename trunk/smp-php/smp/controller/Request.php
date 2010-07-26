@@ -16,6 +16,7 @@ class smp_controller_Request {
 	private $list = array();
 	private $feedbacks;
 	private $entity;
+	private $errors;
 	
 	/**
 	 * constructor
@@ -156,6 +157,21 @@ class smp_controller_Request {
 	 */
 	function addFeedback ( $feedback) {
 		$this->feedbacks[] = $feedback;
+	} 	
+
+	/**
+	 * @return $errors whcih is array of string
+	 */
+	function getErrors() {
+		return $this->errors;
+	}
+	
+	/**
+	 * 
+	 * @param $error
+	 */
+	function addError ( $error) {
+		$this->errors[] = $error;
 	} 	
 
 	/**

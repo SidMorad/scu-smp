@@ -16,12 +16,14 @@ print $indent."	<th>Firstname</th>\r\n";
 print $indent."	<th>Lastname</th>\r\n";	
 print $indent."	<th>Gender</th>\r\n";	
 print $indent."	<th>Student Number</th>\r\n";	
+print $indent."	<th>Account Status</th>\r\n";	
 foreach ($request->getList() as $student) {
 print $indent."	<tr>\r\n";
 	print $indent."		<td>".$student->getFirstname()."</td>\r\n";
 	print $indent."		<td>".$student->getLastname()."</td>\r\n";
 	print $indent."		<td>".$student->getGender()."</td>\r\n";
 	print $indent."		<td>".$student->getStudentNumber()."</td>\r\n";
+	print $indent."		<td>".VH::getValueFromFixArray('account_status',$student->getAccountStatus())."</td>\r\n";
 print $indent."	</tr>\r\n";
 }
 print $indent."</table>\r\n";

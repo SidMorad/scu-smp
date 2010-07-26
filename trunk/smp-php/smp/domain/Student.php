@@ -24,7 +24,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $workStatus;
 	var $tertiaryStudyStatus;
 	var $isFirstYear;
-	var $isTrained;
 	var $isInternational;
 	var $isDisability;
 	var $isIndigenous;
@@ -88,9 +87,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function setIsFirstYear ($isFirstYear) {
 		$this->isFirstYear = $isFirstYear;
-	}
-	function setIsTrained ($isTrained) {
-		$this->isTrained = $isTrained;
 	}
 	function setIsInternational ($isInternational) {
 		$this->isInternational = $isInternational;
@@ -179,9 +175,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function getIsFirstYear() {
 		return $this->isFirstYear;
-	}
-	function getIsTrained() {
-		return $this->isTrained;
 	}
 	function getIsInternational() {
 		return $this->isInternational;

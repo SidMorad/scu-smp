@@ -247,7 +247,7 @@ class smp_util_FormBuilder {
 	private function getOtherAttributes($arrOtherAttributes) {
 		$strOtherAttributes = "";
 		while (list($strArrKey, $strArrValue) = each($arrOtherAttributes)) {
-			$strOtherAttributes .= " ".$strArrKey/"=\"".$strArrValue."\"";
+			$strOtherAttributes .= " ".$strArrKey."=\"".$strArrValue."\"";
 		}
 		return $strOtherAttributes;
 	}

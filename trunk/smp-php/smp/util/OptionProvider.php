@@ -27,7 +27,13 @@ class smp_util_OptionProvider {
 				break;
 			case 'work_status':
 				return array('fulltime'=>'Full-time','parttime'=>'Part-time','casual'=>'Casual','nowork'=>'Do not work');
-				break;			
+				break;
+			case 'account_status':
+				return array(Constants::AS_NEW_MENTOR=>'New Mentor', Constants::AS_NEW_MENTEE=>'New Mentee', Constants::AS_MATCHED_MENTOR=>'Matched Mentor', Constants::AS_MATCHED_MENTEE=>'Matched Mentee', Constants::AS_TRAINED_MENTOR=>'Trained Mentor', Constants::AS_EXPIRED_MENTOR=>'Expired Mentor', Constants::AS_EXPIRED_MENTEE=>'Expired Mentee');
+				break;
+			default:
+				return array('notFound'=>'Not Found!');
+				break;						
 		}
 	}
 }

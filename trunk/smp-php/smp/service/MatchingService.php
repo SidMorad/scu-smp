@@ -24,4 +24,8 @@ class smp_service_MatchingService {
 	function connectMenteeToMentor($menteeId, $mentorId) {
 		return $this->studentMapper->connectMenteeToMentor($menteeId, $mentorId);
 	}
+
+	function markMentorAsTrained($mentorId) {
+		return $this->studentMapper->markMentorAsTrained($mentorId);
+	}
 }

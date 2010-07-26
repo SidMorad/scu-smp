@@ -6,6 +6,7 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
+require_once('smp/Constants.php');
 require_once('smp/command/Command.php');
 require_once('smp/service/StudentService.php');
 require_once('smp/service/MatchingService.php');
@@ -49,9 +50,8 @@ class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 		$mentee = $studentService->find($menteeId);
 		$request->setEntity($mentee);
 		
-		// TODO this list should include only valid Mentors not all of them. 
-		$listOfValidMentors = $studentService->listMentors(); 
-		$request->setList($listOfValidMentors);
+		$listTrainedMentors = $studentService->listStudentWithAccountStatus(Constants::AS_TRAINED_MENTOR);
+		$request->setList($listTrainedMentors);
 		
 		$request->setTitle("Mentee Matching form");
 	}
