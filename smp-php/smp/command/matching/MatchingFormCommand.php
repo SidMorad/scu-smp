@@ -50,7 +50,7 @@ class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 		$mentee = $studentService->find($menteeId);
 		$request->setEntity($mentee);
 		
-		$listTrainedMentors = $studentService->listStudentWithAccountStatus(Constants::AS_TRAINED_MENTOR);
+		$listTrainedMentors = $studentService->listStudentWithAccountStatuses(array(Constants::AS_TRAINED_MENTOR, Constants::AS_MATCHED_MENTOR));
 		$request->setList($listTrainedMentors);
 		
 		$request->setTitle("Mentee Matching form");
