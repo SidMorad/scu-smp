@@ -28,10 +28,10 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Coordinator</a>
 						<ul>
-							<li><a href="#">Current Mentors</a></li>
-							<li><a href="#">Current Mentees</a></li>
-							<li><a href="#">Active Mentors</a></li>
+							<li><a href="index.php?cmd=matching/listNonTrainedMentor">Active Mentors</a></li>
 							<li><a href="index.php?cmd=matching/listNewMentees">Matching Mentee</a></li>
+							<li><a href="index.php?cmd=student/listMatchedMentor">Matched Mentors</a></li>
+							<li><a href="index.php?cmd=student/listMatchedMentee">Matched Mentees</a></li>
 							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>

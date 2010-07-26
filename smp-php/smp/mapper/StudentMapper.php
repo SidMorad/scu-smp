@@ -14,9 +14,9 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	function __construct() {
 		parent::__construct();
 		$strInsertQuery = "INSERT INTO smp_student (user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff";
-		$strInsertQuery .= ",semesters_completed,family_status, work_status, tertiary_study_status,is_first_year, is_trained, is_international, is_disability, is_indigenous";
+		$strInsertQuery .= ",semesters_completed,family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability, is_indigenous";
 		$strInsertQuery .= ",is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments, account_status)";
-		$strInsertQuery .= "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$strInsertQuery .= "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->insertStmt = self::$ADODB->Prepare($strInsertQuery);
 	}
 
@@ -38,7 +38,6 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$obj->setWorkStatus($array['work_status']);
 		$obj->setTertiaryStudyStatus($array['tertiary_study_status']);
 		$obj->setIsFirstYear($array['is_first_year']);
-		$obj->setIsTrained($array['is_trained']);
 		$obj->setIsInternational($array['is_international']);
 		$obj->setIsDisability($array['is_disability']);
 		$obj->setIsIndigenous($array['is_indigenous']);
@@ -58,7 +57,7 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 
 	protected function doInsert(smp_domain_DomainObject $obj) {
 		$values = array($obj->getUserId(), $obj->getFirstname(), $obj->getLastname(), $obj->getGender(), $obj->getStudentNumber(), $obj->getAgeRange(), $obj->getCourse(), $obj->getMajor(),
-		$obj->getStudyMode(), $obj->getRecommendedByStaff(), $obj->getSemestersCompleted(), $obj->getFamilyStatus(), $obj->getWorkStatus(), $obj->getTertiaryStudyStatus(), $obj->getIsFirstYear(), $obj->getIsTrained(),
+		$obj->getStudyMode(), $obj->getRecommendedByStaff(), $obj->getSemestersCompleted(), $obj->getFamilyStatus(), $obj->getWorkStatus(), $obj->getTertiaryStudyStatus(), $obj->getIsFirstYear(),
 		$obj->getIsInternational(), $obj->getIsDisability(), $obj->getIsIndigenous(), $obj->getIsNonEnglish(), $obj->getIsRegional(), $obj->getIsSocioeconomic(), $obj->getPreferGender(),
 		$obj->getPreferAustralian(), $obj->getPreferDistance(), $obj->getPreferInternational(), $obj->getPreferOnCampus(), $obj->getInterests(), $obj->getComments(), $obj->getAccountStatus());
 		return self::$ADODB->Execute($this->insertStmt, $values);
@@ -97,6 +96,16 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	 	$this->logger->save(new smp_domain_Log("student.insert.update", "Updating student information, message:" . $msg));
 		
 		return $ok;
+	}
+	
+	function markMentorAsTrained($mentorId) {
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_student SET account_status=? WHERE id=?");
+		$rs = self::$ADODB->Execute($updateStmt, array(Constants::AS_TRAINED_MENTOR, $mentorId));
+		if ($rs === false) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	function save(smp_domain_Student $student) {

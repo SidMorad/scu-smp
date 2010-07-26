@@ -37,7 +37,7 @@ if ($matchingForm->isPost()) {
 print $indent. $matchingForm->open("matchingForm");
 print $matchingForm->hidden("cmd", "matching/matchingForm");
 print $matchingForm->hidden("menteeId", $mentee->getId());
-print $indent. "	<span style=\"padding-left:20px;\">\r\n" . $matchingForm->button("submit", "Submit", "submit", 0,null, "button");
+print $indent. "	<span style=\"padding-left:20px;\">\r\n" . $matchingForm->button("submit", "Submit", "submit", 0,null, "button", array('onClick'=>'return confirmSubmit()'));
 print $indent ."	</span><hr style=\"border-color:white;\" />\r\n";
 print $indent."<table class=\"table\">\r\n";
 print $indent."	<th>&nbsp;</th>\r\n";	

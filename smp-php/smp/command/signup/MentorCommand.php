@@ -65,13 +65,12 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$student->setWorkStatus($validator->getProperty('workStatus'));
 					$student->setTertiaryStudyStatus($validator->getProperty('tertiaryStudyStatus'));
 					$student->setIsFirstYear($validator->getProperty('isFirstYear'));
-					$student->setIsTrained(false);
 					$student->setIsInternational($validator->getProperty('isInternational'));
-					$student->setIsDisability($validator->getProperty('isDisability'));
-					$student->setIsIndigenous($validator->getProperty('isIndigenous'));
-					$student->setIsNonEnglish($validator->getProperty('isNonEnglish'));
-					$student->setIsRegional($validator->getProperty('isRegional'));
-					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic'));
+					$student->setIsDisability($validator->getProperty('isDisability') === "yes" ? true : false);
+					$student->setIsIndigenous($validator->getProperty('isIndigenous') === "yes" ? true : false);
+					$student->setIsNonEnglish($validator->getProperty('isNonEnglish') === "yes" ? true : false);
+					$student->setIsRegional($validator->getProperty('isRegional') === "yes" ? true : false);
+					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic') === "yes" ? true : false);
 					$student->setPreferGender($validator->getProperty('preferGender'));
 					$student->setPreferAustralian($validator->getProperty('preferAustralian'));
 					$student->setPreferDistance($validator->getProperty('preferDistance'));
@@ -98,6 +97,7 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 				
 				if ($validator->isValid()) {
 					$request->setTitle("Login, First time!");
+					$request->addFeedback("Mentor Registration was successfull, you can login with your username/password now.");
 					$request->forward("public/login");
 				}
 			}

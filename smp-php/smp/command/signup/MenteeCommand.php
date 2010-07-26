@@ -5,6 +5,7 @@
  *
  * @author <a href="mailto:sli24@scu.edu.au">Bruce</a>
  */
+require_once('smp/Constants.php');
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
@@ -62,17 +63,18 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$student->setFamilyStatus($validator->getProperty('familyStatus'));
 					$student->setWorkStatus($validator->getProperty('workStatus'));
 					$student->setTertiaryStudyStatus($validator->getProperty('tertiaryStudyStatus'));
-					
-					$student->setIsTrained(false);
 					$student->setIsInternational($validator->getProperty('isInternational'));
-					$student->setIsDisability($validator->getProperty('isDisability'));
-					$student->setIsIndigenous($validator->getProperty('isIndigenous'));
-					$student->setIsNonEnglish($validator->getProperty('isNonEnglish'));
-					$student->setIsRegional($validator->getProperty('isRegional'));
-					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic'));
+					
+					$student->setIsDisability($validator->getProperty('isDisability') === "yes" ? true : false);
+					$student->setIsIndigenous($validator->getProperty('isIndigenous') === "yes" ? true : false);
+					$student->setIsNonEnglish($validator->getProperty('isNonEnglish') === "yes" ? true : false);
+					$student->setIsRegional($validator->getProperty('isRegional') === "yes" ? true : false);
+					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic') === "yes" ? true : false);
 										
 					$student->setInterests($validator->getProperty('interests'));
 					$student->setComments($validator->getProperty('comments'));
+					// Set account status for new registered Mentee
+					$student->setAccountStatus(Constants::AS_NEW_MENTEE);					
 
 					$contact = new smp_domain_Contact();
 					$contact->setAddrees($validator->getProperty('address'));
@@ -90,6 +92,7 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 				
 				if ($validator->isValid()) {
 					$request->setTitle("Login, First time!");
+					$request->addFeedback("Mentee Registration was successfull, you can login with your username/password now.");
 					$request->forward("public/login");
 				}
 			}

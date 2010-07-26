@@ -28,11 +28,23 @@
 					print "\r\n";
 					$feedbacks = $request->getFeedbacks(); 
 					if (isset($feedbacks)) {
-						$indent = "					";
+						$indent = "				";
 						print $indent."<div id=\"feedbacks\" class=\"grid_12\">\r\n";
 						print $indent."	<ul class=\"ulInfo\">\r\n";	
 						foreach ($feedbacks as $feedback) {
 							print $indent."		<li>$feedback</li>\r\n";						
+						}	
+						print $indent."	</ul>\r\n";	
+						print $indent."</div>\r\n";	
+						print "\r\n";
+					}
+					$errors = $request->getErrors(); 
+					if (isset($errors)) {
+						$indent = "				";
+						print $indent."<div id=\"errors\" class=\"grid_12\">\r\n";
+						print $indent."	<ul class=\"ulError\">\r\n";	
+						foreach ($errors as $error) {
+							print $indent."		<li>$error</li>\r\n";						
 						}	
 						print $indent."	</ul>\r\n";	
 						print $indent."</div>\r\n";	
