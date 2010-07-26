@@ -30,6 +30,10 @@ class smp_service_StudentService {
 		return $this->studentMapper->listStudentWithAccountStatus($accountStatus);
 	}
 	
+	function listStudentWithAccountStatuses(array $arrAccountStatus) {
+		return $this->studentMapper->listStudentWithAccountStatuses($arrAccountStatus);
+	}
+	
 	function find($id) {
 		return $this->studentMapper->find($id);
 	}
