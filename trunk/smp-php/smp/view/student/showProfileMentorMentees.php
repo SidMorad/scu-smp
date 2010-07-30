@@ -16,7 +16,12 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<label>&nbsp;</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
+	
+	//ToDo
+	//if mentor log in, show mentee's info
+	//if mentee log in, show mentor's info
 	print $indent."		<h2>my Mentee(s) Information</h2>\r\n";
+	
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
 	$i = 0;
