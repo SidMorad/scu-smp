@@ -7,11 +7,12 @@
  * @version 1.0
  */
 require_once('smp/mapper/Mapper.php');
+require_once('smp/domain/Contact.php');
 class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
-		$this->insertStmt = self::$ADODB->Prepare("INSERT INTO smp_contact(address, city, postcode, phone_home, phone_work, email, user_id, student_id) values(?,?,?,?,?,?,?,?)");
+		$this->insertStmt = self::$ADODB->Prepare("INSERT INTO smp_contact(address, city, postcode, phone_home, phone_work, mobile, email, user_id, student_id) values(?,?,?,?,?,?,?,?,?)");
 	}
 	
 	protected function targetClass() {
@@ -26,6 +27,7 @@ class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 		$contact->setPostcode($array['postcode']);	
 		$contact->setPhoneHome($array['phone_home']);	
 		$contact->setPhoneWork($array['phone_work']);	
+		$contact->setMobile($array['mobile']);	
 		$contact->setEmail($array['email']);	
 		$contact->setUserId($array['user_id']);	
 		$contact->setStudentId($array['student_id']);
@@ -33,7 +35,7 @@ class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 	}
 	
 	protected function doInsert(smp_domain_DomainObject $obj) {
-		$values = array($obj->getAddrees(), $obj->getCity(), $obj->getPostcode(), $obj->getPhoneHome(), $obj->getPhoneWork(), $obj->getEmail(), $obj->getUserId(), $obj->getStudentId());
+		$values = array($obj->getAddress(), $obj->getCity(), $obj->getPostcode(), $obj->getPhoneHome(), $obj->getPhoneWork(), $obj->getMobile(), $obj->getEmail(), $obj->getUserId(), $obj->getStudentId());
 		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 	
@@ -48,4 +50,11 @@ class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 			return $contact;
 		}
 	}
+
+	function findContactWithUserId($userId) {
+		$findStmt = self::$ADODB->Prepare("SELECT * FROM smp_contact WHERE user_id=?");
+		$rs = self::$ADODB->Execute($findStmt, array($userId));
+		return ($rs ? self::doCreateObject($rs->FetchRow()) : null);
+	}
+	
 }

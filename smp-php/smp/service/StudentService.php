@@ -37,4 +37,12 @@ class smp_service_StudentService {
 	function find($id) {
 		return $this->studentMapper->find($id);
 	}
+	
+	function findStudentWithUser($user) {
+		return $this->studentMapper->findStudentWithUser($user);
+	}
+	
+	function findStudentMenteesWithMentorId($id) {
+		return $this->studentMapper->findStudentMenteesWithMentorId($id);
+	}
 }

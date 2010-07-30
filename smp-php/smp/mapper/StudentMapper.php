@@ -9,6 +9,8 @@
 require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/Student.php');
 require_once('smp/domain/Log.php');
+require_once('smp/mapper/ContactMapper.php');
+require_once('smp/mapper/UserMapper.php');
 class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 
 	function __construct() {
@@ -124,6 +126,29 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$findStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($id));
 		return ($rs ? self::doCreateObject($rs->FetchRow()) : null);
+	}
+	
+	function findStudentWithUser($user) {
+		$findStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE user_id=?");
+		$rs = self::$ADODB->Execute($findStmt, array($user->getId()));
+		return ($rs ? self::doCreateObject($rs->FetchRow()) : null);
+	}
+	
+	function findStudentMenteesWithMentorId($id) {
+		$findStmt = self::$ADODB->Prepare("SELECT mentee_id FROM smp_mentor_mentee WHERE mentor_id=?");
+		$rs = self::$ADODB->Execute($findStmt, array($id));
+		$listMenttes = array();
+		$userMapper = new smp_mapper_UserMapper();
+		$contactMapper = new smp_mapper_ContactMapper();
+     	while (!$rs->EOF) {
+			$menteeId = $rs->fields('mentee_id');
+			$mentee = self::find($menteeId);
+			$mentee->setContact($contactMapper->findContactWithUserId($mentee->getUserId()));
+			$mentee->setUser($userMapper->findUserWithStudentId($mentee->getId()));
+			$listMenttes[] = $mentee;
+			$rs->MoveNext();
+		}
+		return $listMenttes;
 	}
 	
 	function listMentors() {

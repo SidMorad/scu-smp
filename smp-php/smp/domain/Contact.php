@@ -13,6 +13,7 @@ class smp_domain_Contact extends smp_domain_DomainObject {
 	private $postcode;
 	private $phoneHome;
 	private $phoneWork;
+	private $mobile;
 	private $email;
 	private $userId;
 	private $studentId;
@@ -36,6 +37,9 @@ class smp_domain_Contact extends smp_domain_DomainObject {
 	function setPhoneWork ($phoneWork) {
 		$this->phoneWork = $phoneWork;
 	}
+	function setMobile ($mobile) {
+		$this->mobile = $mobile;
+	}
 	function setEmail ($email) {
 		$this->email = $email;
 	}
@@ -46,7 +50,7 @@ class smp_domain_Contact extends smp_domain_DomainObject {
 		$this->studentId = $studentId;
 	}
 
-	function getAddrees() {
+	function getAddress() {
 		return $this->address;
 	}
 	function getCity() {
@@ -61,6 +65,9 @@ class smp_domain_Contact extends smp_domain_DomainObject {
 	function getPhoneWork() {
 		return $this->phoneWork;
 	}
+	function getMobile() {
+		return $this->mobile;
+	}
 	function getEmail() {
 		return $this->email;
 	}
@@ -73,7 +80,7 @@ class smp_domain_Contact extends smp_domain_DomainObject {
 	
 	function __toString() {
 		$contactString = $this->getId();
-		$contactString .= ", " . $this->getAddrees();
+		$contactString .= ", " . $this->getAddress();
 		$contactString .= ", " . $this->getCity();
 		$contactString .= ", " . $this->getPostcode();
 		return $contactString;		

@@ -1,12 +1,13 @@
 <?php
 /**
  * Created at 16/07/2010 2:11:40 PM
- * __FILE__
+ * smp_domain_Student
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
 require_once('smp/domain/DomainObject.php');
+require_once('smp/domain/User.php');
 class smp_domain_Student extends smp_domain_DomainObject {
 	
 	var $userId;
@@ -38,6 +39,9 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $interests;
 	var $comments;
 	var $accountStatus;
+	var $user;
+	var $contact;
+	var $mentees = array();
 	
 	function __construct($id = -1) {
 		parent::__construct($id);
@@ -130,7 +134,16 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function setAccountStatus ($accountStatus) {
 		$this->accountStatus = $accountStatus;
 	}
-
+	function setUser(smp_domain_User $user) {
+		$this->user = $user;
+	}
+	function setContact(smp_domain_contact $contact) {
+		$this->contact = $contact;
+	}
+	function setMentees(array $mentees) {
+		$this->mentees = $mentees;
+	}
+	
 	function getUserId() {
 		return $this->userId;
 	}
@@ -217,6 +230,15 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function getAccountStatus() {
 		return $this->accountStatus;
+	}
+	function getUser() {
+		return $this->user;
+	}
+	function getContact() {
+		return $this->contact;
+	}
+	function getMentees() {
+		return $this->mentees;
 	}
 	
 	function __toString() {

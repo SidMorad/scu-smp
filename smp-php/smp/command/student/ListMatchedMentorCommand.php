@@ -15,6 +15,9 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 		$studentService = new smp_service_StudentService();
 		
 		$list = $studentService->listStudentWithAccountStatus(Constants::AS_MATCHED_MENTOR);
+		foreach($list as $mentor) {
+			$mentor->setMentees($studentService->findStudentMenteesWithMentorId($mentor->getId()));
+		}
 		
 		$request->setList($list);
 		$request->setTitle("List of Matched Mentors");
