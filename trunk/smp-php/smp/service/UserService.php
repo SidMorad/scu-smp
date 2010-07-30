@@ -18,6 +18,15 @@ class smp_service_UserService {
 	}
 	
 	/**
+	 * Find User by id
+	 * @param $id
+	 * @return smp_domain_User  
+	 */
+	function find($id) {
+		return $this->userMapper->find($id);	
+	}
+
+	/**
 	 * Find User by username
 	 * @param $username
 	 * @return smp_domain_User  

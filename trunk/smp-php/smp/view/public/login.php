@@ -39,7 +39,7 @@ print $objLoginForm->strIndent."	<li>admin / admin <span style=\"padding-left: 4
 print $objLoginForm->strIndent."	<li>rob / rob  <span style=\"padding-left: 80px;\"> Role Manager</span></li>\r\n";
 print $objLoginForm->strIndent."	<li>jo / jo  <span style=\"padding-left: 95px;\">Role Coordinator</span></li>\r\n";
 print $objLoginForm->strIndent."	<li>jiya / jiya <span style=\"padding-left: 75px;\">Role Mentor</span></li>\r\n";
-print $objLoginForm->strIndent."	<li>bruce / bruce <span style=\"padding-left: 50px;\">Role Mentee</span></li>\r\n";
+print $objLoginForm->strIndent."	<li>lucy / lucy <span style=\"padding-left: 50px;\">Role Mentee</span></li>\r\n";
 print $objLoginForm->strIndent."</ul>\r\n";
 
 include("smp/view/common/footer.php");

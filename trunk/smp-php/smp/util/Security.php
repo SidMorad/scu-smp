@@ -7,6 +7,7 @@
  * @version 1.0
  */
 require_once('smp/domain/User.php');
+require_once('smp/base/SessionRegistry.php');
 class smp_util_Security {
 	
 	static function getCurrentUser() {

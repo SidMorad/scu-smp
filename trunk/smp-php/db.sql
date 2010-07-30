@@ -85,6 +85,7 @@ CREATE TABLE smp_contact (
 	postcode VARCHAR(20),
 	phone_home VARCHAR(20),
 	phone_work VARCHAR(20),
+	mobile VARCHAR(20),
 	email VARCHAR(100),
 	user_id BIGINT,
 	student_id BIGINT,
@@ -112,32 +113,25 @@ insert into smp_user values(2, 'rob', 'rob', 'rob.cumings@scu.edu.au');
 insert into smp_user values(3, 'jo', 'jo', 'jo.mason@scu.edu.au');
 insert into smp_user values(4, 'jiya', 'jiya', 'b.kaur.10@scu.edu.au');
 insert into smp_user values(5, 'lucy', 'lucy', 'l.zhang.12@scu.edu.au');
-insert into smp_user values(6, 'james', 'james', 'j.li.24@scu.edu.au');
+insert into smp_user values(6, 'james', 'james', 'j.glees.24@scu.edu.au');
 insert into smp_user values(7, 'bruce', 'bruce', 'l.li.24@scu.edu.au');
 insert into smp_user_role (user_id, role_id) values(1,1);
 insert into smp_user_role (user_id, role_id) values(2,2);
 insert into smp_user_role (user_id, role_id) values(3,3);
 insert into smp_user_role (user_id, role_id) values(4,4);
 insert into smp_user_role (user_id, role_id) values(5,5);
+insert into smp_user_role (user_id, role_id) values(6,5);
+insert into smp_user_role (user_id, role_id) values(7,4);
 
-insert into smp_student (id, user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff
-						,semesters_completed,family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability, is_indigenous
+insert into smp_student (id, user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff, semesters_completed, family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability, is_indigenous
 						,is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments, account_status)
-		values (1, 4, 'Jiya', 'Khangura', 'female', '21555555', 'under25', 'IT', 'Multimedia', 'coffs', 'Paul Woods'
-				,'3', 'no', 'parttime', 'no', 'yes', '1', '0', '0'
-				,'1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
-			   (2, 7, 'Bruce', 'Li', 'male', '21666666', 'under25', 'IT', 'Multimedia', 'coffs', 'Paul Woods'
-				,'3', 'no', 'parttime', 'no', 'yes', '1', '0', '0'
-				,'1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
-			   (3, 6, 'James', 'Gleeson', 'male', '21777777', 'under25', 'IT', 'Software Development', 'coffs', 'Paul Woods'
-				,'3', 'no', 'parttime', 'no', 'yes', '0', '0', '0'
-				,'1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
-			   (4, 5, 'Lucy', 'Zhang', 'female', '21888888', 'under25', 'IT', 'Software Development', 'coffs', 'Paul Woods'
-				,'3', 'no', 'parttime', 'no', 'yes', '1', '0', '0'
-				,'1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE');
+		values (1, 4, 'Jiya', 'Khangura', 'female', '21555555', 'under25', 'IT', 'Multimedia', 'coffs', 'Paul Woods', '3', 'no', 'parttime', 'no', 'yes', '1', '0', '0', '1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
+			   (2, 5, 'Lucy', 'Zhang', 'female', '21888888', 'under25', 'IT', 'Software Development', 'coffs', 'Paul Woods', '3', 'no', 'parttime', 'no', 'yes', '1', '0', '0', '1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
+			   (3, 7, 'Bruce', 'Li', 'male', '21666666', 'under25', 'IT', 'Multimedia', 'coffs', 'Paul Woods', '3', 'no', 'parttime', 'no', 'yes', '1', '0', '0', '1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
+			   (4, 6, 'James', 'Gleeson', 'male', '21777777', 'under25', 'IT', 'Software Development', 'coffs', 'Paul Woods', '3', 'no', 'parttime', 'no', 'yes', '0', '0', '0', '1', '0', '0', 'yes', '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE');
 
-insert into smp_contact values (1, 'One Street', 'Coffs Harbour', '2450', '025555555', '045555555', 'jiya@gmail.com', 4,1);				
-insert into smp_contact values (2, 'Two Street', 'Coffs Harbour', '2450', '026666666', '046666666', 'bruce@gmail.com', 7,2);				
-insert into smp_contact values (3, 'Three Street', 'Coffs Harbour', '2450', '027777777', '047777777', 'james@gmail.com', 6,3);				
-insert into smp_contact values (4, 'Four Street', 'Coffs Harbour', '2450', '027777777', '048888888', 'lucy@gmail.com', 5,4);				
+insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '025555555', '045555555', '045555555', 'jiya@gmail.com', 4,1);				
+insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
+insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina     ', '2452', '026666666', '046666666', '046666666', 'bruce@gmail.com', 7,3);				
+insert into smp_contact values (3, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '047777777', '047777777', 'james@gmail.com', 6,4);				
 				

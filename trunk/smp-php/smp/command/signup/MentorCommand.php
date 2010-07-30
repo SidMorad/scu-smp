@@ -87,6 +87,7 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$contact->setPostcode($validator->getProperty('postcode'));
 					$contact->setPhoneHome($validator->getProperty('phoneHome'));
 					$contact->setPhoneWork($validator->getProperty('phoneWork'));
+					$contact->setMobile($validator->getProperty('mobile'));
 					$contact->setEmail($validator->getProperty('email'));
 					// Save User, Student and Contact Information 
 					$blnResult = $signupService->saveMentor($user, $student, $contact);
