@@ -15,7 +15,7 @@ if (isset($student)) {
 	print $indent."		<label>&nbsp;</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
-	print $indent."		<h2>Menotr's Information</h2>\r\n";
+	print $indent."		<h2>Mentor's Information</h2>\r\n";
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
 	
