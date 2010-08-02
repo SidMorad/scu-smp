@@ -38,4 +38,15 @@ class VH {
 		$array = smp_util_OptionProvider::getFixArray($type);
 		return $array[$key];
 	}
+	
+	/**
+	 * This method is for Check null values. 
+	 */
+	static function chN($value) {
+		if (is_null($value)) {
+			return "&nbsp;";
+		} else {
+			return $value;
+		}
+	}
 }

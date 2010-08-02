@@ -143,7 +143,8 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
      	while (!$rs->EOF) {
 			$menteeId = $rs->fields('mentee_id');
 			$mentee = self::find($menteeId);
-			$mentee->setContact($contactMapper->findContactWithUserId($mentee->getUserId()));
+			$contact = $contactMapper->findContactWithUserId($mentee->getUserId());
+			(($contact!= null) ? $mentee->setContact($contact) : true);
 			$mentee->setUser($userMapper->findUserWithStudentId($mentee->getId()));
 			$listMenttes[] = $mentee;
 			$rs->MoveNext();

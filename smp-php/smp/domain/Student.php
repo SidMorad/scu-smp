@@ -8,6 +8,7 @@
  */
 require_once('smp/domain/DomainObject.php');
 require_once('smp/domain/User.php');
+require_once('smp/domain/Contact.php');
 class smp_domain_Student extends smp_domain_DomainObject {
 	
 	var $userId;
@@ -235,7 +236,7 @@ class smp_domain_Student extends smp_domain_DomainObject {
 		return $this->user;
 	}
 	function getContact() {
-		return $this->contact;
+		return (is_null($this->contact) ? new smp_domain_Contact() : $this->contact);
 	}
 	function getMentees() {
 		return $this->mentees;
