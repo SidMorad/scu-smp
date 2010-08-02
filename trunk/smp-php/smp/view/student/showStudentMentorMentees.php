@@ -31,13 +31,13 @@ foreach($student->getMentees() as $mentee) {
 	print $indent."		<label class=\"label\">Student number :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getStudentNumber()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getStudentNumber())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Mobile :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getContact()->getMobile()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getContact()->getMobile())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Email :</label>\r\n";
@@ -49,7 +49,7 @@ foreach($student->getMentees() as $mentee) {
 	print $indent."		<label class=\"label\">Course :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getCourse()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getCourse())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	$i++;
 	print $indent."	<div class=\"grid_12\">\r\n";

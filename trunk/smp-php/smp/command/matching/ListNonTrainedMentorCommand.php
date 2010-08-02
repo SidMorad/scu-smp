@@ -11,7 +11,7 @@ require_once('smp/command/Command.php');
 require_once('smp/service/StudentService.php');
 class smp_command_matching_ListNonTrainedMentorCommand extends smp_command_Command {
 	
-	function doExecute(smp_controller_request $request) {
+	function doExecute(smp_controller_Request $request) {
 		$studentService = new smp_service_StudentService();
 		
 		$listNonTrainedMentor = $studentService->listStudentWithAccountStatus(Constants::AS_NEW_MENTOR);

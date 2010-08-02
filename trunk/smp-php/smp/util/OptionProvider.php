@@ -11,7 +11,7 @@ class smp_util_OptionProvider {
 	static function getFixArray($type) {
 		switch ($type) {
 			case 'study_mode':
-				return array('lismore'=>'On-campus - Lismore','coffs'=>'On-campus - Coffs Harbour','tweedGC'=>'On-campus - Tweed/Gold Coast','external'=>'Distance Study');
+				return array('lismore'=>'On-campus - Lismore','coffs'=>'On-campus - Coffs Harbour','tweed'=>'On-campus - Tweed/Gold Coast','external'=>'Distance Study');
 				break;
 			case 'yes_no':
 				return array('yes'=>'Yes', 'no'=>'No');
