@@ -1,9 +1,9 @@
 <?php
 /**
- * Created at 30/07/2010 2:54:43 PM
- * smp/view/student/showProfileMentorMentees.php
+ * Created at 02/08/2010 1:38:49 PM
+ * smp/view/student/showProfileMentorMentee.php
  *
- * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
+ * @author <a href="mailto:sli24@scu.edu.au">Bruce</a>
  * @version 1.0
  */
 include("smp/view/common/header.php");
@@ -17,44 +17,42 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
 	 
-	//ToDo
-	//if mentor log in, show mentee's info
 	//if mentee log in, show mentor's info
-	print $indent."		<h2>my Mentee(s) Information</h2>\r\n";
+	print $indent."		<h2>My Mentor's Information</h2>\r\n";
 	
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
 	$i = 0;
-foreach($student->getMentees() as $mentee) {
+ $mentor=$student->getMentor();
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Name :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getFirstname()."	".$mentee->getLastname()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".$mentor->getFirstname()."	".$mentor->getLastname()."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Mobile :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getContact()->getMobile()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".$mentor->getContact()->getMobile()."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Email :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getUser()->getScuEmail()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".$mentor->getUser()->getScuEmail()."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Course :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentee->getCourse()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".$mentor->getCourse()."</label>\r\n";
 	print $indent."	</div>\r\n";
 	$i++;
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";
 	print $indent."	</div>\r\n";
-}
+
 print $indent."</div>\r\n";
 
 include("smp/view/common/footer.php");

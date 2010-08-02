@@ -43,6 +43,7 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $user;
 	var $contact;
 	var $mentees = array();
+	var $mentor;
 	
 	function __construct($id = -1) {
 		parent::__construct($id);
@@ -144,6 +145,9 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function setMentees(array $mentees) {
 		$this->mentees = $mentees;
 	}
+	function setMentor ($mentor) {
+		$this->mentor = $mentor;
+	}
 	
 	function getUserId() {
 		return $this->userId;
@@ -240,6 +244,9 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function getMentees() {
 		return $this->mentees;
+	}
+	function getMentor() {
+		return $this->mentor;
 	}
 	
 	function __toString() {
