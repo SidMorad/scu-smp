@@ -20,7 +20,8 @@ if (! empty($list)) {
 	print $indent."	<th>Student Number</th>\r\n";	
 	print $indent."	<th>Course</th>\r\n";	
 	print $indent."	<th>Study Mode</th>\r\n";	
-	print $indent."	<th>Age Range</th>\r\n";	
+	print $indent."	<th>Age Range</th>\r\n";
+	print $indent."	<th>Mentor</th>\r\n";		
 	foreach ($list as $student) {
 	print $indent."	<tr>\r\n";
 		print $indent."		<td>".$student->getFirstname()."</td>\r\n";
@@ -30,7 +31,8 @@ if (! empty($list)) {
 		print $indent."		<td>".$student->getCourse()."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $student->getStudyMode())."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('age_range', $student->getAgeRange())."</td>\r\n";
-	print $indent."	</tr>\r\n";
+		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$student->getId()."\">".$student->getMentor()->getFirstname()." ".$student->getMentor()->getLastname()."</a></td>\r\n";
+		print $indent."	</tr>\r\n";
 	}
 	print $indent."</table>\r\n";
 } else {
