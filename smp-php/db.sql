@@ -48,7 +48,7 @@ CREATE TABLE smp_student (
 	firstname VARCHAR(100),
 	lastname VARCHAR(100),
 	gender VARCHAR(20),
-	student_number VARCHAR(10),
+	student_number VARCHAR(10) UNIQUE,
 	age_range VARCHAR(20),
 	course VARCHAR(100),
 	major VARCHAR(100),
@@ -114,7 +114,7 @@ insert into smp_user values(3, 'jo', 'jo', 'jo.mason@scu.edu.au');
 insert into smp_user values(4, 'jiya', 'jiya', 'b.kaur.10@scu.edu.au');
 insert into smp_user values(5, 'lucy', 'lucy', 'l.zhang.12@scu.edu.au');
 insert into smp_user values(6, 'james', 'james', 'j.glees.24@scu.edu.au');
-insert into smp_user values(7, 'bruce', 'bruce', 'l.li.24@scu.edu.au');
+insert into smp_user values(7, 'bruce', 'bruce', 's.li.24@scu.edu.au');
 insert into smp_user values(8, 'mentor5', 'mentor', 'mentor5@scu.edu.au');
 insert into smp_user values(9, 'mentor6', 'mentor', 'mentor6@scu.edu.au');
 insert into smp_user values(10,'mentor7', 'mentor', 'mentor7@scu.edu.au');
@@ -156,16 +156,16 @@ values
 		(4, 6 , 'James'	 , 'Gleeson' , 'male'  , '21777777', 'under25', 'IT'		, 'Software Development', 'coffs', 'Paul Woods', '1', 'no' , 'parttime', 'no' , 'no' , '0', '0', '0', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
 		(5, 8 , 'Mentor5', 'Family5' , 'female', '21000005', 'under25', 'Nursing'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
 		(6, 9 , 'Mentor6', 'Family6' , 'male'  , '21000006', '25to30' , 'Nursing'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
-		(7, 10, 'Mentor7', 'Family7' , 'female', '21000005', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
-		(8, 11, 'Mentor8', 'Family8' , 'male'  , '21000006', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
-		(9, 12, 'Mentor9', 'Family9' , 'female', '21000005', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
-		(10,13, 'Mentor10','Family10', 'male'  , '21000006', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
-		(11,14, 'Mentee5', 'Family5' , 'female', '21000005', 'under25', 'Nursing'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
-		(12,15, 'Mentee6', 'Family6' , 'male'  , '21000006', '25to30' , 'Nursing'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
-		(13,16, 'Mentee7', 'Family7' , 'female', '21000005', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
-		(14,17, 'Mentee8', 'Family8' , 'male'  , '21000006', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
-		(15,18, 'Mentee9', 'Family9' , 'female', '21000005', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
-		(16,19, 'Mentee10','Family10', 'male'  , '21000006', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE');
+		(7, 10, 'Mentor7', 'Family7' , 'female', '21000007', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
+		(8, 11, 'Mentor8', 'Family8' , 'male'  , '21000008', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
+		(9, 12, 'Mentor9', 'Family9' , 'female', '21000009', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
+		(10,13, 'Mentor10','Family10', 'male'  , '21000010', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
+		(11,14, 'Mentee5', 'Family5' , 'female', '21000011', 'under25', 'Nursing'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
+		(12,15, 'Mentee6', 'Family6' , 'male'  , '21000012', '25to30' , 'Nursing'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
+		(13,16, 'Mentee7', 'Family7' , 'female', '21000013', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
+		(14,17, 'Mentee8', 'Family8' , 'male'  , '21000014', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
+		(15,18, 'Mentee9', 'Family9' , 'female', '21000015', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
+		(16,19, 'Mentee10','Family10', 'male'  , '21000016', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE');
 
 insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '025555555', '045555555', '045555555', 'jiya@gmail.com', 4,1);				
 insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
