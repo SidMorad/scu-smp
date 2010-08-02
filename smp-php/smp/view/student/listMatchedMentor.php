@@ -36,7 +36,7 @@ if (! empty($list)) {
 	}
 	print $indent."</table>\r\n";
 } else {
-	print $indent. "<p>No matched Mentee found.</p>";
+	print $indent. "<p>No matched Mentor found.</p>";
 }
 
 include('smp/view/common/footer.php');
