@@ -151,6 +151,19 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		}
 		return $listMenttes;
 	}
+
+	function findStudentMentorWithMenteeId($id) {
+		$findStmt = self::$ADODB->Prepare("SELECT mentor_id FROM smp_mentor_mentee WHERE mentee_id=?");
+		$rs = self::$ADODB->Execute($findStmt, array($id));
+		$userMapper = new smp_mapper_UserMapper();
+		$contactMapper = new smp_mapper_ContactMapper();
+		$row = $rs->FetchRow();
+		$mentorId = $row['mentor_id'];
+		$mentor = self::find($mentorId);
+		$mentor->setContact($contactMapper->findContactWithUserId($mentor->getUserId()));
+		$mentor->setUser($userMapper->findUserWithStudentId($mentor->getId()));
+		return $mentor;
+	}
 	
 	function listMentors() {
 		// Filter Student with Account status MENTOR

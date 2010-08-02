@@ -53,7 +53,7 @@
 					<li><a href="#" class="MenuBarItemSubmenu">Mentee</a>
 						<ul>
 							<li><a href="index.php?cmd=student/showProfileMentee">Profile</a></li>
-							<li><a href="index.php?cmd=student/showProfileMentorMentees">my Mentor info</a></li>
+							<li><a href="index.php?cmd=student/showProfileMenteeMentor">my Mentor info</a></li>
 							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>
