@@ -125,13 +125,15 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	function find($id) {
 		$findStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($id));
-		return ($rs ? self::doCreateObject($rs->FetchRow()) : null);
+		$row = $rs->FetchRow(); 
+		return (is_array($row) ? self::doCreateObject($row) : null);
 	}
 	
 	function findStudentWithUser($user) {
 		$findStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE user_id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($user->getId()));
-		return ($rs ? self::doCreateObject($rs->FetchRow()) : null);
+		$row = $rs->FetchRow(); 
+		return (is_array($row) ? self::doCreateObject($row) : null);
 	}
 	
 	function findStudentMenteesWithMentorId($id) {
@@ -160,8 +162,11 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$row = $rs->FetchRow();
 		$mentorId = $row['mentor_id'];
 		$mentor = self::find($mentorId);
-		$mentor->setContact($contactMapper->findContactWithUserId($mentor->getUserId()));
-		$mentor->setUser($userMapper->findUserWithStudentId($mentor->getId()));
+		if (!is_null($mentor)) {
+			$contact = $contactMapper->findContactWithUserId($mentor->getUserId());
+			if (!is_null($contact)) { $mentor->setContact($contact);}
+			$mentor->setUser($userMapper->findUserWithStudentId($mentor->getId()));
+		}
 		return $mentor;
 	}
 	
