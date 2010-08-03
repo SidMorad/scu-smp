@@ -13,6 +13,9 @@ class smp_command_student_ListMenteeCommand extends smp_command_Command {
 		$studentService = new smp_service_StudentService();
 		
 		$list = $studentService->listMentees();
+		foreach($list as $mentee) {
+			$mentee->setMentor($studentService->findStudentMentorWithMenteeId($mentee->getId()));
+		}
 		
 		$request->setList($list);
 		$request->setTitle("List of Mentors");

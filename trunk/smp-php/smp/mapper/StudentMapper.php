@@ -216,7 +216,7 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 			$conditionString .= " account_status=? or";
 		}
 		$conditionString = substr($conditionString, 0, strlen($conditionString) -3);
-		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE ". $conditionString);
+		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE ". $conditionString. " ORDER BY id DESC");
 		$rs = self::$ADODB->Execute($selectStmt, $arrAccountStatus);
 		$list = array();
 		if ($rs) {

@@ -19,7 +19,7 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<h2>Mentee(s) Information for '".$student->getFirstname()."	".$student->getLastname() ."' &nbsp;SN:[".$student->getStudentNumber()."]</h2>\r\n";
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
-	$i = 0;
+
 foreach($student->getMentees() as $mentee) {
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Name :</label>\r\n";
@@ -51,7 +51,6 @@ foreach($student->getMentees() as $mentee) {
 	print $indent."	<div class=\"grid_10\">\r\n";
 	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getCourse())."</label>\r\n";
 	print $indent."	</div>\r\n";
-	$i++;
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";
 	print $indent."	</div>\r\n";
