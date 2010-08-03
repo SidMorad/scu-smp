@@ -47,7 +47,8 @@ print $indent."	<th>Lastname</th>\r\n";
 print $indent."	<th>Gender</th>\r\n";	
 print $indent."	<th>Course</th>\r\n";	
 print $indent."	<th>Age Range</th>\r\n";	
-print $indent."	<th>Study Mode</th>\r\n";	
+print $indent."	<th>Study Mode</th>\r\n";
+print $indent."	<th>Mentees</th>\r\n";		
 foreach ($request->getList() as $student) {
 print $indent."	<tr>\r\n";
 	print $indent."		<td>".$matchingForm->redioBox("mentorId", 1, null, array($student->getId()=>$student->getId()), "redio", null);
@@ -59,6 +60,11 @@ print $indent."	<tr>\r\n";
 	print $indent."		<td>".$student->getCourse()."</td>\r\n";
 	print $indent."		<td>".VH::getValueFromFixArray('age_range', $student->getAgeRange())."</td>\r\n";
 	print $indent."		<td>".VH::getValueFromFixArray('study_mode', $student->getStudyMode())."</td>\r\n";
+	if (count($student->getMentees()) > 0) {
+		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$student->getId()."\">".count($student->getMentees())."</a></td>\r\n";
+	} else {
+		print $indent."		<td>0</td>\r\n";
+	}
 print $indent."	</tr>\r\n";
 }
 print $indent."</table>\r\n";
