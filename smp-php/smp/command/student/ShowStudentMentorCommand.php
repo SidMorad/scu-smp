@@ -22,7 +22,7 @@ class smp_command_student_ShowStudentMentorCommand extends smp_command_Command {
 
 		$contactService = new smp_service_ContactService();
 		$contact = $contactService->findContactWithUserId($user->getId());
-		$student->setContact($contact);	
+		if (!is_null($contact)) {$student->setContact($contact);}	
 		
 		$request->setEntity($student);
 		$request->setTitle("Mentor Details");	

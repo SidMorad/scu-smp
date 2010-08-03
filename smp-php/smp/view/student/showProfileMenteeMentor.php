@@ -16,13 +16,11 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<label>&nbsp;</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
-	 
-	//if mentee log in, show mentor's info
 	print $indent."		<h2>My Mentor's Information</h2>\r\n";
-	
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
- $mentor=$student->getMentor();
+ 
+$mentor=$student->getMentor();
  if (!is_null($mentor)) {
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Name :</label>\r\n";
@@ -31,10 +29,16 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<label class=\"labelValue\">".$mentor->getFirstname()."	".$mentor->getLastname()."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
+	print $indent."		<label class=\"label\">Student number :</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_10\">\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentor->getStudentNumber())."</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Mobile :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentor->getContact()->getMobile()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentor->getContact()->getMobile())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Email :</label>\r\n";
@@ -46,7 +50,7 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<label class=\"label\">Course :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$mentor->getCourse()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentor->getCourse())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";

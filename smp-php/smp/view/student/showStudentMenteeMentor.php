@@ -20,7 +20,8 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
 	
-	$mentor=$student->getMentor();
+	 $mentor=$student->getMentor();
+ if (!is_null($mentor)) {
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Name :</label>\r\n";
 	print $indent."	</div>\r\n";
@@ -54,7 +55,11 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";
 	print $indent."	</div>\r\n";
-
+ } else {
+	print $indent."	<div class=\"grid_12\">\r\n";
+	print $indent."		It seems you do not have Mentor yet!\r\n";
+	print $indent."	</div>\r\n";
+ }
 print $indent."</div>\r\n";
 
 include("smp/view/common/footer.php");

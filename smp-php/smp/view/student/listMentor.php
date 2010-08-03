@@ -16,7 +16,8 @@ print $indent."	<th>Firstname</th>\r\n";
 print $indent."	<th>Lastname</th>\r\n";	
 print $indent."	<th>Gender</th>\r\n";	
 print $indent."	<th>Student Number</th>\r\n";	
-print $indent."	<th>Account Status</th>\r\n";	
+print $indent."	<th>Account Status</th>\r\n";
+print $indent."	<th>Mentees</th>\r\n";		
 print $indent."	<th>&nbsp;</th>\r\n";	
 foreach ($request->getList() as $student) {
 print $indent."	<tr>\r\n";
@@ -25,6 +26,11 @@ print $indent."	<tr>\r\n";
 	print $indent."		<td>".$student->getGender()."</td>\r\n";
 	print $indent."		<td>".$student->getStudentNumber()."</td>\r\n";
 	print $indent."		<td>".VH::getValueFromFixArray('account_status',$student->getAccountStatus())."</td>\r\n";
+	if (count($student->getMentees()) > 0) {
+		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$student->getId()."\">".count($student->getMentees())."</a></td>\r\n";
+	} else {
+		print $indent."		<td>0</td>\r\n";
+	}
 	print $indent."		<td><a href=\"index.php?cmd=student/showStudentMentor&mentorId=".$student->getId()."\">See details</td>\r\n";
 print $indent."	</tr>\r\n";
 }
