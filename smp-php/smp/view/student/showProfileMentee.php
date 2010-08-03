@@ -18,11 +18,7 @@ include("smp/view/user/show.php");
 //Student Information
 include("smp/view/student/show.php");
 
-//mentee Information
-include("smp/view/student/showMentee.php");
-
 $contact = $student->getContact();
 // Contact Information
 include("smp/view/contact/show.php");
 include("smp/view/common/footer.php");
-
