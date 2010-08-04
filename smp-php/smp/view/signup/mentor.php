@@ -112,7 +112,7 @@ print $objForm->label(""					, "&nbsp;" , 			"grid_12");
 print $objForm->label("preferAustralian" 	, "Domestic (Australian) student:","grid_6");
 print $objForm->checkBox("preferAustralian"	, "",     33, 			"grid_6");
 
-print $objForm->hx("h3", "grid_12", "Are you a:");
+print $objForm->hx("h3", "grid_12", "Please tick if you identify as one of the following...");
 print $objForm->hr();
 print $objForm->label("isRegional"			, "Student from regional or remote area:", "grid_6");
 print $objForm->redioBox("isRegional"		,		  34, 			"grid_6", VH::getFixArray('yes_no'));
