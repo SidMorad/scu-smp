@@ -7,7 +7,7 @@ For start developing this project you need to have these software installed in y
   * PHP-5.2.x
   * MySQL-5.x
 
-Note: 'x' stands for any number, but if you want have exact number then find it from [http://infotech.scu.edu.au/~smp/info.php here]
+Note: 'x' stands for any number, but if you want have exact number then find it from [http://infotech.scu.edu.au here]
 
 Note2: For easy installation, you may want use XAMP for windows ([http://www.apachefriends.org/en/xampp-windows.html link]). 
  
