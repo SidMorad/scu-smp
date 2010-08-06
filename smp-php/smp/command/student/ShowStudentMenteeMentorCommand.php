@@ -10,6 +10,8 @@ require_once('smp/command/Command.php');
 require_once('smp/util/Security.php');
 require_once('smp/service/StudentService.php');
 require_once('smp/service/ContactService.php');
+require_once('smp/mapper/MentorMenteeMapper.php');
+require_once('smp/mapper/MentorMapper.php');
 class smp_command_student_ShowStudentMenteeMentorCommand extends smp_command_Command {
 
 	function doExecute(smp_controller_Request $request) {
@@ -18,8 +20,13 @@ class smp_command_student_ShowStudentMenteeMentorCommand extends smp_command_Com
 		$studentService = new smp_service_StudentService();
 		$student = $studentService->find($menteeId);
 		
-		$mentor = $studentService->findStudentMentorWithMenteeId($student->getId());
+		$mentorMapper = new smp_mapper_MentorMapper();
+		$mentor = $mentorMapper->findMentorWithStudentId($student->getId());
 		$student->setMentor($mentor);
+		
+		$mentorMenteeMapper = new smp_mapper_MentorMenteeMapper();
+		$relation = $mentorMenteeMapper->findRelationWithMenteeId($student->getId());
+		$student->setRelation($relation);
 		
 		$request->setEntity($student);
 		$request->setTitle("Mentee's Mentor");

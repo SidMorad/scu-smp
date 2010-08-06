@@ -31,7 +31,7 @@ if (! empty($list)) {
 		print $indent."		<td>".$student->getCourse()."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $student->getStudyMode())."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('age_range', $student->getAgeRange())."</td>\r\n";
-		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$student->getId()."\">".$student->getMentor()->getFirstname()." ".$student->getMentor()->getLastname()."</a></td>\r\n";
+		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$student->getId()."\">".$student->getMentor()->getStudent()->getFirstname()." ".$student->getMentor()->getStudent()->getLastname()."</a></td>\r\n";
 		print $indent."	</tr>\r\n";
 	}
 	print $indent."</table>\r\n";

@@ -5,12 +5,10 @@
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  */
-require_once('smp/Constants.php');
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
 class smp_command_signup_MentorCommand extends smp_command_Command {
-	
 	
 	function doExecute(smp_controller_Request $request) {
 		$request->setTitle("Signup Mentor");

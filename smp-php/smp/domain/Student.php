@@ -9,6 +9,8 @@
 require_once('smp/domain/DomainObject.php');
 require_once('smp/domain/User.php');
 require_once('smp/domain/Contact.php');
+require_once('smp/domain/Mentor.php');
+require_once('smp/domain/MentorMentee.php');
 class smp_domain_Student extends smp_domain_DomainObject {
 	
 	var $userId;
@@ -44,6 +46,7 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $contact;
 	var $mentees = array();
 	var $mentor;
+	var $relation;
 	
 	function __construct($id = -1) {
 		parent::__construct($id);
@@ -145,8 +148,11 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function setMentees(array $mentees) {
 		$this->mentees = $mentees;
 	}
-	function setMentor ($mentor) {
+	function setMentor (smp_domain_Mentor $mentor) {
 		$this->mentor = $mentor;
+	}
+	function setRelation (smp_domain_MentorMentee $relation) {
+		$this->relation = $relation;
 	}
 	
 	function getUserId() {
@@ -237,16 +243,19 @@ class smp_domain_Student extends smp_domain_DomainObject {
 		return $this->accountStatus;
 	}
 	function getUser() {
-		return $this->user;
+		return (is_null($this->user) ? new smp_domain_User() : $this->user);
 	}
 	function getContact() {
 		return (is_null($this->contact) ? new smp_domain_Contact() : $this->contact);
 	}
+	function getMentor() {
+		return (is_null($this->mentor) ? new smp_domain_Mentor() : $this->mentor);
+	}
+	function getRelation() {
+		return (is_null($this->relation) ? new smp_domain_MentorMentee() : $this->relation);
+	}
 	function getMentees() {
 		return $this->mentees;
-	}
-	function getMentor() {
-		return $this->mentor;
 	}
 	
 	function __toString() {

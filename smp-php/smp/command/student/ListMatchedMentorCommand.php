@@ -6,7 +6,6 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-require_once('smp/Constants.php');
 require_once('smp/command/Command.php');
 require_once('smp/service/StudentService.php');
 class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {

@@ -9,8 +9,6 @@ DROP TABLE IF EXISTS smp_log;
 DROP TABLE IF EXISTS smp_user;
 DROP TABLE IF EXISTS smp_role;
 
-
-
 CREATE TABLE smp_user (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	username VARCHAR(50) NOT NULL UNIQUE,
@@ -97,7 +95,8 @@ CREATE TABLE smp_contact (
 CREATE TABLE smp_mentor_mentee (
 	mentor_id BIGINT,
 	mentee_id BIGINT,
-	expired BOOLEAN,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	expired BOOLEAN DEFAULT FALSE,
 	CONSTRAINT smp_fk_mentor_student FOREIGN KEY (mentor_id) REFERENCES smp_student(id) ON DELETE CASCADE,
 	CONSTRAINT smp_fk_mentee_student FOREIGN KEY (mentee_id) REFERENCES smp_student(id) ON DELETE CASCADE,
 	PRIMARY KEY(mentor_id, mentee_id)
@@ -171,4 +170,3 @@ insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harb
 insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
 insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina     ', '2452', '026666666', '046666666', '046666666', 'bruce@gmail.com', 7,3);				
 insert into smp_contact values (3, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '047777777', '047777777', 'james@gmail.com', 6,4);				
-				

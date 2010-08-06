@@ -6,7 +6,6 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-require_once('smp/Constants.php');
 require_once('smp/service/StudentService.php');
 class smp_service_MatchingService {
 	private $studentMapper;
@@ -27,5 +26,9 @@ class smp_service_MatchingService {
 
 	function markMentorAsTrained($mentorId) {
 		return $this->studentMapper->markMentorAsTrained($mentorId);
+	}
+	
+	function loadMentorMenteeRelationsWithMentorStudent($student) {
+		return $this->mentorMapper->loadMentorMenteeRelationsWithMentorStudent($student);
 	}
 }

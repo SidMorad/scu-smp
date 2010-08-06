@@ -6,13 +6,12 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/Student.php');
 require_once('smp/domain/Log.php');
-require_once('smp/mapper/ContactMapper.php');
-require_once('smp/mapper/UserMapper.php');
+require_once('smp/mapper/Mapper.php');
+require_once('smp/mapper/MentorMapper.php');
 class smp_mapper_StudentMapper extends smp_mapper_Mapper {
-
+	
 	function __construct() {
 		parent::__construct();
 		$strInsertQuery = "INSERT INTO smp_student (user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff";
@@ -140,14 +139,9 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$findStmt = self::$ADODB->Prepare("SELECT mentee_id FROM smp_mentor_mentee WHERE mentor_id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($id));
 		$listMenttes = array();
-		$userMapper = new smp_mapper_UserMapper();
-		$contactMapper = new smp_mapper_ContactMapper();
      	while (!$rs->EOF) {
-			$menteeId = $rs->fields('mentee_id');
-			$mentee = self::find($menteeId);
-			$contact = $contactMapper->findContactWithUserId($mentee->getUserId());
-			(($contact!= null) ? $mentee->setContact($contact) : true);
-			$mentee->setUser($userMapper->findUserWithStudentId($mentee->getId()));
+			$studentId = $rs->fields('mentee_id');
+			$mentee = self::find($studentId);
 			$listMenttes[] = $mentee;
 			$rs->MoveNext();
 		}
@@ -157,16 +151,9 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	function findStudentMentorWithMenteeId($id) {
 		$findStmt = self::$ADODB->Prepare("SELECT mentor_id FROM smp_mentor_mentee WHERE mentee_id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($id));
-		$userMapper = new smp_mapper_UserMapper();
-		$contactMapper = new smp_mapper_ContactMapper();
 		$row = $rs->FetchRow();
-		$mentorId = $row['mentor_id'];
-		$mentor = self::find($mentorId);
-		if (!is_null($mentor)) {
-			$contact = $contactMapper->findContactWithUserId($mentor->getUserId());
-			if (!is_null($contact)) { $mentor->setContact($contact);}
-			$mentor->setUser($userMapper->findUserWithStudentId($mentor->getId()));
-		}
+		$studentId = $row['mentor_id'];
+		$mentor = self::find($studentId);
 		return $mentor;
 	}
 	
