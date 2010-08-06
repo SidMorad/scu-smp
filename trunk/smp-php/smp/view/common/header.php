@@ -1,6 +1,5 @@
 <?php
-	require_once('smp/view/ViewHelper.php'); 
-	require_once('smp/Constants.php'); 
+	require_once('smp/view/ViewHelper.php');
 	$request = VH::getRequest();
 	$user = VH::getCurrentUser();
 ?>	

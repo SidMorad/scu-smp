@@ -5,13 +5,11 @@
  *
  * @author <a href="mailto:sli24@scu.edu.au">Bruce</a>
  */
-require_once('smp/Constants.php');
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
-
-
 class smp_command_signup_MenteeCommand extends smp_command_Command {
+	
 	function doExecute(smp_controller_Request $request) {
 		$request->setTitle("Signup Mentee");
 		$signupService=new smp_service_SignupService();

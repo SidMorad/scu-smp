@@ -15,7 +15,7 @@ class smp_domain_User extends smp_domain_DomainObject {
 	
 	private $roles = array();
 	
-	function __construct($id =-1, $username, $password = null, $scuEmail = null) {
+	function __construct($id =-1, $username = null, $password = null, $scuEmail = null) {
 		parent::__construct($id);
 		$this->username = $username;
 		$this->password = $password;
