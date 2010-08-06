@@ -23,14 +23,14 @@ if (isset($user)) {
 	print $indent."		<label class=\"label\">Username:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$user->getUsername()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($user->getUsername())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Scu Email:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$user->getScuEmail()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($user->getScuEmail())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	
 	print $indent."</div>\r\n";

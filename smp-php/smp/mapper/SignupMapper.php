@@ -7,15 +7,18 @@
  * @version 1.0
  */
 require_once('smp/mapper/UserMapper.php');
+require_once('smp/mapper/RoleMapper.php');
 require_once('smp/mapper/StudentMapper.php');
 require_once('smp/mapper/ContactMapper.php');
 class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 	protected $userMapper;
+	protected $roleMapper;
 	protected $studentMapper;
 	protected $contactMapper;
 	
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
+		$this->roleMapper = new smp_mapper_RoleMapper(self::$ADODB);
 		$this->userMapper = new smp_mapper_UserMapper(self::$ADODB);
 		$this->studentMapper = new smp_mapper_StudentMapper(self::$ADODB);
 		$this->contactMapper = new smp_mapper_ContactMapper(self::$ADODB);
@@ -25,7 +28,7 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 	protected function doInsert(smp_domain_DomainObject $obj) {}
 	protected function doCreateObject(array $array) {}
 	
-	function saveMentor($user, $student, $contact) {
+	function saveNewStudent($user, $student, $contact) {
 		self::$ADODB->StartTrans();
 		$ok = true;
 		$msg = "";
@@ -35,6 +38,13 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 			$ok = false;
 			$msg = "Save User failed, Error message:" . self::$ADODB->ErrorMsg();
 		}
+		// Save User Roles
+		$arrRoleIds = array();
+		foreach ($user->getRoles() as $roleName) {
+			$role = $this->roleMapper->findRoleByName($roleName);
+			$arrRoleIds[] = $role->getId();			
+		}
+		$this->userMapper->saveUserRoles($user->getId(), $arrRoleIds);
 		
 		if ($ok) {
 			$student->setUserId($user->getId());
@@ -57,7 +67,7 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 		$ok = self::$ADODB->CompleteTrans();
 		
 		if (! $ok) {
-			$this->logger->save(new smp_domain_Log("signup.save.mentor", "Error occoured on Save New Mentor: ". $msg));
+			$this->logger->save(new smp_domain_Log("signup.save", "Error occoured on Save New Student: ". $msg));
 		}
 		
 		return $ok;

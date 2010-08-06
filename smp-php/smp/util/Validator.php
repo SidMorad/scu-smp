@@ -75,6 +75,13 @@ class smp_util_Validator {
 		}
 	}
 
+	function notEmpty($strKey) {
+		if (empty($this->properties[$strKey])) {
+			return false;
+		}
+		return true;
+	}
+	
 	function getErrorMessagesString($strIndent = "	") {
 		$strErrMsgs = "";
 		if ($this->isInvalid()) {
