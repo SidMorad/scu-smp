@@ -23,46 +23,46 @@ if (isset($contact)) {
 	print $indent."		<label class=\"label\">Address:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getAddress()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getAddress())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">City/Town:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getCity()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getCity())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Postcode:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getPostcode()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getPostcode())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Phone(home):</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getPhoneHome()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getPhoneHome())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Mobile:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getMobile()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getMobile())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Phone(work):</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getPhoneWork()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getPhoneWork())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Email:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$contact->getEmail()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($contact->getEmail())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	
 	print $indent."</div>\r\n";

@@ -33,7 +33,9 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 			$validator->checkCustomVal("password","Password and Confirm Password need to be same", $validator->getProperty('password')==$validator->getProperty('password2'));
 			$validator->checkWithRegex("scuEmail", "SCU-Email is not valid. e.g. fbar12@scu.edu.au","/^[a-z0-9A-Z_\\.\\-]+@scu.edu.au$/");
 			$validator->checkWithRegex("studentNumber","Student number is incorrect.","/^[0-9]{8}$/");
-//			$validator->checkWithRegex("email"	, "Email is Invalid.", "/^[a-z0-9_\\.\\-]+@+[a-z0-9_\\.\\-]+(\\.[a-z]{2,4})$/");
+			if ($validator->notEmpty("email")) {
+				$validator->checkWithRegex("email"	, "Email is Invalid.", "/^[a-z0-9_\\.\\-]+@+[a-z0-9_\\.\\-]+(\\.[a-z]{2,4})$/");
+			}
 			
 		if ($validator->isValid()) {
 				// more Validation
@@ -46,8 +48,8 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$validator->setError("scuEmail", "This SCU Email exists!, Which means you are already registered!");
 				} else {
 					$user = new smp_domain_User(-1, $validator->getProperty('username'), $validator->getProperty('password'), $validator->getProperty('scuEmail'));
-					// Add ROLE_MENTOR to user.
-					$user->addToRoles('ROLE_MENTOR');
+					// Add ROLE_MENTEE to user.
+					$user->addToRoles(Constants::ROLE_MENTEE);
 
 					$student = new smp_domain_Student();
 					$student->setUserId($user->getId());
@@ -65,12 +67,12 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$student->setTertiaryStudyStatus($validator->getProperty('tertiaryStudyStatus'));
 					$student->setIsInternational($validator->getProperty('isInternational'));
 					
-					$student->setIsDisability($validator->getProperty('isDisability') === "yes" ? true : false);
-					$student->setIsIndigenous($validator->getProperty('isIndigenous') === "yes" ? true : false);
-					$student->setIsNonEnglish($validator->getProperty('isNonEnglish') === "yes" ? true : false);
-					$student->setIsRegional($validator->getProperty('isRegional') === "yes" ? true : false);
-					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic') === "yes" ? true : false);
-										
+					$student->setIsDisability($validator->getProperty('isDisability'));
+					$student->setIsIndigenous($validator->getProperty('isIndigenous'));
+					$student->setIsNonEnglish($validator->getProperty('isNonEnglish'));
+					$student->setIsRegional($validator->getProperty('isRegional'));
+					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic'));
+					$student->setPreferGender($validator->getProperty('preferGender'));					
 					$student->setInterests($validator->getProperty('interests'));
 					$student->setComments($validator->getProperty('comments'));
 					// Set account status for new registered Mentee
@@ -85,7 +87,7 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$contact->setMobile($validator->getProperty('mobile'));
 					$contact->setEmail($validator->getProperty('email'));
 					// Save User, Student and Contact Information 
-					$blnResult = $signupService->saveMentor($user, $student, $contact);
+					$blnResult = $signupService->saveNewStudent($user, $student, $contact);
 					if (! $blnResult) {
 						$validator->setError("register", "Sorry, Error occourd on saving data to the database. <br/>Please try again or contact your coordinator for more help");
 					}

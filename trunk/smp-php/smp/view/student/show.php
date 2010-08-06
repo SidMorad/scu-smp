@@ -23,20 +23,20 @@ if (isset($student)) {
 	print $indent."		<label class=\"label\">First name:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getFirstname()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getFirstname())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Last name:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getLastname()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getLastname())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Student Number:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getStudentNumber()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getStudentNumber())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Study mode:</label>\r\n";
@@ -49,13 +49,13 @@ if (isset($student)) {
 	print $indent."		<label class=\"label\">Course:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getCourse()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getCourse())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Major:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getMajor()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getMajor())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	
 	print $indent."	<div class=\"grid_2\">\r\n";
@@ -88,13 +88,13 @@ if (isset($student)) {
 	print $indent."		<label class=\"label\">Interests:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getInterests()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getInterests())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Comments:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getComments()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getComments())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	
 	print $indent."	<div class=\"grid_2\">\r\n";
@@ -114,39 +114,39 @@ if (isset($student)) {
 	print $indent."		<label class=\"label\">International?:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getIsInternational() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getIsInternational())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Regional?:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getIsRegional() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getIsRegional())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Disability?:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getIsDisability() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getIsDisability())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Low Socioeconomic?:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getIsSocioeconomic() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getIsSocioeconomic())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Non-English?:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getIsNonEnglish() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getIsNonEnglish())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Indigenous?:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getIsIndigenous() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getIsIndigenous())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	
 	

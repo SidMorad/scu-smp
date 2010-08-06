@@ -30,39 +30,39 @@ if (isset($student)) {
 	print $indent."		<label class=\"label\">Recomended By Staff:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getRecommendedByStaff()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getRecommendedByStaff())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Semesters completed:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".$student->getSemestersCompleted()."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($student->getSemestersCompleted())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Prefer on campus:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getPreferOnCampus() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getPreferOnCampus())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Prefer distance:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getPreferDistance() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getPreferDistance())."</label>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Prefer Australian:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".($student->getPreferAustralian() ? "Yes" : "No")."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromBoolean($student->getPreferAustralian())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Prefer International:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<span class=\"labelValue\">".($student->getPreferInternational() ? "Yes" : "No")."</span>\r\n";
+	print $indent."		<span class=\"labelValue\">".VH::getValueFromBoolean($student->getPreferInternational())."</span>\r\n";
 	print $indent."	</div>\r\n";
 
 	print $indent."</div>\r\n";

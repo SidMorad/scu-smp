@@ -17,7 +17,7 @@ class smp_service_SignupService {
 		$this->signupMapper = new smp_mapper_SignupMapper();
 	}	
 	
-	function saveMentor(smp_domain_User $user, smp_domain_Student $student, smp_domain_Contact $contact) {
-		return $this->signupMapper->saveMentor($user, $student, $contact);
+	function saveNewStudent(smp_domain_User $user, smp_domain_Student $student, smp_domain_Contact $contact) {
+		return $this->signupMapper->saveNewStudent($user, $student, $contact);
 	}
 }

@@ -36,7 +36,19 @@ class VH {
 	
 	static function getValueFromFixArray($type, $key) {
 		$array = smp_util_OptionProvider::getFixArray($type);
-		return $array[$key];
+		return (isset($array[$key]) ? $array[$key] : "-");
+	}
+	
+	static function getValueFromBoolean($value) {
+		if (is_null($value)) {
+			return "-";
+		} else {
+			if ($value == true) {
+				return "Yes";
+			} else {
+				return "No";
+			}
+		}
 	}
 	
 	/**
@@ -44,8 +56,10 @@ class VH {
 	 */
 	static function chN($value) {
 		if (is_null($value)) {
+			return "-";
+		} else if (empty($value)){
 			return "&nbsp;";
-		} else {
+		} else {	
 			return $value;
 		}
 	}
