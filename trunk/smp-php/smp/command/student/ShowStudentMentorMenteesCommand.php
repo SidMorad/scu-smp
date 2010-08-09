@@ -19,8 +19,7 @@ class smp_command_student_ShowStudentMentorMenteesCommand extends smp_command_Co
 		$studentService = new smp_service_StudentService();
 		$student = $studentService->find($mentorId);
 		
-		$menteeMapper = new smp_mapper_MenteeMapper();
-		$mentees = $menteeMapper->findMenteesWithMentorStudentId($student->getId());
+		$mentees = $studentService->findMenteesWithMentorId($student->getId());
 		$student->setMentees($mentees);
 		
 		$request->setEntity($student);
