@@ -9,9 +9,13 @@
 require_once('smp/mapper/StudentMapper.php');
 class smp_service_StudentService {
 	private $studentMapper;
+	private $mentorMapper;
+	private $menteeMapper;
 	
 	function __construct() {
 		$this->studentMapper = new smp_mapper_StudentMapper();
+		$this->mentorMapper = new smp_mapper_MentorMapper();
+		$this->menteeMapper = new smp_mapper_MenteeMapper();
 	}
 	
 	function save(smp_domain_Student $student) {
@@ -42,11 +46,35 @@ class smp_service_StudentService {
 		return $this->studentMapper->findStudentWithUser($user);
 	}
 	
+	/**
+	 * This method will return array of smp_domain_Student object
+	 * @param Student Id $id
+	 */
 	function findStudentMenteesWithMentorId($id) {
 		return $this->studentMapper->findStudentMenteesWithMentorId($id);
 	}
 
+	/**
+	 * This method will return array of smp_domain_Mentee object
+	 * @param Student Id $id
+	 */
+	function findMenteesWithMentorId($id) {
+		return $this->menteeMapper->findMenteesWithMentorStudentId($id);
+	}
+
+	/**
+	 * This method will return smp_domain_Student
+	 * @param Studnet Id $id
+	 */
 	function findStudentMentorWithMenteeId($id) {
 		return $this->studentMapper->findStudentMentorWithMenteeId($id);
+	}
+
+	/**
+	 * This method will return smp_domain_Mentor
+	 * @param Studnet Id $id
+	 */
+	function findMentorWithMenteeId($id) {
+		return $this->mentorMapper->findMentorWithStudentMenteeId($id);
 	}
 }

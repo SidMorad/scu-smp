@@ -32,7 +32,7 @@ class smp_mapper_MentorMapper {
 
 	function findMentorWithStudentMenteeId($studentId) {
 		$student = $this->studentMapper->findStudentMentorWithMenteeId($studentId);
-		$user = $this->userMapper->findUserWithStudentId($studentId);
+		$user = $this->userMapper->findUserWithStudentId($student->getId());
 		$contact = $this->contactMapper->findContactWithUserId($user->getId());
 		$mentor = new smp_domain_Mentor($user, $student, $contact);
 		return $mentor;
