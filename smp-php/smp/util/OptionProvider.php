@@ -31,6 +31,9 @@ class smp_util_OptionProvider {
 			case 'account_status':
 				return array(Constants::AS_NEW_MENTOR=>'New Mentor', Constants::AS_NEW_MENTEE=>'New Mentee', Constants::AS_MATCHED_MENTOR=>'Matched Mentor', Constants::AS_MATCHED_MENTEE=>'Matched Mentee', Constants::AS_TRAINED_MENTOR=>'Trained Mentor', Constants::AS_EXPIRED_MENTOR=>'Expired Mentor', Constants::AS_EXPIRED_MENTEE=>'Expired Mentee');
 				break;
+			case Constants::MESSAGE_MENTOR:
+				return array(Constants::MS_FOR_MENTEE=>'my Mentee', Constants::MS_FOR_COORDINATOR=>'my Coordinator');
+				break;
 			default:
 				return array('notFound'=>'Not Found!');
 				break;						
