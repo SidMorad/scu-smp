@@ -39,6 +39,11 @@ class smp_controller_ApplicationHelper {
 		$this->ensure($dsn, "No dsn tag found");
 		smp_base_ApplicationRegistry::setDSN($dsn);
 		
+		// set MDB2DSN value
+		$mdb2dsn = (string)$options->mdb2dsn;
+		$this->ensure($mdb2dsn, "No mdb2dsn tag found");
+		smp_base_ApplicationRegistry::setMDB2DSN($mdb2dsn);
+		
 		// set ADODB value
 //		$dbConnection = NewADOConnection($dsn);
 //		$this->ensure($dbConnection, "Database connection faild!");
