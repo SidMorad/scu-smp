@@ -7,33 +7,44 @@
  * @version 1.0
  */
 include('smp/view/common/header.php');
+require_once('HTML/Table.php');
+require_once('smp/util/OptionProvider.php');
 
 $indent = "				";
 print $indent."<br/><h1>List of Mentors</h1><br/>\r\n";
 
-print $indent."<table class=\"table\">\r\n";
-print $indent."	<th>Firstname</th>\r\n";	
-print $indent."	<th>Lastname</th>\r\n";	
-print $indent."	<th>Gender</th>\r\n";	
-print $indent."	<th>Student Number</th>\r\n";	
-print $indent."	<th>Account Status</th>\r\n";
-print $indent."	<th>Mentees</th>\r\n";		
-print $indent."	<th>&nbsp;</th>\r\n";	
-foreach ($request->getList() as $student) {
-print $indent."	<tr>\r\n";
-	print $indent."		<td>".$student->getFirstname()."</td>\r\n";
-	print $indent."		<td>".$student->getLastname()."</td>\r\n";
-	print $indent."		<td>".$student->getGender()."</td>\r\n";
-	print $indent."		<td>".$student->getStudentNumber()."</td>\r\n";
-	print $indent."		<td>".VH::getValueFromFixArray('account_status',$student->getAccountStatus())."</td>\r\n";
-	if (count($student->getMentees()) > 0) {
-		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$student->getId()."\">".count($student->getMentees())."</a></td>\r\n";
-	} else {
-		print $indent."		<td>0</td>\r\n";
-	}
-	print $indent."		<td><a href=\"index.php?cmd=student/showStudentMentor&mentorId=".$student->getId()."\">See details</td>\r\n";
-print $indent."	</tr>\r\n";
-}
-print $indent."</table>\r\n";
+$datagrid =& $request->getDatagrid();
+
+// use Formatter to edit generated data
+$studyModeColumn =& $datagrid->getColumnByField('study_mode');
+$studyModeColumn->setFormatter('formatStudyMode');
+$accountStatusColumn =& $datagrid->getColumnByField('account_status');
+$accountStatusColumn->setFormatter('formatAccountStatus');
+
+// Define the Look and Feel
+$tableAttribs = array(
+    'class' => 'table'
+);
+$rendererOptions = array(
+    'sortIconASC' => '&uArr;',
+    'sortIconDESC' => '&dArr;'
+);
+
+// Create a HTML_Table
+$table = new HTML_Table($tableAttribs);
+
+$datagrid->fill($table, $rendererOptions);
+
+print $table->toHtml();
+$datagrid->render(DATAGRID_RENDER_PAGER);
 
 include('smp/view/common/footer.php');
+
+function formatStudyMode($params){
+    $key = $params['record']['study_mode'];
+    return VH::getValueFromFixArray('study_mode', $key);
+}
+function formatAccountStatus($params){
+    $key = $params['record']['account_status'];
+    return VH::getValueFromFixArray('account_status', $key);
+}

@@ -7,6 +7,8 @@
  * @version 1.0
  */
 require_once('smp/mapper/StudentMapper.php');
+require_once('smp/mapper/MentorMapper.php');
+require_once('smp/mapper/MenteeMapper.php');
 class smp_service_StudentService {
 	private $studentMapper;
 	private $mentorMapper;

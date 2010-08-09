@@ -17,6 +17,7 @@ class smp_controller_Request {
 	private $feedbacks;
 	private $entity;
 	private $errors;
+	private $datagrid;
 	
 	/**
 	 * constructor
@@ -189,4 +190,18 @@ class smp_controller_Request {
 		return $this->entity;
 	}
 	
+	/**
+	 * @return Structures_DataGrid object 	
+	 */
+	public function getDatagrid() {
+	    return $this->datagrid;
+	}
+
+	/**
+	 * 
+	 * @param Structures_DataGrid $datagrid
+	 */
+	public function setDatagrid($datagrid) {
+	    $this->datagrid = $datagrid;
+	}
 }

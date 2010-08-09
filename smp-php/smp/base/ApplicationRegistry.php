@@ -61,4 +61,12 @@ class smp_base_ApplicationRegistry extends smp_base_Registry {
 		self::instance()->set('dsn', $dsn);
 	}
 
+	static function getMDB2DSN() {
+		return self::instance()->get('mdb2dsn');
+	}
+	
+	static function setMDB2DSN($mdb2dsn) {
+		self::instance()->set('mdb2dsn', $mdb2dsn);
+	}
+
 }
