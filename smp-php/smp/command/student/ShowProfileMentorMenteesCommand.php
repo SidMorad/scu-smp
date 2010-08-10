@@ -20,7 +20,7 @@ class smp_command_student_ShowProfileMentorMenteesCommand extends smp_command_Co
 		$student = $studentService->findStudentWithUser($currentUser);
 		$student->setUser($currentUser);
 		
-		$mentees = $studentService->findStudentMenteesWithMentorId($student->getId());
+		$mentees = $studentService->findMenteesWithMentorId($student->getId());
 		$student->setMentees($mentees);
 		
 		$request->setEntity($student);

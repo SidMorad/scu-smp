@@ -30,8 +30,12 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 				$mentees = $studentService->findMenteesWithMentorId($currentStudent->getId());
 				$recipients = "";
 				foreach($mentees as $mentee) {
-					$recipients .= $mentee->getUser()->getScuEmail() .", ". $recipients;
-					$recipients .= $mentee->getContact()->getEmail() .", ". $recipients;
+					if (!is_null($mentee->getUser()->getScuEmail())) {
+						$recipients .= "" .$mentee->getUser()->getScuEmail() .", ";
+					}
+					if (!is_null($mentee->getContact()->getEmail())) {
+						$recipients .= $mentee->getContact()->getEmail() .", ";
+					}	
 				}
 			}
 			$mailBean->setRecipients($recipients);
@@ -40,10 +44,12 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 			$mailBean->setSubject($validator->getProperty('subject'));
 			$mailBean->setBody($validator->getProperty('body'));
 			$result = $mailUtil->sendEmail($mailBean);
-			if ($result == true) {
+			if (is_bool($result)) {
 				$request->addFeedback('Message sent successfully');
+				$request->addFeedback($recipients);
 			} else {
 				$validator->setError('submit', $result);
+				$validator->setError('to', $recipients);
 			} 			
 		}
 	}
