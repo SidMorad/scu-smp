@@ -26,7 +26,7 @@ abstract class smp_mapper_Mapper {
 				throw new smp_base_AppException("No DSN founded!");
 			}
 			self::$ADODB = NewADOConnection($dsn);
-			self::$ADODB->debug = false;
+			self::$ADODB->debug = true;
 			self::$ADODB->autoRollback = true;
 		}
 		if (! isset($this->logger)) {

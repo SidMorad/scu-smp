@@ -40,10 +40,16 @@ foreach($student->getMentees() as $mentee) {
 	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getContact()->getMobile())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"label\">Email :</label>\r\n";
+	print $indent."		<label class=\"label\">SCU Email :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
 	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getUser()->getScuEmail())."</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_2\">\r\n";
+	print $indent."		<label class=\"label\">Email :</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_10\">\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getContact()->getEmail())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Course :</label>\r\n";

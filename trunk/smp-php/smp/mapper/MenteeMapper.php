@@ -26,8 +26,8 @@ class smp_mapper_MenteeMapper {
 	
 	function findMenteeWithStudentId($studentId) {
 		$student = $this->studentMapper->find($studentId);
-		$user = $this->userMapper->findUserWithStudentId($studentId);
-		$contact = $this->contactMapper->findContactWithUserId($user->getId());
+		$user = $this->userMapper->findUserWithStudentId($student->getId());
+		$contact = $this->contactMapper->findContactWithStudentId($student->getId());
 		$mentee = new smp_domain_Mentee($user, $student, $contact);
 		return $mentee;
 	}
