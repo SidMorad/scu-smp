@@ -22,16 +22,16 @@ if (! empty($list)) {
 	print $indent."	<th>Study Mode</th>\r\n";	
 	print $indent."	<th>Age Range</th>\r\n";
 	print $indent."	<th>Mentor</th>\r\n";		
-	foreach ($list as $student) {
+	foreach ($list as $mentee) {
 	print $indent."	<tr>\r\n";
-		print $indent."		<td>".$student->getFirstname()."</td>\r\n";
-		print $indent."		<td>".$student->getLastname()."</td>\r\n";
-		print $indent."		<td>".VH::getValueFromFixArray('gender', $student->getGender())."</td>\r\n";
-		print $indent."		<td>".$student->getStudentNumber()."</td>\r\n";
-		print $indent."		<td>".$student->getCourse()."</td>\r\n";
-		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $student->getStudyMode())."</td>\r\n";
-		print $indent."		<td>".VH::getValueFromFixArray('age_range', $student->getAgeRange())."</td>\r\n";
-		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$student->getId()."\">".$student->getMentor()->getStudent()->getFirstname()." ".$student->getMentor()->getStudent()->getLastname()."</a></td>\r\n";
+		print $indent."		<td>".$mentee->getStudent()->getFirstname()."</td>\r\n";
+		print $indent."		<td>".$mentee->getStudent()->getLastname()."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromFixArray('gender', $mentee->getStudent()->getGender())."</td>\r\n";
+		print $indent."		<td>".$mentee->getStudent()->getStudentNumber()."</td>\r\n";
+		print $indent."		<td>".$mentee->getStudent()->getCourse()."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $mentee->getStudent()->getStudyMode())."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromFixArray('age_range', $mentee->getStudent()->getAgeRange())."</td>\r\n";
+		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$mentee->getId()."\">".$mentee->getMentor()->getStudent()->getFirstname()." ".$mentee->getMentor()->getStudent()->getLastname()."</a></td>\r\n";
 		print $indent."	</tr>\r\n";
 	}
 	print $indent."</table>\r\n";

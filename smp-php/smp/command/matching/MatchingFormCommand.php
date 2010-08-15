@@ -9,12 +9,16 @@
 require_once('smp/command/Command.php');
 require_once('smp/service/StudentService.php');
 require_once('smp/service/MatchingService.php');
+require_once('smp/service/MenteeService.php');
+require_once('smp/service/MentorService.php');
 require_once('smp/util/Validator.php');
 class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) { 
 		$studentService = new smp_service_StudentService();
 		$matchingService = new smp_service_MatchingService();
+		$menteeService = new smp_service_MenteeService();
+		$mentorService = new smp_service_MentorService();
 		$menteeId = $request->getProperty('menteeId');
 		if (is_null($menteeId)) {
 			$request->setTitle("List of New Mentees");
@@ -46,12 +50,12 @@ class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 		
 		}
 		
-		$mentee = $studentService->find($menteeId);
+		$mentee = $menteeService->findMenteeStudent($menteeId);
 		$request->setEntity($mentee);
 		
-		$listTrainedMentors = $studentService->listStudentWithAccountStatuses(array(Constants::AS_TRAINED_MENTOR, Constants::AS_MATCHED_MENTOR));
+		$listTrainedMentors = $mentorService->findAllTrainedMentor();
 		foreach($listTrainedMentors as $mentor) {
-			$mentor->setMentees($studentService->findStudentMenteesWithMentorId($mentor->getId()));
+			$mentor->setMentees($menteeService->findMenteesWithMentorId($mentor->getId()));
 		}
 		$request->setList($listTrainedMentors);
 		

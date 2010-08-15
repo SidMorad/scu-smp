@@ -90,7 +90,7 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$contact->setMobile($validator->getProperty('mobile'));
 					$contact->setEmail($validator->getProperty('email'));
 					// Save User, Student and Contact Information 
-					$blnResult = $signupService->saveNewStudent($user, $student, $contact);
+					$blnResult = $signupService->saveMentor($user, $student, $contact);
 					if (! $blnResult) {
 						$validator->setError("register", "Sorry, Error occourd on saving data to the database. <br/>Please try again or contact your coordinator for more help");
 					}

@@ -37,9 +37,9 @@ class smp_mapper_MentorMenteeMapper extends smp_mapper_Mapper {
 		return $list;
 	}
 
-	function findRelationWithMenteeId($mentorId) {
+	function findRelationWithMenteeId($menteeId) {
 		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_mentor_mentee WHERE mentee_id=?");
-		$rs = self::$ADODB->Execute($selectStmt, array($mentorId));
+		$rs = self::$ADODB->Execute($selectStmt, array($menteeId));
 		$row = $rs->FetchRow();
 		return (is_array($row) ? self::doCreateObject($row) : null);
 	}

@@ -60,7 +60,7 @@ class smp_service_StudentService {
 	 * This method will return array of smp_domain_Mentee object
 	 * @param Student Id $id
 	 */
-	function findMenteesWithMentorId($id) {
+	function findMenteesWithStudentId($id) {
 		return $this->menteeMapper->findMenteesWithMentorStudentId($id);
 	}
 

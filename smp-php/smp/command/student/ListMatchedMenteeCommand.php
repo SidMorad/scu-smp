@@ -7,16 +7,17 @@
  * @version 1.0
  */
 require_once('smp/command/Command.php');
-require_once('smp/service/StudentService.php');
+require_once('smp/service/MenteeService.php');
+require_once('smp/service/MentorService.php');
 class smp_command_student_ListMatchedMenteeCommand extends smp_command_Command {
 
 	function doExecute(smp_controller_Request $request) {
-		$studentService = new smp_service_StudentService();
-		$mentorMapper = new smp_mapper_MentorMapper();
+		$menteeService = new smp_service_MenteeService();
+		$mentorService = new smp_service_MentorService();
 		
-		$list = $studentService->listStudentWithAccountStatus(Constants::AS_MATCHED_MENTEE);
+		$list = $menteeService->findAllMatchedMentees();
 		foreach($list as $mentee) {
-			$mentee->setMentor($mentorMapper->findMentorWithStudentMenteeId($mentee->getId()));
+			$mentee->setMentor($mentorService->findMentorStudentWithMenteeId($mentee->getId()));
 		}
 		
 		$request->setList($list);

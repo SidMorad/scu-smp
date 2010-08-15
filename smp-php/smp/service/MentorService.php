@@ -10,8 +10,19 @@ require_once('Structures/DataGrid.php');
 require_once('smp/base/ApplicationRegistry.php');
 require_once('PEAR.php');
 require_once('smp/util/OptionProvider.php');
+require_once('smp/mapper/MentorMapper.php');
+require_once('smp/mapper/MenteeMapper.php');
 class smp_service_MentorService {
-
+	protected $mentorMapper;
+	protected $menteeMapper;
+	protected $studentMapper;
+	
+	function __construct() {
+		$this->menteeMapper = new smp_mapper_MenteeMapper();
+		$this->mentorMapper = new smp_mapper_MentorMapper();
+		$this->studentMapper = new smp_mapper_StudentMapper();
+	}
+	
 	/**
 	 * This method return all student by status *Mentor* .
 	 * 
@@ -34,5 +45,43 @@ class smp_service_MentorService {
 			throw new Exception("DataGrid binding faild.");
 		}
 		return $datagrid;
+	}
+	
+	function findAllMatchedMentor() {
+		return $this->mentorMapper->findAllMatchedMentor();	
+	}
+	
+	function findAllNonTrainedMentor() {
+		return $this->mentorMapper->findAllNotTrainedMentor();	
+	}
+	
+	function findAllTrainedMentor() {
+		return $this->mentorMapper->findAllTrainedMentor();	
+	}
+	
+	function markMentorAsTrained($mentorId) {
+		return $this->mentorMapper->markMentorAsTrained($mentorId);
+	}
+	
+	function find($id) {
+		return $this->mentorMapper->find($id);
+	}
+	
+	function findMentorStudentMentees($mentorId) {
+		$mentor = self::find($mentorId);
+		$mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));
+		$mentees = $this->menteeMapper->findMenteesStudentRelationWithMentorId($mentorId);
+		$mentor->setMentees($mentees);
+		return $mentor;
+	}
+
+	function findMentorWithMenteeId($menteeId) {
+		return $this->mentorMapper->findMentorWithMenteeId($menteeId);
+	}
+	
+	function findMentorStudentWithMenteeId($menteeId) {
+		$mentor = self::findMentorWithMenteeId($menteeId);
+		$mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));
+		return $mentor;
 	}
 }
