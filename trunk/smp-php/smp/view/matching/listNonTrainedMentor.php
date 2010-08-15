@@ -23,22 +23,22 @@ if (! empty($list)) {
 	print $indent."	<th>Study Mode</th>\r\n";	
 	print $indent."	<th>Age Range</th>\r\n";
 	print $indent."	<th>&nbsp;</th>\r\n";			
-	foreach ($list as $student) {
+	foreach ($list as $mentor) {
 	print $indent."	<tr>\r\n";
-		print $indent."		<td>".$student->getId()."</td>\r\n";
-		print $indent."		<td>".$student->getFirstname()."</td>\r\n";
-		print $indent."		<td>".$student->getLastname()."</td>\r\n";
-		print $indent."		<td>".VH::getValueFromFixArray('gender', $student->getGender())."</td>\r\n";
-		print $indent."		<td>".$student->getStudentNumber()."</td>\r\n";
-		print $indent."		<td>".$student->getCourse()."</td>\r\n";
-		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $student->getStudyMode())."</td>\r\n";
-		print $indent."		<td>".VH::getValueFromFixArray('age_range', $student->getAgeRange())."</td>\r\n";
-		print $indent."		<td><a href=\"index.php?cmd=matching/activeMentorForm&amp;mentorId=". $student->getId() ."\" onclick=\"return confirmSubmit()\">Mark as Trained</a></td>\r\n";
+		print $indent."		<td>".$mentor->getStudent()->getId()."</td>\r\n";
+		print $indent."		<td>".$mentor->getStudent()->getFirstname()."</td>\r\n";
+		print $indent."		<td>".$mentor->getStudent()->getLastname()."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromFixArray('gender', $mentor->getStudent()->getGender())."</td>\r\n";
+		print $indent."		<td>".$mentor->getStudent()->getStudentNumber()."</td>\r\n";
+		print $indent."		<td>".$mentor->getStudent()->getCourse()."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $mentor->getStudent()->getStudyMode())."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromFixArray('age_range', $mentor->getStudent()->getAgeRange())."</td>\r\n";
+		print $indent."		<td><a href=\"index.php?cmd=matching/activeMentorForm&amp;mentorId=". $mentor->getId() ."\" onclick=\"return confirmSubmit()\">Mark as Trained</a></td>\r\n";
 	print $indent."	</tr>\r\n";
 	}
 	print $indent."</table>\r\n";
 } else {
-	print $indent. "<p>No matched Mentee found.</p>";
+	print $indent. "<p>No Non-Trained Mentor founded.</p>";
 }
 
 include('smp/view/common/footer.php');

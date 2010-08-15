@@ -2,6 +2,8 @@ CREATE DATABASE IF NOT EXISTS smp;
 USE smp;
 
 DROP TABLE IF EXISTS smp_mentor_mentee;
+DROP TABLE IF EXISTS smp_mentee;
+DROP TABLE IF EXISTS smp_mentor;
 DROP TABLE IF EXISTS smp_contact;
 DROP TABLE IF EXISTS smp_student;
 DROP TABLE IF EXISTS smp_user_role;
@@ -92,13 +94,42 @@ CREATE TABLE smp_contact (
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE smp_mentor (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	user_id BIGINT NOT NULL,
+	student_id BIGINT NOT NULL,
+	contact_id BIGINT NOT NULL,
+	mentee_limit int,
+	mentee_contact_confirm BOOLEAN DEFAULT FALSE,
+	trained BOOLEAN DEFAULT FALSE,
+	matched BOOLEAN DEFAULT FALSE,
+	expired BOOLEAN DEFAULT FALSE,
+	CONSTRAINT smp_fk_mentor_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_mentor_student FOREIGN KEY (student_id) REFERENCES smp_student(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_mentor_contact FOREIGN KEY (contact_id) REFERENCES smp_contact(id) ON DELETE CASCADE,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE smp_mentee (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	user_id BIGINT NOT NULL,
+	student_id BIGINT NOT NULL,
+	contact_id BIGINT NOT NULL,
+	matched BOOLEAN DEFAULT FALSE,
+	expired BOOLEAN DEFAULT FALSE,
+	CONSTRAINT smp_fk_mentee_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_mentee_student FOREIGN KEY (student_id) REFERENCES smp_student(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_mentee_contact FOREIGN KEY (contact_id) REFERENCES smp_contact(id) ON DELETE CASCADE,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE smp_mentor_mentee (
 	mentor_id BIGINT,
 	mentee_id BIGINT,
 	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	expired BOOLEAN DEFAULT FALSE,
-	CONSTRAINT smp_fk_mentor_student FOREIGN KEY (mentor_id) REFERENCES smp_student(id) ON DELETE CASCADE,
-	CONSTRAINT smp_fk_mentee_student FOREIGN KEY (mentee_id) REFERENCES smp_student(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_mm_mentor FOREIGN KEY (mentor_id) REFERENCES smp_mentor(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_mm_mentee FOREIGN KEY (mentee_id) REFERENCES smp_mentee(id) ON DELETE CASCADE,
 	PRIMARY KEY(mentor_id, mentee_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
@@ -167,6 +198,37 @@ values
 		(16,19, 'Mentee10','Family10', 'male'  , '21000016', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE');
 
 insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '025555555', '045555555', '045555555', 'jiya@gmail.com', 4,1);				
-insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
 insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina     ', '2452', '026666666', '046666666', '046666666', 'bruce@gmail.com', 7,3);				
 insert into smp_contact values (3, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '047777777', '047777777', 'james@gmail.com', 6,4);				
+insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
+insert into smp_contact values 
+ (5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
+ (16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);				
+
+insert into smp_mentor values (1, 4, 1, 1, NULL, 0, 0, 0, 0);  
+insert into smp_mentor values (2, 7, 3, 2, 1, 0, 0, 0, 0);
+insert into smp_mentor values (3, 8, 5, 5, NULL, 0, 0, 0, 0);
+insert into smp_mentor values (4, 9, 6, 6, NULL, 0, 0, 0, 0);
+insert into smp_mentor values (5,10, 7, 7, NULL, 0, 0, 0, 0);
+insert into smp_mentor values (6,11, 8, 8, NULL, 0, 0, 0, 0);
+insert into smp_mentor values (7,12, 9, 9, NULL, 0, 0, 0, 0);
+insert into smp_mentor values (8,13,10,10, NULL, 0, 0, 0, 0);
+
+insert into smp_mentee values (1, 5, 2, 4, 0, 0);  
+insert into smp_mentee values (2, 6, 4, 3, 0, 0);
+insert into smp_mentee values (3,14,11,11, 0, 0);
+insert into smp_mentee values (4,15,12,12, 0, 0);
+insert into smp_mentee values (5,16,13,13, 0, 0);
+insert into smp_mentee values (6,17,14,14, 0, 0);
+insert into smp_mentee values (7,18,15,15, 0, 0);
+insert into smp_mentee values (8,19,16,16, 0, 0);

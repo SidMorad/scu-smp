@@ -7,19 +7,17 @@
  * @version 1.0
  */
 require_once('smp/command/Command.php');
-require_once('smp/service/StudentService.php');
-require_once('smp/service/MatchingService.php');
+require_once('smp/service/MentorService.php');
 class smp_command_matching_ActiveMentorFormCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
-		$studentService = new smp_service_StudentService();
-		$matchingService = new smp_service_MatchingService();
+		$mentorService = new smp_service_MentorService();
 		
 		$mentorId = $request->getProperty('mentorId');
 		if (is_null($mentorId)) {
 			$request->addFeedback("Please Select Mentor for being Marked as Trained Mentor!");
 		} else {
-			$result = $matchingService->markMentorAsTrained($mentorId);
+			$result = $mentorService->markMentorAsTrained($mentorId);
 			if ($result) {
 				$request->addFeedback("Selected Mentor by id [".$mentorId."] updated as Trained Mentor.");
 			} else {
@@ -27,7 +25,7 @@ class smp_command_matching_ActiveMentorFormCommand extends smp_command_Command {
 			}
 		}
 		
-		$listNonTrainedMentor = $studentService->listStudentWithAccountStatus(Constants::AS_NEW_MENTOR);
+		$listNonTrainedMentor = $mentorService->findAllNonTrainedMentor();
 		$request->setTitle("List of Non Trained Mentor"); 
 		$request->setList($listNonTrainedMentor);
 		$request->forward("matching/listNonTrainedMentor");

@@ -9,7 +9,6 @@
 require_once('smp/domain/Student.php');
 require_once('smp/domain/Log.php');
 require_once('smp/mapper/Mapper.php');
-require_once('smp/mapper/MentorMapper.php');
 class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	
 	function __construct() {
@@ -68,47 +67,6 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		return "smp_domain_Student";
 	}
 
-	function connectMenteeToMentor($menteeId, $mentorId) {
-		self::$ADODB->StartTrans();
-		$msg = "";
-		
-		$insertStmt = self::$ADODB->Prepare("INSERT INTO smp_mentor_mentee(mentor_id, mentee_id, expired) VALUES(?,?,?)");
-		$ok = self::$ADODB->Execute($insertStmt, array($mentorId, $menteeId, false));
-		if (! $ok) {
-			$msg = self::$ADODB->ErrorMsg();
-			$ok = true;
-		}
-		
-		$updateMenteeStmt = self::$ADODB->Prepare("UPDATE smp_student SET account_status=? WHERE id=?");
-		$ok = self::$ADODB->Execute($updateMenteeStmt, array(Constants::AS_MATCHED_MENTEE, $menteeId));
-		if (! $ok) {
-			$msg = self::$ADODB->ErrorMsg();
-			$ok = true;
-		}
-
-		$updateMentorStmt = self::$ADODB->Prepare("UPDATE smp_student SET account_status=? WHERE id=?");
-		$ok = self::$ADODB->Execute($updateMentorStmt, array(Constants::AS_MATCHED_MENTOR, $mentorId));
-		if (! $ok) {
-			$msg = self::$ADODB->ErrorMsg();
-			$ok = true;
-		}
-		
-		$ok = self::$ADODB->CompleteTrans();
-	 	$this->logger->save(new smp_domain_Log("student.insert.update", "Updating student information, message:" . $msg));
-		
-		return $ok;
-	}
-	
-	function markMentorAsTrained($mentorId) {
-		$updateStmt = self::$ADODB->Prepare("UPDATE smp_student SET account_status=? WHERE id=?");
-		$rs = self::$ADODB->Execute($updateStmt, array(Constants::AS_TRAINED_MENTOR, $mentorId));
-		if ($rs === false) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
 	function save(smp_domain_Student $student) {
 		$rs = self::doInsert($student);
 		if ($rs === false) {
