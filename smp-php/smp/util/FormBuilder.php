@@ -19,7 +19,7 @@ class smp_util_FormBuilder {
 		$this->strFileName = $arrSub[0];
 	}
 
-	function open($strId, $strAction = "", $strMethod = "post", $strEnctype = "multipart", $arrOtherAttributes = array()) {
+	function open($strId, $cssClass = "form_Container", $strAction = "", $strMethod = "post", $strEnctype = "multipart",$arrOtherAttributes = array()) {
 		$strId = $this->getHtmlAttributeString($strId == "", "id", $strId);
 		$strAction = (($strAction == "") ? $this->strFileName : $strAction);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
@@ -48,7 +48,8 @@ class smp_util_FormBuilder {
 				$strEnctype = "multipart/form-data";
 				break;
 		}
-		$openString = "\r\n".$this->strIndent."<div class=\"form_container\">\r\n";
+		$cssClass = ($cssClass != "" ?  "class=\"form_container\"" : "");
+		$openString = "\r\n".$this->strIndent."<div $cssClass>\r\n";
 		$openString .=$this->strIndent."<form ".$strId." action=\"".$strAction."\" method=\"".$strMethod."\"".$strOtherAttributes." enctype=\"".$strEnctype."\">\r\n"; 
 		return $openString; 
 	}
@@ -65,7 +66,7 @@ class smp_util_FormBuilder {
 		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
 		$strClassCSS  = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strLocator = $this->getLocatorString($strId, $classCSS);
-		$strValue = $this->getValueIfIsSet($strId);
+		$strValue = ($strValue != "" ? $strValue : $this->getValueIfIsSet($strId));
 		$strValue = (($strType == "password") ? "" : $strValue);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
 		$strField = "<input id=\"".$strId."\" name =\"".$strId."\" type=\"".$strType."\" value =\"".$strValue."\"".$strOtherAttributes.$strMaxLength.$strTabIndex.$strClassCSS.$strLocator." />";

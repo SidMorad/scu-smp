@@ -17,7 +17,6 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 		$validator = new smp_util_Validator();
 		$validator->checkEmptiness('subject', 'Subject is compulsory.');
 		
-		
 		if ($validator->isValid()) {
 			$mailUtil = new smp_util_MailUtil();
 			$mailBean = new smp_bean_Mail();

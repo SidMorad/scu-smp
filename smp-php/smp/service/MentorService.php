@@ -23,6 +23,10 @@ class smp_service_MentorService {
 		$this->studentMapper = new smp_mapper_StudentMapper();
 	}
 	
+	function updateMentorLimit($mentorId, $menteeLimit) {
+		$this->mentorMapper->updateMentorLimit($mentorId, $menteeLimit);
+	}
+	
 	/**
 	 * This method return all student by status *Mentor* .
 	 * 
@@ -32,14 +36,39 @@ class smp_service_MentorService {
 		$datagrid =& new Structures_DataGrid(5);
 		$options = array('dsn' => smp_base_ApplicationRegistry::getMDB2DSN());
 		$options['generate_columns'] = true;
-		$options['fields'] = array ('firstname', 'lastname', 'course', 'gender', 'study_mode', 'account_status');			 
+		$options['fields'] = array ('firstname', 'lastname', 'course', 'gender', 'study_mode');			 
 		$options['labels'] = array ('firstname' => 'First Name',
 									'lastname' => 'Last Name',
 									'course' => 'Course',
 									'gender' => 'Gender',
-									'study_mode' => 'Study Mode',
-									'account_status' => 'STATUS');
-		$query = 'SELECT * FROM smp_student WHERE account_status="'.Constants::AS_NEW_MENTOR.'" or account_status="'.Constants::AS_TRAINED_MENTOR.'" or account_status="'.Constants::AS_MATCHED_MENTOR.'"';
+									'study_mode' => 'Study Mode');
+		$query = "SELECT smp_mentor.id, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
+				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id";
+		$test = $datagrid->bind($query, $options);
+		if (PEAR::isError($test)) {
+			throw new Exception("DataGrid binding faild.");
+		}
+		return $datagrid;
+	}
+
+	/**
+	 * This method return Active Mentor.
+	 * Active Mentors are Trained and not Expired
+	 * 
+	 * @return Structures_DataGrid $datagrid
+	 */
+	function getAactiveMentorDatagrid() {
+			$datagrid =& new Structures_DataGrid(5);
+		$options = array('dsn' => smp_base_ApplicationRegistry::getMDB2DSN());
+		$options['generate_columns'] = true;
+		$options['fields'] = array ('firstname', 'lastname', 'course', 'gender', 'study_mode');			 
+		$options['labels'] = array ('firstname' => 'First Name',
+									'lastname' => 'Last Name',
+									'course' => 'Course',
+									'gender' => 'Gender',
+									'study_mode' => 'Study Mode');
+		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
+				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id and smp_mentor.trained=1 and smp_mentor.expired<>1";
 		$test = $datagrid->bind($query, $options);
 		if (PEAR::isError($test)) {
 			throw new Exception("DataGrid binding faild.");
