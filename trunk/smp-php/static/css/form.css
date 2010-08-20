@@ -74,78 +74,78 @@
 	font:bold 16px inherit;
 }
 
-.form_container .input,
-.form_container .biginput,
-.form_container .smallinput,
-.form_container .button,
-.form_container .select,
-.form_container .textarea {
+.input,
+.biginput,
+.smallinput,
+.button,
+.select,
+.textarea {
 	border-color:#666666; 
 	color:#666666;
 }
 
-.form_container .selected_input,
-.form_container .selected_biginput,
-.form_container .selected_smallinput,
-.form_container .selected_button,
-.form_container .selected_select,
-.form_container .selected_textarea {
+.selected_input,
+.selected_biginput,
+.selected_smallinput,
+.selected_button,
+.selected_select,
+.selected_textarea {
 	border-color: #006699;
 	background:#E4F5FA;
 }
 
-.form_container .error_input,
-.form_container .error_biginput,
-.form_container .error_smallinput,
-.form_container .error_select,
-.form_container .error_textarea {
+.error_input,
+.error_biginput,
+.error_smallinput,
+.error_select,
+.error_textarea {
 	border-color: #cc0000;
 	background:#FFF0F0;
 }
 
-.form_container .input,
-.form_container .selected_input,
-.form_container .error_input {
+.input,
+.selected_input,
+.error_input {
 	width: 180px;
 }
 
-.form_container .biginput,
-.form_container .selected_biginput,
-.form_container .error_biginput {
+.biginput,
+.selected_biginput,
+.error_biginput {
 	width: 500px;
 }
 
-.form_container .smallinput,
-.form_container .selected_smallinput,
-.form_container .error_smallinput {
+.smallinput,
+.selected_smallinput,
+.error_smallinput {
 	width: 85px;
 }
 
-.form_container .button,
-.form_container .selected_button,
-.form_container .error_button {
+.button,
+.selected_button,
+.error_button {
 	width: 85px;
 }
 
-.form_container .select,
-.form_container .selected_select,
-.form_container .error_select {
+.select,
+.selected_select,
+.error_select {
 	width: 180px;
 	height: 30px;
 	top: 5px;
 }
 
-.form_container .textarea,
-.form_container .selected_textarea,
-.form_container .error_textarea {
+.textarea,
+.selected_textarea,
+.error_textarea {
 }
 
-.form_container .checkbox {
+.checkbox {
 	margin: 0px;
 	border: none;
 }
 
-.form_container .redio {
+.redio {
 	margin: 0px;
 	border: none;
 }

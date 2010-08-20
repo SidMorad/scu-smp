@@ -18,8 +18,8 @@ $datagrid =& $request->getDatagrid();
 // use Formatter to edit generated data
 $studyModeColumn =& $datagrid->getColumnByField('study_mode');
 $studyModeColumn->setFormatter('formatStudyMode');
-$accountStatusColumn =& $datagrid->getColumnByField('account_status');
-$accountStatusColumn->setFormatter('formatAccountStatus');
+//$accountStatusColumn =& $datagrid->getColumnByField('account_status');
+//$accountStatusColumn->setFormatter('formatAccountStatus');
 
 // Define the Look and Feel
 $tableAttribs = array(
@@ -44,7 +44,7 @@ function formatStudyMode($params){
     $key = $params['record']['study_mode'];
     return VH::getValueFromFixArray('study_mode', $key);
 }
-function formatAccountStatus($params){
-    $key = $params['record']['account_status'];
-    return VH::getValueFromFixArray('account_status', $key);
-}
+//function formatAccountStatus($params){
+//    $key = $params['record']['account_status'];
+//    return VH::getValueFromFixArray('account_status', $key);
+//}
