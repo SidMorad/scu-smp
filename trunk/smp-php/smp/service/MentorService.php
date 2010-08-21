@@ -24,7 +24,7 @@ class smp_service_MentorService {
 	}
 	
 	function updateMentorLimit($mentorId, $menteeLimit) {
-		$this->mentorMapper->updateMentorLimit($mentorId, $menteeLimit);
+		return $this->mentorMapper->updateMentorLimit($mentorId, $menteeLimit);
 	}
 	
 	/**
@@ -61,8 +61,9 @@ class smp_service_MentorService {
 			$datagrid =& new Structures_DataGrid(5);
 		$options = array('dsn' => smp_base_ApplicationRegistry::getMDB2DSN());
 		$options['generate_columns'] = true;
-		$options['fields'] = array ('firstname', 'lastname', 'course', 'gender', 'study_mode');			 
-		$options['labels'] = array ('firstname' => 'First Name',
+		$options['fields'] = array ('id', 'firstname', 'lastname', 'course', 'gender', 'study_mode');			 
+		$options['labels'] = array ('id' => 'Id',
+									'firstname' => 'First Name',
 									'lastname' => 'Last Name',
 									'course' => 'Course',
 									'gender' => 'Gender',

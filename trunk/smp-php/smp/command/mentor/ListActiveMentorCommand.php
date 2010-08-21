@@ -7,6 +7,7 @@
  * @version 1.0
  */
 require('smp/service/MentorService.php');
+require('smp/util/Validator.php');
 class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
@@ -15,7 +16,18 @@ class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 		if ($request->isPost()) {
 			$mentorId = $request->getProperty('mentorId');
 			$menteeLimit = $request->getProperty('menteeLimit');
-			$mentorService->updateMentorLimit($mentorId, $menteeLimit);
+			
+			// Check Validation
+			$validator = new smp_util_Validator();
+			if (! $validator->checkWithRegex('menteeLimit', '', '/^[0-9]{1}$/')) {
+				$request->addError('Mentee Limit should be number between 0 to 9');
+			} else {
+				$fullName = $request->getProperty('fullName');
+				$updated = $mentorService->updateMentorLimit($mentorId, $menteeLimit);
+				if ($updated) {
+					$request->addFeedback("Mentee limit[". $menteeLimit ."] for Mentor[". $fullName ."] updated successfully.");
+				}
+			}
 		}
 		
 		$datagrid = $mentorService->getAactiveMentorDatagrid();	
