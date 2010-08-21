@@ -66,7 +66,9 @@ class smp_util_Validator {
 	function checkWithRegex($strKey, $strMessage, $strPattern) {
 		if (preg_match($strPattern, $this->properties[$strKey]) === 0) {
 			$this->setError($strKey, $strMessage);
+			return false;
 		}
+		return true;
 	}
 	
 	function setError($strKey, $strErrorMessage) {

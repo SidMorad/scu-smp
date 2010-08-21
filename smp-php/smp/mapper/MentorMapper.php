@@ -45,7 +45,7 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 	function updateMentorLimit($mentorId, $menteeLimit) {
 		$updateStmt = self::$ADODB->Prepare('UPDATE smp_mentor SET mentee_limit=? where id=?');
 		$rs = self::$ADODB->Execute($updateStmt, array($menteeLimit, $mentorId));
-		return $rs;
+		return ($rs === false ? false : true);
 	}
 	
 	function doInsert(smp_domain_DomainObject $obj) {
