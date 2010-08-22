@@ -65,6 +65,13 @@ class smp_controller_Request {
 	}
 	
 	/**
+	 * @return $properties
+	 */
+	function getProperties() {
+		return $this->properties;
+	}
+	
+	/**
 	 * isPost method for check if request type is post
 	 */
 	public function isPost() {

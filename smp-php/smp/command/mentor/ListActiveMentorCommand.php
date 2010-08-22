@@ -6,31 +6,50 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-require('smp/service/MentorService.php');
-require('smp/util/Validator.php');
+require_once('smp/service/MentorService.php');
+require_once('smp/util/Validator.php');
+require_once('smp/domain/Student.php');
+require_once('smp/base/SessionRegistry.php');
 class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
 		$mentorService = new smp_service_MentorService();
 		
+		$student = null;
 		if ($request->isPost()) {
-			$mentorId = $request->getProperty('mentorId');
-			$menteeLimit = $request->getProperty('menteeLimit');
+			$student = new smp_domain_Student();
+			$student->setFirstname($request->getProperty('firstname'));
+			$student->setLastname($request->getProperty('lastname'));
+			$student->setStudentNumber($request->getProperty('studentNumber'));
+			$student->setGender($request->getProperty('gender'));
+			$student->setCourse($request->getProperty('course'));
+			$student->setStudyMode($request->getProperty('studyMode'));
 			
-			// Check Validation
-			$validator = new smp_util_Validator();
-			if (! $validator->checkWithRegex('menteeLimit', '', '/^[0-9]{1}$/')) {
-				$request->addError('Mentee Limit should be number between 0 to 9');
-			} else {
-				$fullName = $request->getProperty('fullName');
-				$updated = $mentorService->updateMentorLimit($mentorId, $menteeLimit);
-				if ($updated) {
-					$request->addFeedback("Mentee limit[". $menteeLimit ."] for Mentor[". $fullName ."] updated successfully.");
+			$subCommand = $request->getProperty('subCommand');
+			if ($subCommand == 'update') {
+				$mentorId = $request->getProperty('mentorId');
+				$menteeLimit = $request->getProperty('menteeLimit'.$mentorId);
+				
+				// Check Validation
+				$validator = new smp_util_Validator();
+				if (! $validator->checkWithRegex('menteeLimit'.$mentorId, '', '/^[0-9]{1}$/')) {
+					$request->addError('Mentee Limit should be number between 0 to 9');
+				} else {
+					$fullName = $request->getProperty('fullName');
+					$updated = $mentorService->updateMentorLimit($mentorId, $menteeLimit);
+					if ($updated) {
+						$request->addFeedback("Mentee limit[". $menteeLimit ."] for Mentor[". $fullName ."] updated successfully.");
+					} else {
+						$request->addError("Update failed!");
+					}
 				}
+			} else if ($subCommand == 'search') {
+				smp_base_SessionRegistry::setSearchEntity('ListActiveMentor_MentorSearch_Student', $student);
 			}
 		}
+		$student = smp_base_SessionRegistry::getSearchEntity('ListActiveMentor_MentorSearch_Student');
 		
-		$datagrid = $mentorService->getAactiveMentorDatagrid();	
+		$datagrid = $mentorService->getAactiveMentorDatagrid(null, $student);	
 		
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List Active Mentors");

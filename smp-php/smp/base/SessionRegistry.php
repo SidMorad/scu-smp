@@ -45,4 +45,13 @@ class smp_base_SessionRegistry extends smp_base_Registry {
 	static function doInvalidUser() {
 		self::instance()->set('X_USER', null);
 	}
+	
+	static function setSearchEntity($key, $entity) {
+		self::instance()->set($key, $entity);
+	}	
+	
+	static function getSearchEntity($key) {
+		return self::instance()->get($key);
+	}
+	
 }

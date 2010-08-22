@@ -8,34 +8,64 @@
  */
 class smp_util_OptionProvider {
 	
-	static function getFixArray($type) {
+	static function getFixArray($type, $firstRecordEmpty = false) {
+		$array = ($firstRecordEmpty ? array(null => '----------') : array());
 		switch ($type) {
 			case 'study_mode':
-				return array('lismore'=>'On-campus - Lismore','coffs'=>'On-campus - Coffs Harbour','tweed'=>'On-campus - Tweed/Gold Coast','external'=>'Distance Study');
+				$array['lismore'] = 'On-campus - Lismore';
+				$array['coffs'] = 'On-campus - Coffs Harbour'; 
+				$array['tweed'] = 'On-campus - Tweed/Gold Coast'; 
+				$array['external'] = 'Distance Study'; 
+				return $array;
 				break;
 			case 'yes_no':
-				return array('yes'=>'Yes', 'no'=>'No');
+				$array['yes'] = 'Yes';
+				$array['no'] = 'No';
+				return $array;
 				break;
 			case 'age_range':
-				return array('under25'=>'Under 25','25to30'=>'25 to 30','30to40'=>'30 to 40','over40'=>'Over 40');
+				$array['under25'] = 'Under 25';
+				$array['25to30'] = '25 to 30';
+				$array['30to40'] = '30 to 40';
+				$array['over40'] = 'Over 40';
+				return $array;
 				break;
 			case 'gender':
-				return array('female'=>'Female','male'=>'Male');
+				$array['female'] = 'Female';
+				$array['male'] = 'Male';
+				return $array;
 				break;			
 			case 'gender_prefer':
-				return array('doNotCare'=>'Do not care','yes'=>'Yes', 'no'=>'No');
+				$array['doNotCare'] = 'Do not care';
+				$array['yes'] = 'Yes';
+				$array['no'] = 'No';
+				return $array;
 				break;
 			case 'work_status':
-				return array('fulltime'=>'Full-time','parttime'=>'Part-time','casual'=>'Casual','nowork'=>'Do not work');
+				$array['fulltime'] = 'Full-time';
+				$array['parttime'] = 'Part-time';
+				$array['casual'] = 'Casual';
+				$array['nowork'] = 'Do not work';
+				return $array;
 				break;
 			case 'account_status':
-				return array(Constants::AS_NEW_MENTOR=>'New Mentor', Constants::AS_NEW_MENTEE=>'New Mentee', Constants::AS_MATCHED_MENTOR=>'Matched Mentor', Constants::AS_MATCHED_MENTEE=>'Matched Mentee', Constants::AS_TRAINED_MENTOR=>'Trained Mentor', Constants::AS_EXPIRED_MENTOR=>'Expired Mentor', Constants::AS_EXPIRED_MENTEE=>'Expired Mentee');
+				$array[Constants::AS_NEW_MENTOR] = 'New Mentor'; 
+				$array[Constants::AS_NEW_MENTEE] = 'New Mentee';
+				$array[Constants::AS_MATCHED_MENTOR] = 'Matched Mentor';
+				$array[Constants::AS_MATCHED_MENTEE] = 'Matched Mentee';
+				$array[Constants::AS_TRAINED_MENTOR] = 'Trained Mentor';
+				$array[Constants::AS_EXPIRED_MENTOR] = 'Expired Mentor';
+				$array[Constants::AS_EXPIRED_MENTEE] = 'Expired Mentee';      
+				return $array;
 				break;
 			case Constants::MESSAGE_MENTOR:
-				return array(Constants::MS_FOR_MENTEE=>'my Mentee', Constants::MS_FOR_COORDINATOR=>'my Coordinator');
+				$array[Constants::MS_FOR_MENTEE] = 'my Mentee';
+				$array[Constants::MS_FOR_COORDINATOR] = 'my Coordinator';  
+				return $array;
 				break;
 			default:
-				return array('notFound'=>'Not Found!');
+				$array['notFound'] = 'Not Found!'; 
+				return $array;
 				break;						
 		}
 	}

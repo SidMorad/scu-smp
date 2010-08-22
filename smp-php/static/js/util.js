@@ -11,3 +11,16 @@ function confirmSubmit() {
 		return false;
 	}
 }
+
+function toggleMe(elemId) {
+	var element = document.getElementById(elemId);
+	if (! element) {
+		return true;
+	}
+	if (element.style.display == "none") {
+		element.style.display = "block";		
+	} else {
+		element.style.display = "none";		
+	}
+	return true;
+}

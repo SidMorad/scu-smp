@@ -76,6 +76,11 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 			$mentor->setUserId($user->getId());
 			$mentor->setStudentId($student->getId());
 			$mentor->setContactId($contact->getId());
+			//set default values
+			$menotr->setTrained(false);
+			$mentor->setMatched(false);
+			$mentor->setExpired(false);
+			$mentor->setMenteeContactConfirm(false);
 			$mentor = $this->mentorMapper->save($mentor);
 			if (is_null($mentor)) {
 				$ok = false;
@@ -132,6 +137,9 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 			$mentee->setUserId($user->getId());
 			$mentee->setStudentId($student->getId());
 			$mentee->setContactId($contact->getId());
+			// set default values
+			$mentee->setMatched(false);
+			$mentee->setExpired(false);
 			$mentee = $this->menteeMapper->save($mentee);
 			if (is_null($mentee)) {
 				$ok = false;
