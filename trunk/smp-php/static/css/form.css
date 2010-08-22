@@ -84,6 +84,16 @@
 	color:#666666;
 }
 
+.input:hover,
+.biginput:hover,
+.smallinput:hover,
+.button:hover,
+.select:hover,
+.textarea:hover {
+	border-color: #006699;
+	background:#E4F5FA;
+}
+
 .selected_input,
 .selected_biginput,
 .selected_smallinput,
@@ -183,4 +193,21 @@
 	color:red;
 	font-weight: bold;
 	font-size: 16px;
+}
+
+.searchHeader {
+	border:1px solid #000;
+	background: #dedede;
+	padding: 5px;
+	text-decoration: underline;
+}
+
+.searchHeader:hover {
+	cursor: pointer;
+}
+
+.searchPanel {
+	padding-top: 10px;
+	padding-bottom: 40px;
+	display: none;
 }

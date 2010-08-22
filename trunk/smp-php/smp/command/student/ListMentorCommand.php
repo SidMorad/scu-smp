@@ -12,7 +12,7 @@ class smp_command_student_ListMentorCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
 		$mentorService = new smp_service_MentorService();
-		$datagrid = $mentorService->getAllMentorDataGrid();
+		$datagrid = $mentorService->getAllMentorDatagrid();
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Mentors");
 	}

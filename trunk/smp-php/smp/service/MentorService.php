@@ -6,21 +6,22 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-require_once('Structures/DataGrid.php');
-require_once('smp/base/ApplicationRegistry.php');
-require_once('PEAR.php');
+
 require_once('smp/util/OptionProvider.php');
 require_once('smp/mapper/MentorMapper.php');
 require_once('smp/mapper/MenteeMapper.php');
+require_once('smp/datagrid/MentorDatagrid.php');
 class smp_service_MentorService {
 	protected $mentorMapper;
 	protected $menteeMapper;
 	protected $studentMapper;
+	protected $mentorDatagrid;
 	
 	function __construct() {
 		$this->menteeMapper = new smp_mapper_MenteeMapper();
 		$this->mentorMapper = new smp_mapper_MentorMapper();
 		$this->studentMapper = new smp_mapper_StudentMapper();
+		$this->mentorDatagrid = new smp_datagrid_MentorDatagrid();
 	}
 	
 	function updateMentorLimit($mentorId, $menteeLimit) {
@@ -28,27 +29,12 @@ class smp_service_MentorService {
 	}
 	
 	/**
-	 * This method return all student by status *Mentor* .
+	 * This method return all Mentors.
 	 * 
 	 * @return Structures_DataGrid $datagrid
 	 */
-	function getAllMentorDataGrid() {
-		$datagrid =& new Structures_DataGrid(5);
-		$options = array('dsn' => smp_base_ApplicationRegistry::getMDB2DSN());
-		$options['generate_columns'] = true;
-		$options['fields'] = array ('firstname', 'lastname', 'course', 'gender', 'study_mode');			 
-		$options['labels'] = array ('firstname' => 'First Name',
-									'lastname' => 'Last Name',
-									'course' => 'Course',
-									'gender' => 'Gender',
-									'study_mode' => 'Study Mode');
-		$query = "SELECT smp_mentor.id, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
-				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id";
-		$test = $datagrid->bind($query, $options);
-		if (PEAR::isError($test)) {
-			throw new Exception("DataGrid binding faild.");
-		}
-		return $datagrid;
+	function getAllMentorDatagrid($mentor = null, $student = null) {
+		return $this->mentorDatagrid->getAllMentorDatagrid($mentor, $student);
 	}
 
 	/**
@@ -57,24 +43,8 @@ class smp_service_MentorService {
 	 * 
 	 * @return Structures_DataGrid $datagrid
 	 */
-	function getAactiveMentorDatagrid() {
-			$datagrid =& new Structures_DataGrid(5);
-		$options = array('dsn' => smp_base_ApplicationRegistry::getMDB2DSN());
-		$options['generate_columns'] = true;
-		$options['fields'] = array ('id', 'firstname', 'lastname', 'course', 'gender', 'study_mode');			 
-		$options['labels'] = array ('id' => 'Id',
-									'firstname' => 'First Name',
-									'lastname' => 'Last Name',
-									'course' => 'Course',
-									'gender' => 'Gender',
-									'study_mode' => 'Study Mode');
-		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
-				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id and smp_mentor.trained=1 and smp_mentor.expired<>1";
-		$test = $datagrid->bind($query, $options);
-		if (PEAR::isError($test)) {
-			throw new Exception("DataGrid binding faild.");
-		}
-		return $datagrid;
+	function getAactiveMentorDatagrid($mentor = null, $student = null) {
+		return $this->mentorDatagrid->getActiveMentorDatagrid($mentor, $student);
 	}
 	
 	function findAllMatchedMentor() {

@@ -30,8 +30,8 @@ class VH {
 		return smp_util_Security::isUserGrantedWith($ROLE_NAME);
 	}
 	
-	static function getFixArray($type) {
-		return smp_util_OptionProvider::getFixArray($type);
+	static function getFixArray($type, $firstRecordEmpty = false) {
+		return smp_util_OptionProvider::getFixArray($type, $firstRecordEmpty);
 	}
 	
 	static function getValueFromFixArray($type, $key) {
