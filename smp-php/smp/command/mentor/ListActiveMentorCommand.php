@@ -15,7 +15,7 @@ class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 	function doExecute(smp_controller_Request $request) {
 		$mentorService = new smp_service_MentorService();
 		
-		$student = null;
+		$mentor = new smp_domain_mentor();
 		if ($request->isPost()) {
 			$student = new smp_domain_Student();
 			$student->setFirstname($request->getProperty('firstname'));
@@ -44,15 +44,14 @@ class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 					}
 				}
 			} else if ($action == Constants::ACTION_SEARCH) {
-				smp_base_SessionRegistry::setSearchEntity('ListActiveMentor_MentorSearch_Student', $student);
+				$mentor->setStudent($student);
+				smp_base_SessionRegistry::setSearchEntity('mentor_ListActiveMentor_MentorSearch', $mentor);
 			}
 		}
-		$student = smp_base_SessionRegistry::getSearchEntity('ListActiveMentor_MentorSearch_Student');
-		$mentor = new smp_domain_Mentor();
-		$mentor->setStudent($student);
+		$mentor = smp_base_SessionRegistry::getSearchEntity('mentor_ListActiveMentor_MentorSearch');
 		$request->setSearchEntity($mentor);
 		
-		$datagrid = $mentorService->getAactiveMentorDatagrid(null, $student);	
+		$datagrid = $mentorService->getActiveMentorDatagrid($mentor);	
 		
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List Active Mentors");

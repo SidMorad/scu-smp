@@ -54,7 +54,9 @@ class smp_util_Validator {
 	function checkEmptiness($strKey, $strErrorMessage) {
 		if (empty($this->properties[$strKey])) {
 			$this->setError($strKey, $strErrorMessage);
+			return false;
 		}
+		return true;
 	}
 	
 	function checkCustomVal($strKey, $strMessage, $blnValidation) {

@@ -8,21 +8,31 @@
  */
 require_once('smp/mapper/MenteeMapper.php');
 require_once('smp/mapper/StudentMapper.php');
+require_once('smp/datagrid/MenteeDatagrid.php');
+require_once('smp/domain/Mentee.php');
 class smp_service_MenteeService {
 	protected $studentMapper;
 	protected $menteeMapper;
+	protected $menteeDatagrid;
 	
 	function __construct() {
 		$this->menteeMapper = new smp_mapper_MenteeMapper();
 		$this->studentMapper = new smp_mapper_StudentMapper();
+		$this->menteeDatagrid = new smp_datagrid_MenteeDatagrid();
 	}
 
 	function findAllMatchedMentees() {
 		return $this->menteeMapper->findAllMatchedMentees();
 	}
 	
-	function findAllNotMatchedMentees() {
-		return $this->menteeMapper->findAllNotMatchedMentees();
+	function getAllNotMatchedMenteesDatagrid($mentee = null) {
+		if (is_null($mentee)) {
+			$mentee = new smp_domain_Mentee();
+		}
+		// Make sure Mentee is Not Matched and Not Expired
+		$mentee->setMatched(false);
+		$mentee->setExpired(false);
+		return $this->menteeDatagrid->getMenteeDatagrid($mentee);
 	}
 	
 	function find($id) {
