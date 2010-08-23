@@ -29,7 +29,7 @@ abstract class smp_datagrid_Datagrid {
 		self::$datagrid = new Structures_DataGrid(10);
 	}
 	
-	protected function getSearchCriteria(smp_domain_DomainObject $domain, $prefix = "", $withAnd = false) {
+	protected function getSearchCriteria($domain, $prefix = "", $withAnd = false) {
 		if (is_null($domain)) {
 			$searchCriteria = "";
 		} else {
@@ -43,7 +43,7 @@ abstract class smp_datagrid_Datagrid {
 		return $searchCriteria;
 	}
 
-	protected function getEqualsCriteria(smp_domain_DomainObject $domain, $prefix = "", $withAnd = false) {
+	protected function getEqualsCriteria($domain, $prefix = "", $withAnd = false) {
 		if (is_null($domain)) {
 			$searchCriteria = "";
 		} else {

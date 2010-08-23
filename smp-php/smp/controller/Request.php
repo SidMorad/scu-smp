@@ -18,6 +18,7 @@ class smp_controller_Request {
 	private $entity;
 	private $errors;
 	private $datagrid;
+	private $searchEntity;
 	
 	/**
 	 * constructor
@@ -210,5 +211,20 @@ class smp_controller_Request {
 	 */
 	public function setDatagrid($datagrid) {
 	    $this->datagrid = $datagrid;
+	}
+	
+	/**
+	 * 
+	 * @param smp_domain_DomainObject $entity
+	 */
+	function setSearchEntity ($searchEntity) {
+		$this->searchEntity = $searchEntity;
+	}
+	
+	/**
+	 * @return smp_domain_DomainObject entity
+	 */
+	function getSearchEntity() {
+		return $this->searchEntity;
 	}
 }

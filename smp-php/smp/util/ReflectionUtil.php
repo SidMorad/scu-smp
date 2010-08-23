@@ -11,7 +11,7 @@ require_once('smp/domain/Student.php');
 require_once('smp/domain/Mentor.php');
 class smp_util_ReflectionUtil {
 
-	static function getSearchCriteria(smp_domain_DomainObject $domain, $prefix = "") {
+	static function getSearchCriteria($domain, $prefix = "") {
 		$domainClassName = get_class($domain);
 		$domainClass = new ReflectionClass($domainClassName);
 		
@@ -35,7 +35,7 @@ class smp_util_ReflectionUtil {
 		return (empty($searchCriteriaString) ? "" : substr($searchCriteriaString , 0, -5));
 	}
 	
-	static private function getCriteriaFromMethod(smp_domain_DomainObject $domain, ReflectionMethod $method, $prefix = "", $sqlCondition = 'search') {
+	static private function getCriteriaFromMethod($domain, ReflectionMethod $method, $prefix = "", $sqlCondition = 'search') {
 		$name = $method->getName();
 		
 		if (substr($name, 0, 3) != "get") {

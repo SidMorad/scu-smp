@@ -276,4 +276,9 @@ class smp_util_FormBuilder {
 	function setValues($valueArray) {
 		$this->values = $valueArray;
 	}
+
+	function setValue($key, $value) {
+		$this->values[$key] = $value;
+	}
+	
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 19/07/2010 9:59:02 AM
- * smp/view/student/listMentor.php
+ * smp/view/student/listAllMentor.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -11,7 +11,9 @@ require_once('HTML/Table.php');
 require_once('smp/util/OptionProvider.php');
 
 $indent = "				";
-print $indent."<br/><h1>List of Mentors</h1><br/>\r\n";
+print $indent."<br/><h1>List of All Mentors</h1><br/>\r\n";
+
+include("smp/view/search/mentorSearchPanel.php");
 
 $datagrid =& $request->getDatagrid();
 

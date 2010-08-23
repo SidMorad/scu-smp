@@ -57,7 +57,7 @@ function printMenteeLimitTextbox($params) {
 	$formString .= $formBuilder->textBox('menteeLimit'.$id, '',$menteeLimit, $id, NULL,'smallinput',1);
     $formString .= $formBuilder->hidden('mentorId', $id);
     $formString .= $formBuilder->hidden('fullName', $fullName);
-    $formString .= $formBuilder->hidden('subCommand', 'update');
+    $formString .= $formBuilder->hidden(Constants::ACTION, Constants::ACTION_UPDATE);
 	return $formString;
 }
 
