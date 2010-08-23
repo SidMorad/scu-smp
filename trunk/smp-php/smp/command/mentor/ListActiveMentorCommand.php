@@ -25,8 +25,8 @@ class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 			$student->setCourse($request->getProperty('course'));
 			$student->setStudyMode($request->getProperty('studyMode'));
 			
-			$subCommand = $request->getProperty('subCommand');
-			if ($subCommand == 'update') {
+			$action = $request->getProperty(Constants::ACTION);
+			if ($action == Constants::ACTION_UPDATE) {
 				$mentorId = $request->getProperty('mentorId');
 				$menteeLimit = $request->getProperty('menteeLimit'.$mentorId);
 				
@@ -43,11 +43,14 @@ class smp_command_mentor_ListActiveMentorCommand extends smp_command_Command {
 						$request->addError("Update failed!");
 					}
 				}
-			} else if ($subCommand == 'search') {
+			} else if ($action == Constants::ACTION_SEARCH) {
 				smp_base_SessionRegistry::setSearchEntity('ListActiveMentor_MentorSearch_Student', $student);
 			}
 		}
 		$student = smp_base_SessionRegistry::getSearchEntity('ListActiveMentor_MentorSearch_Student');
+		$mentor = new smp_domain_Mentor();
+		$mentor->setStudent($student);
+		$request->setSearchEntity($mentor);
 		
 		$datagrid = $mentorService->getAactiveMentorDatagrid(null, $student);	
 		

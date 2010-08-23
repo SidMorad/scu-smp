@@ -11,15 +11,18 @@ require_once('smp/domain/Mentor.php');
 require_once('smp/domain/Student.php');
 class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 	
-	function getAllMentorDatagrid(smp_domain_Mentor $mentor = null, smp_domain_Student $student = null) {
+	function getAllMentorDatagrid($mentor = null, $student = null) {
 		self::$options['fields'] = array ('firstname', 'lastname', 'course', 'gender', 'study_mode');			 
 		self::$options['labels'] = array ('firstname' => 'First Name',
 									'lastname' => 'Last Name',
 									'course' => 'Course',
 									'gender' => 'Gender',
 									'study_mode' => 'Study Mode');
+		
+		$studentSearchCriteria = self::getSearchCriteria($student, 'smp_student.', true);
+		
 		$query = "SELECT smp_mentor.id, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
-				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id";
+				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id ".$studentSearchCriteria;
 		$test = self::$datagrid->bind($query, self::$options);
 		
 		if (PEAR::isError($test)) {
@@ -28,7 +31,7 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 		return self::$datagrid;
 	}
 	
-	function getActiveMentorDatagrid(smp_domain_Mentor $mentor = null, smp_domain_Student $student = null) {
+	function getActiveMentorDatagrid($mentor = null, $student = null) {
 		self::$options['fields'] = array ('id', 'firstname', 'lastname', 'course', 'gender', 'study_mode', 'mentee_limit');			 
 		self::$options['labels'] = array ('id' => 'Id',
 									'firstname' => 'First Name',

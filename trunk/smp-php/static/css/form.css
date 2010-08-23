@@ -209,5 +209,5 @@
 .searchPanel {
 	padding-top: 10px;
 	padding-bottom: 40px;
-	display: none;
+	display: block;
 }

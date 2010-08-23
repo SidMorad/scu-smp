@@ -21,9 +21,18 @@ $searchForm->setIndent($indent. "	");
 if ($searchForm->isPost()) {
 	$searchForm->setValues($request->getProperties());
 }
+if (!is_null($request->getSearchEntity())) {
+	$mentor = $request->getSearchEntity();
+	$searchForm->setValue('firstname', $mentor->getStudent()->getFirstname());
+	$searchForm->setValue('lastname', $mentor->getStudent()->getLastname());
+	$searchForm->setValue('studentNumber', $mentor->getStudent()->getStudentNumber());
+	$searchForm->setValue('course', $mentor->getStudent()->getCourse());
+	$searchForm->setValue('gender', $mentor->getStudent()->getGender());
+	$searchForm->setValue('studyMode', $mentor->getStudent()->getStudyMode());
+}
 
 print $searchForm->open('mentorSearchForm', "form_container", $_SERVER['REQUEST_URI']);
-print $searchForm->hidden('subCommand', 'search');
+print $searchForm->hidden(Constants::ACTION, Constants::ACTION_SEARCH);
 print $searchForm->label('firstname','Firstname:', 'grid_1');
 print $searchForm->textBox('firstname', null, null,1,'grid_2','smallinput');
 print $searchForm->label('lastname','Lastname:', 'grid_1');
