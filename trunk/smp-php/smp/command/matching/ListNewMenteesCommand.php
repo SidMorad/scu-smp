@@ -8,15 +8,42 @@
  */
 require_once('smp/command/Command.php');
 require_once('smp/service/MatchingService.php');
+require_once('smp/base/SessionRegistry.php');
 class smp_command_matching_ListNewMenteesCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
 		$matchingService = new smp_service_MatchingService();
 		
-		$list = $matchingService->listNewMentees();
-		$request->setList($list);
+		$mentee = new smp_domain_Mentee();
+		// Only Not match and Not Expired Mentees
+		$mentee->setMatched(false);
+		$mentee->setExpired(false);
+		if ($request->isPost()) {
+			$student = new smp_domain_Student();
+			$student->setFirstname($request->getProperty('firstname'));
+			$student->setLastname($request->getProperty('lastname'));
+			$student->setStudentNumber($request->getProperty('studentNumber'));
+			$student->setGender($request->getProperty('gender'));
+			$student->setCourse($request->getProperty('course'));
+			$student->setStudyMode($request->getProperty('studyMode'));
+			
+			$action = $request->getProperty(Constants::ACTION);
+			if ($action == Constants::ACTION_SEARCH) {
+				$mentee->setStudent($student);
+				smp_base_SessionRegistry::setSearchEntity('matching_ListNewMentees_MenteeSearch', $mentee);
+			}
+		}
+
+		$menteeFromSession = smp_base_SessionRegistry::getSearchEntity('matching_ListNewMentees_MenteeSearch');
+		if (!is_null($menteeFromSession)) {
+			$mentee = $menteeFromSession;
+			$request->setSearchEntity($mentee);
+		}
 		
-		$request->setTitle("List of New Mentees");
+		$datagrid = $matchingService->getAllNotMatchedMenteesDatagrid($mentee);
+		$request->setDatagrid($datagrid);
+		
+		$request->setTitle("List of Not Matched Mentees");
 	}
 
 }

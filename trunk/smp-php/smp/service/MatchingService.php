@@ -17,8 +17,8 @@ class smp_service_MatchingService {
 		$this->menteeService = new smp_service_MenteeService();
 	}
 	
-	function listNewMentees() {
-		return $this->menteeService->findAllNotMatchedMentees();
+	function getAllNotMatchedMenteesDatagrid($mentee = null) {
+		return $this->menteeService->getAllNotMatchedMenteesDatagrid($mentee);
 	}
 	
 	function connectMenteeToMentor($menteeId, $mentorId) {

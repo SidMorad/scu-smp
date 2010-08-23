@@ -33,8 +33,8 @@ class smp_service_MentorService {
 	 * 
 	 * @return Structures_DataGrid $datagrid
 	 */
-	function getAllMentorDatagrid($mentor = null, $student = null) {
-		return $this->mentorDatagrid->getAllMentorDatagrid($mentor, $student);
+	function getAllMentorDatagrid($mentor = null) {
+		return $this->mentorDatagrid->getAllMentorDatagrid($mentor);
 	}
 
 	/**
@@ -43,8 +43,18 @@ class smp_service_MentorService {
 	 * 
 	 * @return Structures_DataGrid $datagrid
 	 */
-	function getAactiveMentorDatagrid($mentor = null, $student = null) {
-		return $this->mentorDatagrid->getActiveMentorDatagrid($mentor, $student);
+	function getActiveMentorDatagrid($mentor = null) {
+		return $this->mentorDatagrid->getActiveMentorDatagrid($mentor);
+	}
+
+	/**
+	 * This method return Active Mentor plus their Number of Mentee
+	 * Active Mentors are Trained and not Expired
+	 * 
+	 * @return Structures_DataGrid $datagrid
+	 */
+	function getActiveMentorForMatchingDatagrid($mentor = null) {
+		return $this->mentorDatagrid->getActiveMentorForMatchingDatagrid($mentor);
 	}
 	
 	function findAllMatchedMentor() {

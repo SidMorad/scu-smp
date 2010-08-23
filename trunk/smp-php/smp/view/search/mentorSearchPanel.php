@@ -39,6 +39,7 @@ print $searchForm->label('lastname','Lastname:', 'grid_1');
 print $searchForm->textBox('lastname', null, null,1,'grid_2','smallinput');
 print $searchForm->label('studentNumber','StudentNumber:', 'grid_1');
 print $searchForm->textBox('studentNumber', null, null,1,'grid_4','smallinput');
+//print $searchForm->button('clearButton', 'Clear', 'button', 1,'grid_1', 'button', array('onClick'=>'clearForm(this.form)'));
 print $searchForm->label('course','Course:', 'grid_1');
 print $searchForm->textBox('course', null, null,1,'grid_2','smallinput');
 print $searchForm->label('gender','Gender:', 'grid_1');

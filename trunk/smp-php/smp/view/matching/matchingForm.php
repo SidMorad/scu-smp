@@ -8,6 +8,7 @@
  */
 include('smp/view/common/header.php');
 require_once('smp/util/FormBuilder.php');
+require_once('smp/util/DatagridUtil.php');
 
 $indent = "				";
 
@@ -22,52 +23,54 @@ print $indent."<span style=\"padding-left:20px;\">Course :  <b>". $mentee->getSt
 print $indent."<span style=\"padding-left:20px;\">Age Range :  <b>". VH::getValueFromFixArray('age_range', $mentee->getStudent()->getAgeRange())."</b></span>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Study Mode :  <b>". VH::getValueFromFixArray('study_mode', $mentee->getStudent()->getStudyMode())."</b></span><hr/>\r\n";
 
+// Include Mentor Search Panel
+include("smp/view/search/mentorSearchPanel.php");
+
 $matchingForm = new smp_util_FormBuilder();
 $matchingForm->setIndent($indent);
-
-if ($matchingForm->isPost()) {
-	$validator = VH::getValidator();
-	$matchingForm->setValues($validator->getValues());
-	if ($validator->isInvalid()) {
-		$matchingForm->setErrors($validator->getErrors());
-		print $validator->getErrorMessagesString($matchingForm->strIndent);
-	}
-}
-
-print $indent. $matchingForm->open("matchingForm");
-print $matchingForm->hidden("cmd", "matching/matchingForm");
+print $indent. $matchingForm->open("matchingForm", null, $_SERVER['REQUEST_URI']);
+print $matchingForm->hidden(Constants::ACTION, Constants::ACTION_SUBMIT);
 print $matchingForm->hidden("menteeId", $mentee->getId());
+print $indent ."	</span><hr style=\"border-color:white;\" />\r\n";
 print $indent. "	<span style=\"padding-left:20px;\">\r\n" . $matchingForm->button("submit", "Submit", "submit", 0,null, "button", array('onClick'=>'return confirmSubmit()'));
 print $indent ."	</span><hr style=\"border-color:white;\" />\r\n";
-print $indent."<table class=\"table\">\r\n";
-print $indent."	<th>Id</th>\r\n";	
-print $indent."	<th>Student Number</th>\r\n";	
-print $indent."	<th>Firstname</th>\r\n";	
-print $indent."	<th>Lastname</th>\r\n";	
-print $indent."	<th>Gender</th>\r\n";	
-print $indent."	<th>Course</th>\r\n";	
-print $indent."	<th>Age Range</th>\r\n";	
-print $indent."	<th>Study Mode</th>\r\n";
-print $indent."	<th>Mentees</th>\r\n";		
-foreach ($request->getList() as $mentor) {
-print $indent."	<tr>\r\n";
-	print $indent."		<td>".$matchingForm->redioBox("mentorId", 1, null, array($mentor->getId()=>$mentor->getId()), "redio", null);
-	print $indent."		</td>\r\n";
-	print $indent."		<td>".$mentor->getStudent()->getStudentNumber()."</td>\r\n";
-	print $indent."		<td>".$mentor->getStudent()->getFirstname()."</td>\r\n";
-	print $indent."		<td>".$mentor->getStudent()->getLastname()."</td>\r\n";
-	print $indent."		<td>".VH::getValueFromFixArray('gender', $mentor->getStudent()->getGender())."</td>\r\n";
-	print $indent."		<td>".$mentor->getStudent()->getCourse()."</td>\r\n";
-	print $indent."		<td>".VH::getValueFromFixArray('age_range', $mentor->getStudent()->getAgeRange())."</td>\r\n";
-	print $indent."		<td>".VH::getValueFromFixArray('study_mode', $mentor->getStudent()->getStudyMode())."</td>\r\n";
-	if (count($mentor->getMentees()) > 0) {
-		print $indent."		<td><a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$mentor->getId()."\">".count($mentor->getMentees())."</a></td>\r\n";
-	} else {
-		print $indent."		<td>0</td>\r\n";
-	}
-print $indent."	</tr>\r\n";
-}
-print $indent."</table>\r\n";
+
+
+$datagrid =& $request->getDatagrid();
+
+// use Formatter to edit generated data
+$idColumn =& $datagrid->getColumnByField('id');
+$idColumn->setFormatter('printMenteeIdRedioBox');
+
+$datagrid->addColumn(new Structures_DataGrid_Column('Mentees / Limit', null, null, array('width' => '20%'), null, 'printMenteesNumber()'));
+
+$table = smp_util_DatagridUtil::getCustomHtmlTable();
+
+$datagrid->fill($table, smp_util_DatagridUtil::getRenderOptions());
+
+print $table->toHtml();
+$datagrid->render(DATAGRID_RENDER_PAGER);
+
+
 print $matchingForm->close();
 
 include('smp/view/common/footer.php');
+
+function printMenteeIdRedioBox($params) {
+	$formBuilder = new smp_util_FormBuilder();
+	$formBuilder->setIndent("			");
+    $id = $params['record']['id'];
+    return $formBuilder->redioBox("mentorId", 1, null, array($id=>$id), "redio", null);
+}
+
+function printMenteesNumber($params) {
+	$mentorId = $params['record']['id'];
+	$menteeLimit = $params['record']['mentee_limit'];
+	$menteeCount = $params['record']['mentee_count'];
+	
+	if ($menteeCount > 0) {
+		$menteeCount = "<a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$mentorId."\">".$menteeCount."</a>";
+	}
+	
+	return $menteeCount . "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;". "<span style=\"color:red\">$menteeLimit</span>";
+} 

@@ -74,6 +74,17 @@
 	font:bold 16px inherit;
 }
 
+.form_container h3 {
+	padding-top: 30px;
+	padding-left: 20px;
+}
+
+.form_container hr {
+	float:left;
+	width: 920px;
+	margin-top: 0px;
+}
+
 .input,
 .biginput,
 .smallinput,
@@ -160,15 +171,18 @@
 	border: none;
 }
 
-.form_container h3 {
-	padding-top: 30px;
-	padding-left: 20px;
+.button {
+	border:1px solid #666666;
+	padding:5px 0px 5px 0px;
+	margin-bottom:2px;
+	font:bold 16px inherit;
 }
 
-.form_container hr {
-	float:left;
-	width: 920px;
-	margin-top: 0px;
+.selected_button {
+	border:1px solid #006699;
+	padding:5px 0px 5px 0px;
+	margin-bottom:2px;
+	font:bold 16px inherit;
 }
 
 .ulError {
