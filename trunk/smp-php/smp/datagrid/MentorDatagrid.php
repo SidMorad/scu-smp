@@ -58,7 +58,8 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 		self::$datagrid->bind($query, self::$options);
 		return self::$datagrid;
 	}	
-
+	
+	
 	function getActiveMentorForMatchingDatagrid($mentor) {
 		self::$options['fields'] = array ('id', 'firstname', 'lastname', 'course', 'gender', 'study_mode');			 
 		self::$options['labels'] = array (

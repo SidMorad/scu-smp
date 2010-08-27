@@ -31,8 +31,8 @@ class smp_util_OptionProvider {
 				return $array;
 				break;
 			case 'gender':
-				$array['female'] = 'Female';
-				$array['male'] = 'Male';
+				$array['f'] = 'Female';
+				$array['m'] = 'Male';
 				return $array;
 				break;			
 			case 'gender_prefer':
