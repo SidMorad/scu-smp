@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 30/07/2010 2:54:43 PM
- * smp/view/student/showProfileMentorMentees.php
+ * smp/view/mentor/showProfileMentees.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -50,6 +50,18 @@ foreach($student->getMentees() as $mentee) {
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
 	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getStudent()->getCourse())."</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_2\">\r\n";
+	print $indent."		<label class=\"label\">Matched Time:</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_10\">\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getRelation()->getCreateTime())."</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_2\">\r\n";
+	print $indent."		<label class=\"label\">Contact Confirm?</label>\r\n";
+	print $indent."	</div>\r\n";
+	print $indent."	<div class=\"grid_10\">\r\n";
+	print $indent."		<label class=\"labelValue\">"."Yes/No"."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";
