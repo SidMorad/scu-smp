@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 30/07/2010 9:34:07 AM
- * smp/view/student/mentorProfile.php
+ * smp/view/mentor/showProfile.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
