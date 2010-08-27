@@ -12,7 +12,6 @@ class smp_base_SessionRegistry extends smp_base_Registry {
 	private static $instance;
 	
 	private function __construct() {
-	// below line will give Warning : Cannot send session cookie - headers already sent by
 		session_start();
 	}
 	
@@ -47,11 +46,18 @@ class smp_base_SessionRegistry extends smp_base_Registry {
 	}
 	
 	static function setSearchEntity($key, $entity) {
-		self::instance()->set($key, $entity);
+		self::instance()->set('SEARCH'.$key, $entity);
 	}	
 	
 	static function getSearchEntity($key) {
-		return self::instance()->get($key);
+		return self::instance()->get('SEARCH'.$key);
 	}
 	
+	static function setValue($key, $value) {
+		return self::instance()->set($key, $value);
+	}	
+
+	static function getValue($key) {
+		return self::instance()->get($key);
+	}	
 }
