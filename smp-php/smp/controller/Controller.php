@@ -10,7 +10,7 @@
 require_once('smp/controller/Request.php');
 require_once('smp/controller/AppController.php');
 require_once('smp/controller/ApplicationHelper.php');
-require_once('smp/controller/SessionHelper.php');
+//require_once('smp/controller/SessionHelper.php');
 class smp_controller_Controller {
 
 	/**
@@ -34,8 +34,8 @@ class smp_controller_Controller {
 	function init() {
 		$applicationHelper = smp_controller_ApplicationHelper::instance();
 		$applicationHelper->init();
-		$sessionHelper = smp_controller_SessionHelper::instance();
-		$sessionHelper->init();
+//		$sessionHelper = smp_controller_SessionHelper::instance();
+//		$sessionHelper->init();
 	}
 	
 	/**

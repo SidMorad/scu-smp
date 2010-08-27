@@ -46,18 +46,18 @@ class smp_base_SessionRegistry extends smp_base_Registry {
 	}
 	
 	static function setSearchEntity($key, $entity) {
-		self::instance()->set('SEARCH'.$key, $entity);
+		self::instance()->set($key, $entity);
 	}	
 	
 	static function getSearchEntity($key) {
-		return self::instance()->get('SEARCH'.$key);
+		return self::instance()->get($key);
 	}
 	
-	static function setValue($key, $value) {
+/*	static function setValue($key, $value) {
 		return self::instance()->set($key, $value);
 	}	
 
 	static function getValue($key) {
 		return self::instance()->get($key);
-	}	
+	}	*/
 }

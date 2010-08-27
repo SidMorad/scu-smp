@@ -17,6 +17,7 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 		$mentorService = new smp_service_MentorService();
 		
 		$mentor= new smp_domain_Mentor();
+		$mentor->setMatched(true);
 		if($request->isPost()){
 			$student=new smp_domain_Student();
 			$student->setFirstName($request->getProperty('firstname'));
@@ -32,10 +33,9 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 				smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentor_MentorSearch',$mentor);
 			}
 		}
-		$mentor=smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentor_MentorSearch');
+		$mentor = smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentor_MentorSearch');
 		$request->setSearchEntity($mentor);
 		
-		$mentor->setMatched(true);
 		$datagrid = $mentorService->getAllMentorDatagrid($mentor);
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Matched Mentors");
