@@ -17,6 +17,7 @@ class smp_command_student_ListMatchedMenteeCommand extends smp_command_Command {
 		$menteeService = new smp_service_MenteeService();
 		
 		$mentee = new smp_domain_Mentee();
+		$mentee->setMatched(true);
 		if($request->isPost()){
 			$student = new smp_domain_Student();
 			$student->setFirstname($request->getProperty('firstname'));
@@ -28,14 +29,13 @@ class smp_command_student_ListMatchedMenteeCommand extends smp_command_Command {
 			
 			$action = $request->getProperty(Constants::ACTION);
 			if($action==Constants::ACTION_SEARCH){
-			$mentee->setStudent($student);
-			smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentee_MenteeSearch', $mentee);
+				$mentee->setStudent($student);
+//				smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentee_MenteeSearch', $mentee);
 			}
 		}
-		$mentee = smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentee_MenteeSearch');
-		$request->setSearchEntity($mentee);
+//		$mentee = smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentee_MenteeSearch');
+		$request->setSearchEntity($mentee);		
 		
-		$mentee->setMatched(true);
 		$datagrid=$menteeService->getAllMenteeDatagrid($mentee);
 		$request->setDatagrid($datagrid);		
 		$request->setTitle("List of Matched Mentees");

@@ -21,6 +21,13 @@ $datagrid=&$request->getDatagrid();
 //use Formatter to edit generated data
 $studyModeColumn=&$datagrid->getColumnByField('study_mode');
 $studyModeColumn->setFormatter('formatStudyMode');
+//format the gender column form f/m to Female/Male
+$genderColumn=$datagrid->getColumnByField('gender');
+$genderColumn->setFormatter('formatGender');
+function formatGender($params){
+	$key=$params['record']['gender'];
+	return VH::getValueFromFixArray('gender', $key);
+}
 
 $table=smp_util_DatagridUtil::getCustomHtmlTable();
 

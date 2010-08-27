@@ -26,6 +26,12 @@ class smp_service_MenteeService {
 	}
 	//Thismethod return all mentees.
 	function getAllMenteeDatagrid($mentee=null){
+		if (is_null($mentee)) {
+			$mentee = new smp_domain_Mentee();
+		}
+		// Make sure Mentee is Matched and Not Expired
+		$mentee->setMatched(true);
+		$mentee->setExpired(false);
 		return $this->menteeDatagrid->getMenteeDatagrid($mentee);
 	}
 	

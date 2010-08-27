@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 23/08/2010 2:27:11 PM
- * __FILE__
+ * smp_datagrid_MenteeDatagrid
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -19,10 +19,9 @@ class smp_datagrid_MenteeDatagrid extends smp_datagrid_Datagrid {
 			'course' => 'Course',
 			'gender' => 'Gender',
 			'study_mode' => 'Study Mode');
-		if (!is_null($mentee)) {
-			$menteeSearchCriteria = self::getSearchCriteria($mentee, 'smp_mentee.', true);
-			$studentSearchCriteria = self::getSearchCriteria($mentee->getStudent(), 'smp_student.', true);
-		}
+
+		$menteeSearchCriteria = (!is_null($mentee) ? self::getSearchCriteria($mentee, 'smp_mentee.', true) : "");
+		$studentSearchCriteria = (!is_null($mentee) ? self::getSearchCriteria($mentee->getStudent(), 'smp_student.', true) : "");
 		
 		$query = "SELECT smp_mentee.id, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course, smp_student.gender, smp_student.study_mode 
 				FROM smp_mentee INNER JOIN smp_student WHERE smp_mentee.student_id = smp_student.id ".$menteeSearchCriteria.$studentSearchCriteria;
