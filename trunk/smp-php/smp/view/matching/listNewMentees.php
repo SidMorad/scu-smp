@@ -18,6 +18,16 @@ include("smp/view/search/menteeSearchPanel.php");
 
 $datagrid =& $request->getDatagrid();
 
+//use Formatter to edit generated data
+$studyModeColumn=& $datagrid->getColumnByField('study_mode');
+$studyModeColumn->setFormatter('formatStudyMode');
+//format the gender column form f/m to Female/Male
+$genderColumn=$datagrid->getColumnByField('gender');
+$genderColumn->setFormatter('formatGender');
+function formatGender($params){
+	$key=$params['record']['gender'];
+	return VH::getValueFromFixArray('gender', $key);
+}
 $datagrid->addColumn(new Structures_DataGrid_Column('&nbsp;', null, null, array('width' => '20%'), null, 'printSelectForMatchingLink()'));
 
 $table = smp_util_DatagridUtil::getCustomHtmlTable();
@@ -32,4 +42,8 @@ include('smp/view/common/footer.php');
 function printSelectForMatchingLink($params) {
 	$menteeId = $params['record']['id'];
 	return "<a href=\"index.php?cmd=matching/matchingForm&amp;menteeId=". $menteeId ."\">select for matching</a></td>\r\n";
+}
+function formatStudyMode($params){
+    $key = $params['record']['study_mode'];
+    return VH::getValueFromFixArray('study_mode', $key);
 }
