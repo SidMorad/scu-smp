@@ -18,7 +18,7 @@
 						<ul>
 							<li><a href="#">All Coordinators</a></li>
 							<li><a href="index.php?cmd=mentor/listAllMentor">List all Mentors</a></li>
-							<li><a href="index.php?cmd=student/listMentee">List all Mentees</a></li>
+							<li><a href="index.php?cmd=mentee/listAllMentee">List all Mentees</a></li>
 							<li><a href="#">ReportPerCampus</a></li>
 						</ul>
 					</li>
