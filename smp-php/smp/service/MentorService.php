@@ -77,16 +77,24 @@ class smp_service_MentorService {
 		return $this->mentorMapper->find($id);
 	}
 	
+	function findWithMentor($mentor) {
+		return $this->mentorMapper->findWithMentor($mentor);
+	}
+	
 	function findMentorStudentMentees($mentorId) {
 		$mentor = self::find($mentorId);
 		$mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));
-		$mentees = $this->menteeMapper->findMenteesStudentRelationWithMentorId($mentorId);
+		$mentees = $this->menteeMapper->findMenteesStudentRelationUserContactWithMentorId($mentorId);
 		$mentor->setMentees($mentees);
 		return $mentor;
 	}
 
 	function findMentorWithMenteeId($menteeId) {
 		return $this->mentorMapper->findMentorWithMenteeId($menteeId);
+	}
+	
+	function findMentorWithUser($user) {
+		return $this->mentorMapper->findMentorWithUser($user); 
 	}
 	
 	function findMentorStudentWithMenteeId($menteeId) {

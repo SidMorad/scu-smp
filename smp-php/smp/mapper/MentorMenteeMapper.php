@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 06/08/2010 6:19:10 PM
- * __FILE__
+ * smp_mapper_MentorMenteeMapper
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -22,6 +22,8 @@ class smp_mapper_MentorMenteeMapper extends smp_mapper_Mapper {
 	
 	function doCreateObject(array $array) {
 		$obj = new smp_domain_MentorMentee($array['mentor_id'], $array['mentee_id'], $array['create_time'], $array['expired']);
+		$obj->setMentorContactConfirm($array['mentor_contact_confirm']);
+		$obj->setMentorContactConfirmTime($array['mentor_contact_confirm_time']);
 		return $obj;
 	}
 	

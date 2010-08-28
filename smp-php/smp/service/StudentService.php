@@ -61,7 +61,7 @@ class smp_service_StudentService {
 	 * @param Student Id $id
 	 */
 	function findMenteesWithStudentId($id) {
-		return $this->menteeMapper->findMenteesWithMentorStudentId($id);
+		return $this->studentMapper->findMenteesWithMentorStudentId($id);
 	}
 
 	/**

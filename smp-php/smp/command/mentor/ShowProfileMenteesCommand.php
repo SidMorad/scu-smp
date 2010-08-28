@@ -8,22 +8,22 @@
  */
 require_once('smp/command/Command.php');
 require_once('smp/util/Security.php');
-require_once('smp/service/StudentService.php');
-require_once('smp/service/ContactService.php');
+require_once('smp/domain/Mentor.php');
+require_once('smp/service/MentorService.php');
 class smp_command_mentor_ShowProfileMenteesCommand extends smp_command_Command {
 
 	function doExecute(smp_controller_Request $request) {
 		$securityUtil = new smp_util_Security();
 		$currentUser = $securityUtil->getCurrentUser();
 		
-		$studentService = new smp_service_StudentService();
-		$student = $studentService->findStudentWithUser($currentUser);
-		$student->setUser($currentUser);
+		$mentorService = new smp_service_MentorService();
+		$mentor = new smp_domain_Mentor();
+		$mentor->setUserId($currentUser->getId());
+		$mentor = $mentorService->findWithMentor($mentor);
 		
-		$mentees = $studentService->findMenteesWithStudentId($student->getId());
-		$student->setMentees($mentees);
+		$mentor = $mentorService->findMentorStudentMentees($mentor->getId());
 		
-		$request->setEntity($student);
-		$request->setTitle("My Mentees(".count($mentees).")");		
+		$request->setEntity($mentor);
+		$request->setTitle("My Mentees(".count($mentor->getMentees()).")");		
 	}
 }

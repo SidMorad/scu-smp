@@ -21,7 +21,7 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		$this->userMapper = new smp_mapper_UserMapper();
 		$this->studentMapper = new smp_mapper_StudentMapper();
 		$this->contactMapper = new smp_mapper_ContactMapper();
-		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentor (user_id, student_id, contact_id, mentee_limit, mentee_contact_confirm, trained, matched, expired) VALUES (?,?,?,?,?,?,?,?)');
+		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentor (user_id, student_id, contact_id, mentee_limit, trained, matched, expired) VALUES (?,?,?,?,?,?,?)');
 	}
 
 	function targetClass() {
@@ -35,7 +35,6 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		$obj->setStudentId($array['student_id']);
 		$obj->setContactId($array['contact_id']);
 		$obj->setMenteeLimit($array['mentee_limit']);
-		$obj->setMenteeContactConfirm($array['mentee_contact_confirm']);
 		$obj->setTrained($array['trained']);
 		$obj->setMatched($array['matched']);
 		$obj->setExpired($array['expired']);
@@ -49,7 +48,7 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 	}
 	
 	function doInsert(smp_domain_DomainObject $obj) {
-		$values = array($obj->getUserId(), $obj->getStudentId(), $obj->getContactId(), $obj->getMenteeLimit(), $obj->getMenteeContactConfirm(), $obj->getTrained(), $obj->getMatched(), $obj->getExpired());
+		$values = array($obj->getUserId(), $obj->getStudentId(), $obj->getContactId(), $obj->getMenteeLimit(), $obj->getTrained(), $obj->getMatched(), $obj->getExpired());
 		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 	
@@ -136,6 +135,12 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		return (($rs === false) ? null: self::doCreateObject($rs->FetchRow()));
 	}
 
+	function findWithMentor($mentor) {
+		$mentorEqualsCriteriaString = self::getEqualsCriteria($mentor,"",false);
+		$rs = self::$ADODB->Execute('SELECT * FROM smp_mentor WHERE '.$mentorEqualsCriteriaString);
+		return (($rs === false) ? null: self::doCreateObject($rs->FetchRow()));
+	}	
+
 	function findMentorWithMenteeId($menteeId) {
 		$selectStmt = self::$ADODB->Prepare('SELECT * FROM smp_mentor INNER JOIN smp_mentor_mentee ON smp_mentor.id = smp_mentor_mentee.mentor_id WHERE smp_mentor_mentee.mentee_id=?');
 		$rs = self::$ADODB->Execute($selectStmt, array($menteeId));
@@ -143,5 +148,6 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		$mentor = (is_array($row) ? self::doCreateObject($row) : null);
 		return $mentor;
 	}
+	
 	
 }

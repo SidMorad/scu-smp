@@ -8,7 +8,7 @@
  */
 include("smp/view/common/header.php");
 
-$student = $request->getEntity();
+$mentor = $request->getEntity();
 
 $indent = "				";
 print $indent."<div class=\"form_container\">\r\n";
@@ -20,12 +20,13 @@ print $indent."<div class=\"form_container\">\r\n";
 	print $indent."		<hr/>\r\n";
 	print $indent."	</div>\r\n";
 
-foreach($student->getMentees() as $mentee) {
+foreach($mentor->getMentees() as $mentee) {
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Name :</label>\r\n";
 	print $indent."	</div>\r\n";
+	$fullName = VH::chN($mentee->getStudent()->getFirstname())." ".VH::chN($mentee->getStudent()->getLastname());	
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getStudent()->getFirstname())." ".VH::chN($mentee->getStudent()->getLastname())."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".$fullName."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Mobile :</label>\r\n";
@@ -57,12 +58,25 @@ foreach($student->getMentees() as $mentee) {
 	print $indent."	<div class=\"grid_10\">\r\n";
 	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getRelation()->getCreateTime())."</label>\r\n";
 	print $indent."	</div>\r\n";
-	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"label\">Contact Confirm?</label>\r\n";
-	print $indent."	</div>\r\n";
-	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">"."Yes/No"."</label>\r\n";
-	print $indent."	</div>\r\n";
+	
+	if ($mentee->getRelation()->getMentorContactConfirm()) {
+		print $indent."	<div class=\"grid_2\">\r\n";
+		print $indent."		<label class=\"label\">Contact Confirm?</label>\r\n";
+		print $indent."	</div>\r\n";
+		print $indent."	<div class=\"grid_10\">\r\n";
+		print $indent."		<img src=\"static/images/yes.png\" >";
+		print $indent."	</div>\r\n";
+	} else {
+		print $indent."	<div class=\"grid_2\">\r\n";
+		print $indent."		<label class=\"label\">Contact Confirm?</label>\r\n";
+		print $indent."	</div>\r\n";
+		print $indent."	<div class=\"grid_10\">\r\n";
+		print $indent."		<img src=\"static/images/no.png\" >";
+		print $indent."		<a href=\"index.php?cmd=mentor/confirmContactMentee\">Click here for confirm that you had contact with $fullName ?</a>";
+		print $indent."	</div>\r\n";
+	}
+	
+	
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";
 	print $indent."	</div>\r\n";

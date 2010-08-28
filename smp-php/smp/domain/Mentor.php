@@ -18,7 +18,6 @@ class smp_domain_Mentor extends smp_domain_DomainObject {
 	private $studentId;
 	private $contactId;
 	private $menteeLimit;
-	private $menteeContactConfirm;
 	private $trained;
 	private $matched;
 	private $expired;
@@ -79,14 +78,6 @@ class smp_domain_Mentor extends smp_domain_DomainObject {
 	public function setMenteeLimit($menteeLimit) {
 		$this->menteeLimit = $menteeLimit;
 	}
-
-	public function getMenteeContactConfirm() {
-	    return $this->menteeContactConfirm;
-	}
-
-	public function setMenteeContactConfirm($menteeContactConfirm) {
-	    $this->menteeContactConfirm = $menteeContactConfirm;
-	}
 	
 	public function getTrained() {
 		return $this->trained;
@@ -113,7 +104,7 @@ class smp_domain_Mentor extends smp_domain_DomainObject {
 	}
 
 	public function getMentees() {
-	    return $this->mentees;
+	    return (is_null($this->mentees) ? array() : $this->mentees);
 	}
 
 	public function setMentees($mentees) {
