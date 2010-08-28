@@ -98,7 +98,7 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 	}
 	
 	function findMenteesWithMentorStudentId ($studentId) {
-		$students = $this->studentMapper->findStudentMenteesWithMentorId($studentId);
+		$students = $this->studentMapper->findStudentMenteesWithStudentId($studentId);
 		$list = array();
 		foreach ($students as $student) {
 			$mentee = self::findMenteeWithStudentId($student->getId());
@@ -131,6 +131,15 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		$mentees = self::findMenteesStudentWithMentorId($mentorId);
 		foreach ($mentees as $mentee) {
 			$mentee->setRelation($this->mentorMenteeMapper->findRelationWithMenteeId($mentee->getId()));
+		}
+		return $mentees;	
+	}
+	
+	function findMenteesStudentRelationUserContactWithMentorId($mentorId) {
+		$mentees = self::findMenteesStudentRelationWithMentorId($mentorId);
+		foreach ($mentees as $mentee) {
+			$mentee->setContact($this->contactMapper->find($mentee->getContactId()));
+			$mentee->setUser($this->userMapper->find($mentee->getUserId()));
 		}
 		return $mentees;	
 	}

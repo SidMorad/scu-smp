@@ -9,6 +9,7 @@
  */
 require_once('library/adodb511/adodb.inc.php');
 require_once('smp/mapper/Logger.php');
+require_once('smp/util/ReflectionUtil.php');
 abstract class smp_mapper_Mapper {
 	protected static $ADODB;
 	protected $selectStmt;
@@ -41,4 +42,33 @@ abstract class smp_mapper_Mapper {
 	protected abstract function doCreateObject(array $array);
 	protected abstract function doInsert(smp_domain_DomainObject $object);
 	protected abstract function targetClass();
+	
+	protected function getEqualsCriteria($domain, $prefix = "", $withAnd = false) {
+		if (is_null($domain)) {
+			$searchCriteria = "";
+		} else {
+			$extractedInfo = smp_util_ReflectionUtil::getEqualsCriteria($domain, $prefix); 
+			if (empty($extractedInfo)) {
+				$searchCriteria = "";
+			} else {
+				$searchCriteria = ($withAnd ? " AND " . $extractedInfo : " ".$extractedInfo);	
+			}
+		}
+		return $searchCriteria;
+	}
+	
+	protected function getSearchCriteria($domain, $prefix = "", $withAnd = false) {
+		if (is_null($domain)) {
+			$searchCriteria = "";
+		} else {
+			$extractedInfo = smp_util_ReflectionUtil::getSearchCriteria($domain, $prefix); 
+			if (empty($extractedInfo)) {
+				$searchCriteria = "";
+			} else {
+				$searchCriteria = ($withAnd ? " AND " . $extractedInfo : " ".$extractedInfo);
+			}
+		}
+		return $searchCriteria;
+	}
+	
 }

@@ -100,7 +100,6 @@ CREATE TABLE smp_mentor (
 	student_id BIGINT NOT NULL,
 	contact_id BIGINT NOT NULL,
 	mentee_limit int,
-	mentee_contact_confirm BOOLEAN DEFAULT FALSE,
 	trained BOOLEAN DEFAULT FALSE,
 	matched BOOLEAN DEFAULT FALSE,
 	expired BOOLEAN DEFAULT FALSE,
@@ -127,6 +126,8 @@ CREATE TABLE smp_mentor_mentee (
 	mentor_id BIGINT,
 	mentee_id BIGINT,
 	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	mentor_contact_confirm BOOLEAN DEFAULT FALSE,
+	mentor_contact_confirm_time TIMESTAMP NULL,	
 	expired BOOLEAN DEFAULT FALSE,
 	CONSTRAINT smp_fk_mm_mentor FOREIGN KEY (mentor_id) REFERENCES smp_mentor(id) ON DELETE CASCADE,
 	CONSTRAINT smp_fk_mm_mentee FOREIGN KEY (mentee_id) REFERENCES smp_mentee(id) ON DELETE CASCADE,
@@ -215,14 +216,14 @@ insert into smp_contact values
  (15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),				
  (16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);				
 
-insert into smp_mentor values (1, 4, 1, 1, NULL, 0, 0, 0, 0);  
-insert into smp_mentor values (2, 7, 3, 2, 1, 0, 0, 0, 0);
-insert into smp_mentor values (3, 8, 5, 5, NULL, 0, 0, 0, 0);
-insert into smp_mentor values (4, 9, 6, 6, NULL, 0, 0, 0, 0);
-insert into smp_mentor values (5,10, 7, 7, NULL, 0, 0, 0, 0);
-insert into smp_mentor values (6,11, 8, 8, NULL, 0, 0, 0, 0);
-insert into smp_mentor values (7,12, 9, 9, NULL, 0, 0, 0, 0);
-insert into smp_mentor values (8,13,10,10, NULL, 0, 0, 0, 0);
+insert into smp_mentor values (1, 4, 1, 1, NULL, 0, 0, 0);  
+insert into smp_mentor values (2, 7, 3, 2, 1   , 0, 0, 0);
+insert into smp_mentor values (3, 8, 5, 5, NULL, 0, 0, 0);
+insert into smp_mentor values (4, 9, 6, 6, NULL, 0, 0, 0);
+insert into smp_mentor values (5,10, 7, 7, NULL, 0, 0, 0);
+insert into smp_mentor values (6,11, 8, 8, NULL, 0, 0, 0);
+insert into smp_mentor values (7,12, 9, 9, NULL, 0, 0, 0);
+insert into smp_mentor values (8,13,10,10, NULL, 0, 0, 0);
 
 insert into smp_mentee values (1, 5, 2, 4, 0, 0);  
 insert into smp_mentee values (2, 6, 4, 3, 0, 0);

@@ -96,16 +96,23 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 	function findStudentMenteesWithMentorId($id) {
 		$findStmt = self::$ADODB->Prepare("SELECT mentee_id FROM smp_mentor_mentee WHERE mentor_id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($id));
-		$listMenttes = array();
+		$list = array();
      	while (!$rs->EOF) {
 			$studentId = $rs->fields('mentee_id');
-			$mentee = self::find($studentId);
-			$listMenttes[] = $mentee;
+			$student = self::find($studentId);
+			$list[] = $student;
 			$rs->MoveNext();
 		}
-		return $listMenttes;
+		return $list;
 	}
-
+	
+	function findStudentMenteesWithStudentId($id) {
+		$findStmt = self::$ADODB->Prepare('SELECT id FROM smp_mentor WHERE student_id=?');
+		$rs = self::$ADODB->Execute($findStmt, array($id));
+		$row = $rs->FetchRow();
+		return self::findStudentMenteesWithMentorId($row['id']);
+	}
+	
 	function findStudentMentorWithMenteeId($id) {
 		$findStmt = self::$ADODB->Prepare("SELECT mentor_id FROM smp_mentor_mentee WHERE mentee_id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($id));
@@ -141,6 +148,7 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		return $list;
 	}
 	
+	// TODO Remove this method and Refactor related classes
 	function listStudentWithAccountStatus($accountStatus) {
 		// list Student with passed Account status
 		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE account_status like ?");
@@ -154,6 +162,7 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		return $list;
 	}	
 
+	// TODO Remove this method and Refactor related classes
 	function listStudentWithAccountStatuses($arrAccountStatus) {
 		// list Student with passed Account status
 		$conditionString = "";

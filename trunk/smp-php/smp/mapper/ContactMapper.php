@@ -51,6 +51,12 @@ class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 		}
 	}
 
+	function find($id) {
+		$selectStmt = self::$ADODB->Prepare('SELECT * FROM smp_contact WHERE id=?');
+		$rs = self::$ADODB->Execute($selectStmt, array($id));
+		return (($rs === false) ? null: self::doCreateObject($rs->FetchRow()));
+	}
+	
 	function findContactWithUserId($userId) {
 		$findStmt = self::$ADODB->Prepare("SELECT * FROM smp_contact WHERE user_id=?");
 		$rs = self::$ADODB->Execute($findStmt, array($userId));
