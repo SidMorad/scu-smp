@@ -10,7 +10,7 @@
 require_once('smp/controller/Request.php');
 require_once('smp/controller/AppController.php');
 require_once('smp/controller/ApplicationHelper.php');
-//require_once('smp/controller/SessionHelper.php');
+require_once('smp/controller/SessionHelper.php');
 class smp_controller_Controller {
 
 	/**
@@ -26,6 +26,9 @@ class smp_controller_Controller {
 		$instance = new smp_controller_Controller();
 		$instance->init();
 		$instance->handleRequest();
+		// This method it should be run after handleRequest, 
+		// that is why we could not include it in orignal init() method
+		$instance->initSession(); 
 	}
 	
 	/**
@@ -34,8 +37,6 @@ class smp_controller_Controller {
 	function init() {
 		$applicationHelper = smp_controller_ApplicationHelper::instance();
 		$applicationHelper->init();
-//		$sessionHelper = smp_controller_SessionHelper::instance();
-//		$sessionHelper->init();
 	}
 	
 	/**
@@ -49,6 +50,14 @@ class smp_controller_Controller {
 		$request->setView($appController->getView($request));
 		$cmd->execute($request);
 		$this->invokeView($request->getView());
+	}
+
+	/**
+	 * Initalize required configuration for HttpSession after handle request
+ 	 */
+	function initSession() {
+		$sessionHelper = smp_controller_SessionHelper::instance();
+		$sessionHelper->init();
 	}
 
 	/**

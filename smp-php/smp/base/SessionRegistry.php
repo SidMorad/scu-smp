@@ -53,11 +53,11 @@ class smp_base_SessionRegistry extends smp_base_Registry {
 		return self::instance()->get($key);
 	}
 	
-/*	static function setValue($key, $value) {
-		return self::instance()->set($key, $value);
+	static function setValue($key, $value) {
+		self::instance()->set($key, $value);
 	}	
 
 	static function getValue($key) {
 		return self::instance()->get($key);
-	}	*/
+	}	
 }
