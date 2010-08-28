@@ -20,8 +20,8 @@ class smp_controller_SessionHelper {
 	}
 	
 	function init() {
-//		$this->checkSessionForDestroyAndUnset();
-//		$this->checkSessionForReGenerateId();
+		$this->checkSessionForDestroyAndUnset();
+		$this->checkSessionForReGenerateId();
 	}
 	
 	private function checkSessionForDestroyAndUnset() {

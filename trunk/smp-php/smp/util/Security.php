@@ -27,7 +27,7 @@ class smp_util_Security {
 	}
 	
 	static function isUserGrantedWith($roleName) {
-		$user = smp_util_Security::getCurrentUser();
+		$user = self::getCurrentUser();
 		return in_array($roleName, $user->getRoles());
 	}
 }
