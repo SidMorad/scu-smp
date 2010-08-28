@@ -8,7 +8,6 @@
  * @version 1.0
  */
 include('smp/view/common/header.php');
-require_once('smp/util/OptionProvider.php');
 require_once('smp/util/DatagridUtil.php');
 
 $indent = "				";
