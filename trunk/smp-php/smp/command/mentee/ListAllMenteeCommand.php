@@ -15,28 +15,29 @@ require_once('smp/base/SessionRegistry.php');
 class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
-		$menteeService= new smp_service_MenteeService();
+		$menteeService = new smp_service_MenteeService();
 		
-		$mentee=new smp_domain_Mentee();
+		$mentee = new smp_domain_Mentee();
 		if($request->isPost()){
-			$student=new smp_domain_Student();
+			$student = new smp_domain_Student();
 			$student->setFirstname($request->getProperty('firstname'));
 			$student->setLastname($request->getProperty('lastname'));
 			$student->setStudentNumber($request->getProperty('studentNumber'));
 			$student->setGender($request->getProperty('gender'));
 			$student->setCourse($request->getProperty('course'));
 			$student->setStudyMode($request->getProperty('studyMode'));
+			
+			$action = $request->getProperty(Constants::ACTION);
+			if($action == Constants::ACTION_SEARCH){
+				$mentee->setStudent($student);
+				smp_base_SessionRegistry::setSearchEntity('mentee_ListAllMentee_MenteeSearch', $mentee);
+			}
 		}
 		
-		$action=$request->getProperty(Constants::ACTION);
-		if($action ==Constants::ACTION_SEARCH){
-			$mentee->setStudent($student);
-			smp_base_SessionRegistry::setSearchEntity('mentee_ListAllMentee_MenteeSearch', $mentee);
-		}
-		$mentee =smp_base_SessionRegistry::getSearchEntity('mentee_ListAllMentee_MenteeSearch');
+		$mentee = smp_base_SessionRegistry::getSearchEntity('mentee_ListAllMentee_MenteeSearch');
 		$request->setSearchEntity($mentee);
 		
-		$datagrid=$menteeService->getAllMenteeDatagrid($mentee);
+		$datagrid = $menteeService->getAllMenteeDatagrid($mentee);
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Mentees");
 	}

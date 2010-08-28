@@ -24,14 +24,12 @@ class smp_service_MenteeService {
 	function findAllMatchedMentees() {
 		return $this->menteeMapper->findAllMatchedMentees();
 	}
-	//Thismethod return all mentees.
-	function getAllMenteeDatagrid($mentee=null){
-		if (is_null($mentee)) {
-			$mentee = new smp_domain_Mentee();
-		}
-		// Make sure Mentee is Matched and Not Expired
-		$mentee->setMatched(true);
-		$mentee->setExpired(false);
+	
+	/** This method return datagrid of all mentees.
+	 * 
+	 * @param smp_domain_Mentee $mentee 
+	 */
+	function getAllMenteeDatagrid($mentee = null){
 		return $this->menteeDatagrid->getMenteeDatagrid($mentee);
 	}
 	
