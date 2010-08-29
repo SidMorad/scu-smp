@@ -26,7 +26,7 @@ if (!is_null($request->getSearchEntity())) {
 	$searchForm->setValue('firstname', $mentor->getStudent()->getFirstname());
 	$searchForm->setValue('lastname', $mentor->getStudent()->getLastname());
 	$searchForm->setValue('studentNumber', $mentor->getStudent()->getStudentNumber());
-	$searchForm->setValue('course', $mentor->getStudent()->getCourse());
+	$searchForm->setValue('courseId', $mentor->getStudent()->getCourseId());
 	$searchForm->setValue('gender', $mentor->getStudent()->getGender());
 	$searchForm->setValue('studyMode', $mentor->getStudent()->getStudyMode());
 }
@@ -40,8 +40,8 @@ print $searchForm->textBox('lastname', null, null,1,'grid_2','smallinput');
 print $searchForm->label('studentNumber','StudentNumber:', 'grid_1');
 print $searchForm->textBox('studentNumber', null, null,1,'grid_4','smallinput');
 //print $searchForm->button('clearButton', 'Clear', 'button', 1,'grid_1', 'button', array('onClick'=>'clearForm(this.form)'));
-print $searchForm->label('course','Course:', 'grid_1');
-print $searchForm->textBox('course', null, null,1,'grid_2','smallinput');
+print $searchForm->label('courseId','Course:', 'grid_1');
+print $searchForm->selectBox('courseId', null, null,1,'grid_2', VH::getDynamicArray('course', true),'smallinput');
 print $searchForm->label('gender','Gender:', 'grid_1');
 print $searchForm->selectBox('gender', null, null,1,'grid_2', VH::getFixArray('gender', true),'smallinput');
 print $searchForm->label('studyMode','StudyMode:', 'grid_1');

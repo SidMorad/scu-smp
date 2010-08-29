@@ -77,10 +77,9 @@ class smp_mapper_SignupMapper extends smp_mapper_Mapper {
 			$mentor->setStudentId($student->getId());
 			$mentor->setContactId($contact->getId());
 			//set default values
-			$menotr->setTrained(false);
+			$mentor->setTrained(false);
 			$mentor->setMatched(false);
 			$mentor->setExpired(false);
-			$mentor->setMenteeContactConfirm(false);
 			$mentor = $this->mentorMapper->save($mentor);
 			if (is_null($mentor)) {
 				$ok = false;

@@ -1,11 +1,13 @@
 CREATE DATABASE IF NOT EXISTS smp;
 USE smp;
 
+
 DROP TABLE IF EXISTS smp_mentor_mentee;
 DROP TABLE IF EXISTS smp_mentee;
 DROP TABLE IF EXISTS smp_mentor;
 DROP TABLE IF EXISTS smp_contact;
 DROP TABLE IF EXISTS smp_student;
+DROP TABLE IF EXISTS smp_course;
 DROP TABLE IF EXISTS smp_user_role;
 DROP TABLE IF EXISTS smp_log;
 DROP TABLE IF EXISTS smp_user;
@@ -43,6 +45,12 @@ CREATE TABLE smp_log (
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE smp_course (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(100),
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE smp_student (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	firstname VARCHAR(100),
@@ -50,7 +58,7 @@ CREATE TABLE smp_student (
 	gender VARCHAR(20),
 	student_number VARCHAR(10) UNIQUE,
 	age_range VARCHAR(20),
-	course VARCHAR(100),
+	course_id BIGINT,
 	major VARCHAR(100),
 	study_mode VARCHAR(50),
 	recommended_by_staff VARCHAR(100),
@@ -75,6 +83,7 @@ CREATE TABLE smp_student (
 	user_id BIGINT,
 	account_status VARCHAR(50),
 	CONSTRAINT smp_fk_student_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	CONSTRAINT smp_fk_student_course FOREIGN KEY (course_id) REFERENCES smp_course(id) ON DELETE CASCADE,
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -179,24 +188,91 @@ insert into smp_user_role (user_id, role_id) values(17,5);
 insert into smp_user_role (user_id, role_id) values(18,5);
 insert into smp_user_role (user_id, role_id) values(19,5);
 
-insert into smp_student (id, user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff, semesters_completed, family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability,		is_indigenous,is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments,account_status)
+insert into smp_course (name) values 
+	('Ageing In The Community'),
+	('Applied Computing'),
+	('Applied Science (Forestry)'),
+	('Arts'),
+	('Arts / Educ'),
+	('Arts / Laws'),
+	('Assoc Degree of Info Tech'),
+	('Assoc Degree in Law'),
+	('Behavioural Science '),
+	('Business'),
+	('Business Admin'),
+	('Business / Arts'),
+	('Business / Laws'),
+	('Clinical Sciences'),
+	('Contemp Music'),
+	('Contemp Music / Educ'),
+	('Contemp Music / Laws'),
+	('Convention & Event Mgt'),
+	('Education / Early Childhood'),
+	('Education / Primary'),
+	('Education / Secondary'),
+	('Education / Technology'),
+	('Enviro Science'),
+	('Enviro Science / Laws'),
+	('Enviro Tourism Mgt'),
+	('Exercise Science & Nutrition'),
+	('Hotel & Resort Mgt'),
+	('Indigenous Studies'),
+	('Indigenous Studies (T & H)'),
+	('Indigenous Studies / Laws'),
+	('Info Tech'),
+	('International Tourism Mgt'),
+	('Laws'),
+	('Legal & Justice Studies'),
+	('Legal & Justice Studies / Laws'),
+	('Mgt & Prof Studies'),
+	('Marine Science & Mgt'),
+	('Media'),
+	('Multimedia'),
+	('Naturopathy'),
+	('Nursing'),
+	('Occupational Therapy'),
+	('Psychology'),
+	('Science / Educ'),
+	('Social Science'),
+	('Social Science / Laws'),
+	('Sport & Exercise Science'),
+	('Sport & Exercise Science / Educ'),
+	('Sport & Exercise Sci / Laws'),
+	('Sport Tourism Mgt'),
+	('Tourism Mgt'),
+	('Tourism Mgt / Laws'),
+	('Visual Arts'),
+	('Visual Arts / Educ'),
+	('Doctor of Business Mgt'),
+	('Master of Business Admin'),
+	('Master of Bus Admin (Hotel & Tour Mgt)'),
+	('Master of Convention & Event Mgt'),
+	('Master of Environmental Science'),
+	('Master of Professional Accounting'),
+	('Master of Public Health'),
+	('Master of Supply Chain Mgt'),
+	('Master of Technology Mgt'),
+	('Master of Tourism & Hotel Mgt');
+
+
+insert into smp_student (id, user_id, firstname, lastname, gender, student_number, age_range, course_id, major, study_mode, recommended_by_staff, semesters_completed, family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability,		is_indigenous,is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments,account_status)
 values 	
-		(1, 4 , 'Jiya' 	 , 'Khangura', 'f', '21555555', 'under25', 'IT'		, 'Multimedia'			, 'coffs', 'Paul Woods', '4', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '0', '1', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
-		(2, 5 , 'Lucy' 	 , 'Zhang'   , 'f', '21888888', 'under25', 'IT'		, 'Software Development', 'coffs', 'Paul Woods', '0', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
-		(3, 7 , 'Bruce'  , 'Li'      , 'm'  , '21666666', 'under25', 'IT'		, 'Multimedia'			, 'coffs', 'Paul Woods', '4', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
-		(4, 6 , 'James'	 , 'Gleeson' , 'm'  , '21777777', 'under25', 'IT'		, 'Software Development', 'coffs', 'Paul Woods', '1', 'no' , 'parttime', 'no' , 'no' , '0', '0', '0', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
-		(5, 8 , 'Mentor5', 'Family5' , 'f', '21000005', 'under25', 'Nursing'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
-		(6, 9 , 'Mentor6', 'Family6' , 'm'  , '21000006', '25to30' , 'Nursing'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
-		(7, 10, 'Mentor7', 'Family7' , 'f', '21000007', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
-		(8, 11, 'Mentor8', 'Family8' , 'm'  , '21000008', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
-		(9, 12, 'Mentor9', 'Family9' , 'f', '21000009', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
-		(10,13, 'Mentor10','Family10', 'm'  , '21000010', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
-		(11,14, 'Mentee5', 'Family5' , 'f', '21000011', 'under25', 'Nursing'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
-		(12,15, 'Mentee6', 'Family6' , 'm'  , '21000012', '25to30' , 'Nursing'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
-		(13,16, 'Mentee7', 'Family7' , 'f', '21000013', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
-		(14,17, 'Mentee8', 'Family8' , 'm'  , '21000014', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
-		(15,18, 'Mentee9', 'Family9' , 'f', '21000015', '30to40' , 'Hotel Mgm'	, 'Major1'				, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
-		(16,19, 'Mentee10','Family10', 'm'  , '21000016', '25to30' , 'Hotel Mgm'	, 'Major2'				, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE');
+		(1, 4 , 'Jiya' 	 , 'Khangura', 'f', '21555555', 'under25', 31, 'Multimedia'	, 'coffs', 'Paul Woods', '4', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '0', '1', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
+		(2, 5 , 'Lucy' 	 , 'Zhang'   , 'f', '21888888', 'under25', 31, 'Software '	, 'coffs', 'Paul Woods', '0', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
+		(3, 7 , 'Bruce'  , 'Li'      , 'm', '21666666', 'under25', 31, 'Multimedia'	, 'coffs', 'Paul Woods', '4', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
+		(4, 6 , 'James'	 , 'Gleeson' , 'm', '21777777', 'under25', 31, 'Software '	, 'coffs', 'Paul Woods', '1', 'no' , 'parttime', 'no' , 'no' , '0', '0', '0', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),
+		(5, 8 , 'Mentor5', 'Family5' , 'f', '21000005', 'under25', 41, 'Major1'		, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
+		(6, 9 , 'Mentor6', 'Family6' , 'm', '21000006', '25to30' , 41, 'Major2'		, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
+		(7, 10, 'Mentor7', 'Family7' , 'f', '21000007', '30to40' , 41, 'Major1'		, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
+		(8, 11, 'Mentor8', 'Family8' , 'm', '21000008', '25to30' , 51, 'Major2'		, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
+		(9, 12, 'Mentor9', 'Family9' , 'f', '21000009', '30to40' , 51, 'Major1'		, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTOR'),
+		(10,13, 'Mentor10','Family10', 'm', '21000010', '25to30' , 51, 'Major2'		, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTOR'),
+		(11,14, 'Mentee5', 'Family5' , 'f', '21000011', 'under25', 41, 'Major1'		, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
+		(12,15, 'Mentee6', 'Family6' , 'm', '21000012', '25to30' , 41, 'Major2'		, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
+		(13,16, 'Mentee7', 'Family7' , 'f', '21000013', '30to40' , 41, 'Major1'		, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
+		(14,17, 'Mentee8', 'Family8' , 'm', '21000014', '25to30' , 51, 'Major2'		, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE'),
+		(15,18, 'Mentee9', 'Family9' , 'f', '21000015', '30to40' , 51, 'Major1'		, 'coffs', 'Paul Woods', '2', 'no' , 'nowork'  , 'no' , 'yes', '0', '1', '0', '1', '0', '1', 'yes', '1', '0', '0', '0', 'Walking', 'I like chocolate', 'AS_NEW_MENTEE'),
+		(16,19, 'Mentee10','Family10', 'm', '21000016', '25to30' , 51, 'Major2'		, 'tweed', 'Staff num1', '2', 'yes', 'casual'  , 'yes', 'no' , '1', '0', '1', '0', '1', '0', 'no' , '0', '1', '1', '1', 'Walking', 'I like ice cream', 'AS_NEW_MENTEE');
 
 insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '025555555', '045555555', '045555555', 'jiya@gmail.com', 4,1);				
 insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina     ', '2452', '026666666', '046666666', '046666666', 'bruce@gmail.com', 7,3);				

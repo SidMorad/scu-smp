@@ -19,7 +19,7 @@ $mentee = $request->getEntity();
 print $indent."<span style=\"padding-left:20px;\">Student Number :  <b>". $mentee->getStudent()->getStudentNumber()."</b></span><br/>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Mentee Name :  <b>". $mentee->getStudent()->getFirstname() ."	". $mentee->getStudent()->getLastname() ."</b></span>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Gender :  <b>". VH::getValueFromFixArray('gender', $mentee->getStudent()->getGender())."</b></span>\r\n";
-print $indent."<span style=\"padding-left:20px;\">Course :  <b>". $mentee->getStudent()->getCourse()."</b></span>\r\n";
+print $indent."<span style=\"padding-left:20px;\">Course :  <b>". VH::getValueFromDynamicArray('course', $mentee->getStudent()->getCourseId())."</b></span>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Age Range :  <b>". VH::getValueFromFixArray('age_range', $mentee->getStudent()->getAgeRange())."</b></span>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Study Mode :  <b>". VH::getValueFromFixArray('study_mode', $mentee->getStudent()->getStudyMode())."</b></span><hr/>\r\n";
 
@@ -41,6 +41,8 @@ $datagrid =& $request->getDatagrid();
 // use Formatter to edit generated data
 $idColumn =& $datagrid->getColumnByField('id');
 $idColumn->setFormatter('printMenteeIdRedioBox');
+$idColumn =& $datagrid->getColumnByField('course_id');
+$idColumn->setFormatter('formatCourseId');
 
 $datagrid->addColumn(new Structures_DataGrid_Column('Mentees / Limit', null, null, array('width' => '20%'), null, 'printMenteesNumber()'));
 
@@ -74,3 +76,8 @@ function printMenteesNumber($params) {
 	
 	return $menteeCount . "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;". "<span style=\"color:red\">$menteeLimit</span>";
 } 
+
+function formatCourseId($params) {
+    $id = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $id);
+}

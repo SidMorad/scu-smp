@@ -23,6 +23,8 @@ $studyModeColumn->setFormatter('formatStudyMode');
 //format the gender column form f/m to Female/Male
 $genderColumn=$datagrid->getColumnByField('gender');
 $genderColumn->setFormatter('formatGender');
+$courseIdColumn =& $datagrid->getColumnByField('course_id');
+$courseIdColumn->setFormatter('formatCourseId');
 
 $table = smp_util_DatagridUtil::getCustomHtmlTable();
 
@@ -40,4 +42,8 @@ function formatGender($params){
 function formatStudyMode($params){
 	$key=$params['record']['study_mode'];
 	return VH::getValueFromFixArray('study_mode', $key);
+}
+function formatCourseId($params){
+    $id = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $id);
 }

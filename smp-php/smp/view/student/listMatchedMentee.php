@@ -41,3 +41,7 @@ function formatGender($params){
 	$key=$params['record']['gender'];
 	return VH::getValueFromFixArray('gender', $key);
 }
+function formatCourseId($params){
+    $id = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $id);
+}

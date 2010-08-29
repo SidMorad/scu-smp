@@ -21,6 +21,8 @@ $datagrid =& $request->getDatagrid();
 //use Formatter to edit generated data
 $studyModeColumn=& $datagrid->getColumnByField('study_mode');
 $studyModeColumn->setFormatter('formatStudyMode');
+$courseColumn=& $datagrid->getColumnByField('course_id');
+$courseColumn->setFormatter('formatCourse');
 //format the gender column form f/m to Female/Male
 $genderColumn=$datagrid->getColumnByField('gender');
 $genderColumn->setFormatter('formatGender');
@@ -46,4 +48,8 @@ function printSelectForMatchingLink($params) {
 function formatStudyMode($params){
     $key = $params['record']['study_mode'];
     return VH::getValueFromFixArray('study_mode', $key);
+}
+function formatCourse($params){
+    $id = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $id);
 }

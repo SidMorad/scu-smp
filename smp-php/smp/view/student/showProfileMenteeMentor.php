@@ -44,7 +44,7 @@ $mentor=$student->getMentor();
 	print $indent."		<label class=\"label\">Course :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".VH::chN($mentor->getStudent()->getCourse())."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::chN($mentor->getStudent()->getCourseId())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_12\">\r\n";
 	print $indent."		&nbsp;\r\n";

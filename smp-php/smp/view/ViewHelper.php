@@ -34,9 +34,18 @@ class VH {
 		return smp_util_OptionProvider::getFixArray($type, $firstRecordEmpty);
 	}
 	
+	static function getDynamicArray($table, $firstRecordEmpty = false) {
+		return smp_util_OptionProvider::getDynamicArray($table, $firstRecordEmpty);
+	}
+	
 	static function getValueFromFixArray($type, $key) {
 		$array = smp_util_OptionProvider::getFixArray($type);
 		return (isset($array[$key]) ? $array[$key] : "-");
+	}
+	
+	static function getValueFromDynamicArray($table, $id) {
+		$array = smp_util_OptionProvider::getDynamicArray($table);
+		return (isset($array[$id]) ? $array[$id] : "-");
 	}
 	
 	static function getValueFromBoolean($value) {

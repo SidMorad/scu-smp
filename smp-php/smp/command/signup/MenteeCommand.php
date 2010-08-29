@@ -56,7 +56,7 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$student->setGender($validator->getProperty('gender'));
 					$student->setStudentNumber($validator->getProperty('studentNumber'));
 					$student->setAgeRange($validator->getProperty('ageRange'));
-					$student->setCourse($validator->getProperty('course'));
+					$student->setCourseId($validator->getProperty('courseId'));
 					$student->setMajor($validator->getProperty('major'));
 					$student->setStudyMode($validator->getProperty('studyMode'));
 					
