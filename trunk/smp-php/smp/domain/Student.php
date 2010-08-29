@@ -19,7 +19,7 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $gender;
 	var $studentNumber;
 	var $ageRange;
-	var $course;
+	var $courseId;
 	var $major;
 	var $studyMode;
 	var $recommendedByStaff;
@@ -70,8 +70,8 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function setAgeRange ($ageRange) {
 		$this->ageRange = $ageRange;
 	}
-	function setCourse ($course) {
-		$this->course = $course;
+	function setCourseId ($courseId) {
+		$this->courseId = $courseId;
 	}
 	function setMajor ($major) {
 		$this->major = $major;
@@ -173,8 +173,8 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	function getAgeRange() {
 		return $this->ageRange;
 	}
-	function getCourse() {
-		return $this->course;
+	function getCourseId() {
+		return $this->courseId;
 	}
 	function getMajor() {
 		return $this->major;

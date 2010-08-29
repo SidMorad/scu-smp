@@ -50,7 +50,7 @@ foreach($mentor->getMentees() as $mentee) {
 	print $indent."		<label class=\"label\">Course :</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_10\">\r\n";
-	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getStudent()->getCourse())."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".VH::getValueFromDynamicArray('course', $mentee->getStudent()->getCourseId())."</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Matched Time:</label>\r\n";

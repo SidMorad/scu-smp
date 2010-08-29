@@ -16,21 +16,21 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 	function doExecute(smp_controller_Request $request) {
 		$mentorService = new smp_service_MentorService();
 		
-		$mentor= new smp_domain_Mentor();
+		$mentor = new smp_domain_Mentor();
 		$mentor->setMatched(true);
 		if($request->isPost()){
-			$student=new smp_domain_Student();
-			$student->setFirstName($request->getProperty('firstname'));
-			$student->setLastName($request->getProperty('lastname'));
+			$student = new smp_domain_Student();
+			$student->setFirstname($request->getProperty('firstname'));
+			$student->setLastname($request->getProperty('lastname'));
 			$student->setStudentNumber($request->getProperty('studentNumber'));
 			$student->setGender($request->getProperty('gender'));
-			$student->setCourse($request->getProperty('course'));
+			$student->setCourseId($request->getProperty('courseId'));
 			$student->setStudyMode($request->getProperty('studyMode'));
 			
-			$action=$request->getProperty(Constants::ACTION);
+			$action = $request->getProperty(Constants::ACTION);
 			if($action==Constants::ACTION_SEARCH){
 				$mentor->setStudent($student);
-				smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentor_MentorSearch',$mentor);
+				smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentor_MentorSearch', $mentor);
 			}
 		}
 		$mentor = smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentor_MentorSearch');

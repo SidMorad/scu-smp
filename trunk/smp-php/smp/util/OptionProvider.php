@@ -6,6 +6,7 @@
  * @author <a href='mailto:smorad12@scu.edu.au'>Sid</a>
  * @version 1.0
  */
+require_once('smp/mapper/CourseMapper.php');
 class smp_util_OptionProvider {
 	
 	static function getFixArray($type, $firstRecordEmpty = false) {
@@ -67,6 +68,17 @@ class smp_util_OptionProvider {
 				$array['notFound'] = 'Not Found!'; 
 				return $array;
 				break;						
+		}
+	}
+	
+	
+	static function getDynamicArray($table, $firstRecordEmpty = false) {
+		$array = ($firstRecordEmpty ? array(null => '----------') : array());
+		switch($table) {
+			case "course":
+				$courseMapper = new smp_mapper_CourseMapper();
+				return $courseMapper->getIdNameArray($array);
+				break;
 		}
 	}
 }

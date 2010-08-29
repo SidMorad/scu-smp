@@ -12,19 +12,19 @@ require_once('smp/domain/Student.php');
 class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 	
 	function getAllMentorDatagrid($mentor = null) {
-		self::$options['fields'] = array ('id','firstname', 'lastname', 'course', 'gender', 'study_mode');			 
+		self::$options['fields'] = array ('id','firstname', 'lastname', 'course_id', 'gender', 'study_mode');			 
 		self::$options['labels'] = array (
 			'id' => 'Id',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
-			'course' => 'Course',
+			'course_id' => 'Course',
 			'gender' => 'Gender',
 			'study_mode' => 'Study Mode');
 		
 		$mentorSearchCriteria = (!is_null($mentor) ? self::getSearchCriteria($mentor, 'smp_mentor.', true) : "");
 		$studentSearchCriteria = (!is_null($mentor) ? self::getSearchCriteria($mentor->getStudent(), 'smp_student.', true) : "");
 		
-		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
+		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course_id, smp_student.gender, smp_student.study_mode 
 				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id ".$mentorSearchCriteria.$studentSearchCriteria;
 		
 		self::$datagrid->setDefaultSort(array('id' => 'DESC'));
@@ -33,12 +33,12 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 	}
 	
 	function getActiveMentorDatagrid($mentor) {
-		self::$options['fields'] = array ('id', 'firstname', 'lastname', 'course', 'gender', 'study_mode', 'mentee_limit');			 
+		self::$options['fields'] = array ('id', 'firstname', 'lastname', 'course_id', 'gender', 'study_mode', 'mentee_limit');			 
 		self::$options['labels'] = array (
 			'id' => 'Id',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
-			'course' => 'Course',
+			'course_id' => 'Course',
 			'gender' => 'Gender',
 			'study_mode' => 'Study Mode',
 			'mentee_limit' => 'Mentee Limit');
@@ -51,7 +51,7 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 		$mentorEqualsCriteria = self::getEqualsCriteria($mentor, 'smp_mentor.', true);
 		$studentSearchCriteria = self::getSearchCriteria($mentor->getStudent(), 'smp_student.', true);
 		
-		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
+		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course_id, smp_student.gender, smp_student.study_mode 
 		FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id ".$mentorEqualsCriteria.$studentSearchCriteria;
 		
 		self::$datagrid->setDefaultSort(array('id' => 'DESC'));
@@ -61,12 +61,12 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 	
 	
 	function getActiveMentorForMatchingDatagrid($mentor) {
-		self::$options['fields'] = array ('id', 'firstname', 'lastname', 'course', 'gender', 'study_mode');			 
+		self::$options['fields'] = array ('id', 'firstname', 'lastname', 'course_id', 'gender', 'study_mode');			 
 		self::$options['labels'] = array (
 			'id' => 'Id',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
-			'course' => 'Course',
+			'course_id' => 'Course',
 			'gender' => 'Gender',
 			'study_mode' => 'Study Mode');
 		if (is_null($mentor)) {
@@ -80,7 +80,7 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 		
 		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, 
 			(SELECT COUNT(*) FROM smp_mentor_mentee WHERE smp_mentor_mentee.mentor_id=smp_mentor.id) AS mentee_count, 
-			smp_student.firstname, smp_student.lastname, smp_student.course, smp_student.gender, smp_student.study_mode 
+			smp_student.firstname, smp_student.lastname, smp_student.course_id, smp_student.gender, smp_student.study_mode 
 			FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id ".$mentorEqualsCriteria.$studentSearchCriteria;
 		
 		self::$datagrid->setDefaultSort(array('id' => 'DESC'));

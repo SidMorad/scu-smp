@@ -30,7 +30,7 @@ if (! empty($list)) {
 		print $indent."		<td>".$mentor->getStudent()->getLastname()."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('gender', $mentor->getStudent()->getGender())."</td>\r\n";
 		print $indent."		<td>".$mentor->getStudent()->getStudentNumber()."</td>\r\n";
-		print $indent."		<td>".$mentor->getStudent()->getCourse()."</td>\r\n";
+		print $indent."		<td>".VH::getValueFromDynamicArray('course', $mentor->getStudent()->getCourseId())."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('study_mode', $mentor->getStudent()->getStudyMode())."</td>\r\n";
 		print $indent."		<td>".VH::getValueFromFixArray('age_range', $mentor->getStudent()->getAgeRange())."</td>\r\n";
 		print $indent."		<td><a href=\"index.php?cmd=matching/activeMentorForm&amp;mentorId=". $mentor->getId() ."\" onclick=\"return confirmSubmit()\">Mark as Trained</a></td>\r\n";

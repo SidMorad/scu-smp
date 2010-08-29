@@ -21,6 +21,8 @@ $datagrid =& $request->getDatagrid();
 // use Formatter to edit generated data
 $studyModeColumn =& $datagrid->getColumnByField('study_mode');
 //$studyModeColumn->setFormatter('formatStudyMode');
+$courseIdColumn =& $datagrid->getColumnByField('course_id');
+$courseIdColumn->setFormatter('formatCourseId');
 $accountStatusColumn =& $datagrid->getColumnByField('mentee_limit');
 $accountStatusColumn->setFormatter('printMenteeLimitTextbox');
 
@@ -38,6 +40,10 @@ include('smp/view/common/footer.php');
 function formatStudyMode($params){
     $key = $params['record']['study_mode'];
     return VH::getValueFromFixArray('study_mode', $key);
+}
+function formatCourseId($params){
+    $id = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $id);
 }
 function printUpdateButton($params) {
 	$formBuilder = new smp_util_FormBuilder();

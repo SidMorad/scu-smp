@@ -49,7 +49,7 @@ if (isset($student)) {
 	print $indent."		<label class=\"label\">Course:</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".VH::chN($student->getCourse())."</label>\r\n";
+	print $indent."		<label class=\"labelValue\">".substr(VH::getValueFromDynamicArray('course', $student->getCourseId()), 0, 18)."..</label>\r\n";
 	print $indent."	</div>\r\n";
 	print $indent."	<div class=\"grid_2\">\r\n";
 	print $indent."		<label class=\"label\">Major:</label>\r\n";
