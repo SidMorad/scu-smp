@@ -61,7 +61,7 @@ class smp_controller_AppController {
 				throw new smp_base_AppException("Class '$classname' does not exist");
 			}
 		} else {
-//			throw new smp_base_AppException("File '$filepath' does not exist");
+			throw new smp_base_AppException("File '$filepath' does not exist");
 		}
 		return null;
 	}	

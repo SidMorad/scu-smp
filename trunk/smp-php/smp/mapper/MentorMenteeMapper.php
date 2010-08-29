@@ -8,10 +8,17 @@
  */
 require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/MentorMentee.php');
+require_once('smp/util/DateUtil.php');
 class smp_mapper_MentorMenteeMapper extends smp_mapper_Mapper {
 	
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
+	}
+	
+	function confirmContactMentee($id) {
+		$updateStmt = self::$ADODB->Prepare('UPDATE smp_mentor_mentee SET mentor_contact_confirm=?,mentor_contact_confirm_time=? WHERE id=?');
+		$rs = self::$ADODB->Execute($updateStmt, array(true, smp_util_DateUtil::mysqlDate(time()), $id));
+		return $rs;
 	}
 	
 	function targetClass() {
@@ -21,7 +28,7 @@ class smp_mapper_MentorMenteeMapper extends smp_mapper_Mapper {
 	function doInsert(smp_domain_DomainObject $obj) {}
 	
 	function doCreateObject(array $array) {
-		$obj = new smp_domain_MentorMentee($array['mentor_id'], $array['mentee_id'], $array['create_time'], $array['expired']);
+		$obj = new smp_domain_MentorMentee($array['mentor_id'], $array['mentee_id'], $array['create_time'], $array['expired'], $array['id']);
 		$obj->setMentorContactConfirm($array['mentor_contact_confirm']);
 		$obj->setMentorContactConfirmTime($array['mentor_contact_confirm_time']);
 		return $obj;
