@@ -58,22 +58,37 @@ foreach($mentor->getMentees() as $mentee) {
 	print $indent."	<div class=\"grid_10\">\r\n";
 	print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getRelation()->getCreateTime())."</label>\r\n";
 	print $indent."	</div>\r\n";
-	
 	if ($mentee->getRelation()->getMentorContactConfirm()) {
 		print $indent."	<div class=\"grid_2\">\r\n";
 		print $indent."		<label class=\"label\">Contact Confirm?</label>\r\n";
 		print $indent."	</div>\r\n";
 		print $indent."	<div class=\"grid_10\">\r\n";
-		print $indent."		<img src=\"static/images/yes.png\" >";
+		print $indent."		<img src=\"static/images/yes.png\" >&nbsp;\r\n";
+		print $indent."	</div>\r\n";
+		print $indent."	<div class=\"grid_2\">\r\n";
+		print $indent."		<label class=\"label\">Confirm Time:</label>\r\n";
+		print $indent."	</div>\r\n";
+		print $indent."	<div class=\"grid_10\">\r\n";
+		print $indent."		<label class=\"labelValue\">".VH::chN($mentee->getRelation()->getMentorContactConfirmTime())."</label>\r\n";
 		print $indent."	</div>\r\n";
 	} else {
+		$relationId = $mentee->getRelation()->getId();
 		print $indent."	<div class=\"grid_2\">\r\n";
 		print $indent."		<label class=\"label\">Contact Confirm?</label>\r\n";
 		print $indent."	</div>\r\n";
 		print $indent."	<div class=\"grid_10\">\r\n";
-		print $indent."		<img src=\"static/images/no.png\" >";
-		print $indent."		<a href=\"index.php?cmd=mentor/confirmContactMentee\">Click here for confirm that you had contact with $fullName ?</a>";
+		print $indent."		<img src=\"static/images/no.png\" >\r\n";
+		print $indent."		<a href=\"index.php?cmd=mentor/confirmContactMentee&relation_id=$relationId\" onClick=\"return confirmSubmit()\">Click here for confirm that you had contact with $fullName ?</a>";
 		print $indent."	</div>\r\n";
+		if (!is_null($mentee->getRelation()->getCreateTime())) {
+			print $indent."	<div class=\"grid_2\">\r\n";
+			print $indent."		<label class=\"label\">Number of days passed after matching:</label>\r\n";
+			print $indent."	</div>\r\n";
+			print $indent."	<div class=\"grid_10\">\r\n";
+			print $indent."		<label class=\"labelValue\">".smp_util_DateUtil::DayDiffUntilToday($mentee->getRelation()->getCreateTime());
+			print $indent."		</label>\r\n";
+			print $indent."	</div>\r\n";
+		}
 	}
 	
 	

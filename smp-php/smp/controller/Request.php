@@ -19,6 +19,7 @@ class smp_controller_Request {
 	private $errors;
 	private $datagrid;
 	private $searchEntity;
+	private $isRedirect = false;
 	
 	/**
 	 * constructor
@@ -227,4 +228,27 @@ class smp_controller_Request {
 	function getSearchEntity() {
 		return $this->searchEntity;
 	}
+	
+	/**
+	 * Return true if the request has redirect
+	 */
+	public function getIsRedirect() {
+	    return $this->isRedirect;
+	}
+	
+	/**
+	 * 
+	 * @param Boolean $isRedirect
+	 */
+	public function setIsRedirect($isRedirect) {
+	    $this->isRedirect = $isRedirect;
+	}
+	
+	public function redirect($cmd) {
+		$this->setIsRedirect(true);
+		$this->setProperty('cmd', $cmd);
+		$this->setView($cmd);
+	}
+	
+	
 }

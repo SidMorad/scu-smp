@@ -123,6 +123,7 @@ CREATE TABLE smp_mentee (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE smp_mentor_mentee (
+	id BIGINT NOT NULL AUTO_INCREMENT,
 	mentor_id BIGINT,
 	mentee_id BIGINT,
 	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -131,7 +132,7 @@ CREATE TABLE smp_mentor_mentee (
 	expired BOOLEAN DEFAULT FALSE,
 	CONSTRAINT smp_fk_mm_mentor FOREIGN KEY (mentor_id) REFERENCES smp_mentor(id) ON DELETE CASCADE,
 	CONSTRAINT smp_fk_mm_mentee FOREIGN KEY (mentee_id) REFERENCES smp_mentee(id) ON DELETE CASCADE,
-	PRIMARY KEY(mentor_id, mentee_id)
+	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 insert into smp_role values(1, 'ROLE_ADMIN');
@@ -178,8 +179,7 @@ insert into smp_user_role (user_id, role_id) values(17,5);
 insert into smp_user_role (user_id, role_id) values(18,5);
 insert into smp_user_role (user_id, role_id) values(19,5);
 
-insert into smp_student (id, user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff, semesters_completed, family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability, 
-						is_indigenous,is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments,account_status)
+insert into smp_student (id, user_id, firstname, lastname, gender, student_number, age_range, course, major, study_mode, recommended_by_staff, semesters_completed, family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability,		is_indigenous,is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments,account_status)
 values 	
 		(1, 4 , 'Jiya' 	 , 'Khangura', 'f', '21555555', 'under25', 'IT'		, 'Multimedia'			, 'coffs', 'Paul Woods', '4', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '0', '1', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTOR'),
 		(2, 5 , 'Lucy' 	 , 'Zhang'   , 'f', '21888888', 'under25', 'IT'		, 'Software Development', 'coffs', 'Paul Woods', '0', 'no' , 'parttime', 'no' , 'no' , '1', '0', '0', '1', '0', '0', 'no' , '1', '0', '1', '1', 'Reading', 'No Commnets left', 'AS_NEW_MENTEE'),

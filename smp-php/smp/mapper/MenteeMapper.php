@@ -109,7 +109,7 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 	}
 
 	function findMenteesWithMentorId($mentorId) {
-		$selectStmt = self::$ADODB->Prepare('SELECT * FROM smp_mentee INNER JOIN smp_mentor_mentee ON smp_mentee.id = smp_mentor_mentee.mentee_id WHERE smp_mentor_mentee.mentor_id=?');
+		$selectStmt = self::$ADODB->Prepare('SELECT smp_mentee.* FROM smp_mentee INNER JOIN smp_mentor_mentee ON smp_mentee.id = smp_mentor_mentee.mentee_id WHERE smp_mentor_mentee.mentor_id=?');
 		$rs = self::$ADODB->Execute($selectStmt, array($mentorId));
 		$list = array();
 		while ($row = $rs->FetchRow()) {

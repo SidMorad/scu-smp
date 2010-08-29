@@ -42,14 +42,25 @@ class smp_controller_Controller {
 	/**
 	 * handle request 
 	 */
-	function handleRequest() {
-		$request = new smp_controller_Request();
+	function handleRequest($request = null) {
+		if (is_null($request)) {
+			$request = new smp_controller_Request();
+		} else {
+			// Set redirect to false
+			$request->setIsRedirect(false);
+		}
 		$appController = new smp_controller_AppController();
 		$cmd = $appController->getCommand($request);
 		// set default view for request before execute command;
 		$request->setView($appController->getView($request));
 		$cmd->execute($request);
-		$this->invokeView($request->getView());
+		
+		// Check for redirect
+		if ($request->getIsRedirect()) {
+			$this->handleRequest($request);	
+		} else {
+			$this->invokeView($request->getView());
+		}
 	}
 
 	/**
