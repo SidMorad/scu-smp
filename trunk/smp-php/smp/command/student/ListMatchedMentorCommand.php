@@ -18,6 +18,7 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 		
 		$mentor = new smp_domain_Mentor();
 		$mentor->setMatched(true);
+		smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentor_MentorSearch', $mentor);
 		if($request->isPost()){
 			$student = new smp_domain_Student();
 			$student->setFirstname($request->getProperty('firstname'));

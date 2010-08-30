@@ -43,6 +43,8 @@ $idColumn =& $datagrid->getColumnByField('id');
 $idColumn->setFormatter('printMenteeIdRedioBox');
 $idColumn =& $datagrid->getColumnByField('course_id');
 $idColumn->setFormatter('formatCourseId');
+$genderColumn=$datagrid->getColumnByField('gender');
+$genderColumn->setFormatter('formatGender');
 
 $datagrid->addColumn(new Structures_DataGrid_Column('Mentees / Limit', null, null, array('width' => '20%'), null, 'printMenteesNumber()'));
 
@@ -64,20 +66,20 @@ function printMenteeIdRedioBox($params) {
     $id = $params['record']['id'];
     return $formBuilder->redioBox("mentorId", 1, null, array($id=>$id), "redio", null);
 }
-
 function printMenteesNumber($params) {
 	$mentorId = $params['record']['id'];
 	$menteeLimit = $params['record']['mentee_limit'];
 	$menteeCount = $params['record']['mentee_count'];
-	
 	if ($menteeCount > 0) {
 		$menteeCount = "<a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$mentorId."\">".$menteeCount."</a>";
 	}
-	
 	return $menteeCount . "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;". "<span style=\"color:red\">$menteeLimit</span>";
 } 
-
 function formatCourseId($params) {
     $id = $params['record']['course_id'];
     return VH::getValueFromDynamicArray('course', $id);
+}
+function formatGender($params){
+	$key=$params['record']['gender'];
+	return VH::getValueFromFixArray('gender', $key);
 }

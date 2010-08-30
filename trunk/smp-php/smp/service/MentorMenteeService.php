@@ -7,14 +7,21 @@
  * @version 1.0
  */
 require_once('smp/mapper/MentorMenteeMapper.php');
-class smp_serivce_MentorMenteeService {
+require_once('smp/datagrid/MentorMenteeDatagrid.php');
+class smp_service_MentorMenteeService {
 	private $mentorMenteeMapper;
+	private $mentorMenteeDatagrid;
 	
 	function __construct() {
 		$this->mentorMenteeMapper = new smp_mapper_MentorMenteeMapper();
+		$this->mentorMenteeDatagrid = new smp_datagrid_MentorMenteeDatagrid();
 	}
 	
 	function confirmContactMentee($id) {
 		return $this->mentorMenteeMapper->confirmContactMentee($id);
+	}
+	
+	function getAllMentorMenteeDatagrid($mentorMentee) {
+		return $this->mentorMenteeDatagrid->getAllMentorMenteeDatagrid($mentorMentee);
 	}
 }

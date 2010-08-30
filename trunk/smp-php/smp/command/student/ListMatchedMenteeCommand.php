@@ -18,6 +18,7 @@ class smp_command_student_ListMatchedMenteeCommand extends smp_command_Command {
 		
 		$mentee = new smp_domain_Mentee();
 		$mentee->setMatched(true);
+		smp_base_SessionRegistry::setSearchEntity('student_ListMatchedMentee_MenteeSearch', $mentee);
 		if($request->isPost()){
 			$student = new smp_domain_Student();
 			$student->setFirstname($request->getProperty('firstname'));
