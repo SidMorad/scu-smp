@@ -29,12 +29,14 @@ class smp_command_mentor_ListAllMentorCommand extends smp_command_Command {
 			if ($action == Constants::ACTION_SEARCH) {
 				$mentor->setStudent($student);
 				smp_base_SessionRegistry::setSearchEntity('mentor_ListAllMentor_MentorSearch', $mentor);
+				$request->setProperty('output_format', null);
 			}
 		}
 		$mentor = smp_base_SessionRegistry::getSearchEntity('mentor_ListAllMentor_MentorSearch');
 		$request->setSearchEntity($mentor);
 		
 		$datagrid = $mentorService->getAllMentorDatagrid($mentor);
+		
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Mentors");
 	}
