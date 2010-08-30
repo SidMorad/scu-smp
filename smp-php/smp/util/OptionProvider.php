@@ -60,7 +60,7 @@ class smp_util_OptionProvider {
 				return $array;
 				break;
 			case Constants::MESSAGE_MENTOR:
-				$array[Constants::MS_FOR_MENTEE] = 'my Mentee';
+				$array[Constants::MS_FOR_MENTEE] = 'my Mentee(s)';
 				$array[Constants::MS_FOR_COORDINATOR] = 'my Coordinator';  
 				return $array;
 				break;

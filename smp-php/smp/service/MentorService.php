@@ -93,10 +93,6 @@ class smp_service_MentorService {
 		return $this->mentorMapper->findMentorWithMenteeId($menteeId);
 	}
 	
-	function findMentorWithUser($user) {
-		return $this->mentorMapper->findMentorWithUser($user); 
-	}
-	
 	function findMentorStudentWithMenteeId($menteeId) {
 		$mentor = self::findMentorWithMenteeId($menteeId);
 		$mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));
