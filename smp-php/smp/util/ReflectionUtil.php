@@ -60,6 +60,11 @@ class smp_util_ReflectionUtil {
 			return "";
 		}
 		
+		// If the value is numeric then do the equals anyway!
+		if (is_numeric($value) ) {
+			return $prefix.$databaseProperty . " = '" . $value . "' AND ";;
+		}
+		
 		if ($sqlCondition == 'search') {
 			return $prefix.$databaseProperty . " LIKE '%" . $value . "%' AND ";;
 		} else if ($sqlCondition == 'equals'){

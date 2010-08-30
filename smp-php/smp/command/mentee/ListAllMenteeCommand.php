@@ -24,7 +24,7 @@ class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {
 			$student->setLastname($request->getProperty('lastname'));
 			$student->setStudentNumber($request->getProperty('studentNumber'));
 			$student->setGender($request->getProperty('gender'));
-			$student->setCourse($request->getProperty('course'));
+			$student->setCourseId($request->getProperty('courseId'));
 			$student->setStudyMode($request->getProperty('studyMode'));
 			
 			$action = $request->getProperty(Constants::ACTION);
