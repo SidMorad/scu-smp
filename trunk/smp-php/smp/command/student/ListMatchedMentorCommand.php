@@ -37,7 +37,7 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 		$mentor = smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentor_MentorSearch');
 		$request->setSearchEntity($mentor);
 		
-		$datagrid = $mentorService->getAllMentorDatagrid($mentor);
+		$datagrid = $mentorService->getActiveMentorForMatchingDatagrid($mentor);
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Matched Mentors");
 	}
