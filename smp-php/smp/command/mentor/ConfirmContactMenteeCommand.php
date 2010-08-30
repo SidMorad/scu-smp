@@ -16,7 +16,7 @@ class smp_command_mentor_ConfirmContactMenteeCommand extends smp_command_Command
 		} else if ($relationId == -1){
 			$request->addError('Error: Mentor-Mentee id is not set.');	
 		} else {
-			$mmService = new smp_serivce_MentorMenteeService();
+			$mmService = new smp_service_MentorMenteeService();
 			$result = $mmService->confirmContactMentee($relationId);
 			if ($result === false) {
 				$request->addError('Update failed!');
