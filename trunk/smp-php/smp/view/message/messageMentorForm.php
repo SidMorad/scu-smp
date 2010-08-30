@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 09/08/2010 5:34:33 PM
- * __FILE__
+ * smp/view/message/messageMentorForm.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0

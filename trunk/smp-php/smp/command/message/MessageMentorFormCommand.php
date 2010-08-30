@@ -10,7 +10,7 @@ require_once('smp/util/Validator.php');
 require_once('smp/util/MailUtil.php');
 require_once('smp/util/Security.php');
 require_once('smp/domain/Mail.php');
-require_once('smp/service/StudentService.php');
+require_once('smp/service/MentorService.php');
 class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
@@ -23,12 +23,14 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 			// find Recipients 
 			$to = $validator->getProperty('to');
 			if ($to == Constants::MS_FOR_MENTEE) {
-				$studentService = new smp_service_StudentService();
+				$mentorService = new smp_service_MentorService();
 				$currentUser = smp_util_Security::getCurrentUser();
-				$currentStudent = $studentService->findStudentWithUser($currentUser);
-				$mentees = $studentService->findMenteesWithMentorId($currentStudent->getId());
+				$mentor = new smp_domain_Mentor();
+				$mentor->setUserId($currentUser->getId());
+				$mentor = $mentorService->findWithMentor($mentor);
+				$mentor = $mentorService->findMentorStudentMentees($mentor->getId());
 				$recipients = "";
-				foreach($mentees as $mentee) {
+				foreach($mentor->getMentees() as $mentee) {
 					if (!is_null($mentee->getUser()->getScuEmail())) {
 						$recipients .= "" .$mentee->getUser()->getScuEmail() .", ";
 					}
@@ -36,6 +38,8 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 						$recipients .= $mentee->getContact()->getEmail() .", ";
 					}	
 				}
+			} else if ($to == Constants::MS_FOR_COORDINATOR) {
+				
 			}
 			$mailBean->setRecipients($recipients);
 			$mailBean->setFrom('smp@scu.edu.au');
@@ -44,7 +48,7 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 			$mailBean->setBody($validator->getProperty('body'));
 			$result = $mailUtil->sendEmail($mailBean);
 			if (is_bool($result)) {
-				$request->addFeedback('Message sent successfully');
+				$request->addFeedback('Message sent successfully to :');
 				$request->addFeedback($recipients);
 			} else {
 				$validator->setError('submit', $result);
