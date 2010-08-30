@@ -25,9 +25,6 @@ class smp_command_matching_ActiveMentorFormCommand extends smp_command_Command {
 			}
 		}
 		
-		$listNonTrainedMentor = $mentorService->findAllNonTrainedMentor();
-		$request->setTitle("List of Non Trained Mentor"); 
-		$request->setList($listNonTrainedMentor);
-		$request->forward("matching/listNonTrainedMentor");
+		$request->redirect("matching/listNonTrainedMentor");
 	}
 }

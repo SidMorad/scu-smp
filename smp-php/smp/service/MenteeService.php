@@ -32,6 +32,14 @@ class smp_service_MenteeService {
 	function getAllMenteeDatagrid($mentee = null){
 		return $this->menteeDatagrid->getMenteeDatagrid($mentee);
 	}
+
+	/** This method return datagrid of all matched mentees.
+	 * 
+	 * @param smp_domain_Mentee $mentee 
+	 */
+	function getMatchedMenteeDatagrid($mentee = null){
+		return $this->menteeDatagrid->getMatchedMenteeDatagrid($mentee);
+	}
 	
 	function getAllNotMatchedMenteesDatagrid($mentee = null) {
 		if (is_null($mentee)) {

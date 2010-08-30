@@ -37,7 +37,7 @@ class smp_command_student_ListMatchedMenteeCommand extends smp_command_Command {
 		$mentee = smp_base_SessionRegistry::getSearchEntity('student_ListMatchedMentee_MenteeSearch');
 		$request->setSearchEntity($mentee);		
 		
-		$datagrid = $menteeService->getAllMenteeDatagrid($mentee);
+		$datagrid = $menteeService->getMatchedMenteeDatagrid($mentee);
 		$request->setDatagrid($datagrid);		
 		$request->setTitle("List of Matched Mentees");
 	}

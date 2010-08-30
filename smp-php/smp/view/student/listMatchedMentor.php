@@ -26,6 +26,8 @@ $genderColumn->setFormatter('formatGender');
 $courseIdColumn =& $datagrid->getColumnByField('course_id');
 $courseIdColumn->setFormatter('formatCourseId');
 
+$datagrid->addColumn(new Structures_DataGrid_Column('Mentees / Limit',null,null,array('width'=>'20%'),null,'printMenteesNumber()'));
+
 $table = smp_util_DatagridUtil::getCustomHtmlTable();
 
 $datagrid->fill($table,smp_util_DatagridUtil::getRenderOptions());
@@ -44,6 +46,15 @@ function formatStudyMode($params){
 	return VH::getValueFromFixArray('study_mode', $key);
 }
 function formatCourseId($params){
-    $id = $params['record']['course_id'];
-    return VH::getValueFromDynamicArray('course', $id);
+	$id = $params['record']['course_id'];
+	return VH::getValueFromDynamicArray('course', $id);
+}
+function printMenteesNumber($params){
+	$mentorId = $params['record']['id'];
+	$menteeLimit = $params['record']['mentee_limit'];
+	$menteeCount = $params['record']['mentee_count'];
+	if($menteeCount>0){
+		$menteeCount="<a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$mentorId."\">".$menteeCount."</a>";
+	}
+	return $menteeCount. "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;"."<span style=\"color:red\">$menteeLimit</span>";
 }

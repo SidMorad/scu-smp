@@ -24,6 +24,8 @@ $studyModeColumn->setFormatter('formatStudyMode');
 $genderColumn=$datagrid->getColumnByField('gender');
 $genderColumn->setFormatter('formatGender');
 
+$datagrid->addColumn(new Structures_DataGrid_Column("Mentor", null,null, array('width'=>'20%'),null,'printMentorOfMentee()'));
+
 $table=smp_util_DatagridUtil::getCustomHtmlTable();
 
 $datagrid->fill($table,smp_util_DatagridUtil::getRenderOptions());
@@ -45,3 +47,9 @@ function formatCourseId($params){
     $id = $params['record']['course_id'];
     return VH::getValueFromDynamicArray('course', $id);
 }
+function printMentorOfMentee($params){
+	$menteeId=$params['record']['id'];
+	$mentorLastname=$params['record']['mentor_lastname'];
+	return "<a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$menteeId."\">".$mentorLastname."</a>";
+}
+//<a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$mentee->getId()."\">".$mentee->getMentor()->getStudent()->getFirstname()." ".$mentee->getMentor()->getStudent()->getLastname()."</a>
