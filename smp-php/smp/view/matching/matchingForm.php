@@ -12,14 +12,15 @@ require_once('smp/util/DatagridUtil.php');
 
 $indent = "				";
 
-print $indent."<br /><h1>Mentee matching form</h1><br/>\r\n";
+//print $indent."<br /><h1>Mentee matching form</h1><br/>\r\n";
+print $indent."<br/>\r\n";
 
 $mentee = $request->getEntity();
 
-print $indent."<span style=\"padding-left:20px;\">Student Number :  <b>". $mentee->getStudent()->getStudentNumber()."</b></span><br/>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Mentee Name :  <b>". $mentee->getStudent()->getFirstname() ."	". $mentee->getStudent()->getLastname() ."</b></span>\r\n";
+print $indent."<span style=\"padding-left:20px;\">Student Number :  <b>". $mentee->getStudent()->getStudentNumber()."</b></span>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Gender :  <b>". VH::getValueFromFixArray('gender', $mentee->getStudent()->getGender())."</b></span>\r\n";
-print $indent."<span style=\"padding-left:20px;\">Course :  <b>". VH::getValueFromDynamicArray('course', $mentee->getStudent()->getCourseId())."</b></span>\r\n";
+print $indent."<span style=\"padding-left:20px;\">Course :  <b>". VH::getValueFromDynamicArray('course', $mentee->getStudent()->getCourseId())."</b></span><br/>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Age Range :  <b>". VH::getValueFromFixArray('age_range', $mentee->getStudent()->getAgeRange())."</b></span>\r\n";
 print $indent."<span style=\"padding-left:20px;\">Study Mode :  <b>". VH::getValueFromFixArray('study_mode', $mentee->getStudent()->getStudyMode())."</b></span><hr/>\r\n";
 
