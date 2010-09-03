@@ -18,7 +18,9 @@ class smp_command_matching_ListNonTrainedMentorCommand extends smp_command_Comma
 		$mentor->setTrained(false);
 		$mentor->setExpired(false);
 		
-		smp_base_SessionRegistry::setSearchEntity('matching_ListNonTrainedMentor_MentorSearch',$mentor);
+		if (is_null(smp_base_SessionRegistry::getSearchEntity('matching_ListNonTrainedMentor_MentorSearch'))) {
+			smp_base_SessionRegistry::setSearchEntity('matching_ListNonTrainedMentor_MentorSearch',$mentor);
+		}
 		if($request->isPost()){
 			$student=new smp_domain_Student();
 			$student->setFirstname($request->getProperty('firstname'));
@@ -32,9 +34,9 @@ class smp_command_matching_ListNonTrainedMentorCommand extends smp_command_Comma
 			if($action==Constants::ACTION_SEARCH){
 				$mentor->setStudent($student);
 				smp_base_SessionRegistry::setSearchEntity('matching_ListNonTrainedMentor_MentorSearch', $mentor);
-				}				
+			}				
 		}
-		$mentor=smp_base_SessionRegistry::getSearchEntity('matching_ListNonTrainedMentor_MentorSearch');
+		$mentor = smp_base_SessionRegistry::getSearchEntity('matching_ListNonTrainedMentor_MentorSearch');
 		$request->setSearchEntity($mentor);
 		
 		$nonTrainedMentorDatagrid = $mentorService->getAllMentorDatagrid($mentor);
