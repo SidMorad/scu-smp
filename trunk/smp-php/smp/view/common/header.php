@@ -16,7 +16,7 @@
 	<body>
 		<div id="container" class="container_12">
 			<div id="header" class="grid_12">
-				<img src="static/images/mentoring_logo.png" width="240" height="41" alt="mentoring program" />
+				<img src="static/images/mentoring_logo.png" width="340" height="41" alt="mentoring program" />
 				<h6>Welcome <?php print $user->getUsername()?></h6>
 			</div>
 			<div  id="menu" class="grid_12">
