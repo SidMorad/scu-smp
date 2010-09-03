@@ -8,47 +8,21 @@
  * @version 1.0
  */
 require_once('smp/view/ViewHelper.php');
+require_once('smp/util/DatagridUtil.php');
 $request = VH::getRequest();
 $datagrid =& $request->getDatagrid();
+// use Formatter to edit generated data
+$datagrid = smp_util_DatagridUtil::formatColumn('study_mode', $datagrid);
+$datagrid = smp_util_DatagridUtil::formatColumn('gender', $datagrid);
+$datagrid = smp_util_DatagridUtil::formatColumn('course_id', $datagrid);
 
-if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'XLS') {
-	require_once('Structures/DataGrid/Renderer/XLS.php');
-	require_once('Structures/DataGrid/Renderer/CSV.php');
-	// Create a workbook
-	$workbook = new Spreadsheet_Excel_Writer();
-	// Create your format
-	$format_bold =& $workbook->addFormat();
-	$format_bold->setBold();
-	
-	// Fill the workbook, passing the format as an option
-	$options = array('headerFormat' => &$format_bold);
-	$datagrid->fill($workbook, $options);
-	
-	// Specify that spreadsheet must be sent the browser
-	$workbook->send('test.xls');
-} else if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'CSV'){
-	$datagrid->render(DATAGRID_RENDER_CSV);
-} else {
-
+if (is_null($request->getProperty('output_format'))) {
 	include('smp/view/common/header.php');
-	require_once('smp/util/DatagridUtil.php');
 	
 	$indent = "				";
 	print $indent."<br/><h1>List of All Mentors</h1><br/>\r\n";
 	
 	include("smp/view/search/mentorSearchPanel.php");
-	
-	
-	// use Formatter to edit generated data
-	$studyModeColumn =& $datagrid->getColumnByField('study_mode');
-	$studyModeColumn->setFormatter('formatStudyMode');
-	//format the gender column form f/m to Female/Male
-	$genderColumn=$datagrid->getColumnByField('gender');
-	$genderColumn->setFormatter('formatGender');
-	function formatGender($params){
-		$key=$params['record']['gender'];
-		return VH::getValueFromFixArray('gender', $key);
-	}
 	
 	$table = smp_util_DatagridUtil::getCustomHtmlTable();
 	
@@ -57,14 +31,39 @@ if (!is_null($request->getProperty('output_format')) && $request->getProperty('o
 	print $table->toHtml();
 	$datagrid->render(DATAGRID_RENDER_PAGER);
 	
-	print $indent. "<a href=\"index.php?cmd=mentor/listAllMentor&output_format=CSV\">";
-	print $indent. "<img src=\"static/images/csv.png\" >";
-	print $indent. "</a>";
+	print $indent. "<br/>\r\n";
+	print $indent. "<div style=\"clear:both;padding-left:800px;\">\r\n";
+	print $indent. "	<a href=\"index.php?cmd=mentor/listAllMentor&output_format=CSV\">\r\n";
+	print $indent. "	<img src=\"static/images/csv.png\" >\r\n";
+	print $indent. "	</a>\r\n";
+	print $indent. "	<span>&nbsp; | &nbsp;</span>\r\n";
+	print $indent. "	<a href=\"index.php?cmd=mentor/listAllMentor&output_format=XLS\">\r\n";
+	print $indent. "	<img src=\"static/images/xls.png\" >\r\n";
+	print $indent. "	</a>\r\n";
+	print $indent. "<div/>\r\n";
 	include('smp/view/common/footer.php');
-	
-	function formatStudyMode($params){
-	    $key = $params['record']['study_mode'];
-	    return VH::getValueFromFixArray('study_mode', $key);
-	}
 
+}else if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'XLS') {
+//	$datagrid->rowLimit = 5;
+//	$renderer =& $datagrid->getRenderer();
+//	$renderer->setLimit($datagrid->page, 20, $datagrid->getRecordCount());
+//	$datagrid->setRendererOption('filename', 'listAllMentor.xls');
+	//TODO Fix the issue with Paging , we need to render all records not only last page
+	$datagrid->render(DATAGRID_RENDER_XLS);
+} else if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'CSV'){
+	$datagrid->render(DATAGRID_RENDER_CSV);
 }
+
+function format_gender($params){
+    $key = $params['record']['gender'];
+    return VH::getValueFromFixArray('gender', $key);
+}
+function format_study_mode($params){
+    $key = $params['record']['study_mode'];
+    return VH::getValueFromFixArray('study_mode', $key);
+}	
+function format_course_id($params){
+    $key = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $key);
+}	
+	

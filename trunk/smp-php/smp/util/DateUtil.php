@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 29/08/2010 5:39:57 PM
- * __FILE__
+ * smp_util_DateUtil
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -35,4 +35,5 @@ class smp_util_DateUtil {
 	static function DayDiffUntilToday($startDate) {
 		return self::dayDiff($startDate, self::mysqlDate(time()));
 	}
+
 }

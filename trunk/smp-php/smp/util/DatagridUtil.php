@@ -7,6 +7,7 @@
  * @version 1.0
  */
 require_once('HTML/Table.php');
+require_once('smp/view/ViewHelper.php');
 class smp_util_DatagridUtil {
 
 	static function getCustomHtmlTable() {
@@ -26,6 +27,23 @@ class smp_util_DatagridUtil {
 		    'sortIconDESC' => '&dArr;'
 		);
 		return $rendererOptions;
+	}
+	
+		
+	static function formatColumn($field , $datagrid) {
+		$column =& $datagrid->getColumnByField($field);
+		$column->setFormatter('format_'.$field);
+		return $datagrid;
+	}
+	
+	function format_gender($params) {
+		$key=$params['record']['gender'];
+		return VH::getValueFromFixArray('gender', $key);
+	}
+	
+	function format_study_mode($params){
+	    $key = $params['record']['study_mode'];
+	    return VH::getValueFromFixArray('study_mode', $key);
 	}
 	
 }
