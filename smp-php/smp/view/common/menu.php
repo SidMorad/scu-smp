@@ -33,7 +33,7 @@
 							<li><a href="index.php?cmd=student/listMatchedMentor">Matched Mentors</a></li>
 							<li><a href="index.php?cmd=student/listMatchedMentee">Matched Mentees</a></li>
 							<li><a href="index.php?cmd=mentor/listActiveMentor">Mentor set Limit</a></li>
-							<li><a href="index.php?cmd=mentormentee/listAllMentorMentee">Mentor&Mentee</a></li>
+							<li><a href="index.php?cmd=mentormentee/listAllMentorMentee">Contact confirm results</a></li>
 							<li><a href="#">Send Message</a></li>
 						</ul>
 					</li>
