@@ -48,7 +48,7 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 	
-	function save(smp_domain_Mentor $mentee) {
+	function save(smp_domain_Mentee $mentee) {
 		$rs = self::doInsert($mentee);
 		if ($rs === false) {
 			$this->logger->save(new smp_domain_Log("mentor.save", "Mentor save failed, message:".self::$ADODB->ErrorMsg()));

@@ -9,30 +9,25 @@
 $indent = "				";
 if (isset($user)) {
 	
-	print $indent."<div class=\"form_container\">\r\n";
+	print $indent . "<a onClick=\"return toggleMe('userInfoDiv')\">\r\n";
+	print $indent . "	<div class=\"showInfoHeader\">User's Information</div>\r\n"; 
+	print $indent . "</a>\r\n"; 
 	
-	print $indent."	<div class=\"grid_12\">\r\n";
-	print $indent."		<label>&nbsp;</label>\r\n";
-	print $indent."	</div>\r\n";
-	print $indent."	<div class=\"grid_12\">\r\n";
-	print $indent."		<h2>User's Information</h2>\r\n";
-	print $indent."		<hr/>\r\n";
-	print $indent."	</div>\r\n";
+	print $indent."<div id=\"userInfoDiv\" class=\"infoPanel\">\r\n";
 	
-	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"label\">Username:</label>\r\n";
-	print $indent."	</div>\r\n";
-	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"labelValue\">".VH::chN($user->getUsername())."</label>\r\n";
-	print $indent."	</div>\r\n";
+	print $indent."<table class=\"infoTable\">\r\n";
+	
+	print $indent."	<tr>\r\n";
+	print $indent."		<td class=\"tdLabel\">Username:</td>\r\n";
+	print $indent."		<td class=\"tdValue\">".VH::chN($user->getUsername())."</td>\r\n";
+	print $indent."	</tr>\r\n";
 
-	print $indent."	<div class=\"grid_2\">\r\n";
-	print $indent."		<label class=\"label\">Scu Email:</label>\r\n";
-	print $indent."	</div>\r\n";
-	print $indent."	<div class=\"grid_6\">\r\n";
-	print $indent."		<label class=\"labelValue\">".VH::chN($user->getScuEmail())."</label>\r\n";
-	print $indent."	</div>\r\n";
+	print $indent."	<tr>\r\n";
+	print $indent."		<td class=\"tdLabel\">Scu Email:</td>\r\n";
+	print $indent."		<td class=\"tdValue\">".VH::chN($user->getScuEmail())."</td>\r\n";
+	print $indent."	</tr>\r\n";
 	
+	print $indent."</table>\r\n";
 	print $indent."</div>\r\n";
 
 } else {

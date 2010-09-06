@@ -15,6 +15,7 @@ $datagrid =& $request->getDatagrid();
 $datagrid = smp_util_DatagridUtil::formatColumn('study_mode', $datagrid);
 $datagrid = smp_util_DatagridUtil::formatColumn('gender', $datagrid);
 $datagrid = smp_util_DatagridUtil::formatColumn('course_id', $datagrid);
+$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 
 if (is_null($request->getProperty('output_format'))) {
 	include('smp/view/common/header.php');
@@ -65,5 +66,10 @@ function format_study_mode($params){
 function format_course_id($params){
     $key = $params['record']['course_id'];
     return VH::getValueFromDynamicArray('course', $key);
-}	
+}
+function format_id($params) {
+	$id = $params['record']['id'];
+	return "<a href=\"index.php?cmd=mentor/showMentor&id=$id\">$id</a>";
+}
+
 	
