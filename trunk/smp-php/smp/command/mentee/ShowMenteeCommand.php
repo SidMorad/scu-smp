@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 06/09/2010 12:57:58 PM
- * smp/command/mentee/showMenteeCommand.php
+ * smp/command/mentee/ShowMenteeCommand.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @author <a href="mailto:sli24@scu.edu.au">Bruce</a>
