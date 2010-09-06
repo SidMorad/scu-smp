@@ -17,6 +17,14 @@ if (isset($user)) {
 	
 	print $indent."<table class=\"infoTable\">\r\n";
 	
+	$pictureName = $user->getPicture();
+	if (!is_null($pictureName)) {
+		print $indent."	<tr>\r\n";
+		print $indent."		<td ROWSPAN=3><img src=\"static/images/profile/_thb_$pictureName\"></td>\r\n";
+		print $indent."		<td class=\"tdValue\">&nbsp;</td>\r\n";
+		print $indent."		<td class=\"tdValue\">&nbsp;</td>\r\n";
+		print $indent."	</tr>\r\n";
+	}
 	print $indent."	<tr>\r\n";
 	print $indent."		<td class=\"tdLabel\">Username:</td>\r\n";
 	print $indent."		<td class=\"tdValue\">".VH::chN($user->getUsername())."</td>\r\n";

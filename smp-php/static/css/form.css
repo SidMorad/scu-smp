@@ -245,6 +245,8 @@
 }
 
 .infoTable {
+	cellpadding: 0px;
+	cellspaccing: 0px;
 }
 
 .tdLabel{

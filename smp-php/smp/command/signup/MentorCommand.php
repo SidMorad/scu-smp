@@ -8,6 +8,8 @@
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
+require_once "HTTP/Upload.php";
+require_once 'Image/Transform.php';
 class smp_command_signup_MentorCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
@@ -49,6 +51,22 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					// Add ROLE_MENTOR to user.
 					$user->addToRoles(Constants::ROLE_MENTOR);
 
+					// Add Profile Picture 
+					$upload = new HTTP_Upload("en");
+					$upload->setChmod(0644);
+					
+					$filePic = $upload->getFiles('picture');
+					if ($filePic->isValid()) {
+						$filePic->setName("uniq");
+					}
+					$dest_pic = $filePic->moveTo("static/images/profile/");
+					$picture = $filePic->getProp('name');
+					$imgTrans = Image_Transform::factory('GD');
+					$imgTrans->load("static/images/profile/".$picture);
+					$imgTrans->scaleByXY(100,100);
+					$imgTrans->save("static/images/profile/_thb_".$picture);
+					$user->setPicture($picture);
+					
 					$student = new smp_domain_Student();
 					$student->setFirstname($validator->getProperty('firstname'));
 					$student->setLastname($validator->getProperty('lastname'));
