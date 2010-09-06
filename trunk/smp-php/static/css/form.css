@@ -221,8 +221,40 @@
 	cursor: pointer;
 }
 
+.showInfoHeader {
+	border:1px solid #000;
+	background: #dedede;
+	padding: 5px;
+	text-decoration: underline;
+}
+
+.showInfoHeader:hover {
+	cursor: pointer;
+}
+
 .searchPanel {
 	padding-top: 10px;
 	padding-bottom: 40px;
 	display: block;
+}
+
+.infoPanel {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+}
+
+.infoTable {
+}
+
+.tdLabel{
+	text-align: right;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.tdValue {
+	font-weight: bold;
 }

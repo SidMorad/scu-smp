@@ -11,16 +11,20 @@ include("smp/view/common/header.php");
 $student = $request->getEntity();
 
 $user = $student->getUser();
+print "				<br/>\r\n";
 // User Information
 include("smp/view/user/show.php");
 
+print "				<br/>\r\n";
 // Student Information
 include("smp/view/student/show.php");
 
+print "				<br/>\r\n";
 // Mentor Information
-include("smp/view/student/showMentor.php");
+include("smp/view/mentor/show.php");
 
 $contact = $student->getContact();
+print "				<br/>\r\n";
 // Contact Information
 include("smp/view/contact/show.php");
 

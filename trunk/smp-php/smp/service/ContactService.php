@@ -13,6 +13,10 @@ class smp_service_ContactService {
 	function __construct() {
 		$this->contactMapper = new smp_mapper_ContactMapper();
 	}
+
+	function find($id) {
+		return $this->contactMapper->find($id);
+	}
 	
 	function findContactWithUserId($userId) {
 		return $this->contactMapper->findContactWithUserId($userId);
