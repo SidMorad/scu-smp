@@ -177,4 +177,8 @@ td 	{
 .contribTable tr.odd {
    	background: #eee !important;
 	}
+img{
+	float:right;
+	padding:10px;
+}
 /* END TABLE */
