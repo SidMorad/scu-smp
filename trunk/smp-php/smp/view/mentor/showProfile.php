@@ -9,13 +9,15 @@
 include("smp/view/common/header.php");
 
 $student = $request->getEntity();
+$indent = "				";
 
 $user = $student->getUser();
-print "				<br/>\r\n";
+print $indent. "<br/>\r\n";
 // User Information
 include("smp/view/user/show.php");
+print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=usermentor/editUser&userId=$userId\">Edit</a></div>\r\n";
+print $indent. "<br/>\r\n";
 
-print "				<br/>\r\n";
 // Student Information
 include("smp/view/student/show.php");
 

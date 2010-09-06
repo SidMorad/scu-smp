@@ -58,14 +58,14 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$filePic = $upload->getFiles('picture');
 					if ($filePic->isValid()) {
 						$filePic->setName("uniq");
+						$dest_pic = $filePic->moveTo("static/images/profile/");
+						$picture = $filePic->getProp('name');
+						$imgTrans = Image_Transform::factory('GD');
+						$imgTrans->load("static/images/profile/".$picture);
+						$imgTrans->scaleByXY(100,100);
+						$imgTrans->save("static/images/profile/_thb_".$picture);
+						$user->setPicture($picture);
 					}
-					$dest_pic = $filePic->moveTo("static/images/profile/");
-					$picture = $filePic->getProp('name');
-					$imgTrans = Image_Transform::factory('GD');
-					$imgTrans->load("static/images/profile/".$picture);
-					$imgTrans->scaleByXY(100,100);
-					$imgTrans->save("static/images/profile/_thb_".$picture);
-					$user->setPicture($picture);
 					
 					$student = new smp_domain_Student();
 					$student->setFirstname($validator->getProperty('firstname'));
