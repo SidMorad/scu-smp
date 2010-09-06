@@ -16,6 +16,7 @@ print $indent."<br><h1>List of Matched Mentees</h1><br>\r\n";
 
 include("smp/view/search/menteeSearchPanel.php");
 $datagrid=&$request->getDatagrid();
+$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 
 //use Formatter to edit generated data
 $studyModeColumn=&$datagrid->getColumnByField('study_mode');
@@ -52,4 +53,7 @@ function printMentorOfMentee($params){
 	$mentorLastname=$params['record']['mentor_lastname'];
 	return "<a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$menteeId."\">".$mentorLastname."</a>";
 }
-//<a href=\"index.php?cmd=student/showStudentMenteeMentor&menteeId=".$mentee->getId()."\">".$mentee->getMentor()->getStudent()->getFirstname()." ".$mentee->getMentor()->getStudent()->getLastname()."</a>
+function format_id($params) {
+	$id = $params['record']['id'];
+	return "<a href=\"index.php?cmd=mentee/showMentee&id=$id\">$id</a>";
+}

@@ -17,6 +17,7 @@ print $indent."<br/><h1>List of Not Matched Mentees</h1><br/>\r\n";
 include("smp/view/search/menteeSearchPanel.php");
 
 $datagrid =& $request->getDatagrid();
+$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 
 //use Formatter to edit generated data
 $studyModeColumn=& $datagrid->getColumnByField('study_mode');
@@ -52,4 +53,8 @@ function formatStudyMode($params){
 function formatCourse($params){
     $id = $params['record']['course_id'];
     return VH::getValueFromDynamicArray('course', $id);
+}
+function format_id($params) {
+	$id = $params['record']['id'];
+	return "<a href=\"index.php?cmd=mentee/showMentee&id=$id\">$id</a>";
 }

@@ -17,6 +17,7 @@ print $indent."<br/><h1>List of Active Mentors</h1><br/>\r\n";
 include("smp/view/search/mentorSearchPanel.php");
 
 $datagrid =& $request->getDatagrid();
+$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 
 // use Formatter to edit generated data
 $studyModeColumn =& $datagrid->getColumnByField('study_mode');
@@ -66,4 +67,7 @@ function printMenteeLimitTextbox($params) {
     $formString .= $formBuilder->hidden(Constants::ACTION, Constants::ACTION_UPDATE);
 	return $formString;
 }
-
+function format_id($params) {
+	$id = $params['record']['id'];
+	return "<a href=\"index.php?cmd=mentor/showMentor&id=$id\">$id</a>";
+}
