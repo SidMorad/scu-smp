@@ -18,6 +18,7 @@ include("smp/view/search/menteeSearchPanel.php");
 
 $datagrid = $request->getDatagrid();
 
+$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 //use Formatter to edit generated data
 $studyModeColumn =& $datagrid->getColumnByField('study_mode');
 $studyModeColumn->setFormatter('formatStudyMode');
@@ -46,4 +47,8 @@ include('smp/view/common/footer.php');
 function format_course_id($params){
     $key = $params['record']['course_id'];
     return VH::getValueFromDynamicArray('course', $key);
-}	
+}
+function format_id($params) {
+	$id = $params['record']['id'];
+	return "<a href=\"index.php?cmd=mentee/showMentee&id=$id\">$id</a>";
+}

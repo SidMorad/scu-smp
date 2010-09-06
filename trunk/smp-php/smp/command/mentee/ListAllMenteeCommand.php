@@ -4,8 +4,7 @@
  * smp_command_student_ListAllMenteeCommand
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
- * @author <a href="mailto:sli24@scu.edu.au">Bruce</a>
- * @au
+ * @author <a href="mailto:sli24@scu.edu.au">Bruce</a> 
  * @version 1.0
  */
 require_once('smp/command/Command.php');
