@@ -22,7 +22,7 @@ if (isset($user)) {
 	print $indent."	<tr>\r\n";
 	$pictureName = $user->getPicture();
 	if (!is_null($pictureName)) {		
-		print $indent."		<td rowspan=\"3\"><br /><img src=\"static/images/profile/_thb_$pictureName\"></td>\r\n";
+		print $indent."		<td rowspan=\"3\"><img src=\"static/images/profile/_thb_$pictureName\"><br /></td>\r\n";
 	}else
 		print $indent."     <td rowspan=\"3\"><br />&nbsp;</td>\r\n";
 	print $indent."		<td class=\"tdLabel\">Username:</td>\r\n";
