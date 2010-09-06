@@ -12,6 +12,7 @@ class smp_domain_User extends smp_domain_DomainObject {
 	private $username;
 	private $password;
 	private $scuEmail;
+	private $picture;
 	
 	private $roles = array();
 	
@@ -45,6 +46,14 @@ class smp_domain_User extends smp_domain_DomainObject {
 	function getScuEmail() {
 		return $this->scuEmail;
 	}
+
+	public function getPicture() {
+	    return $this->picture;
+	}
+
+	public function setPicture($picture) {
+	    $this->picture = $picture;
+	}	
 	
 	function getRoles() {
 		return $this->roles;

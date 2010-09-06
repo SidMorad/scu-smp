@@ -146,6 +146,16 @@ class smp_util_FormBuilder {
 		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
 	}
 	
+	function file($strId, $strLabel, $intTabIndex = null, $grid_X = null, $classCSS = "input" ,$arrOtherAttributes = array()) {
+		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex);
+		$classCSS = $this->getCSSclassIsError($strId, $classCSS);
+		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
+		$strLocator =  $this->getLocatorString($strId, $strClassCSS);
+		$strValue = $this->getValueIfIsSet($strId);
+		$strField = "<input id=\"$strId\" name=\"$strId\" type=\"file\"".$strTabIndex.$strClassCSS.$strLocator.">$strValue</input>";
+		return $this->getHtmlTagString($strLabel, $strField, $strId, $grid_X);
+	}
+	
 	function label($strId, $strLabel, $grid_X = null, $blnRequired = false, $arrOtherAttributes = array()) {
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
 		$forAttribute = (($strId != null) ? " for=\"".$strId."\" " : "");

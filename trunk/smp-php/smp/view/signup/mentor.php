@@ -49,13 +49,15 @@ print $objForm->textBox("city"		, "", "", 8		, "grid_2");
 print $objForm->label("postcode"	, "Postcode:"	, "grid_2");
 print $objForm->textBox("postcode"	, "", "", 9		, "grid_6", "smallinput", 10);
 print $objForm->label("phoneHome"	, "Phone (home):","grid_2");
-print $objForm->textBox("phoneHome"	, "", "", 10		, "grid_2", "input", 15);
+print $objForm->textBox("phoneHome"	, "", "", 10	, "grid_2", "input", 15);
 print $objForm->label("mobile"		, "Mobile:"		, "grid_2");
-print $objForm->textBox("mobile"	, "", "", 11		, "grid_6", "input", 15);
+print $objForm->textBox("mobile"	, "", "", 11	, "grid_6", "input", 15);
 print $objForm->label("phoneWork"	, "Phone (work):","grid_2");
 print $objForm->textBox("phoneWork"	, "", "", 12	, "grid_2", "input", 15);
 print $objForm->label("email"		, "Email:"		, "grid_2");
 print $objForm->textBox("email"		, "", "", 13	, "grid_6", "input");
+print $objForm->label("picture" 	, "Profile Picture:", "grid_2");
+print $objForm->file("picture"		, "", 	  13	, "grid_10", "biginput");
 //print $objForm->note("grid_X","Note: This contact information is used to contact you about the program. Your name, and email address will also be given to the new student(s) you will mentor");
 
 print $objForm->hx("h3", "grid_12", "Study Information");

@@ -15,16 +15,17 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		parent::__construct($adodb);
 		$this->selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_user WHERE username=?");
 		$this->updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET password=?, WHERE id=?");
-		$this->insertStmt = self::$ADODB->Prepare("INSERT into smp_user (username, password, scu_email) values(?,?,?) ");
+		$this->insertStmt = self::$ADODB->Prepare("INSERT into smp_user (username, password, scu_email, picture) values(?,?,?,?) ");
 	}
 	
 	protected function doCreateObject(array $array) {
 		$obj = new smp_domain_User($array['id'], $array['username'], $array['password'],$array['scu_email']);
+		$obj->setPicture($array['picture']);
 		return $obj;
 	}
 	
 	protected function doInsert(smp_domain_DomainObject $object) {
-		$values = array($object->getUsername(), $object->getPassword(), $object->getScuEmail());
+		$values = array($object->getUsername(), $object->getPassword(), $object->getScuEmail(), $object->getPicture());
 		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 
