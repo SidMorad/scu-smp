@@ -21,6 +21,8 @@ $datagrid = $request->getDatagrid();
 //use Formatter to edit generated data
 $studyModeColumn =& $datagrid->getColumnByField('study_mode');
 $studyModeColumn->setFormatter('formatStudyMode');
+$studyModeColumn =& $datagrid->getColumnByField('course_id');
+$studyModeColumn->setFormatter('format_course_id');
 function formatStudyMode($params){
 	$key=$params['record']['study_mode'];
 	return VH::getValueFromFixArray('study_mode', $key);
@@ -41,3 +43,7 @@ print $table->toHtml();
 $datagrid->render(DATAGRID_RENDER_PAGER);
 
 include('smp/view/common/footer.php');
+function format_course_id($params){
+    $key = $params['record']['course_id'];
+    return VH::getValueFromDynamicArray('course', $key);
+}	
