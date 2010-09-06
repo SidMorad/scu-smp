@@ -45,7 +45,7 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 				} else if (!is_null($userByScuEmail)) {
 					$validator->setError("scuEmail", "This SCU Email exists!, Which means you are already registered!");
 				} else {
-					$user = new smp_domain_User(-1, $validator->getProperty('username'), $validator->getProperty('password'), $validator->getProperty('scuEmail'));
+					$user = new smp_domain_User(-1, $validator->getProperty('username'), md5($validator->getProperty('password')), $validator->getProperty('scuEmail'));
 					// Add ROLE_MENTEE to user.
 					$user->addToRoles(Constants::ROLE_MENTEE);
 

@@ -26,7 +26,7 @@ class smp_command_public_LoginCommand extends smp_command_Command {
 				//TODO change findByUsername to return user object with 'case sensetive' username 
 				$user = $userService->findUserByUsername($username);
 				if (!is_null($user)) {
-					$validator->checkCustomVal("password", "Password is incorrect", $user->getPassword() === $validator->getProperty('password'));
+					$validator->checkCustomVal("password", "Password is incorrect", $user->getPassword() === md5($validator->getProperty('password')));
 				} else {
 					$validator->setError("username", "Username ($username) does not exist.");
 				}
