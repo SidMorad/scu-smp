@@ -8,12 +8,14 @@
  */
 $indent = "				";
 if (isset($user)) {
+	$userId = $user->getId();
 	
 	print $indent . "<a onClick=\"return toggleMe('userInfoDiv')\">\r\n";
-	print $indent . "	<div class=\"showInfoHeader\">User's Information</div>\r\n"; 
+	print $indent . "	<div class=\"showInfoHeader\">User's Information\r\n";
+	print $indent . "	</div>\r\n";
 	print $indent . "</a>\r\n"; 
 	
-	print $indent."<div id=\"userInfoDiv\" class=\"infoPanel\">\r\n";
+	print $indent."<div id=\"userInfoDiv\" class=\"infoPanel\">\r\n"; 
 	
 	print $indent."<table class=\"infoTable\">\r\n";
 	
@@ -34,7 +36,7 @@ if (isset($user)) {
 	print $indent."		<td class=\"tdLabel\">Scu Email:</td>\r\n";
 	print $indent."		<td class=\"tdValue\">".VH::chN($user->getScuEmail())."</td>\r\n";
 	print $indent."	</tr>\r\n";
-	
+		
 	print $indent."</table>\r\n";
 	print $indent."</div>\r\n";
 

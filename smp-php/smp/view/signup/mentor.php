@@ -9,7 +9,6 @@ include("smp/view/common/header.php");
 require_once('smp/util/FormBuilder.php');
 
 $objForm = new smp_util_FormBuilder();
-$objForm->useLocator();
 $objForm->setIndent("			");
 $validator = VH::getValidator();
 

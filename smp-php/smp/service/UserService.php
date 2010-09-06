@@ -16,6 +16,10 @@ class smp_service_UserService {
 		$this->userMapper = new smp_mapper_UserMapper();
 		$this->roleService = new smp_service_RoleService();
 	}
+
+	function updateUser($user) {
+		return $this->userMapper->updateUser($user);
+	}
 	
 	/**
 	 * Find User by id
