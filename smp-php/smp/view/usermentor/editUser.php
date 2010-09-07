@@ -21,17 +21,14 @@ if ($objForm->isPost()) {
 		$objForm->setErrors($validator->getErrors());
 		print $validator->getErrorMessagesString($objForm->strIndent);
 	}
-	$userId = $validator->getProperty('userId');
 } else {
 	$user = $request->getEntity();
 	$objForm->setValue('username', $user->getUsername());
 	$objForm->setValue('scuEmail', $user->getScuEmail());
-	$userId = $user->getId();
 }
 
 print $objForm->open("userEditForm");
 print $objForm->hidden("cmd"		, "usermentor/editUser");
-print $objForm->hidden("userId"		, "$userId");
 print $objForm->label("username"	, "Username:"	, "grid_2", true);
 print $objForm->textBox("username"	, "", "", 1		, "grid_2", "input", 50, 'text', array('readonly'=>'readonly'));
 print $objForm->label("scuEmail"	, "SCU-Email:"	, "grid_2", true);
