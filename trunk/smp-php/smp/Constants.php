@@ -39,5 +39,7 @@ class Constants {
 	const ACTION_SEARCH = 'ACTION_SEARCH';
 	const ACTION_UPDATE = 'ACTION_UPDATE';
 	const ACTION_SUBMIT = 'ACTION_SUBMIT';
-	
+
+	// Image upload directory
+	const IMAGE_UPLOAD_DIR = 'static/images/profile/';	
 }

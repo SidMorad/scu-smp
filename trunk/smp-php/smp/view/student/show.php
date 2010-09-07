@@ -33,7 +33,7 @@ if (isset($student)) {
 
 	print $indent."	<tr>\r\n";
 	print $indent."		<td class=\"tdLabel\">Course:</td>\r\n";
-	print $indent."		<td class=\"tdValue\">".substr(VH::getValueFromDynamicArray('course', $student->getCourseId()), 0, 18)."..</td>\r\n";
+	print $indent."		<td class=\"tdValue\">".VH::getValueFromDynamicArray('course', $student->getCourseId())."</td>\r\n";
 	print $indent."		<td class=\"tdLabel\">Major:</td>\r\n";
 	print $indent."		<td class=\"tdValue\">".VH::chN($student->getMajor())."</td>\r\n";
 	print $indent."	</tr>\r\n";
