@@ -8,8 +8,8 @@
  */
 require_once('smp/service/UserService.php');
 require_once('smp/util/Validator.php');
-require_once "HTTP/Upload.php";
-require_once 'Image/Transform.php';
+require_once('HTTP/Upload.php');
+require_once('Image/Transform.php');
 class smp_command_usermentor_EditUserCommand extends smp_command_Command {
 
 	function doExecute(smp_controller_Request $request) {
@@ -39,18 +39,29 @@ class smp_command_usermentor_EditUserCommand extends smp_command_Command {
 				$filePic = $upload->getFiles('picture');
 				if ($filePic->isValid()) {
 					$filePic->setName("uniq");
-					$dest_pic = $filePic->moveTo("static/images/profile/");
+					$dest_pic = $filePic->moveTo(Constants::IMAGE_UPLOAD_DIR);
 					$picture = $filePic->getProp('name');
 					$imgTrans = Image_Transform::factory('GD');
-					$imgTrans->load("static/images/profile/".$picture);
+					$imgTrans->load(Constants::IMAGE_UPLOAD_DIR.$picture);
 					$imgTrans->scaleByXY(100,100);
-					$imgTrans->save("static/images/profile/_thb_".$picture);
-					$user->setPicture($picture);
+					$imgTrans->save(Constants::IMAGE_UPLOAD_DIR."_thb_".$picture);
+					// First remove old picture from image directory
+					if (file_exists(Constants::IMAGE_UPLOAD_DIR.$user->getPicture())) {
+						unlink(Constants::IMAGE_UPLOAD_DIR.$user->getPicture());
+						unlink(Constants::IMAGE_UPLOAD_DIR."_thb_".$user->getPicture());
+					}
+ 					$user->setPicture($picture);
+				} elseif ($filePic->isError()) {
+					$request->addError($filePic->errorMsg());
+				} elseif ($filePic->isMissing()) {
+					$request->addFeedback("No picture was provided. Or picture's type was not supported, try jpg type.");
 				}
 				
 				$result = $userService->updateUser($user);
 				if ($result) {
-					$request->addFeedback("User Profile updated successfully.");
+					$request->addFeedback("User Profile updated successfully. Please login again.");
+					// redirect to logout command
+					$request->redirect('public/logout');
 				} else {
 					$request->addError("Error accour on saving data, Please try again.");
 				}
