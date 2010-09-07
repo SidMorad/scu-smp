@@ -21,22 +21,13 @@ if (isset($user)) {
 	print $indent."<table class=\"infoTable\">\r\n";
 	print $indent."	<tr>\r\n";
 	$pictureName = $user->getPicture();
-	if (!is_null($pictureName)) {		
-		print $indent."		<td rowspan=\"3\"><img src=\"static/images/profile/_thb_$pictureName\"><br /></td>\r\n";
-	}else
-		print $indent."     <td rowspan=\"3\"><br />&nbsp;</td>\r\n";
+if (!is_null($pictureName)) {		
+	print $indent."		<td><img src=\"static/images/profile/_thb_$pictureName\"><br /></td>\r\n";
+}
 	print $indent."		<td class=\"tdLabel\">Username:</td>\r\n";
 	print $indent."		<td class=\"tdValue\">".VH::chN($user->getUsername())."</td>\r\n";
-	print $indent."	</tr>\r\n";
-
-	print $indent."	<tr>\r\n";
 	print $indent."		<td class=\"tdLabel\">Scu Email:</td>\r\n";
 	print $indent."		<td class=\"tdValue\">".VH::chN($user->getScuEmail())."</td>\r\n";
-	print $indent."	</tr>\r\n";
-	print $indent."		<td>&nbsp;</td>\r\n";
-	print $indent."		<td>&nbsp;</td>\r\n";
-	print $indent."	<tr>\r\n";
-	
 	print $indent."	</tr>\r\n";
 		
 	print $indent."</table>\r\n";
