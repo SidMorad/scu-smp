@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 06/09/2010 5:03:46 PM
- * smp/view/usermentor/editUser.php
+ * smp/view/profile/editUser.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -28,7 +28,7 @@ if ($objForm->isPost()) {
 }
 
 print $objForm->open("userEditForm");
-print $objForm->hidden("cmd"		, "usermentor/editUser");
+print $objForm->hidden("cmd"		, "profile/editUser");
 print $objForm->label("username"	, "Username:"	, "grid_2", true);
 print $objForm->textBox("username"	, "", "", 1		, "grid_2", "input", 50, 'text', array('readonly'=>'readonly'));
 print $objForm->label("scuEmail"	, "SCU-Email:"	, "grid_2", true);

@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 06/09/2010 4:54:54 PM
- * smp_command_mentor_EditUserCommand
+ * smp_command_profile_EditUserCommand
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -10,7 +10,7 @@ require_once('smp/service/UserService.php');
 require_once('smp/util/Validator.php');
 require_once('HTTP/Upload.php');
 require_once('Image/Transform.php');
-class smp_command_usermentor_EditUserCommand extends smp_command_Command {
+class smp_command_profile_EditUserCommand extends smp_command_Command {
 
 	function doExecute(smp_controller_Request $request) {
 		$currentUser = smp_base_SessionRegistry::getUser();
@@ -60,7 +60,7 @@ class smp_command_usermentor_EditUserCommand extends smp_command_Command {
 				
 				$result = $userService->updateUser($user);
 				if ($result) {
-					$request->addFeedback("User Profile updated successfully. Please login again.");
+					$request->addFeedback("User Profile updated successfully! please login again.");
 					// redirect to logout command
 					$request->redirect('public/logout');
 				} else {
