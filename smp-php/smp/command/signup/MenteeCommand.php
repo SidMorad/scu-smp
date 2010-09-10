@@ -97,8 +97,10 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$request->forward("public/login");
 				}
 			}
-
-			
 		}
+	}
+
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ANONYMOUS);
 	}
 }

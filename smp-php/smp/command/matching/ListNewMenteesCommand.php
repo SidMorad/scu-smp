@@ -46,4 +46,7 @@ class smp_command_matching_ListNewMenteesCommand extends smp_command_Command {
 		$request->setTitle("List of Not Matched Mentees");
 	}
 
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}
 }

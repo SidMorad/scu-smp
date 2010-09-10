@@ -44,5 +44,8 @@ class smp_command_profile_EditContactCommand extends smp_command_Command {
 		
 		$request->setTitle('Edit Contact Info');
 	}
-	
+
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ADMIN, Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR, Constants::ROLE_MENTOR, Constants::ROLE_MENTEE);
+	}
 }	

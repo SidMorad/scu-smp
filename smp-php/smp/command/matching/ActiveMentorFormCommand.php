@@ -27,4 +27,8 @@ class smp_command_matching_ActiveMentorFormCommand extends smp_command_Command {
 		
 		$request->redirect("matching/listNonTrainedMentor");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}
 }

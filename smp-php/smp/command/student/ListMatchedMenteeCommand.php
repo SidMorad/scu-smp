@@ -41,4 +41,8 @@ class smp_command_student_ListMatchedMenteeCommand extends smp_command_Command {
 		$request->setDatagrid($datagrid);		
 		$request->setTitle("List of Matched Mentees");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}	
 }

@@ -39,4 +39,8 @@ class smp_command_public_LoginCommand extends smp_command_Command {
 			}
 		}
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ANONYMOUS);
+	}
 }

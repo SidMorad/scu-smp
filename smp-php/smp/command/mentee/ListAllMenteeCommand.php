@@ -41,4 +41,7 @@ class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {
 		$request->setTitle("List of Mentees");
 	}
 
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}
 }

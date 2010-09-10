@@ -20,6 +20,7 @@ class smp_controller_Request {
 	private $datagrid;
 	private $searchEntity;
 	private $isRedirect = false;
+	private $viewRedirectedFrom;
 	
 	/**
 	 * constructor
@@ -247,8 +248,15 @@ class smp_controller_Request {
 	public function redirect($cmd) {
 		$this->setIsRedirect(true);
 		$this->setProperty('cmd', $cmd);
+		$this->setViewRedirectedFrom($this->getView());
 		$this->setView($cmd);
 	}
-	
-	
+
+	public function getViewRedirectedFrom(){
+	    return $this->viewRedirectedFrom;
+	}
+
+	public function setViewRedirectedFrom($viewRedirectedFrom){
+	    $this->viewRedirectedFrom = $viewRedirectedFrom;
+	}
 }

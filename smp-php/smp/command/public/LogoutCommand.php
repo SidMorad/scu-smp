@@ -15,4 +15,8 @@ class smp_command_public_LogoutCommand extends smp_command_Command {
 		$request->setTitle("Login again!");
 		$request->forward("public/login");
 	} 
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ANONYMOUS);
+	}
 }

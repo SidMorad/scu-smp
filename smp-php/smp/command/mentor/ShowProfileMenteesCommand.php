@@ -26,4 +26,8 @@ class smp_command_mentor_ShowProfileMenteesCommand extends smp_command_Command {
 		$request->setEntity($mentor);
 		$request->setTitle("My Mentees(".count($mentor->getMentees()).")");		
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTOR);
+	}	
 }

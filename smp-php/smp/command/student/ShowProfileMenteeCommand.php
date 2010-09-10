@@ -27,4 +27,8 @@ class smp_command_student_ShowProfileMenteeCommand extends smp_command_Command {
 		$request->setEntity($student);
 		$request->setTitle("Mentee Profile");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTEE);
+	}	
 }

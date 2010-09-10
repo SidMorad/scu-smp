@@ -27,4 +27,8 @@ class smp_command_mentor_ShowProfileCommand extends smp_command_Command {
 		$request->setEntity($student);
 		$request->setTitle("Profile");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTOR);
+	}
 }

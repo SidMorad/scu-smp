@@ -78,4 +78,8 @@ class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 		$request->setDatagrid($activeMentorsDatagrid);
 		$request->setTitle("Mentee Matching form");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}	
 }
