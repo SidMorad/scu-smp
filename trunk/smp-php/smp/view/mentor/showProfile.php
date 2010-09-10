@@ -15,7 +15,7 @@ $user = $student->getUser();
 print $indent. "<br/>\r\n";
 // User Information
 include("smp/view/user/show.php");
-print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=usermentor/editUser\">Edit</a></div>\r\n";
+print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profile/editUser\">Edit</a></div>\r\n";
 print $indent. "<br/>\r\n";
 
 // Student Information
