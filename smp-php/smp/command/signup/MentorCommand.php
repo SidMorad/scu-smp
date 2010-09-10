@@ -54,17 +54,20 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					// Add Profile Picture 
 					$upload = new HTTP_Upload("en");
 					$upload->setChmod(0644);
-					
 					$filePic = $upload->getFiles('picture');
 					if ($filePic->isValid()) {
 						$filePic->setName("uniq");
-						$dest_pic = $filePic->moveTo("static/images/profile/");
+						$dest_pic = $filePic->moveTo(Constants::IMAGE_UPLOAD_DIR);
 						$picture = $filePic->getProp('name');
 						$imgTrans = Image_Transform::factory('GD');
-						$imgTrans->load("static/images/profile/".$picture);
+						$imgTrans->load(Constants::IMAGE_UPLOAD_DIR.$picture);
 						$imgTrans->scaleByXY(100,100);
-						$imgTrans->save("static/images/profile/_thb_".$picture);
-						$user->setPicture($picture);
+						$imgTrans->save(Constants::IMAGE_UPLOAD_DIR."_thb_".$picture);
+	 					$user->setPicture($picture);
+					} elseif ($filePic->isError()) {
+						$request->addError($filePic->errorMsg());
+					} elseif ($filePic->isMissing()) {
+						$request->addFeedback("No picture was provided. Or picture's type was not supported, try jpg type.");
 					}
 					
 					$student = new smp_domain_Student();

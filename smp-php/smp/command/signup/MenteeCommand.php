@@ -8,6 +8,8 @@
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
+require_once "HTTP/Upload.php";
+require_once 'Image/Transform.php';
 class smp_command_signup_MenteeCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
@@ -48,6 +50,25 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$user = new smp_domain_User(-1, $validator->getProperty('username'), md5($validator->getProperty('password')), $validator->getProperty('scuEmail'));
 					// Add ROLE_MENTEE to user.
 					$user->addToRoles(Constants::ROLE_MENTEE);
+					
+					// Add Profile Picture 
+					$upload = new HTTP_Upload("en");
+					$upload->setChmod(0644);
+					$filePic = $upload->getFiles('picture');
+					if ($filePic->isValid()) {
+						$filePic->setName("uniq");
+						$dest_pic = $filePic->moveTo(Constants::IMAGE_UPLOAD_DIR);
+						$picture = $filePic->getProp('name');
+						$imgTrans = Image_Transform::factory('GD');
+						$imgTrans->load(Constants::IMAGE_UPLOAD_DIR.$picture);
+						$imgTrans->scaleByXY(100,100);
+						$imgTrans->save(Constants::IMAGE_UPLOAD_DIR."_thb_".$picture);
+	 					$user->setPicture($picture);
+					} elseif ($filePic->isError()) {
+						$request->addError($filePic->errorMsg());
+					} elseif ($filePic->isMissing()) {
+						$request->addFeedback("No picture was provided. Or picture's type was not supported, try jpg type.");
+					}
 
 					$student = new smp_domain_Student();
 					$student->setUserId($user->getId());
