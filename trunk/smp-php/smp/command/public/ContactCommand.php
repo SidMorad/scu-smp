@@ -9,4 +9,8 @@ class smp_command_public_ContactCommand extends smp_command_Command {
 	function doExecute(smp_controller_Request $request) {
 		$request->setTitle("Contact Us");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ANONYMOUS);
+	}
 }

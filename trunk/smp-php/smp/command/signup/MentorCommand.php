@@ -121,4 +121,8 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 			}
 		}
 	}
+
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ANONYMOUS);
+	}
 }

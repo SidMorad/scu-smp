@@ -11,5 +11,8 @@ class smp_command_DefaultCommand extends smp_command_Command {
 	function doExecute(smp_controller_Request $request) {
 		$request->setTitle("Default Page");
 	}
-
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTOR);
+	}	
 }

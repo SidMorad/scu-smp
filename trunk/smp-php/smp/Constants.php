@@ -9,6 +9,7 @@
 class Constants {
 	
 	// Exsiting Role in SMP application
+	const ROLE_ANONYMOUS = 'ROLE_ANONYMOUS';
 	const ROLE_ADMIN = 'ROLE_ADMIN';
 	const ROLE_MANAGER = 'ROLE_MANAGER';
 	const ROLE_COORDINATOR = 'ROLE_COORDINATOR';

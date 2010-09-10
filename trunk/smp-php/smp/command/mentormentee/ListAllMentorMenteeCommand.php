@@ -16,4 +16,8 @@ class smp_command_mentormentee_ListAllMentorMenteeCommand extends smp_command_Co
 		$request->setDatagrid($datagrid);
 		$request->setTitle('List all Mentor&Mentee');
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}	
 }

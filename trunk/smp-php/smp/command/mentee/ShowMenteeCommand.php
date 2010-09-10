@@ -28,4 +28,8 @@ class smp_command_mentee_ShowMenteeCommand extends smp_command_Command{
 		$request->setEntity($mentee);
 		$request->setTitle("mentee Info | ".$mentee->getStudent());		
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}	
 }

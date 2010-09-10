@@ -68,4 +68,7 @@ class smp_command_profile_EditStudentCommand extends smp_command_Command {
 		$request->setTitle('Edit Student Info');
 	}
 	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTOR, Constants::ROLE_MENTEE);
+	}
 }

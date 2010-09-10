@@ -31,4 +31,8 @@ class smp_command_student_ShowStudentMenteeMentorCommand extends smp_command_Com
 		$request->setEntity($student);
 		$request->setTitle("Mentee's Mentor");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}		
 }

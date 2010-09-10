@@ -43,4 +43,8 @@ class smp_command_matching_ListNonTrainedMentorCommand extends smp_command_Comma
 		$request->setDatagrid($nonTrainedMentorDatagrid);
 		$request->setTitle("List of Non Trained Mentor"); 
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}	
 }

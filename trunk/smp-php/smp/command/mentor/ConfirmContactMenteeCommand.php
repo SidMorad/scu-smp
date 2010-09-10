@@ -26,4 +26,8 @@ class smp_command_mentor_ConfirmContactMenteeCommand extends smp_command_Command
 		}
 		$request->redirect('mentor/showProfileMentees');
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTOR);
+	}	
 }

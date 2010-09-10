@@ -41,4 +41,8 @@ class smp_command_student_ListMatchedMentorCommand extends smp_command_Command {
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Matched Mentors");
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR);
+	}		
 }

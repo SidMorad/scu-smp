@@ -73,9 +73,10 @@ class smp_command_profile_EditUserCommand extends smp_command_Command {
 			$request->setEntity($user);
 		}
 		
-		
-		
 		$request->setTitle('Edit User Info');
 	}
-	
+
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_ADMIN, Constants::ROLE_MANAGER, Constants::ROLE_COORDINATOR, Constants::ROLE_MENTOR, Constants::ROLE_MENTEE);
+	}
 }

@@ -56,4 +56,8 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 			} 			
 		}
 	}
+	
+	function doSecurity() {
+		$this->roles = array(Constants::ROLE_MENTOR);
+	}	
 }
