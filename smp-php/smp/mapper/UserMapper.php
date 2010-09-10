@@ -18,7 +18,7 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		$this->insertStmt = self::$ADODB->Prepare("INSERT into smp_user (username, password, scu_email, picture) values(?,?,?,?) ");
 	}
 	
-	function updateUser($user) {
+	function update($user) {
 		if (!is_null($user->getPicture())) {
 			$updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET password=?, scu_email=?, picture=? WHERE id=?");
 			$rs = self::$ADODB->Execute($updateStmt, array($user->getPassword(), $user->getScuEmail(), $user->getPicture(), $user->getId()));

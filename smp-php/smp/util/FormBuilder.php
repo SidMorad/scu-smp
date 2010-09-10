@@ -112,26 +112,27 @@ class smp_util_FormBuilder {
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
 		while (list($strKey, $strVal) = each($arrItems)) {
 			$strChecked = "";
-			if ($this->isPost()) {
+//			if ($this->isPost()) {
 				$strChecked = (((isset($this->values[$strId])? $this->values[$strId]: "") == $strKey) ? " checked=\"checked\"" : "");
-			} else {
-				$strChecked = (($strCheckedItem == $strKey) ? " checked=\"checked\"" : "");
-			}
+//			} else {
+//				$strChecked = (($strCheckedItem == $strKey) ? " checked=\"checked\"" : "");
+//			}
 			$strField = "<input id=\"".$strId."-".$strKey."\" name=\"$strId\" type=\"radio\" value=\"$strKey\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." >$strVal</input>";
 			$strFieldCombined .= $this->getHtmlTagString("", $strField, $strId."-".$strKey);
 		}
 		return $this->getHtmlTagString("", $strFieldCombined, $strId, $grid_X);
 	}
 	
-	function checkBox($strId, $strLabel, $intTabIndex = null, $grid_X = null, $classCSS = "checkbox", $blnChecked = false, $strValue="1", $arrOtherOptions = array()) {
+	function checkBox($strId, $strLabel, $intTabIndex = null, $grid_X = null, $classCSS = "checkbox", $blnChecked = false, $strValue=1, $arrOtherOptions = array()) {
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex );
 		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherOptions);
-		if ($this->isPost()) {
-			$strChecked = ((isset($this->values[$strId])) ? "checked=\"checked\"" : "");
-		} else {
-			$strChecked = (($blnChecked) ? "checked=\"checked\"" : "");
-		}
+//		if ($this->isPost()) {
+			$strChecked = (((isset($this->values[$strId])) && ($this->values[$strId] == 1)) ? "checked=\"checked\"" : "");
+//			$strValue = ((isset($this->values[$strId])) ? $this->values[$strId] : 0);
+//		} else {
+//			$strChecked = (($blnChecked) ? "checked=\"checked\"" : "");
+//		}
 		$strField = "<input id=\"$strId\" name=\"$strId\" type=\"checkbox\" value=\"$strValue\"".$strChecked.$strTabIndex.$strClassCSS.$strOtherAttributes." />";
 		return $this->getHtmlTagString($strLabel, $strField,$strId, $grid_X);
 	}

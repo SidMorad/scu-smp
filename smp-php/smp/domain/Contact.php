@@ -22,7 +22,7 @@ class smp_domain_Contact extends smp_domain_DomainObject {
 		parent::__construct($id);
 	}
 
-	function setAddrees ($address) {
+	function setAddress ($address) {
 		$this->address = $address;
 	}
 	function setCity ($city) {

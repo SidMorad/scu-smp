@@ -20,6 +20,10 @@ class smp_service_StudentService {
 		$this->menteeMapper = new smp_mapper_MenteeMapper();
 	}
 	
+	function update($student) {
+		return $this->studentMapper->update($student);
+	}
+	
 	function save(smp_domain_Student $student) {
 		return $this->studentMapper->save($student);
 	}

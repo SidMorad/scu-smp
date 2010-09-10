@@ -17,8 +17,8 @@ class smp_service_UserService {
 		$this->roleService = new smp_service_RoleService();
 	}
 
-	function updateUser($user) {
-		return $this->userMapper->updateUser($user);
+	function update($user) {
+		return $this->userMapper->update($user);
 	}
 	
 	/**

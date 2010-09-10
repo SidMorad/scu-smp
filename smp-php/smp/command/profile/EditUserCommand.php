@@ -58,7 +58,7 @@ class smp_command_profile_EditUserCommand extends smp_command_Command {
 					$request->addFeedback("No picture was provided. Or picture's type was not supported, try jpg type.");
 				}
 				
-				$result = $userService->updateUser($user);
+				$result = $userService->update($user);
 				if ($result) {
 					$request->addFeedback("User Profile updated successfully! please login again.");
 					// redirect to logout command

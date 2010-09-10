@@ -14,6 +14,10 @@ class smp_service_ContactService {
 		$this->contactMapper = new smp_mapper_ContactMapper();
 	}
 
+	function update($contact) {
+		return $this->contactMapper->update($contact);
+	}	
+	
 	function find($id) {
 		return $this->contactMapper->find($id);
 	}

@@ -67,6 +67,20 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		return "smp_domain_Student";
 	}
 
+	function update($student) {
+		$strUpdateQuery = "UPDATE smp_student SET firstname=?, lastname=?, gender=?, student_number=?, age_range=?, course_id=?, major=?, study_mode=?, recommended_by_staff=?,";		
+		$strUpdateQuery .= "semesters_completed=?,family_status=?, work_status=?, tertiary_study_status=?,is_first_year=?, is_international=?, is_disability=?, is_indigenous=?,";
+		$strUpdateQuery .= "is_non_english=?,is_regional=?,is_socioeconomic=?,prefer_gender=?,prefer_australian=?,prefer_distance=?,prefer_international=?,prefer_on_campus=?,interests=?,comments=?";
+		$strUpdateQuery .= " WHERE id=?";
+		$updateStmt = self::$ADODB->Prepare($strUpdateQuery);
+		
+		$rs = self::$ADODB->Execute($updateStmt, array($student->getFirstname(), $student->getLastname(), $student->getGender(), $student->getStudentNumber(), $student->getAgeRange(), $student->getCourseId(), $student->getMajor(),
+		$student->getStudyMode(), $student->getRecommendedByStaff(), $student->getSemestersCompleted(), $student->getFamilyStatus(), $student->getWorkStatus(), $student->getTertiaryStudyStatus(), $student->getIsFirstYear(),
+		$student->getIsInternational(), $student->getIsDisability(), $student->getIsIndigenous(), $student->getIsNonEnglish(), $student->getIsRegional(), $student->getIsSocioeconomic(), $student->getPreferGender(),
+		$student->getPreferAustralian(), $student->getPreferDistance(), $student->getPreferInternational(), $student->getPreferOnCampus(), $student->getInterests(), $student->getComments(), $student->getId()));
+		return $rs;
+	}
+	
 	function save(smp_domain_Student $student) {
 		$rs = self::doInsert($student);
 		if ($rs === false) {
