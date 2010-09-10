@@ -45,6 +45,4 @@ print $objForm->label("", "&nbsp;", "grid_2");
 print $objForm->submitAndResetButton("button", "Update", "Reset", 40, "grid_10", "button");
 print $objForm->close();
 
-$user = $request->getEntity();
-
 include('smp/view/common/footer.php');

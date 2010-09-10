@@ -22,7 +22,7 @@ class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 	protected function doCreateObject(array $array) {
 		$contact = new smp_domain_Contact();
 		$contact->setId($array['id']);
-		$contact->setAddrees($array['address']);	
+		$contact->setAddress($array['address']);	
 		$contact->setCity($array['city']);	
 		$contact->setPostcode($array['postcode']);	
 		$contact->setPhoneHome($array['phone_home']);	
@@ -37,6 +37,12 @@ class smp_mapper_ContactMapper extends smp_mapper_Mapper {
 	protected function doInsert(smp_domain_DomainObject $obj) {
 		$values = array($obj->getAddress(), $obj->getCity(), $obj->getPostcode(), $obj->getPhoneHome(), $obj->getPhoneWork(), $obj->getMobile(), $obj->getEmail(), $obj->getUserId(), $obj->getStudentId());
 		return self::$ADODB->Execute($this->insertStmt, $values);
+	}
+	
+	function update($contact) {
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_contact SET address=?, city=?, postcode=?, phone_home=?, phone_work=?, mobile=?, email=? WHERE id=?");
+		$values = array($contact->getAddress(), $contact->getCity(), $contact->getPostcode(), $contact->getPhoneHome(), $contact->getPhoneWork(), $contact->getMobile(), $contact->getEmail(), $contact->getId()); 
+		return self::$ADODB->Execute($updateStmt, $values);
 	}
 	
 	function save(smp_domain_Contact $contact) {

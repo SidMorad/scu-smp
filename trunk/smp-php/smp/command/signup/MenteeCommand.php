@@ -77,7 +77,7 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$student->setAccountStatus(Constants::AS_NEW_MENTEE);					
 
 					$contact = new smp_domain_Contact();
-					$contact->setAddrees($validator->getProperty('address'));
+					$contact->setAddress($validator->getProperty('address'));
 					$contact->setCity($validator->getProperty('city'));
 					$contact->setPostcode($validator->getProperty('postcode'));
 					$contact->setPhoneHome($validator->getProperty('phoneHome'));
