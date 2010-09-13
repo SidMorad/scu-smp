@@ -38,11 +38,11 @@ print $objForm->textBox("password"	, "", "", 3		, "grid_2", "input", 50, "passwo
 print $objForm->label("password2"	, "Confirm Password:", "grid_2", true);
 print $objForm->textBox("password2"	, "", "", 4		, "grid_6", "input", 50, "password");
 print $objForm->label("picture" 	, "Profile Picture:", "grid_2");
-print $objForm->file("picture"		, "", 	  13	, "grid_10", "biginput");
+print $objForm->file("picture"		, "", 	  5	, "grid_10", "biginput");
 
 print $objForm->label("", "&nbsp;", "grid_12");
 print $objForm->label("", "&nbsp;", "grid_2");
-print $objForm->submitAndResetButton("button", "Update", "Reset", 40, "grid_10", "button");
+print $objForm->submitAndResetButton("button", "Update", "Reset", 6, "grid_10", "button");
 print $objForm->close();
 
 include('smp/view/common/footer.php');
