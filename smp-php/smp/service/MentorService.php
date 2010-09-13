@@ -11,6 +11,7 @@ require_once('smp/util/OptionProvider.php');
 require_once('smp/mapper/MentorMapper.php');
 require_once('smp/mapper/MenteeMapper.php');
 require_once('smp/datagrid/MentorDatagrid.php');
+require_once('smp/util/Security.php');
 class smp_service_MentorService {
 	protected $mentorMapper;
 	protected $menteeMapper;
@@ -22,6 +23,14 @@ class smp_service_MentorService {
 		$this->mentorMapper = new smp_mapper_MentorMapper();
 		$this->studentMapper = new smp_mapper_StudentMapper();
 		$this->mentorDatagrid = new smp_datagrid_MentorDatagrid();
+	}
+	
+	function getEmailAddressToArray() {
+		$currentUser = smp_util_Security::getCurrentUser();
+		$mentor = new smp_domain_Mentor();
+		$mentor->setUserId($currentUser->getId());
+		$mentor = self::findWithMentor($mentor);
+		return $this->mentorMapper->getEmailAddressToArray($mentor);
 	}
 	
 	function updateMentorLimit($mentorId, $menteeLimit) {

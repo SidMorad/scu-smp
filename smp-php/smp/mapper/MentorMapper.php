@@ -11,16 +11,19 @@ require_once('smp/domain/Mentor.php');
 require_once('smp/mapper/UserMapper.php');
 require_once('smp/mapper/StudentMapper.php');
 require_once('smp/mapper/ContactMapper.php');
+require_once('smp/mapper/MenteeMapper.php');
 class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 	private $userMapper;
 	private $studentMapper;
 	private $contactMapper;
+	private $menteeMapper;
 	
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
 		$this->userMapper = new smp_mapper_UserMapper();
 		$this->studentMapper = new smp_mapper_StudentMapper();
 		$this->contactMapper = new smp_mapper_ContactMapper();
+		$this->menteeMapper = new smp_mapper_MenteeMapper();
 		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentor (user_id, student_id, contact_id, mentee_limit, trained, matched, expired) VALUES (?,?,?,?,?,?,?)');
 	}
 
@@ -39,6 +42,25 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		$obj->setMatched($array['matched']);
 		$obj->setExpired($array['expired']);
 		return $obj;
+	}
+	
+	function getEmailAddressToArray($mentor) {
+		$mentees = $this->menteeMapper->findMenteesWithMentorId($mentor->getId());
+		$emailArray = array();
+		foreach($mentees as $mentee) {
+			$emails = "";
+			$user = $this->userMapper->findUserWithStudentId($mentee->getStudentId());
+			if (!is_null($user->getScuEmail())) {
+				$emails = $user->getScuEmail();
+			}
+			$contact = $this->contactMapper->findContactWithStudentId($mentee->getStudentId());
+			if (!is_null($contact->getEmail())) {
+				$emails .= ",". $contact->getEmail(); 
+			}
+			$student = $this->studentMapper->findStudentWithUser($user);
+			$emailArray[$emails] = "My Mentee : " .$student->getFirstname() . " " . $student->getLastname() . " (".$emails.")";
+		}
+		return $emailArray;
 	}
 	
 	function updateMentorLimit($mentorId, $menteeLimit) {

@@ -6,7 +6,6 @@
  * @author <a href='mailto:smorad12@scu.edu.au'>Sid</a>
  * @version 1.0
  */
-require_once('smp/mapper/CourseMapper.php');
 class smp_util_OptionProvider {
 	
 	static function getFixArray($type, $firstRecordEmpty = false) {
@@ -76,8 +75,15 @@ class smp_util_OptionProvider {
 		$array = ($firstRecordEmpty ? array(null => '----------') : array());
 		switch($table) {
 			case "course":
+				require_once('smp/mapper/CourseMapper.php');
 				$courseMapper = new smp_mapper_CourseMapper();
 				return $courseMapper->getIdNameArray($array);
+				break;
+
+			case Constants::MESSAGE_MENTOR: 
+				require_once('smp/service/MentorService.php');
+				$mentorService = new smp_service_MentorService();
+				return $mentorService->getEmailAddressToArray();	
 				break;
 		}
 	}

@@ -26,7 +26,7 @@ if ($form->isPost()) {
 print $form->open('messageForm');
 print $form->hidden('cmd', 'message/messageMentorForm');
 print $form->label('to', "To: ","grid_2",true);
-print $form->selectBox('to', null, null, 1, "grid_10",VH::getFixArray(Constants::MESSAGE_MENTOR));
+print $form->selectBox('to', null, null, 1, "grid_10",VH::getDynamicArray(Constants::MESSAGE_MENTOR));
 print $form->label('subject', "Subject: ","grid_2",true);
 print $form->textBox('subject', null, null, 2, "grid_10");
 print $form->label('body', "Text : ","grid_2",true);
