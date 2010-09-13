@@ -118,6 +118,10 @@ class smp_util_Validator {
 		return null;
 	}	
 	
+	function setProperty($key, $value) {
+		$this->properties[$key] = $value;
+	}
+	
 	function getValues() {
 		return $this->properties;
 	}

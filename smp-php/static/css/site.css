@@ -33,7 +33,7 @@ body {
 
 #content {
 	background-color: white;
-	min-height: 600px;
+	min-height: 740px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -68,6 +68,13 @@ h5 {
 h6 {
     font-size: 1em;
 }
+
+.profileImg {
+	float:right;
+	padding:10px;
+}
+
+
 
 /* TABLE */
 table {
@@ -177,8 +184,4 @@ td 	{
 .contribTable tr.odd {
    	background: #eee !important;
 	}
-img{
-	float:right;
-	padding:10px;
-}
 /* END TABLE */

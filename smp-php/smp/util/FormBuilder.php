@@ -204,6 +204,7 @@ class smp_util_FormBuilder {
 	}
 		
 	function hidden($strId, $strValue) {
+		$strValue = ($strValue == "" ? $this->getValueIfIsSet($strId) : $strValue) ;
 		return $this->strIndent."	<input id=\"".$strId."\" name=\"".$strId."\" type=\"hidden\" value=\"".$strValue."\" />\r\n";
 	}
 
