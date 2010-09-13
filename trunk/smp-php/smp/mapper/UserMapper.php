@@ -90,7 +90,7 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 	}
 	
 	function findUserWithStudentId ($studentId) {
-		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_user INNER JOIN smp_student ON smp_user.id = smp_student.user_id WHERE smp_student.id=?");
+		$selectStmt = self::$ADODB->Prepare("SELECT smp_user.id, smp_user.username, smp_user.scu_email, smp_user.password, smp_user.picture FROM smp_user INNER JOIN smp_student ON smp_user.id = smp_student.user_id WHERE smp_student.id=?");
 		$rs = self::$ADODB->Execute($selectStmt, array($studentId));
 		$row = $rs->FetchRow(); 
 		return (is_array($row) ? self::doCreateObject($row) : null);
