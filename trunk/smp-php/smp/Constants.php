@@ -18,6 +18,7 @@ class Constants {
 
 	// Table names
 	const TABLE_COURSE = 'smp_course';
+	const TABLE_USER = 'smp_user';
 	
 	// Existing Account status for students in SMP application
 	const AS_NEW_MENTOR = 'AS_NEW_MENTOR';
