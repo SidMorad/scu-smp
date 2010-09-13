@@ -13,6 +13,6 @@ class smp_command_DefaultCommand extends smp_command_Command {
 	}
 	
 	function doSecurity() {
-		$this->roles = array(Constants::ROLE_MENTOR);
+		$this->roles = array(Constants::ROLE_ANONYMOUS);
 	}	
 }

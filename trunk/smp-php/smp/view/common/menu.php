@@ -19,7 +19,7 @@
 							<li><a href="#">All Coordinators</a></li>
 							<li><a href="index.php?cmd=mentor/listAllMentor">List all Mentors</a></li>
 							<li><a href="index.php?cmd=mentee/listAllMentee">List all Mentees</a></li>
-							<li><a href="#">ReportPerCampus</a></li>
+							<li><a href="index.php?cmd=course/list">Course List</a></li>
 						</ul>
 					</li>
 	<?php		

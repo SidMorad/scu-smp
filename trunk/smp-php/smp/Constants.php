@@ -16,6 +16,9 @@ class Constants {
 	const ROLE_MENTOR = 'ROLE_MENTOR';
 	const ROLE_MENTEE = 'ROLE_MENTEE';
 
+	// Table names
+	const TABLE_COURSE = 'smp_course';
+	
 	// Existing Account status for students in SMP application
 	const AS_NEW_MENTOR = 'AS_NEW_MENTOR';
 	const AS_NEW_MENTEE = 'AS_NEW_MENTEE';
@@ -43,4 +46,7 @@ class Constants {
 
 	// Image upload directory
 	const IMAGE_UPLOAD_DIR = 'static/images/profile/';	
+	
+	// Admin email address
+	const ADMIN_EMAIL = 'smp_admin@scu.edu.au';
 }
