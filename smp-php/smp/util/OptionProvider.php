@@ -83,7 +83,12 @@ class smp_util_OptionProvider {
 			case Constants::MESSAGE_MENTOR: 
 				require_once('smp/service/MentorService.php');
 				$mentorService = new smp_service_MentorService();
-				return $mentorService->getEmailAddressToArray();	
+				return $mentorService->getCurrentMenteesEmailAddressArray();	
+				break;
+			case Constants::MESSAGE_MENTEE:
+				require_once('smp/service/MenteeService.php');
+				$menteeService = new smp_service_MenteeService();	
+				return $menteeService->getCurrentMentorEmailAddressArray();
 				break;
 		}
 	}

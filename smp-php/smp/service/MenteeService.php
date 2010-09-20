@@ -20,6 +20,14 @@ class smp_service_MenteeService {
 		$this->studentMapper = new smp_mapper_StudentMapper();
 		$this->menteeDatagrid = new smp_datagrid_MenteeDatagrid();
 	}
+	
+	function getCurrentMentorEmailAddressArray() {
+		$currentUser = smp_util_Security::getCurrentUser();
+		$mentee = new smp_domain_Mentee();
+		$mentee->setUserId($currentUser->getId());
+		$mentee = self::findWithMentee($mentee);
+		return $this->menteeMapper->getEmailAddressToArray($mentee);
+	}
 
 	function findAllMatchedMentees() {
 		return $this->menteeMapper->findAllMatchedMentees();
@@ -55,6 +63,10 @@ class smp_service_MenteeService {
 		return $this->menteeMapper->find($id);
 	}
 
+	function findWithMentee($mentee) {
+		return $this->menteeMapper->findWithMentee($mentee);
+	}
+	
 	function findMenteesWithMentorId($mentorId) {
 		return $this->menteeMapper->findMenteesWithMentorId($mentorId);
 	}	

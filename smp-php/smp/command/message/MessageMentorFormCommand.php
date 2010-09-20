@@ -15,6 +15,7 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
 		$validator = new smp_util_Validator();
+		$validator->checkEmptiness('to', 'To is compulsory.');
 		$validator->checkEmptiness('subject', 'Subject is compulsory.');
 		
 		if ($validator->isValid()) {
@@ -36,6 +37,7 @@ class smp_command_message_MessageMentorFormCommand extends smp_command_Command {
 				$validator->setError('to', $recipients);
 			} 			
 		}
+		$request->setTitle('Send Message');
 	}
 	
 	function doSecurity() {

@@ -155,9 +155,9 @@ insert into smp_user (id, username, password, scu_email) values
 	(3, 'jo'		, '674f33841e2309ffdd24c85dc3b999de', 'jo.mason@scu.edu.au'),
 	(4, 'jiya'		, '23a52ee24d66e9a72ec506cd9db39057', 'b.kaur.10@scu.edu.au'),
 	(5, 'lucy'		, 'ecfb2ca9428299f31f0bbb9b5ea28dc3', 'l.zhang.12@scu.edu.au'),
-	(6, 'james'		, 'b4cc344d25a2efe540adbf2678e2304c', 'j.glees.24@scu.edu.au'),
+	(6, 'james'		, 'b4cc344d25a2efe540adbf2678e2304c', 'smorad12@scu.edu.au'),
 	(7, 'bruce'		, 'e8315caa4eb8c2a2625d4e97dbba100a', 's.li.24@scu.edu.au'),
-	(8, 'mentor5'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'smorad12@scu.edu.au'),
+	(8, 'mentor5'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor5@scu.edu.au'),
 	(9, 'mentor6'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor6@scu.edu.au'),
 	(10,'mentor7'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor7@scu.edu.au'),
 	(11,'mentor8'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor8@scu.edu.au'),
@@ -282,9 +282,9 @@ values
 		(25,28, 'Mentor19'	, 'Family19', 'm', '21000025', 'under25', 51, 'Major 2'		, 'coffs', 'Paul Woods', '5', 'no'	, 'nowork'  , 'no' , 'no' , '1', '0', '1', '0', '0', '0', 'no' , '0', '0', '1', '1', 'Wiritng', 'I like read poem', 'AS_NEW_MENTOR'),
 		(26,29, 'Mentor20'	, 'Family20', 'f', '21000026', 'under25', 51, 'Major 3'		, 'coffs', 'Paul Woods', '5', 'no'	, 'nowork'  , 'no' , 'no' , '1', '0', '1', '0', '0', '0', 'no' , '0', '1', '1', '1', 'Wiritng', 'I like read poem', 'AS_NEW_MENTOR');
 
-insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '025555555', '045555555', '045555555', 'jiya@gmail.com', 4,1);				
-insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina     ', '2452', '026666666', '046666666', '046666666', 'bruce@gmail.com', 7,3);				
-insert into smp_contact values (3, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '047777777', '047777777', 'james@gmail.com', 6,4);				
+insert into smp_contact values (1, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '025555555', '045555555', '045555555', 'jia.khangura@gmail.com', 4,1);				
+insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina     ', '2452', '026666666', '046666666', '046666666', 'lsq991@gmail.com', 7,3);				
+insert into smp_contact values (3, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '047777777', '047777777', 'saeid33mr@yahoo.com', 6,4);				
 insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
 insert into smp_contact values 
  (5, '101 Street', 'City', '2450', '021111111', '0233333333', '041111111', 'foo@bar.com', 8, 5),				

@@ -25,7 +25,7 @@ class smp_service_MentorService {
 		$this->mentorDatagrid = new smp_datagrid_MentorDatagrid();
 	}
 	
-	function getEmailAddressToArray() {
+	function getCurrentMenteesEmailAddressArray() {
 		$currentUser = smp_util_Security::getCurrentUser();
 		$mentor = new smp_domain_Mentor();
 		$mentor->setUserId($currentUser->getId());
