@@ -27,6 +27,7 @@ $courseIdColumn =& $datagrid->getColumnByField('course_id');
 $courseIdColumn->setFormatter('formatCourseId');
 
 $datagrid->addColumn(new Structures_DataGrid_Column('Mentees / Limit',null,null,array('width'=>'20%'),null,'printMenteesNumber()'));
+$datagrid->addColumn(new Structures_DataGrid_Column('Mark as Expired',null,null,array('width'=>'20%'),null,'printMarkAsExpired()'));
 
 $table = smp_util_DatagridUtil::getCustomHtmlTable();
 
@@ -53,7 +54,7 @@ function printMenteesNumber($params){
 	$mentorId = $params['record']['id'];
 	$menteeLimit = $params['record']['mentee_limit'];
 	$menteeCount = $params['record']['mentee_count'];
-	if($menteeCount>0){
+	if($menteeCount > 0){
 		$menteeCount="<a href=\"index.php?cmd=student/showStudentMentorMentees&mentorId=".$mentorId."\">".$menteeCount."</a>";
 	}
 	return $menteeCount. "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;"."<span style=\"color:red\">$menteeLimit</span>";
@@ -61,4 +62,9 @@ function printMenteesNumber($params){
 function format_id($params) {
 	$id = $params['record']['id'];
 	return "<a href=\"index.php?cmd=mentor/showMentor&id=$id\">$id</a>";
+}
+
+function printMarkAsExpired($params){
+	$mentorId = $params['record']['id'];
+	return "<a href=\"index.php?cmd=mentor/expireMentorForm&amp;mentorId=". $mentorId ."\" onclick=\"return confirmSubmit()\">Mark as Expired</a>";
 }
