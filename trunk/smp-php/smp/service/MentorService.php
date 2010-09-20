@@ -47,8 +47,8 @@ class smp_service_MentorService {
 	 * 
 	 * @return Structures_DataGrid $datagrid
 	 */
-	function getAllMentorDatagrid($mentor = null) {
-		return $this->mentorDatagrid->getAllMentorDatagrid($mentor);
+	function getAllMentorDatagrid($mentor = null, $paging = true) {
+		return $this->mentorDatagrid->getAllMentorDatagrid($mentor, $paging);
 	}
 
 	/**
@@ -85,6 +85,10 @@ class smp_service_MentorService {
 	
 	function markMentorAsTrained($mentorId) {
 		return $this->mentorMapper->markMentorAsTrained($mentorId);
+	}
+
+	function markMentorAsExpired($mentorId) {
+		return $this->mentorMapper->markMentorAsExpired($mentorId);
 	}
 	
 	function find($id) {

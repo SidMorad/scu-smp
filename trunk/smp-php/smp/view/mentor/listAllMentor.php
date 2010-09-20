@@ -15,15 +15,15 @@ $datagrid =& $request->getDatagrid();
 $datagrid = smp_util_DatagridUtil::formatColumn('study_mode', $datagrid);
 $datagrid = smp_util_DatagridUtil::formatColumn('gender', $datagrid);
 $datagrid = smp_util_DatagridUtil::formatColumn('course_id', $datagrid);
-$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 
 if (is_null($request->getProperty('output_format'))) {
 	include('smp/view/common/header.php');
+	$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 	
 	$indent = "				";
 	print $indent."<br/><h1>List of All Mentors</h1><br/>\r\n";
 	
-	include("smp/view/search/mentorSearchPanel.php");
+	include("smp/view/search/mentorSearchFullPanel.php");
 	
 	$table = smp_util_DatagridUtil::getCustomHtmlTable();
 	
@@ -45,11 +45,6 @@ if (is_null($request->getProperty('output_format'))) {
 	include('smp/view/common/footer.php');
 
 }else if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'XLS') {
-//	$datagrid->rowLimit = 5;
-//	$renderer =& $datagrid->getRenderer();
-//	$renderer->setLimit($datagrid->page, 20, $datagrid->getRecordCount());
-//	$datagrid->setRendererOption('filename', 'listAllMentor.xls');
-	//TODO Fix the issue with Paging , we need to render all records not only last page
 	$datagrid->render(DATAGRID_RENDER_XLS);
 } else if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'CSV'){
 	$datagrid->render(DATAGRID_RENDER_CSV);

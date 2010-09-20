@@ -88,12 +88,12 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 	
 	function markMentorAsTrained($mentorId) {
 		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentor SET trained=? WHERE id=?");
-		$rs = self::$ADODB->Execute($updateStmt, array(true, $mentorId));
-		if ($rs === false) {
-			return false;
-		} else {
-			return true;
-		}
+		return self::$ADODB->Execute($updateStmt, array(true, $mentorId));
+	}
+
+	function markMentorAsExpired($mentorId) {
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentor SET expired=? WHERE id=?");
+		return self::$ADODB->Execute($updateStmt, array(true, $mentorId));
 	}
 	
 	function findMentorWithStudentId($studentId) {

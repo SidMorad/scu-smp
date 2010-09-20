@@ -73,6 +73,12 @@
 	margin-bottom:2px;
 }
 
+.form_container select {
+	border:1px solid #666666;
+	padding:2px 0px 2px 0px;
+	margin-bottom:2px;
+}
+
 .form_container h3 {
 	padding-top: 30px;
 	padding-left: 20px;
@@ -164,8 +170,6 @@
 }
 
 .checkbox {
-	margin: 0px;
-	border: none;
 }
 
 .redio {

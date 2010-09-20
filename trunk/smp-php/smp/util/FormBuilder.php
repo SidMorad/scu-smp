@@ -123,7 +123,7 @@ class smp_util_FormBuilder {
 		return $this->getHtmlTagString("", $strFieldCombined, $strId, $grid_X);
 	}
 	
-	function checkBox($strId, $strLabel, $intTabIndex = null, $grid_X = null, $classCSS = "checkbox", $blnChecked = false, $strValue=1, $arrOtherOptions = array()) {
+	function checkBox($strId, $strLabel, $intTabIndex = null, $grid_X = null, $classCSS = "checkbox", $blnChecked = false, $strValue=true, $arrOtherOptions = array()) {
 		$strTabIndex = $this->getHtmlAttributeString($intTabIndex != null, "tabindex", $intTabIndex );
 		$strClassCSS = $this->getHtmlAttributeString($classCSS != null, "class", $classCSS);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherOptions);

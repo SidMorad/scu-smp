@@ -11,12 +11,13 @@ require_once('smp/domain/Mentor.php');
 require_once('smp/domain/Student.php');
 class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 	
-	function getAllMentorDatagrid($mentor = null) {
-		self::$options['fields'] = array ('id','firstname', 'lastname', 'course_id', 'gender', 'study_mode');			 
+	function getAllMentorDatagrid($mentor = null, $paging = true) {
+		self::$options['fields'] = array ('id','firstname', 'lastname', 'student_number', 'course_id', 'gender', 'study_mode');			 
 		self::$options['labels'] = array (
 			'id' => 'Id',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
+			'student_number' => 'Student Number',
 			'course_id' => 'Course',
 			'gender' => 'Gender',
 			'study_mode' => 'Study Mode');
@@ -24,10 +25,14 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 		$mentorSearchCriteria = (!is_null($mentor) ? self::getSearchCriteria($mentor, 'smp_mentor.', true) : "");
 		$studentSearchCriteria = (!is_null($mentor) ? self::getSearchCriteria($mentor->getStudent(), 'smp_student.', true) : "");
 		
-		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.course_id, smp_student.gender, smp_student.study_mode 
+		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course_id, smp_student.gender, smp_student.study_mode 
 				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id ".$mentorSearchCriteria.$studentSearchCriteria;
 		
-		self::$datagrid->setDefaultSort(array('id' => 'DESC'));
+		if (!$paging) {
+			self::$datagrid = new Structures_DataGrid();
+		}
+		
+		self::$datagrid->setDefaultSort(array('firstname' => 'ASC'));
 		self::$datagrid->bind($query, self::$options);
 		return self::$datagrid;
 	}
