@@ -7,28 +7,30 @@
  * @version 1.0
  */
 require_once('smp/command/Command.php');
-require_once('smp/service/StudentService.php');
 require_once('smp/service/MatchingService.php');
 require_once('smp/service/MenteeService.php');
 require_once('smp/service/MentorService.php');
+require_once('smp/service/UserService.php');
+require_once('smp/service/ContactService.php');
 require_once('smp/util/Validator.php');
 require_once('smp/domain/Mentee.php');
 require_once('smp/domain/Mentor.php');
 require_once('smp/base/SessionRegistry.php');
+require_once('smp/util/MailUtil.php');
+require_once('smp/util/EmailTemplate.php');
+require_once('smp/domain/Mail.php');
 class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) { 
-		$studentService = new smp_service_StudentService();
 		$matchingService = new smp_service_MatchingService();
 		$menteeService = new smp_service_MenteeService();
 		$mentorService = new smp_service_MentorService();
+		$userService = new smp_service_UserService();
+		$contactService = new smp_service_ContactService();
 		$menteeId = $request->getProperty('menteeId');
 		if (is_null($menteeId)) {
-			$request->setTitle("List of New Mentees");
 			$request->addError("Mentee Id was not found, please select Mentee again.");
-			$request->setDatagrid($matchingService->getAllNotMatchedMenteesDatagrid());
-			$request->forward("matching/listNewMentees");
-			return;
+			$request->redirect("matching/listNewMentees");
 		}
 		
 		$mentor = new smp_domain_Mentor();
@@ -53,15 +55,43 @@ class smp_command_matching_MatchingFormCommand extends smp_command_Command {
 					$result = $matchingService->connectMenteeToMentor($menteeId, $mentorId);
 					if ($result) {
 						$request->addFeedback("Matching Mentee was successful");
+						
+						// Sending Email to Mentor
+						$mailUtil = new smp_util_MailUtil();
+						$mentorMailBean = new smp_bean_Mail();
+						$menteeMailBean = new smp_bean_Mail();
+						$mentor = $mentorService->findFilledMentor($mentorId);
+						$mentee = $menteeService->findFilledMentee($menteeId);
+						$mentorRecipients = $mentor->getUser()->getScuEmail();
+						$mentorRecipients = (is_null($mentor->getContact()->getEmail()) ? $mentorRecipients : $mentorRecipients . ", " . $mentor->getContact()->getEmail()) ;
+						$menteeRecipients = $mentee->getUser()->getScuEmail();
+						$menteeRecipients = (is_null($mentee->getContact()->getEmail()) ? $menteeRecipients : $menteeRecipients . ", " . $mentee->getContact()->getEmail()) ;
+						$mentorMailBean->setRecipients($mentorRecipients);
+						$mentorMailBean->setFrom(Constants::APPLICATION_EMAIL);
+						$mentorMailBean->setTo($mentorRecipients);
+						$mentorMailBean->setSubject(smp_util_EmailTemplate::subjectForMentorAfterMatching());
+						$mentorMailBean->setBody(smp_util_EmailTemplate::bodyForMentorAfterMatching($mentor, $mentee));
+						$menteeMailBean->setRecipients($menteeRecipients);
+						$menteeMailBean->setFrom(Constants::APPLICATION_EMAIL);
+						$menteeMailBean->setTo($menteeRecipients);
+						$menteeMailBean->setSubject(smp_util_EmailTemplate::subjectForMenteeAfterMatching());
+						$menteeMailBean->setBody(smp_util_EmailTemplate::bodyForMenteeAfterMatching($mentor, $mentee));
+						
+						$result = $mailUtil->sendEmail($mentorMailBean);
+						$result = $mailUtil->sendEmail($menteeMailBean);
+						
+						if (is_bool($result)) {
+							$request->addFeedback('Notify messages sent successfully to :');
+							$request->addFeedback( 'Mentor: ' .$mentor->getStudent()->getFirstname().' '. $mentor->getStudent()->getLastname().' ('.$mentorRecipients .')');
+							$request->addFeedback( 'Mentee: ' .$mentee->getStudent()->getFirstname().' '. $mentee->getStudent()->getLastname().' ('.$menteeRecipients .')');
+						} else {
+							$request->addError($result);
+						}
+						
 					} else {
 						$request->addError("Matching faild! (Database Error)");
 					}
-				}
-				if ($validator->isValid()) {
-					$request->setTitle("List of New Mentees");
-					$request->setDatagrid($matchingService->getAllNotMatchedMenteesDatagrid());
-					$request->forward("matching/listNewMentees");
-					return;
+					$request->redirect("matching/listNewMentees");
 				}
 			} else if ($action == Constants::ACTION_SEARCH) {
 				$mentor->setStudent($student);
