@@ -50,4 +50,7 @@ class Constants {
 	
 	// Admin email address
 	const ADMIN_EMAIL = 'smp_admin@scu.edu.au';
+	const APPLICATION_EMAIL = 'smp@scu.edu.au';
+	// Application root domain address
+	const APPLICATION_DOMAIN = 'http://infotech.scu.edu.au/~smp/';
 }

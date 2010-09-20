@@ -141,6 +141,7 @@ CREATE TABLE smp_mentor_mentee (
 	expired BOOLEAN DEFAULT FALSE,
 	CONSTRAINT smp_fk_mm_mentor FOREIGN KEY (mentor_id) REFERENCES smp_mentor(id) ON DELETE CASCADE,
 	CONSTRAINT smp_fk_mm_mentee FOREIGN KEY (mentee_id) REFERENCES smp_mentee(id) ON DELETE CASCADE,
+	CONSTRAINT smp_unique_mm_id UNIQUE (mentor_id,mentee_id),
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
@@ -157,7 +158,7 @@ insert into smp_user (id, username, password, scu_email) values
 	(5, 'lucy'		, 'ecfb2ca9428299f31f0bbb9b5ea28dc3', 'l.zhang.12@scu.edu.au'),
 	(6, 'james'		, 'b4cc344d25a2efe540adbf2678e2304c', 'smorad12@scu.edu.au'),
 	(7, 'bruce'		, 'e8315caa4eb8c2a2625d4e97dbba100a', 's.li.24@scu.edu.au'),
-	(8, 'mentor5'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor5@scu.edu.au'),
+	(8, 'mentor5'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 's.moradi.12@scu.edu.au'),
 	(9, 'mentor6'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor6@scu.edu.au'),
 	(10,'mentor7'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor7@scu.edu.au'),
 	(11,'mentor8'	, '23cbeacdea458e9ced9807d6cbe2f4d6', 'mentor8@scu.edu.au'),
@@ -287,7 +288,7 @@ insert into smp_contact values (2, '48 Ameroo Street, Toormina    ', 'Toormina  
 insert into smp_contact values (3, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '047777777', '047777777', 'saeid33mr@yahoo.com', 6,4);				
 insert into smp_contact values (4, 'Carina College, SCU, Hogbin Dr', 'Coffs Harbour', '2450', '027777777', '048888888', '048888888', 'lucy@gmail.com', 5,2);				
 insert into smp_contact values 
- (5, '101 Street', 'City', '2450', '021111111', '0233333333', '041111111', 'foo@bar.com', 8, 5),				
+ (5, '101 Street', 'City', '2450', '021111111', '0233333333', '041111111', 'saeid33mr@yahoo.com', 8, 5),				
  (6, '101 Street', 'City', '2450', '021111111', '0233333333', '041111111', 'foo@bar.com', 9, 6),				
  (7, '101 Street', 'City', '2450', '021111111', '0233333333', '041111111', 'foo@bar.com', 10, 7),				
  (8, '101 Street', 'City', '2450', '021111111', '0233333333', '041111111', 'foo@bar.com', 11, 8),				

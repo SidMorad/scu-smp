@@ -10,18 +10,23 @@
 require_once('smp/util/OptionProvider.php');
 require_once('smp/mapper/MentorMapper.php');
 require_once('smp/mapper/MenteeMapper.php');
+require_once('smp/mapper/UserMapper.php');
+require_once('smp/mapper/ContactMapper.php');
 require_once('smp/datagrid/MentorDatagrid.php');
 require_once('smp/util/Security.php');
 class smp_service_MentorService {
 	protected $mentorMapper;
 	protected $menteeMapper;
 	protected $studentMapper;
+	protected $userMapper;
 	protected $mentorDatagrid;
 	
 	function __construct() {
 		$this->menteeMapper = new smp_mapper_MenteeMapper();
 		$this->mentorMapper = new smp_mapper_MentorMapper();
 		$this->studentMapper = new smp_mapper_StudentMapper();
+		$this->userMapper = new smp_mapper_UserMapper();
+		$this->contactMapper = new smp_mapper_ContactMapper();
 		$this->mentorDatagrid = new smp_datagrid_MentorDatagrid();
 	}
 	
@@ -88,6 +93,14 @@ class smp_service_MentorService {
 	
 	function findWithMentor($mentor) {
 		return $this->mentorMapper->findWithMentor($mentor);
+	}
+	
+	function findFilledMentor($mentorId) {
+		$mentor = self::find($mentorId);
+		$mentor->setUser($this->userMapper->find($mentor->getUserId()));
+		$mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));
+		$mentor->setContact($this->contactMapper->find($mentor->getContactId()));
+		return $mentor;
 	}
 	
 	function findMentorStudentMentees($mentorId) {
