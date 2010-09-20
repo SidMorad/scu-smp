@@ -117,14 +117,4 @@ print $objForm->label("", "&nbsp;", "grid_2");
 print $objForm->submitAndResetButton("button", "Register", "Reset", 40, "grid_10", "button");
 print $objForm->close();
 
-
-
-
-
-
-
-
-
-
-
 include("smp/view/common/footer.php");

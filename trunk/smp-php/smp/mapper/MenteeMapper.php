@@ -8,6 +8,7 @@
  */
 require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/Mentee.php');
+require_once('smp/domain/Mentor.php');
 require_once('smp/mapper/Mapper.php');
 require_once('smp/mapper/UserMapper.php');
 require_once('smp/mapper/StudentMapper.php');
@@ -18,6 +19,7 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 	private $studentMapper;
 	private $contactMapper;
 	private $mentorMenteeMapper;
+//	private $mentorMapper;
 
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
@@ -25,6 +27,7 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		$this->studentMapper = new smp_mapper_StudentMapper(self::$ADODB);
 		$this->contactMapper = new smp_mapper_ContactMapper(self::$ADODB);
 		$this->mentorMenteeMapper = new smp_mapper_MentorMenteeMapper(self::$ADODB);
+//		$this->mentorMapper = new smp_mapper_MentorMapper(self::$ADODB);
 		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentee (user_id, student_id, contact_id, matched, expired) VALUES (?,?,?,?,?)');
 	}
 	
@@ -89,6 +92,12 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		return (($rs === false) ? null: self::doCreateObject($rs->FetchRow()));
 	}
 	
+	function findWithMentee($mentee) {
+		$menteeEqualsCriteriaString = self::getEqualsCriteria($mentee,"",false);
+		$rs = self::$ADODB->Execute('SELECT * FROM smp_mentee WHERE '.$menteeEqualsCriteriaString);
+		return (($rs === false) ? null: self::doCreateObject($rs->FetchRow()));
+	}	
+	
 	function findMenteeWithStudentId($studentId) {
 		$student = $this->studentMapper->find($studentId);
 		$user = $this->userMapper->findUserWithStudentId($student->getId());
@@ -142,6 +151,46 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 			$mentee->setUser($this->userMapper->find($mentee->getUserId()));
 		}
 		return $mentees;	
+	}
+	
+	function getEmailAddressToArray($mentee) {
+		$mentor = self::findMentorWithMenteeId($mentee->getId());
+		$emailArray = array();
+		if (!is_null($mentor)) {
+			$emails = "";
+			$user = $this->userMapper->findUserWithStudentId($mentor->getStudentId());
+			if (!is_null($user->getScuEmail())) {
+				$emails = $user->getScuEmail();
+			}
+			$contact = $this->contactMapper->findContactWithStudentId($mentor->getStudentId());
+			if (!is_null($contact->getEmail())) {
+				$emails .= ",". $contact->getEmail(); 
+			}
+			$student = $this->studentMapper->findStudentWithUser($user);
+			$emailArray[$emails] = "My Mentor : " .$student->getFirstname() . " " . $student->getLastname() . " (".$emails.")";
+		}
+		return $emailArray;
+	}
+	
+	function findMentorWithMenteeId($menteeId) {
+		$selectStmt = self::$ADODB->Prepare('SELECT smp_mentor.* FROM smp_mentor INNER JOIN smp_mentor_mentee ON smp_mentor.id = smp_mentor_mentee.mentor_id WHERE smp_mentor_mentee.mentee_id=?');
+		$rs = self::$ADODB->Execute($selectStmt, array($menteeId));
+		$row = $rs->FetchRow();
+		$mentor = (is_array($row) ? self::doCreateMentor($row) : null);
+		return $mentor;	
+	}
+	
+	function doCreateMentor($array) {
+		$mentor = new smp_domain_Mentor();
+		$mentor->setId($array['id']);
+		$mentor->setUserId($array['user_id']);
+		$mentor->setStudentId($array['student_id']);
+		$mentor->setContactId($array['contact_id']);
+		$mentor->setMenteeLimit($array['mentee_limit']);
+		$mentor->setTrained($array['trained']);
+		$mentor->setMatched($array['matched']);
+		$mentor->setExpired($array['expired']);
+		return $mentor;
 	}
 	
 }

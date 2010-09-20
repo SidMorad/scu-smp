@@ -71,7 +71,6 @@
 	border:1px solid #666666;
 	padding:5px 0px 5px 0px;
 	margin-bottom:2px;
-	font:bold 16px inherit;
 }
 
 .form_container h3 {
@@ -110,6 +109,7 @@
 .selected_smallinput,
 .selected_button,
 .selected_select,
+.selected_error_select,
 .selected_textarea {
 	border-color: #006699;
 	background:#E4F5FA;
@@ -150,15 +150,17 @@
 
 .select,
 .selected_select,
+.selected_error_select,
 .error_select {
 	width: 180px;
 	height: 30px;
-	top: 5px;
 }
 
 .textarea,
 .selected_textarea,
 .error_textarea {
+	font-family: inherit;
+	font-size: 14px;
 }
 
 .checkbox {
@@ -175,7 +177,6 @@
 	border:1px solid #666666;
 	padding:5px 0px 5px 0px;
 	margin-bottom:2px;
-	font:bold 16px inherit;
 	background:#9fcc41;
 }
 
@@ -183,7 +184,6 @@
 	border:1px solid #006699;
 	padding:5px 0px 5px 0px;
 	margin-bottom:2px;
-	font:bold 16px inherit;
 }
 
 .ulError {

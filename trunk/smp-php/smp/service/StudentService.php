@@ -80,7 +80,7 @@ class smp_service_StudentService {
 	 * This method will return smp_domain_Mentor
 	 * @param Studnet Id $id
 	 */
-	function findMentorWithMenteeId($id) {
-		return $this->mentorMapper->findMentorWithStudentMenteeId($id);
+	function findMentorForMenteeWithStudentId($id) {
+		return $this->mentorMapper->findMentorForMenteeWithStudentId($id);
 	}
 }

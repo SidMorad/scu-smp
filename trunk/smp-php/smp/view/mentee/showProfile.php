@@ -1,7 +1,7 @@
 <?php
 /**
- * Created at 10/09/2010 5:14:54 PM
- * smp/view/profile/showMentee.php
+ * Created at 20/09/2010 10:13:23 AM
+ * smp/view/mentee/showProfile.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -20,7 +20,7 @@ print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profi
 print "				<br/>\r\n";
 // Student Information
 include("smp/view/student/show.php");
-print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profile/editStudent\">Edit</a></div>\r\n";
+print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profile/editStudentMentee\">Edit</a></div>\r\n";
 
 $contact = $student->getContact();
 print "				<br/>\r\n";
