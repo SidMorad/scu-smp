@@ -90,6 +90,10 @@ class smp_service_MentorService {
 	function markMentorAsExpired($mentorId) {
 		return $this->mentorMapper->markMentorAsExpired($mentorId);
 	}
+
+	function markMentorAsNotExpired($mentorId) {
+		return $this->mentorMapper->markMentorAsNotExpired($mentorId);
+	}
 	
 	function find($id) {
 		return $this->mentorMapper->find($id);

@@ -63,6 +63,14 @@ class smp_util_OptionProvider {
 				$array[Constants::MS_FOR_COORDINATOR] = 'my Coordinator';  
 				return $array;
 				break;
+			case 'role':
+				$array[Constants::ROLE_ADMIN] = Constants::ROLE_ADMIN;
+				$array[Constants::ROLE_MANAGER] = Constants::ROLE_MANAGER;
+				$array[Constants::ROLE_COORDINATOR] = Constants::ROLE_COORDINATOR;
+				$array[Constants::ROLE_MENTOR] = Constants::ROLE_MENTOR;
+				$array[Constants::ROLE_MENTEE] = Constants::ROLE_MENTEE;
+				return $array;
+				break;
 			default:
 				$array['notFound'] = 'Not Found!'; 
 				return $array;
