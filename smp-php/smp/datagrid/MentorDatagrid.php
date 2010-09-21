@@ -25,7 +25,7 @@ class smp_datagrid_MentorDatagrid extends smp_datagrid_Datagrid {
 		$mentorSearchCriteria = (!is_null($mentor) ? self::getSearchCriteria($mentor, 'smp_mentor.', true) : "");
 		$studentSearchCriteria = (!is_null($mentor) ? self::getSearchCriteria($mentor->getStudent(), 'smp_student.', true) : "");
 		
-		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course_id, smp_student.gender, smp_student.study_mode 
+		$query = "SELECT smp_mentor.id, smp_mentor.mentee_limit, smp_mentor.expired, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course_id, smp_student.gender, smp_student.study_mode 
 				FROM smp_mentor INNER JOIN smp_student WHERE smp_mentor.student_id = smp_student.id ".$mentorSearchCriteria.$studentSearchCriteria;
 		
 		if (!$paging) {

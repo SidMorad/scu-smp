@@ -18,13 +18,13 @@ class smp_command_mentor_ExpireMentorFormCommand extends smp_command_Command {
 		} else {
 			$result = $mentorService->markMentorAsExpired($mentorId);
 			if ($result) {
-				$request->addFeedback("Selected Mentor by id [".$mentorId."] updated as Trained Mentor.");
+				$request->addFeedback("Selected Mentor by id [".$mentorId."] updated as Expired Mentor.");
 			} else {
-				$request->addError("Selected Mentor by id [".$mentorId."] did not updated as Trained Mentor.");
+				$request->addError("Selected Mentor by id [".$mentorId."] did not updated as Expired Mentor.");
 			}
 		}
 		
-		$request->redirect("student/listMatchedMentor");
+		$request->redirect("mentor/listMatchedMentor");
 	}
 	
 	function doSecurity() {

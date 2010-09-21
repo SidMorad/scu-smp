@@ -15,25 +15,22 @@ include('smp/view/search/courseSearchPanel.php');
 
 $datagrid = $request->getDatagrid();
 
-$datagrid->addColumn(new Structures_DataGrid_Column('Edit', null, null, array('width' => '20%'), null, 'edit_icon()'));
-$datagrid->addColumn(new Structures_DataGrid_Column('Delete', null, null, array('width' => '20%'), null, 'delete_icon()'));
+$datagrid->addColumn(new Structures_DataGrid_Column('&nbsp;', null, null, array('width' => '20%'), null, 'icons()'));
 
 $table = smp_util_DatagridUtil::getCustomHtmlTable();
 
 $datagrid->fill($table,smp_util_DatagridUtil::getRenderOptions());
 
-print $indent."<a href=\"index.php?cmd=course/form\">Add new course</a>\r\n";
+print $indent."<a href=\"index.php?cmd=course/form\">Add new course<img src=\"static/images/add.png\" alt=\"new\" title=\"New\"></a>\r\n";
 print $table->toHtml();
 $datagrid->render(DATAGRID_RENDER_PAGER);
 
 include('smp/view/common/footer.php');
 
-function edit_icon($params) {
+function icons($params) {
 	$id = $params['record']['id'];
-	return "<a href=\"index.php?cmd=course/edit&id=$id\"><img src=\"static/images/update.png\" ></a>\r\n";
-}
-
-function delete_icon($params) {
-	$id = $params['record']['id'];
-	return "<a href=\"index.php?cmd=course/delete&id=$id\" onClick=\"return confirmSubmit()\"><img src=\"static/images/delete.png\" ></a>\r\n";
+	$html = "<a href=\"index.php?cmd=course/edit&id=$id\"><img src=\"static/images/update.png\" alt=\"update\" title=\"Update\"></a>\r\n";
+	$html .= "&nbsp; | &nbsp;";
+	$html .="<a href=\"index.php?cmd=course/delete&id=$id\" onClick=\"return confirmSubmit()\"><img src=\"static/images/delete.png\" alt=\"delete\" title=\"Delete\"></a>\r\n";
+	return $html;
 }

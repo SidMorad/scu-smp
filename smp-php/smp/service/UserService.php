@@ -8,6 +8,7 @@
  */
 require_once('smp/mapper/UserMapper.php');
 require_once('smp/service/RoleService.php');
+
 class smp_service_UserService {
 	private $userMapper;
 	private $roleService;
@@ -17,9 +18,6 @@ class smp_service_UserService {
 		$this->roleService = new smp_service_RoleService();
 	}
 
-	function update($user) {
-		return $this->userMapper->update($user);
-	}
 	
 	/**
 	 * Find User by id
@@ -70,4 +68,18 @@ class smp_service_UserService {
 		}
 		return $savedUser;	
 	}
+
+	function update($user) {
+		return $this->userMapper->update($user);
+	}
+	
+	function updateUserRoles($user) {
+		$arrRoleIds = $this->roleService->findRoleIdsByRoleNames($user->getRoles());
+		return $this->userMapper->saveUserRoles($user->getId(), $arrRoleIds);
+	}	
+
+	function delete($id) {
+		return $this->userMapper->delete($id);	
+	}
+
 }

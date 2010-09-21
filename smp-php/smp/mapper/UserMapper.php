@@ -18,6 +18,11 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		$this->insertStmt = self::$ADODB->Prepare("INSERT into smp_user (username, password, scu_email, picture) values(?,?,?,?) ");
 	}
 	
+	function delete($id) {
+		$deleteStmt = self::$ADODB->Prepare("DELETE FROM smp_user WHERE id=?");
+		return self::$ADODB->Execute($deleteStmt, array($id));
+	}
+	
 	function update($user) {
 		if (!is_null($user->getPicture())) {
 			$updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET password=?, scu_email=?, picture=? WHERE id=?");
@@ -60,8 +65,9 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		self::deleteUserRoles($userId);
 		$stmt = self::$ADODB->Prepare("INSERT INTO smp_user_role(user_id,role_id) VALUES(?,?)");
 		foreach ($arrRoleIds as $roleId) {
-			return self::$ADODB->Execute($stmt, array($userId, $roleId));
+			self::$ADODB->Execute($stmt, array($userId, $roleId));
 		}
+		return true;
 	}
 	
 	function deleteUserRoles($userId) {

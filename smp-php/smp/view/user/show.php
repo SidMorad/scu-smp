@@ -20,9 +20,9 @@ if (isset($user)) {
 	
 	print $indent."<table class=\"infoTable\">\r\n";
 	print $indent."	<tr>\r\n";
-	$pictureName = $user->getPicture();
-if (!is_null($pictureName)) {		
-	print $indent."		<td><img class=\"profileImg\" src=\"static/images/profile/_thb_$pictureName\"><br /></td>\r\n";
+	$picture = $user->getPicture();
+if (!is_null($picture)) {		
+	print $indent."		<td><a href=\"".Constants::IMAGE_UPLOAD_DIR."$picture\"><img class=\"profileImg\" src=\"".Constants::IMAGE_UPLOAD_DIR."_thb_$picture\"></a><br /></td>\r\n";
 }
 	print $indent."		<td class=\"tdLabel\">Username:</td>\r\n";
 	print $indent."		<td class=\"tdValue\">".VH::chN($user->getUsername())."</td>\r\n";

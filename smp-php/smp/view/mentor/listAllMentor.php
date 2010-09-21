@@ -41,7 +41,7 @@ if (is_null($request->getProperty('output_format'))) {
 	print $indent. "	<a href=\"index.php?cmd=mentor/listAllMentor&output_format=XLS\">\r\n";
 	print $indent. "	<img src=\"static/images/xls.png\" >\r\n";
 	print $indent. "	</a>\r\n";
-	print $indent. "<div/>\r\n";
+	print $indent. "</div>\r\n";
 	include('smp/view/common/footer.php');
 
 }else if (!is_null($request->getProperty('output_format')) && $request->getProperty('output_format') == 'XLS') {

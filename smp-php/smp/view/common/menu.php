@@ -6,8 +6,8 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Admin</a>
 						<ul>
-							<li><a href="#">List all users</a></li>
-							<li><a href="#">Add new User</a></li>
+							<li><a href="index.php?cmd=user/list">User list</a></li>
+							<li><a href="index.php?cmd=log/list">Biz Log</a></li>
 						</ul>
 					</li>
 	<?php		
@@ -30,11 +30,10 @@
 						<ul>
 							<li><a href="index.php?cmd=matching/listNonTrainedMentor">Active Mentors</a></li>
 							<li><a href="index.php?cmd=matching/listNewMentees">Matching Mentee</a></li>
-							<li><a href="index.php?cmd=student/listMatchedMentor">Matched Mentors</a></li>
+							<li><a href="index.php?cmd=mentor/listMatchedMentor">Matched Mentors</a></li>
 							<li><a href="index.php?cmd=student/listMatchedMentee">Matched Mentees</a></li>
 							<li><a href="index.php?cmd=mentor/listActiveMentor">Mentor set Limit</a></li>
-							<li><a href="index.php?cmd=mentormentee/listAllMentorMentee">Contact confirm results</a></li>
-							<li><a href="#">Send Message</a></li>
+							<li><a href="index.php?cmd=mentormentee/listAllMentorMentee">Contact confirmed ?</a></li>
 						</ul>
 					</li>
 	<?php		

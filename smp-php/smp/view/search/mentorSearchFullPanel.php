@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 20/09/2010 4:32:41 PM
- * smp/view/search/mentorSearchFullPanel
+ * smp/view/search/mentorSearchFullPanel.php
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
