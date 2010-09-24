@@ -40,8 +40,7 @@ class smp_command_profile_EditContactCommand extends smp_command_Command {
 			}
 		} else {
 			$request->setEntity($contact);
-		}
-		
+		}		
 		$request->setTitle('Edit Contact Info');
 	}
 

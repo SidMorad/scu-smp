@@ -8,19 +8,26 @@
  * @version 1.0
  */
 include('smp/view/common/header.php');
-
 $mentee=$request->getEntity();
 
-print "				<br/>\r\n";
+$indent = "				";
+
+print $indent."<br/>\r\n";
 $user=$mentee->getUser();
+$userId=$user->getId();
 include('smp/view/user/show.php');
+print $indent."<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=user/edit&id=$userId\">Edit</a></div>\r\r";
 
 print "				<br/>\r\n";
 $student=$mentee->getStudent();
+$studentId=$student->getId();
 include('smp/view/student/show.php');
+print $indent."<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=student/edit&id=$studentId\">Edit</a></div>\r\n";
 
-print "				<br/>\r\n";
+print $indent."<br/>\r\n";
 $contact=$mentee->getContact();
+$contactId=$contact->getId();
 include('smp/view/contact/show.php');
+print $indent."<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=contact/edit&id=$contactId\">Edit</a></div>\r\n";
 
 include('smp/view/common/footer.php');
