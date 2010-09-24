@@ -61,8 +61,7 @@
 	<?php		
 		}
 	?>
-	
-					<li><a href="index.php?cmd=public/album">Album</a></li>
+						
 					<li><a href="index.php?cmd=public/about">About Us</a></li>
 					<li><a href="index.php?cmd=public/contact">Contact Us</a></li>
 	<?php 

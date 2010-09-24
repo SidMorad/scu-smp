@@ -25,7 +25,7 @@ print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profi
 print "				<br/>\r\n";
 // Mentor Information
 include("smp/view/mentor/show.php");
-print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profile/editStudent\">Edit</a></div>\r\n";
+//print $indent. "<div style=\"padding-left:900px;\"><a href=\"index.php?cmd=profile/editStudent\">Edit</a></div>\r\n";
 
 $contact = $student->getContact();
 print "				<br/>\r\n";
