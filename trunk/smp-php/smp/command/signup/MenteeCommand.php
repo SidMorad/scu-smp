@@ -8,8 +8,11 @@
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
-require_once "HTTP/Upload.php";
-require_once 'Image/Transform.php';
+require_once('HTTP/Upload.php');
+require_once('Image/Transform.php');
+require_once('smp/util/MailUtil.php');
+require_once('smp/util/EmailTemplate.php');
+require_once('smp/domain/Mail.php');
 class smp_command_signup_MenteeCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
@@ -107,15 +110,27 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$contact->setEmail($validator->getProperty('email'));
 					// Save User, Student and Contact Information 
 					$blnResult = $signupService->saveMentee($user, $student, $contact);
-					if (! $blnResult) {
+					if ($blnResult) {
+						//Sending Email to mentee
+						$mailUtil=new smp_util_MailUtil();
+						$menteeMailBean=new smp_bean_Mail();
+						$menteeRecipients=$user->getScuEmail();
+						if(!is_null($contact->getEmail())){
+							$menteeRecipients=$menteeRecipients.", ".$contact->getEmail();
+						}
+						$menteeMailBean->setRecipients($menteeRecipients);
+						$menteeMailBean->setFrom(Constants::APPLICATION_EMAIL);
+						$menteeMailBean->setTo($menteeRecipients);
+						$menteeMailBean->setSubject(smp_util_EmailTemplate::subjectForMenteeAfterRegistration());
+						$menteeMailBean->setBody(smp_util_EmailTemplate::bodyForMenteeAfterRegistration($user,$student, $contact));
+						$mailUtil->sendEmail($menteeMailBean);
+						
+						$request->setTitle("Login, First time!");
+						$request->addFeedback("mentee Registration was successful, you can login with your username/password now.");
+						$request->forward("public/login");
+					}else{
 						$validator->setError("register", "Sorry, Error occourd on saving data to the database. <br/>Please try again or contact your coordinator for more help");
 					}
-				}
-				
-				if ($validator->isValid()) {
-					$request->setTitle("Login, First time!");
-					$request->addFeedback("Mentee Registration was successfull, you can login with your username/password now.");
-					$request->forward("public/login");
 				}
 			}
 		}

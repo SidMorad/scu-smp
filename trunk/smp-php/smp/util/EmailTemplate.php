@@ -40,7 +40,10 @@ class smp_util_EmailTemplate {
 	}
 	
 	static function subjectForMentorAfterRegistration() {
-		return "Registration was successfull";
+		return "Registration was successful";
+	}
+	static function subjectForMenteeAfterRegistration(){
+		return "Registration was successful";
 	}
 
 	static function bodyForMentorAfterRegistration($user, $student, $contact) {
@@ -51,5 +54,12 @@ class smp_util_EmailTemplate {
 		$body .= Constants::APPLICATION_DOMAIN."index.php?cmd=public/login";
 		return $body;
 	}
-	
+	static function bodyForMenteeAfterRegistration($user, $student, $contact){
+		$body="Dear " . $student->getFirstname() . "\n\n";
+		$body .="You are registered now, Thank you!\n";
+		$body .="Username: ". $user->getUsername()."\n";
+		$body .="Please login to our website and see your information. \n";
+		$body .=Constants::APPLICATION_DOMAIN."index.php?cmd=public/login";
+		return $body;
+	}
 }

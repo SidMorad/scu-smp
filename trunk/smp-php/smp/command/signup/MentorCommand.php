@@ -130,7 +130,7 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 						$mailUtil->sendEmail($mentorMailBean);
 						
 						$request->setTitle("Login, First time!");
-						$request->addFeedback("Mentor Registration was successfull, you can login with your username/password now.");
+						$request->addFeedback("Mentor Registration was successful, you can login with your username/password now.");
 						$request->forward("public/login");
 					} else {	
 						$validator->setError("register", "Sorry, Error occourd on saving data to the database. <br/>Please try again or contact your coordinator for more help");
