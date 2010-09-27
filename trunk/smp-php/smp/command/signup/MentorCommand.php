@@ -5,11 +5,14 @@
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  */
+require_once('HTTP/Upload.php');
+require_once('Image/Transform.php');
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
 require_once('smp/service/SignupService.php');
-require_once "HTTP/Upload.php";
-require_once 'Image/Transform.php';
+require_once('smp/util/MailUtil.php');
+require_once('smp/util/EmailTemplate.php');
+require_once('smp/domain/Mail.php');
 class smp_command_signup_MentorCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
@@ -111,19 +114,32 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$contact->setEmail($validator->getProperty('email'));
 					// Save User, Student and Contact Information 
 					$blnResult = $signupService->saveMentor($user, $student, $contact);
-					if (! $blnResult) {
+					if ($blnResult) {
+						// Sending Email to Mentor
+						$mailUtil = new smp_util_MailUtil();
+						$mentorMailBean = new smp_bean_Mail();
+						$mentorRecipients = $user->getScuEmail();
+						if (! is_null($contact->getEmail())) {
+							$mentorRecipients = $mentorRecipients . ", " . $contact->getEmail();
+						}
+						$mentorMailBean->setRecipients($mentorRecipients);
+						$mentorMailBean->setFrom(Constants::APPLICATION_EMAIL);
+						$mentorMailBean->setTo($mentorRecipients);
+						$mentorMailBean->setSubject(smp_util_EmailTemplate::subjectForMentorAfterRegistration());
+						$mentorMailBean->setBody(smp_util_EmailTemplate::bodyForMentorAfterRegistration($user, $student, $contact));	
+						$mailUtil->sendEmail($mentorMailBean);
+						
+						$request->setTitle("Login, First time!");
+						$request->addFeedback("Mentor Registration was successfull, you can login with your username/password now.");
+						$request->forward("public/login");
+					} else {	
 						$validator->setError("register", "Sorry, Error occourd on saving data to the database. <br/>Please try again or contact your coordinator for more help");
 					}
-				}
-				
-				if ($validator->isValid()) {
-					$request->setTitle("Login, First time!");
-					$request->addFeedback("Mentor Registration was successfull, you can login with your username/password now.");
-					$request->forward("public/login");
 				}
 			}
 		}
 	}
+
 
 	function doSecurity() {
 		$this->roles = array(Constants::ROLE_ANONYMOUS);
