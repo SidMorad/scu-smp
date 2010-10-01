@@ -1,7 +1,7 @@
 <?php
 /**
  * Created at 12/07/2010 8:51:07 PM
- * filename
+ * smp_util_OptionProvider
  *
  * @author <a href='mailto:smorad12@scu.edu.au'>Sid</a>
  * @version 1.0
@@ -97,6 +97,11 @@ class smp_util_OptionProvider {
 				require_once('smp/service/MenteeService.php');
 				$menteeService = new smp_service_MenteeService();	
 				return $menteeService->getCurrentMentorEmailAddressArray();
+				break;
+			case Constants::TABLE_CAMPUS: 	
+				require_once('smp/mapper/CampusMapper.php');
+				$campusMapper = new smp_mapper_CampusMapper();
+				return $campusMapper->getIdNameArray($array);
 				break;
 		}
 	}

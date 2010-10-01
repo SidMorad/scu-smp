@@ -1,12 +1,15 @@
 CREATE DATABASE IF NOT EXISTS smp;
 USE smp;
 
+DROP TABLE IF EXISTS smp_user_campus;
 DROP TABLE IF EXISTS smp_mentor_mentee;
 DROP TABLE IF EXISTS smp_mentee;
 DROP TABLE IF EXISTS smp_mentor;
 DROP TABLE IF EXISTS smp_contact;
 DROP TABLE IF EXISTS smp_student;
+DROP TABLE IF EXISTS smp_coordinator;
 DROP TABLE IF EXISTS smp_course;
+DROP TABLE IF EXISTS smp_campus;
 DROP TABLE IF EXISTS smp_user_role;
 DROP TABLE IF EXISTS smp_log;
 DROP TABLE IF EXISTS smp_user;
@@ -49,6 +52,13 @@ CREATE TABLE smp_course (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(100) NOT NULL UNIQUE,
 	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE smp_campus (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL UNIQUE,
+	short_name VARCHAR(20) NOT NULL UNIQUE,
+	PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE smp_student (
@@ -144,6 +154,25 @@ CREATE TABLE smp_mentor_mentee (
 	CONSTRAINT smp_unique_mm_id UNIQUE (mentor_id,mentee_id),
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+CREATE TABLE smp_coordinator (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	firstname VARCHAR(100),
+	lastname VARCHAR(100),
+	user_id BIGINT NOT NULL,
+	CONSTRAINT smp_fk_coordinator_user FOREIGN KEY(user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE smp_user_campus(
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	user_id BIGINT,
+	campus_id BIGINT,
+	CONSTRAINT smp_uc_user FOREIGN KEY(user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
+	CONSTRAINT smp_uc_camp FOREIGN KEY(campus_id) REFERENCES smp_campus(id) ON DELETE CASCADE,
+	CONSTRAINT smp_unique_uc_id UNIQUE (user_id,campus_id),
+	PRIMARY KEY(id)
+);
 
 insert into smp_role values(1, 'ROLE_ADMIN');
 insert into smp_role values(2, 'ROLE_MANAGER');
@@ -340,3 +369,15 @@ insert into smp_mentee (id, user_id, student_id, contact_id, matched, expired) v
 	(6,17,14,14, 0, 0),
 	(7,18,15,15, 0, 0),
 	(8,19,16,16, 0, 0);
+
+insert into smp_coordinator(id, user_id, firstname, lastname) values
+	(1, 3, 'Jo', 'Mason');
+
+insert into smp_campus(id, short_name, name) values
+	(1, 'lismore', 	'On-campus - Lismore'),
+	(2, 'coffs', 	'On-campus - Coffs Harbour'),
+	(3, 'tweed', 	'On-campus - Tweed/Gold Coast'),
+	(4, 'external', 'Distance Study');
+	
+insert into smp_user_campus(id , user_id, campus_id) values
+	(1, 3, 2);

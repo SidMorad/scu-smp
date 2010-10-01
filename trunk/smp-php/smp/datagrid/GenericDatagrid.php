@@ -22,5 +22,4 @@ class smp_datagrid_GenericDatagrid extends smp_datagrid_Datagrid {
 		return self::$datagrid;
 	}
 	
-	
 }

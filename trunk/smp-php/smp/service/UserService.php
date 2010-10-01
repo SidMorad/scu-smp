@@ -53,6 +53,14 @@ class smp_service_UserService {
 	function findUserRoles(smp_domain_User $user) {
 		return $this->userMapper->findUserRoles($user);
 	}
+
+	/**
+	 * 
+	 * @param smp_domain_User
+	 */
+	function findUserCampuses(smp_domain_User $user) {
+		return $this->userMapper->findUserCampuses($user);
+	}
 	
 	/**
 	 * Save new User and return it with new Id.
@@ -64,7 +72,10 @@ class smp_service_UserService {
 		$savedUser = $this->userMapper->save($user);
 		if (!is_null($savedUser)) {
 			$arrRoleIds = $this->roleService->findRoleIdsByRoleNames($user->getRoles());
+			// save roles
 			$this->userMapper->saveUserRoles($savedUser->getId(), $arrRoleIds);
+			// save campuses 
+			$this->userMapper->saveUserCampuses($savedUser->getId(), $user->getCampuses());
 		}
 		return $savedUser;	
 	}
@@ -76,6 +87,10 @@ class smp_service_UserService {
 	function updateUserRoles($user) {
 		$arrRoleIds = $this->roleService->findRoleIdsByRoleNames($user->getRoles());
 		return $this->userMapper->saveUserRoles($user->getId(), $arrRoleIds);
+	}	
+
+	function updateUserCampuses($user) {
+		return $this->userMapper->saveUserCampuses($user->getId(), $user->getCampuses());
 	}	
 
 	function delete($id) {
