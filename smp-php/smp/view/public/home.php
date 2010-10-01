@@ -6,7 +6,15 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  */
 include("smp/view/common/header.php");
-print "<br /><p>Do you feel comfused in your first semester?<br />
-		Are you looking for some help in this first semester?<br />
-		Then student Mentoring Program is a good place you are free to go.</p>";
+print "<div class=\"maincontainer\">
+		<br />
+		<h1>Welcome Freshmen</h1>
+		<p class=\"headline\">Do you feel confused in your first semester?<br />
+		Are you searching for some help in your first semester?<br />
+		Are you looking for some study groups?<br />
+		Then WELCOME to the Student Mentoring Program.</p>
+		
+		<br />	
+		</div>";
+
 include("smp/view/common/footer.php");
