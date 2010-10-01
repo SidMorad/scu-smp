@@ -24,13 +24,19 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 	}
 	
 	function update($user) {
+		$pictureCriteria = (is_null($user->getPicture()) ? " " : ", picture=?") ;
+		$passwordCriteria = (is_null($user->getPassword()) ? " " : ", password=?") ;
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET scu_email=? $pictureCriteria $passwordCriteria WHERE id=?");
+		$values = array($user->getScuEmail());
 		if (!is_null($user->getPicture())) {
-			$updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET password=?, scu_email=?, picture=? WHERE id=?");
-			$rs = self::$ADODB->Execute($updateStmt, array($user->getPassword(), $user->getScuEmail(), $user->getPicture(), $user->getId()));
-		} else {
-			$updateStmt = self::$ADODB->Prepare("UPDATE smp_user SET password=?, scu_email=? WHERE id=?");
-			$rs = self::$ADODB->Execute($updateStmt, array($user->getPassword(), $user->getScuEmail(), $user->getId()));
+			$values[] = $user->getPicture();			
 		}
+		if (!is_null($user->getPassword())) {
+			$values[] = $user->getPassword();			
+		}
+		$values[] = $user->getId();
+		
+		$rs = self::$ADODB->Execute($updateStmt, $values);
 		return $rs;
 	}
 	
@@ -69,9 +75,23 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		}
 		return true;
 	}
+
+	function saveUserCampuses($userId, $arrCampusIds) {
+		self::deleteUserCampuses($userId);
+		$stmt = self::$ADODB->Prepare("INSERT INTO smp_user_campus(user_id,campus_id) VALUES(?,?)");
+		foreach ($arrCampusIds as $campusId) {
+			self::$ADODB->Execute($stmt, array($userId, $campusId));
+		}
+		return true;
+	}	
 	
 	function deleteUserRoles($userId) {
 		$stmt = self::$ADODB->Prepare("DELETE FROM smp_user_role WHERE user_id=?");
+		return self::$ADODB->Execute($stmt, array($userId));
+	}
+
+	function deleteUserCampuses($userId) {
+		$stmt = self::$ADODB->Prepare("DELETE FROM smp_user_campus WHERE user_id=?");
 		return self::$ADODB->Execute($stmt, array($userId));
 	}
 	
@@ -107,6 +127,16 @@ class smp_mapper_UserMapper extends smp_mapper_Mapper {
 		$rs = self::$ADODB->Execute($selectStmt, array($user->getId()));
 		while (!$rs->EOF) {
 			$user->addToRoles($rs->fields('name'));
+			$rs->MoveNext();
+		}
+		return $user;
+	}
+
+	function findUserCampuses(smp_domain_User $user) {
+		$selectStmt = self::$ADODB->Prepare("SELECT smp_campus.id FROM smp_campus INNER JOIN smp_user_campus ON smp_campus.id = smp_user_campus.campus_id WHERE smp_user_campus.user_id=?");
+		$rs = self::$ADODB->Execute($selectStmt, array($user->getId()));
+		while (!$rs->EOF) {
+			$user->addToCampuses($rs->fields('id'));
 			$rs->MoveNext();
 		}
 		return $user;

@@ -40,8 +40,8 @@ abstract class smp_mapper_Mapper {
 	}	
 	
 	protected abstract function doCreateObject(array $array);
-	protected abstract function doInsert(smp_domain_DomainObject $object);
 	protected abstract function targetClass();
+	protected abstract function doInsert(smp_domain_DomainObject $object);
 	
 	protected function getEqualsCriteria($domain, $prefix = "", $withAnd = false) {
 		if (is_null($domain)) {

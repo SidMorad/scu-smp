@@ -10,6 +10,7 @@
 class smp_command_DefaultCommand extends smp_command_Command {
 	function doExecute(smp_controller_Request $request) {
 		$request->setTitle("Default Page");
+		$request->forward('public/home');
 	}
 	
 	function doSecurity() {

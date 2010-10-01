@@ -15,6 +15,7 @@ class smp_domain_User extends smp_domain_DomainObject {
 	private $picture;
 	
 	private $roles = array();
+	private $campuses = array();
 	
 	function __construct($id =-1, $username = null, $password = null, $scuEmail = null) {
 		parent::__construct($id);
@@ -59,8 +60,22 @@ class smp_domain_User extends smp_domain_DomainObject {
 		return $this->roles;
 	}
 	
+	/**
+	 * @param Role name $roleName e.g. ROLE_ADMIN
+	 */
 	function addToRoles($roleName) {
 		$this->roles[] = $roleName;
+	}
+
+	function getCampuses() {
+		return $this->campuses;
+	}
+	
+	/**
+	 * @param Campus id $campusId e.g. 1
+	 */
+	function addToCampuses($campusId) {
+		$this->campuses[] = $campusId;
 	}
 
 	function __toString() {
