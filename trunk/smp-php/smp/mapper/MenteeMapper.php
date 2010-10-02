@@ -35,8 +35,8 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 	}
 
 	function markMenteeAsNotExpired($id) {
-		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentee SET expired=? WHERE id=?");
-		return self::$ADODB->Execute($updateStmt, array(false, $id));
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentee SET expired=?, matched=? WHERE id=?");
+		return self::$ADODB->Execute($updateStmt, array(false, false, $id));
 	}
 	
 	function save(smp_domain_Mentee $mentee) {
