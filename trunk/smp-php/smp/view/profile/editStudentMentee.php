@@ -6,7 +6,7 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-include('smp/view/common/Header.php');
+include('smp/view/common/header.php');
 require_once('smp/util/FormBuilder.php');
 
 $objForm = new smp_util_FormBuilder();
@@ -115,4 +115,4 @@ print $objForm->label("", "&nbsp;", "grid_5");
 print $objForm->submitAndResetButton("button", "Update", "Reset", 21, "grid_7", "button");
 print $objForm->close();
 
-include('smp/view/common/Footer.php');
+include('smp/view/common/footer.php');

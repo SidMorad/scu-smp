@@ -6,7 +6,7 @@
  * @author <a href="mailto:sli24@scu.edu.au">Bruce</a>
  * @version 1.0
  */
-include('smp/view/common/Header.php');
+include('smp/view/common/header.php');
 require_once('smp/util/FormBuilder.php');
 
 $objForm=new smp_util_FormBuilder();
