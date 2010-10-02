@@ -19,6 +19,7 @@ $datagrid = smp_util_DatagridUtil::formatColumn('course_id', $datagrid);
 if (is_null($request->getProperty('output_format'))) {
 	include('smp/view/common/header.php');
 	$datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
+	$datagrid->addColumn(new Structures_DataGrid_Column('Mark as Expired',null,null,array('width'=>'15%'),null,'printMarkAsExpired()'));
 	
 	$indent = "				";
 	print $indent."<br/><h1>List of All Mentors</h1><br/>\r\n";
@@ -50,6 +51,15 @@ if (is_null($request->getProperty('output_format'))) {
 	$datagrid->render(DATAGRID_RENDER_CSV);
 }
 
+function printMarkAsExpired($params){
+	$mentorId = $params['record']['id'];
+	$expired = $params['record']['expired'];
+	if ($expired) {
+		return "<a href=\"index.php?cmd=mentor/undoExpireMentorForm&amp;mentorId=". $mentorId ."&amp;next=mentor/listAllMentor\" onclick=\"return confirmSubmit()\">Mark as Not Expired</a>";
+	} else {
+		return "<a href=\"index.php?cmd=mentor/expireMentorForm&amp;mentorId=". $mentorId ."&amp;next=mentor/listAllMentor\" onclick=\"return confirmSubmit()\">Mark as Expired</a>";
+	}
+}
 function format_gender($params){
     $key = $params['record']['gender'];
     return VH::getValueFromFixArray('gender', $key);
@@ -65,6 +75,4 @@ function format_course_id($params){
 function format_id($params) {
 	$id = $params['record']['id'];
 	return "<a href=\"index.php?cmd=mentor/showMentor&id=$id\">$id</a>";
-}
-
-	
+}	

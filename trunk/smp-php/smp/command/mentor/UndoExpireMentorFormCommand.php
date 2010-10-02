@@ -23,8 +23,8 @@ class smp_command_mentor_UndoExpireMentorFormCommand extends smp_command_Command
 				$request->addError("Selected Mentor by id [".$mentorId."] did not updated as Not Expired Mentor.");
 			}
 		}
-		
-		$request->redirect("mentor/listMatchedMentor");
+
+		$request->redirect($request->getProperty('next'));
 	}
 	
 	function doSecurity() {

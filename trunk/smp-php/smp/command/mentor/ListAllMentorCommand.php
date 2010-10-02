@@ -24,9 +24,9 @@ class smp_command_mentor_ListAllMentorCommand extends smp_command_Command {
 			$student->setGender($request->getProperty('gender'));
 			$student->setCourseId($request->getProperty('courseId'));
 			$student->setStudyMode($request->getProperty('studyMode'));
-			$mentor->setExpired($request->getProperty('expired'));
-			$mentor->setMatched($request->getProperty('matched'));
-			$mentor->setTrained($request->getProperty('trained'));
+			$mentor->setExpired((is_null($request->getProperty('expired')) ? null : true));
+			$mentor->setMatched((is_null($request->getProperty('matched')) ? null : true));
+			$mentor->setTrained((is_null($request->getProperty('trained')) ? null : true));
 			
 			$mentor->setStudent($student);
 			smp_base_SessionRegistry::setSearchEntity('mentor_ListAllMentor_MentorSearch', $mentor);
