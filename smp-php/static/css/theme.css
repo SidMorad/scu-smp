@@ -3,6 +3,7 @@
 @import "reset.css";
 @import "text.css";
 @import "960.css";
-@import "site.css";
 @import "menu/SpryMenuBarHorizontal.css";
 @import "form.css";
+@import "table.css";
+@import "site.css";

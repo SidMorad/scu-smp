@@ -12,7 +12,9 @@ require_once('smp/util/DatagridUtil.php');
 print "<br/><h1>&nbsp; Log List</h1><br/>";
 
 $datagrid = $request->getDatagrid();
-$datagrid = smp_util_DatagridUtil::formatColumn('user_id', $datagrid);
+if ($datagrid) {
+	$datagrid = smp_util_DatagridUtil::formatColumn('user_id', $datagrid);
+}
 
 $table = smp_util_DatagridUtil::getCustomHtmlTable();
 $datagrid->fill($table, smp_util_DatagridUtil::getRenderOptions());

@@ -32,6 +32,9 @@ class smp_util_DatagridUtil {
 		
 	static function formatColumn($field , $datagrid) {
 		$column =& $datagrid->getColumnByField($field);
+		if (empty($column)) {
+			return $datagrid;
+		}
 		$column->setFormatter('format_'.$field);
 		return $datagrid;
 	}

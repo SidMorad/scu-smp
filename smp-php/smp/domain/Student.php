@@ -41,7 +41,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	var $preferOnCampus;
 	var $interests;
 	var $comments;
-	var $accountStatus;
 	var $user;
 	var $contact;
 	var $mentees = array();
@@ -135,9 +134,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function setComments ($comments) {
 		$this->comments = $comments;
-	}
-	function setAccountStatus ($accountStatus) {
-		$this->accountStatus = $accountStatus;
 	}
 	function setUser(smp_domain_User $user) {
 		$this->user = $user;
@@ -238,9 +234,6 @@ class smp_domain_Student extends smp_domain_DomainObject {
 	}
 	function getComments() {	
 		return $this->comments;
-	}
-	function getAccountStatus() {
-		return $this->accountStatus;
 	}
 	function getUser() {
 		return (is_null($this->user) ? new smp_domain_User() : $this->user);

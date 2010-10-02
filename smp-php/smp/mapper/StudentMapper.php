@@ -15,8 +15,8 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		parent::__construct();
 		$strInsertQuery = "INSERT INTO smp_student (user_id, firstname, lastname, gender, student_number, age_range, course_id, major, study_mode, recommended_by_staff";
 		$strInsertQuery .= ",semesters_completed,family_status, work_status, tertiary_study_status,is_first_year, is_international, is_disability, is_indigenous";
-		$strInsertQuery .= ",is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments, account_status)";
-		$strInsertQuery .= "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$strInsertQuery .= ",is_non_english,is_regional,is_socioeconomic,prefer_gender,prefer_australian,prefer_distance,prefer_international,prefer_on_campus,interests,comments)";
+		$strInsertQuery .= "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->insertStmt = self::$ADODB->Prepare($strInsertQuery);
 	}
 
@@ -51,7 +51,6 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$obj->setPreferOnCampus($array['prefer_on_campus']);
 		$obj->setInterests($array['interests']);
 		$obj->setComments($array['comments']);
-		$obj->setAccountStatus($array['account_status']);
 		return $obj;
 	}
 
@@ -59,7 +58,7 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$values = array($obj->getUserId(), $obj->getFirstname(), $obj->getLastname(), $obj->getGender(), $obj->getStudentNumber(), $obj->getAgeRange(), $obj->getCourseId(), $obj->getMajor(),
 		$obj->getStudyMode(), $obj->getRecommendedByStaff(), $obj->getSemestersCompleted(), $obj->getFamilyStatus(), $obj->getWorkStatus(), $obj->getTertiaryStudyStatus(), $obj->getIsFirstYear(),
 		$obj->getIsInternational(), $obj->getIsDisability(), $obj->getIsIndigenous(), $obj->getIsNonEnglish(), $obj->getIsRegional(), $obj->getIsSocioeconomic(), $obj->getPreferGender(),
-		$obj->getPreferAustralian(), $obj->getPreferDistance(), $obj->getPreferInternational(), $obj->getPreferOnCampus(), $obj->getInterests(), $obj->getComments(), $obj->getAccountStatus());
+		$obj->getPreferAustralian(), $obj->getPreferDistance(), $obj->getPreferInternational(), $obj->getPreferOnCampus(), $obj->getInterests(), $obj->getComments());
 		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 
@@ -134,65 +133,5 @@ class smp_mapper_StudentMapper extends smp_mapper_Mapper {
 		$studentId = $row['mentor_id'];
 		$mentor = self::find($studentId);
 		return $mentor;
-	}
-	
-	function listMentors() {
-		// Filter Student with Account status MENTOR
-		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE account_status like ?");
-		$rs = self::$ADODB->Execute($selectStmt, array('%MENTOR%'));
-		$list = array();
-		if ($rs) {
-			while ($row = $rs->FetchRow()) {
-				$list[] = self::doCreateObject($row);
-			}
-		}
-		return $list;
-	}
-
-	function listMentees() {
-		// Filter Student with Account status MENTEE
-		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE account_status like ?");
-		$rs = self::$ADODB->Execute($selectStmt, array('%MENTEE%'));
-		$list = array();
-		if ($rs) {
-			while ($row = $rs->FetchRow()) {
-				$list[] = self::doCreateObject($row);
-			}
-		}
-		return $list;
-	}
-	
-	// TODO Remove this method and Refactor related classes
-	function listStudentWithAccountStatus($accountStatus) {
-		// list Student with passed Account status
-		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE account_status like ?");
-		$rs = self::$ADODB->Execute($selectStmt, array("%$accountStatus%"));
-		$list = array();
-		if ($rs) {
-			while ($row = $rs->FetchRow()) {
-				$list[] = self::doCreateObject($row);
-			}
-		}
-		return $list;
 	}	
-
-	// TODO Remove this method and Refactor related classes
-	function listStudentWithAccountStatuses($arrAccountStatus) {
-		// list Student with passed Account status
-		$conditionString = "";
-		foreach($arrAccountStatus as $ccountStatus) {
-			$conditionString .= " account_status=? or";
-		}
-		$conditionString = substr($conditionString, 0, strlen($conditionString) -3);
-		$selectStmt = self::$ADODB->Prepare("SELECT * FROM smp_student WHERE ". $conditionString. " ORDER BY id DESC");
-		$rs = self::$ADODB->Execute($selectStmt, $arrAccountStatus);
-		$list = array();
-		if ($rs) {
-			while ($row = $rs->FetchRow()) {
-				$list[] = self::doCreateObject($row);
-			}
-		}
-		return $list;
-	}	
-	
 }
