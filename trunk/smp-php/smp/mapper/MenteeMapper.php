@@ -19,7 +19,6 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 	private $studentMapper;
 	private $contactMapper;
 	private $mentorMenteeMapper;
-//	private $mentorMapper;
 
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
@@ -27,28 +26,17 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		$this->studentMapper = new smp_mapper_StudentMapper(self::$ADODB);
 		$this->contactMapper = new smp_mapper_ContactMapper(self::$ADODB);
 		$this->mentorMenteeMapper = new smp_mapper_MentorMenteeMapper(self::$ADODB);
-//		$this->mentorMapper = new smp_mapper_MentorMapper(self::$ADODB);
 		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentee (user_id, student_id, contact_id, matched, expired) VALUES (?,?,?,?,?)');
 	}
 	
-	function targetClass() {
-		return "smp_domain_Mentee";
+	function markMenteeAsExpired($id) {
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentee SET expired=? WHERE id=?");
+		return self::$ADODB->Execute($updateStmt, array(true, $id));
 	}
-	
-	function doCreateObject(array $array) {
-		$obj = new smp_domain_Mentee();
-		$obj->setId($array['id']);
-		$obj->setUserId($array['user_id']);
-		$obj->setStudentId($array['student_id']);
-		$obj->setContactId($array['contact_id']);
-		$obj->setMatched($array['matched']);
-		$obj->setExpired($array['expired']);
-		return $obj;
-	}
-	
-	function doInsert(smp_domain_DomainObject $obj) {
-		$values = array($obj->getUserId(), $obj->getStudentId(), $obj->getContactId(), $obj->getMatched(), $obj->getExpired());
-		return self::$ADODB->Execute($this->insertStmt, $values);
+
+	function markMenteeAsNotExpired($id) {
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentee SET expired=? WHERE id=?");
+		return self::$ADODB->Execute($updateStmt, array(false, $id));
 	}
 	
 	function save(smp_domain_Mentee $mentee) {
@@ -191,6 +179,26 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		$mentor->setMatched($array['matched']);
 		$mentor->setExpired($array['expired']);
 		return $mentor;
+	}
+
+	function targetClass() {
+		return "smp_domain_Mentee";
+	}
+	
+	function doCreateObject(array $array) {
+		$obj = new smp_domain_Mentee();
+		$obj->setId($array['id']);
+		$obj->setUserId($array['user_id']);
+		$obj->setStudentId($array['student_id']);
+		$obj->setContactId($array['contact_id']);
+		$obj->setMatched($array['matched']);
+		$obj->setExpired($array['expired']);
+		return $obj;
+	}
+	
+	function doInsert(smp_domain_DomainObject $obj) {
+		$values = array($obj->getUserId(), $obj->getStudentId(), $obj->getContactId(), $obj->getMatched(), $obj->getExpired());
+		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 	
 }

@@ -27,23 +27,6 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentor (user_id, student_id, contact_id, mentee_limit, trained, matched, expired) VALUES (?,?,?,?,?,?,?)');
 	}
 
-	function targetClass() {
-		return "smp_domain_Mentor";
-	}
-	
-	function doCreateObject(array $array) {
-		$obj = new smp_domain_Mentor();
-		$obj->setId($array['id']);
-		$obj->setUserId($array['user_id']);
-		$obj->setStudentId($array['student_id']);
-		$obj->setContactId($array['contact_id']);
-		$obj->setMenteeLimit($array['mentee_limit']);
-		$obj->setTrained($array['trained']);
-		$obj->setMatched($array['matched']);
-		$obj->setExpired($array['expired']);
-		return $obj;
-	}
-	
 	function getEmailAddressToArray($mentor) {
 		$mentees = $this->menteeMapper->findMenteesWithMentorId($mentor->getId());
 		$emailArray = array();
@@ -67,11 +50,6 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		$updateStmt = self::$ADODB->Prepare('UPDATE smp_mentor SET mentee_limit=? where id=?');
 		$rs = self::$ADODB->Execute($updateStmt, array($menteeLimit, $mentorId));
 		return ($rs === false ? false : true);
-	}
-	
-	function doInsert(smp_domain_DomainObject $obj) {
-		$values = array($obj->getUserId(), $obj->getStudentId(), $obj->getContactId(), $obj->getMenteeLimit(), $obj->getTrained(), $obj->getMatched(), $obj->getExpired());
-		return self::$ADODB->Execute($this->insertStmt, $values);
 	}
 	
 	function save(smp_domain_Mentor  $mentor) {
@@ -174,5 +152,26 @@ class smp_mapper_MentorMapper extends smp_mapper_Mapper {
 		return $mentor;
 	}
 	
+	function targetClass() {
+		return "smp_domain_Mentor";
+	}
+	
+	function doInsert(smp_domain_DomainObject $obj) {
+		$values = array($obj->getUserId(), $obj->getStudentId(), $obj->getContactId(), $obj->getMenteeLimit(), $obj->getTrained(), $obj->getMatched(), $obj->getExpired());
+		return self::$ADODB->Execute($this->insertStmt, $values);
+	}
+	
+	function doCreateObject(array $array) {
+		$obj = new smp_domain_Mentor();
+		$obj->setId($array['id']);
+		$obj->setUserId($array['user_id']);
+		$obj->setStudentId($array['student_id']);
+		$obj->setContactId($array['contact_id']);
+		$obj->setMenteeLimit($array['mentee_limit']);
+		$obj->setTrained($array['trained']);
+		$obj->setMatched($array['matched']);
+		$obj->setExpired($array['expired']);
+		return $obj;
+	}
 	
 }

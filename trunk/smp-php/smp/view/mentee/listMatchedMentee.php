@@ -14,7 +14,7 @@ require_once('smp/util/DatagridUtil.php');
 $indent = "				";
 print $indent."<br><h1>List of Matched Mentees</h1><br>\r\n";
 
-include("smp/view/search/menteeSearchPanel.php");
+include("smp/view/search/menteeSearchExpiredPanel.php");
 $datagrid=&$request->getDatagrid();
 $datagrid = smp_util_DatagridUtil::formatColumn('id', $datagrid);
 
@@ -26,6 +26,7 @@ $genderColumn=$datagrid->getColumnByField('gender');
 $genderColumn->setFormatter('formatGender');
 
 $datagrid->addColumn(new Structures_DataGrid_Column("Mentor", null,null, array('width'=>'20%'),null,'printMentorOfMentee()'));
+$datagrid->addColumn(new Structures_DataGrid_Column('Mark as Expired',null,null,array('width'=>'20%'),null,'printMarkAsExpired()'));
 
 $table=smp_util_DatagridUtil::getCustomHtmlTable();
 
@@ -35,6 +36,16 @@ print $table->toHtml();
 $datagrid->render(DATAGRID_RENDER_PAGER);
 
 include('smp/view/common/footer.php');
+
+function printMarkAsExpired($params){
+	$menteeId = $params['record']['id'];
+	$expired = $params['record']['expired'];
+	if ($expired) {
+		return "<a href=\"index.php?cmd=mentee/undoExpireMenteeForm&amp;menteeId=". $menteeId ."\" onclick=\"return confirmSubmit()\">Mark as Not Expired</a>";
+	} else {
+		return "<a href=\"index.php?cmd=mentee/expireMenteeForm&amp;menteeId=". $menteeId ."\" onclick=\"return confirmSubmit()\">Mark as Expired</a>";
+	}
+}
 
 function formatStudyMode($params){
 	$key = $params['record']['study_mode'];

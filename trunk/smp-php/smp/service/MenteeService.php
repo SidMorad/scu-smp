@@ -16,6 +16,7 @@ class smp_service_MenteeService {
 	protected $studentMapper;
 	protected $menteeMapper;
 	protected $menteeDatagrid;
+	protected $mentorMenteeMapper;
 	
 	function __construct() {
 		$this->menteeMapper = new smp_mapper_MenteeMapper();
@@ -23,6 +24,17 @@ class smp_service_MenteeService {
 		$this->userMapper = new smp_mapper_UserMapper();
 		$this->contactMapper = new smp_mapper_ContactMapper();
 		$this->menteeDatagrid = new smp_datagrid_MenteeDatagrid();
+		$this->mentorMenteeMapper = new smp_mapper_MentorMenteeMapper();	
+	}
+	
+	function markMenteeAsExpired($menteeId) {
+		$result = $this->menteeMapper->markMenteeAsExpired($menteeId);
+		$result = $this->mentorMenteeMapper->markMenteeAsExpired($menteeId);
+		return $result;
+	}
+	
+	function markMenteeAsNotExpired($menteeId) {
+		return $this->menteeMapper->markMenteeAsNotExpired($menteeId);
 	}
 	
 	function getCurrentMentorEmailAddressArray() {

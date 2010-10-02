@@ -31,7 +31,7 @@
 							<li><a href="index.php?cmd=matching/listNonTrainedMentor">Active Mentors</a></li>
 							<li><a href="index.php?cmd=matching/listNewMentees">Matching Mentee</a></li>
 							<li><a href="index.php?cmd=mentor/listMatchedMentor">Matched Mentors</a></li>
-							<li><a href="index.php?cmd=student/listMatchedMentee">Matched Mentees</a></li>
+							<li><a href="index.php?cmd=mentee/listMatchedMentee">Matched Mentees</a></li>
 							<li><a href="index.php?cmd=mentor/listActiveMentor">Mentor set Limit</a></li>
 							<li><a href="index.php?cmd=mentormentee/listAllMentorMentee">Contact confirmed ?</a></li>
 						</ul>
