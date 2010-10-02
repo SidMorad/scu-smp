@@ -46,7 +46,7 @@ class smp_datagrid_MenteeDatagrid extends smp_datagrid_Datagrid {
 		$menteeSearchCriteria = (!is_null($mentee) ? self::getSearchCriteria($mentee, 'smp_mentee.', true) : "");
 		$studentSearchCriteria = (!is_null($mentee) ? self::getSearchCriteria($mentee->getStudent(), 'smp_student.', true) : "");
 		
-		$query = "SELECT smp_mentee.id, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course_id, smp_student.gender, smp_student.study_mode,
+		$query = "SELECT smp_mentee.id, smp_mentee.expired, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course_id, smp_student.gender, smp_student.study_mode,
 				(SELECT lastname FROM smp_student WHERE smp_mentor.student_id = smp_student.id) AS mentor_lastname
 				FROM smp_mentee, smp_student, smp_mentor_mentee, smp_mentor WHERE smp_mentee.student_id = smp_student.id AND smp_mentee.id = smp_mentor_mentee.mentee_id AND smp_mentor_mentee.mentor_id = smp_mentor.id".$menteeSearchCriteria.$studentSearchCriteria;
 		self::$datagrid->setDefaultSort(array('id' => 'DESC'));
