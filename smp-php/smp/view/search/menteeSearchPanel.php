@@ -31,7 +31,7 @@ if (!is_null($request->getSearchEntity())) {
 	$searchForm->setValue('studyMode', $mentee->getStudent()->getStudyMode());
 }
 
-print $searchForm->open('mentorSearchForm', "form_container", $_SERVER['REQUEST_URI']);
+print $searchForm->open('menteeSearchForm', "form_container", $_SERVER['REQUEST_URI']);
 print $searchForm->hidden(Constants::ACTION, Constants::ACTION_SEARCH);
 print $searchForm->label('firstname','Firstname:', 'grid_1');
 print $searchForm->textBox('firstname', null, null,1,'grid_2','smallinput');

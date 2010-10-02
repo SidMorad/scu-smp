@@ -24,7 +24,7 @@ class smp_command_mentor_ExpireMentorFormCommand extends smp_command_Command {
 			}
 		}
 		
-		$request->redirect("mentor/listMatchedMentor");
+		$request->redirect($request->getProperty('next'));
 	}
 	
 	function doSecurity() {

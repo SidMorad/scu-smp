@@ -25,7 +25,7 @@ class smp_command_mentee_ExpireMenteeFormCommand extends smp_command_Command {
 			}
 		}
 		
-		$request->redirect("mentee/listMatchedMentee");
+		$request->redirect($request->getProperty('next'));
 	}
 	
 	function doSecurity() {

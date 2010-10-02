@@ -71,8 +71,8 @@ function printMarkAsExpired($params){
 	$mentorId = $params['record']['id'];
 	$expired = $params['record']['expired'];
 	if ($expired) {
-		return "<a href=\"index.php?cmd=mentor/undoExpireMentorForm&amp;mentorId=". $mentorId ."\" onclick=\"return confirmSubmit()\">Mark as Not Expired</a>";
+		return "<a href=\"index.php?cmd=mentor/undoExpireMentorForm&amp;mentorId=". $mentorId ."&amp;next=mentor/listMatchedMentor\" onclick=\"return confirmSubmit()\">Mark as Not Expired</a>";
 	} else {
-		return "<a href=\"index.php?cmd=mentor/expireMentorForm&amp;mentorId=". $mentorId ."\" onclick=\"return confirmSubmit()\">Mark as Expired</a>";
+		return "<a href=\"index.php?cmd=mentor/expireMentorForm&amp;mentorId=". $mentorId ."&amp;next=mentor/listMatchedMentor\" onclick=\"return confirmSubmit()\">Mark as Expired</a>";
 	}
 }

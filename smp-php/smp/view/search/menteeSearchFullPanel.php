@@ -1,7 +1,7 @@
 <?php
 /**
- * Created at 02/10/2010 3:49:01 PM
- * smp/view/search/MenteeSearchExpiredPanel.php
+ * Created at 02/10/2010 4:57:17 PM
+ * smp/view/search/menteeSearchFullPanel
  *
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
@@ -29,7 +29,8 @@ if (!is_null($request->getSearchEntity())) {
 	$searchForm->setValue('courseId', $mentee->getStudent()->getCourseId());
 	$searchForm->setValue('gender', $mentee->getStudent()->getGender());
 	$searchForm->setValue('studyMode', $mentee->getStudent()->getStudyMode());
-	$searchForm->setValue('expired', $mentee->getExpired());	
+	$searchForm->setValue('expired', $mentee->getExpired());
+	$searchForm->setValue('matched', $mentee->getMatched());
 }
 
 print $searchForm->open('menteeSearchForm', "form_container", $_SERVER['REQUEST_URI']);
@@ -39,10 +40,7 @@ print $searchForm->textBox('firstname', null, null,1,'grid_2','smallinput');
 print $searchForm->label('lastname','Lastname:', 'grid_1');
 print $searchForm->textBox('lastname', null, null,1,'grid_2','smallinput');
 print $searchForm->label('studentNumber','StudentNumber:', 'grid_1');
-print $searchForm->textBox('studentNumber', null, null,1,'grid_1','smallinput');
-print $searchForm->label("expired", "Expired:", "grid_1");
-print $searchForm->checkBox("expired", "", 1,"grid_1");
-print $searchForm->button('clearButton', 'Clear', 'button', 1,'grid_1', 'button', array('onClick'=>'clearForm(this.form)'));
+print $searchForm->textBox('studentNumber', null, null,1,'grid_4','smallinput');
 
 print $searchForm->label('courseId','Course:', 'grid_1');
 print $searchForm->selectBox('courseId', null, null,1,'grid_2', VH::getDynamicArray('course', true),'smallinput');
@@ -50,6 +48,14 @@ print $searchForm->label('gender','Gender:', 'grid_1');
 print $searchForm->selectBox('gender', null, null,1,'grid_2', VH::getFixArray('gender', true),'smallinput');
 print $searchForm->label('studyMode','StudyMode:', 'grid_1');
 print $searchForm->selectBox('studyMode', null, null,1,'grid_3', VH::getFixArray('study_mode', true),'input');
+print $searchForm->button('clearButton', 'Clear', 'button', 1,'grid_1', 'button', array('onClick'=>'clearForm(this.form)'));
+
+print $searchForm->label("expired" , "Expired:", "grid_1");
+print $searchForm->checkBox("expired", "", 1, 	"grid_2");
+print $searchForm->label("matched" , "Matched:", "grid_1");
+print $searchForm->checkBox("matched", "", 1, 	"grid_2");
+print $searchForm->label("empty_space" , "&nbsp;", "grid_4");
+
 
 print $searchForm->button('searchButton', 'Search', 'submit', 1,'grid_1');
 print $searchForm->close();

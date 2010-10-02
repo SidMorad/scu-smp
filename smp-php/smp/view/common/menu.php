@@ -6,7 +6,7 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Admin</a>
 						<ul>
-							<li><a href="index.php?cmd=user/list">User list</a></li>
+							<li><a href="index.php?cmd=user/list">User List</a></li>
 							<li><a href="index.php?cmd=log/list">Biz Log</a></li>
 						</ul>
 					</li>
@@ -16,9 +16,9 @@
 	?>
 					<li><a href="#" class="MenuBarItemSubmenu">Manager</a>
 						<ul>
-							<li><a href="index.php?cmd=coordinator/list">Coordinator list</a></li>
-							<li><a href="index.php?cmd=mentor/listAllMentor">Mentor list</a></li>
-							<li><a href="index.php?cmd=mentee/listAllMentee">Mentee list</a></li>
+							<li><a href="index.php?cmd=coordinator/list">Coordinator List</a></li>
+							<li><a href="index.php?cmd=mentor/listAllMentor">Mentor List</a></li>
+							<li><a href="index.php?cmd=mentee/listAllMentee">Mentee List</a></li>
 							<li><a href="index.php?cmd=course/list">Course List</a></li>
 						</ul>
 					</li>

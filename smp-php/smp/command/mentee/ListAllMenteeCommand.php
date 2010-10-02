@@ -25,14 +25,12 @@ class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {
 			$student->setGender($request->getProperty('gender'));
 			$student->setCourseId($request->getProperty('courseId'));
 			$student->setStudyMode($request->getProperty('studyMode'));
+			$mentee->setExpired((is_null($request->getProperty('expired')) ? null : true));
+			$mentee->setMatched((is_null($request->getProperty('matched')) ? null : true));
 			
-			$action = $request->getProperty(Constants::ACTION);
-			if($action == Constants::ACTION_SEARCH){
-				$mentee->setStudent($student);
-				smp_base_SessionRegistry::setSearchEntity('mentee_ListAllMentee_MenteeSearch', $mentee);
-			}
+			$mentee->setStudent($student);
+			smp_base_SessionRegistry::setSearchEntity('mentee_ListAllMentee_MenteeSearch', $mentee);
 		}
-		
 		$mentee = smp_base_SessionRegistry::getSearchEntity('mentee_ListAllMentee_MenteeSearch');
 		$request->setSearchEntity($mentee);
 		
