@@ -1,0 +1,266 @@
+/*
+ *	CSS for FormBuilder.php
+ *	FormBuilder is using Grid 960 CSS Framework for lay out forms.
+ * 	
+*/
+.form_container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 940px;
+}
+.form_container .grid_1 {
+	width: 60px;
+}
+
+.form_container .grid_2 {
+	width: 140px;
+}
+
+
+.form_container .grid_3 {
+	width: 220px;
+}
+
+.form_container .grid_4 {
+	width: 300px;
+}
+
+.form_container .grid_5 {
+	width: 370px;
+}
+
+.form_container .grid_6 {
+	width: 440px;
+}
+
+.form_container .grid_7 {
+	width: 520px;
+}
+
+.form_container .grid_8 {
+	width: 600px;
+}
+
+.form_container .grid_9 {
+	width: 680px;
+}
+
+.form_container .grid_10 {
+	width: 760px;
+}
+
+.form_container .grid_11 {
+	width: 840px;
+}
+
+.form_container .grid_12 {
+	width: 940px;
+}
+
+.form_container .label {
+	text-align:right;
+	float: right;
+}
+
+.form_container .labelValue {
+	text-align:left;
+	font-weight: bold;
+}
+
+.form_container input {
+	border:1px solid #666666;
+	padding:5px 0px 5px 0px;
+	margin-bottom:2px;
+}
+
+.form_container select {
+	border:1px solid #666666;
+	padding:2px 0px 2px 0px;
+	margin-bottom:2px;
+}
+
+.form_container h3 {
+	padding-top: 30px;
+	padding-left: 20px;
+}
+
+.form_container hr {
+	float:left;
+	width: 920px;
+	margin-top: 0px;
+}
+
+.input,
+.biginput,
+.smallinput,
+.button,
+.select,
+.textarea {
+	border-color:#666666; 
+	color:#666666;
+}
+
+.input:hover,
+.biginput:hover,
+.smallinput:hover,
+.button:hover,
+.select:hover,
+.textarea:hover {
+	border-color: #006699;
+	background:#E4F5FA;
+}
+
+.selected_input,
+.selected_biginput,
+.selected_smallinput,
+.selected_button,
+.selected_select,
+.selected_error_select,
+.selected_textarea {
+	border-color: #006699;
+	background:#E4F5FA;
+}
+
+.error_input,
+.error_biginput,
+.error_smallinput,
+.error_select,
+.error_textarea {
+	border-color: #cc0000;
+	background:#FFF0F0;
+}
+
+.input,
+.selected_input,
+.error_input {
+	width: 180px;
+}
+
+.biginput,
+.selected_biginput,
+.error_biginput {
+	width: 500px;
+}
+
+.smallinput,
+.selected_smallinput,
+.error_smallinput {
+	width: 85px;
+}
+
+.button,
+.selected_button,
+.error_button {
+	width: 85px;
+}
+
+.select,
+.selected_select,
+.selected_error_select,
+.error_select {
+	width: 180px;
+	height: 30px;
+}
+
+.textarea,
+.selected_textarea,
+.error_textarea {
+	font-family: inherit;
+	font-size: 14px;
+}
+
+.checkbox {
+}
+
+.redio {
+	margin: 0px;
+	border: none;
+}
+
+.button {
+	border:1px solid #666666;
+	padding:5px 0px 5px 0px;
+	margin-bottom:2px;
+	background:#9fcc41;
+}
+
+.selected_button {
+	border:1px solid #006699;
+	padding:5px 0px 5px 0px;
+	margin-bottom:2px;
+}
+
+.ulError {
+	margin:0;
+	padding:5px;
+	width:570px;
+	background:#FFF0F0;
+	border:1px solid #cc0000;
+	color:#cc0000;
+}
+
+.ulInfo {
+	margin:0;
+	padding:10px 25px 10px 25px;
+	width:570px;
+	background:#F0FFF0;
+	border:1px solid #00cc00;
+	color:#00bb00;
+}
+
+.required {
+	color:red;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.searchHeader {
+	border:1px solid #000;
+	background: #dedede;
+	padding: 5px;
+	text-decoration: underline;
+}
+
+.searchHeader:hover {
+	cursor: pointer;
+}
+
+.showInfoHeader {
+	border:1px solid #000;
+	background: #dedede;
+	padding: 5px;
+	text-decoration: underline;
+}
+
+.showInfoHeader:hover {
+	cursor: pointer;
+}
+
+.searchPanel {
+	padding-top: 10px;
+	padding-bottom: 40px;
+	display: block;
+}
+
+.infoPanel {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+}
+
+.infoTable {
+	cellpadding: 0px;
+	cellspaccing: 0px;
+}
+
+.tdLabel{
+	text-align: right;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.tdValue {
+	font-weight: bold;
+}

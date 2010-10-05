@@ -1,0 +1,113 @@
+/*
+	CSS for SMP website
+*/
+body {
+	background-color: #49531f;	
+	font-size:81.25%;
+}
+
+#header {
+	height: 90px;
+	background-color: #9FCC41;
+	background-image: url(../images/mentoring.jpg);
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+#header img {
+	margin: 0px;
+	padding: 1.5em;
+	float: left;
+}
+
+#header h6 {
+	padding-top: 70px;
+	padding-left: 400px;
+}
+
+#menu {
+	background-color: #1A6116;
+	color: #FFF;
+	height: 34px;
+}
+
+#content {
+	background-color: white;
+	min-height: 740px;
+}
+
+#footer {
+	background-color: white;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: tahoma, arial, helvetica, sans-serif;
+	font-weight: normal;
+	padding: 0;
+	color: green;
+	margin: 0 0 0.5em 0;
+	line-height: 1.5em;
+}
+
+h1 {
+	font-size: 2.2em;
+	letter-spacing: -1px;
+}
+
+h2 {
+	font-size: 1.4em;
+}
+
+h3 {
+	font-size: 1.3em;
+}
+
+h4 {
+	font-size: 1.2em;
+}
+
+h5 {
+	font-size: 1.1em;
+}
+
+h6 {
+	font-size: 1em;
+}
+
+.profileImg {
+	float: right;
+	padding: 10px;
+}
+
+/* Container
+----------------------------------------------------------------------------------------------------*/
+.maincontainer p {	
+	margin-left: 20px;
+	max-width: 600px;
+	font-size: 1.25em;	
+	text-align:justify;
+	font-family:"Tahoma", Geneva, sans-serif;
+	text-indent: 50px;	
+}
+
+.maincontainer p.headline {
+	color: #88B036;	
+	font-size: 1.5em;
+	margin-bottom: -2px;
+	text-indent: 0px;	
+	font-family:"Comic Sans MS", cursive, sans-serif;	
+}
+
+.maincontainer img {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 0px;
+	margin-left: 0px;
+}
+.maincontainer table{
+	margin:10px;
+}
+.maincontainer table img{
+	margin-left:10px;
+}

@@ -1,0 +1,4 @@
+<config>
+	<dsn>mysqlt://smp:smp@localhost/smp</dsn>
+	<mdb2dsn>mysql://smp:smp@localhost/smp</mdb2dsn>
+</config>
