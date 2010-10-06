@@ -7,7 +7,7 @@
 				&nbsp;|&nbsp; <a href="index.php?cmd=public/contact">Contacting Us</a> 
 			</div>
 			<div id="quotes" class="grid_12">
-				<iframe width="930px" height="80px" scrolling="auto"
+				<iframe width="930px" height="80px" scrolling="no"
   				frameborder="0" allowtransparency="true"
   				src="http://quotes4all.net/quotes.html?quote_align=left&quote_background=49531f&image=none&image_size=40&author_align=left&padding=0&title_align=left">
 				</iframe>
