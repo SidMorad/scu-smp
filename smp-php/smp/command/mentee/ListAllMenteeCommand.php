@@ -11,8 +11,7 @@ require_once('smp/command/Command.php');
 require_once('smp/service/MenteeService.php');
 require_once('smp/domain/Student.php');
 require_once('smp/base/SessionRegistry.php');
-class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {
-	
+class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {	
 	function doExecute(smp_controller_Request $request) {
 		$menteeService = new smp_service_MenteeService();
 		
@@ -28,13 +27,21 @@ class smp_command_mentee_ListAllMenteeCommand extends smp_command_Command {
 			$mentee->setExpired((is_null($request->getProperty('expired')) ? null : true));
 			$mentee->setMatched((is_null($request->getProperty('matched')) ? null : true));
 			
+			
 			$mentee->setStudent($student);
 			smp_base_SessionRegistry::setSearchEntity('mentee_ListAllMentee_MenteeSearch', $mentee);
 		}
 		$mentee = smp_base_SessionRegistry::getSearchEntity('mentee_ListAllMentee_MenteeSearch');
 		$request->setSearchEntity($mentee);
 		
-		$datagrid = $menteeService->getAllMenteeDatagrid($mentee);
+		$outputFormat = $request->getProperty('output_format');
+		if(is_null($outputFormat)){
+			$datagrid = $menteeService->getAllMenteeDatagrid($mentee);
+		}else{
+			$datagrid = $menteeService->getAllMenteeDatagrid($mentee, false);
+		}
+		
+		
 		$request->setDatagrid($datagrid);
 		$request->setTitle("List of Mentees");
 	}

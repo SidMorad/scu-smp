@@ -7,9 +7,11 @@
  * @version 1.0
  */
 require_once('smp/datagrid/Datagrid.php');
+
+
 class smp_datagrid_MenteeDatagrid extends smp_datagrid_Datagrid {
 	
-	function getMenteeDatagrid($mentee = null) {
+	function getMenteeDatagrid($mentee = null, $paging=ture) {
 		self::$options['fields'] = array ('id','firstname', 'lastname', 'student_number', 'course_id', 'gender', 'study_mode');			 
 		self::$options['labels'] = array (
 			'id' => 'Id',
@@ -25,7 +27,12 @@ class smp_datagrid_MenteeDatagrid extends smp_datagrid_Datagrid {
 		
 		$query = "SELECT smp_mentee.id, smp_mentee.expired, smp_student.firstname, smp_student.lastname, smp_student.student_number, smp_student.course_id, smp_student.gender, smp_student.study_mode 
 				FROM smp_mentee INNER JOIN smp_student WHERE smp_mentee.student_id = smp_student.id ".$menteeSearchCriteria.$studentSearchCriteria;
-		self::$datagrid->setDefaultSort(array('id' => 'DESC'));
+				
+		if(!$paging){
+			self::$datagrid = new Structures_DataGrid();
+		}
+		
+		self::$datagrid->setDefaultSort(array('id' => 'ASC'));
 		self::$datagrid->bind($query, self::$options);
 		
 		return self::$datagrid;
