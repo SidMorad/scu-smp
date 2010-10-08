@@ -20,7 +20,7 @@ class smp_util_FormBuilder {
 	}
 
 	function open($strId, $cssClass = "form_Container", $strAction = "", $strMethod = "post", $strEnctype = "multipart",$arrOtherAttributes = array()) {
-		$strId = $this->getHtmlAttributeString($strId == "", "id", $strId);
+		$strId = $this->getHtmlAttributeString($strId != "", "id", $strId);
 		$strAction = (($strAction == "") ? $this->strFileName : $strAction);
 		$strOtherAttributes = $this->getOtherAttributes($arrOtherAttributes);
 		switch ($strMethod) {
