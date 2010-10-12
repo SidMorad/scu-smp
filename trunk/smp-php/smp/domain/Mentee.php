@@ -23,6 +23,8 @@ class smp_domain_Mentee extends smp_domain_DomainObject {
 	private $matched;
 	private $expired;
 	private $mentor;
+	private $wantToBeMentor;
+	private $copiedAsMentor;
 	
 		function __construct(smp_domain_User $user = null, smp_domain_Student $student = null, smp_domain_Contact $contact = null, $id = -1) {
 		$this->user = $user;
@@ -100,5 +102,21 @@ class smp_domain_Mentee extends smp_domain_DomainObject {
 
 	public function setExpired($expired) {
 	    $this->expired = $expired;
+	}
+
+	public function getWantToBeMentor() {
+	    return $this->wantToBeMentor;
+	}
+
+	public function setWantToBeMentor($wantToBeMentor) {
+	    $this->wantToBeMentor = $wantToBeMentor;
+	}
+
+	public function getCopiedAsMentor() {
+	    return $this->copiedAsMentor;
+	}
+
+	public function setCopiedAsMentor($copiedAsMentor) {
+	    $this->copiedAsMentor = $copiedAsMentor;
 	}
 }

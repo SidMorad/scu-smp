@@ -96,9 +96,7 @@ class smp_command_signup_MenteeCommand extends smp_command_Command {
 					$student->setIsSocioeconomic($validator->getProperty('isSocioeconomic'));
 					$student->setPreferGender($validator->getProperty('preferGender'));					
 					$student->setInterests($validator->getProperty('interests'));
-					$student->setComments($validator->getProperty('comments'));
-					// Set account status for new registered Mentee
-					$student->setAccountStatus(Constants::AS_NEW_MENTEE);					
+					$student->setComments($validator->getProperty('comments'));					
 
 					$contact = new smp_domain_Contact();
 					$contact->setAddress($validator->getProperty('address'));

@@ -6,14 +6,13 @@
  * @author <a href="mailto:smorad12@scu.edu.au">Sid</a>
  * @version 1.0
  */
-
-require_once('smp/util/OptionProvider.php');
 require_once('smp/mapper/MentorMapper.php');
 require_once('smp/mapper/MenteeMapper.php');
 require_once('smp/mapper/UserMapper.php');
 require_once('smp/mapper/ContactMapper.php');
 require_once('smp/datagrid/MentorDatagrid.php');
 require_once('smp/util/Security.php');
+
 class smp_service_MentorService {
 	protected $mentorMapper;
 	protected $menteeMapper;
@@ -129,7 +128,7 @@ class smp_service_MentorService {
 	
 	function findMentorStudentWithMenteeId($menteeId) {
 		$mentor = self::findMentorWithMenteeId($menteeId);
-		$mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));
+		if (! is_null($mentor)) { $mentor->setStudent($this->studentMapper->find($mentor->getStudentId()));}
 		return $mentor;
 	}
 }

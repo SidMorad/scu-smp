@@ -20,6 +20,7 @@
 							<li><a href="index.php?cmd=mentor/listAllMentor">Mentor List</a></li>
 							<li><a href="index.php?cmd=mentee/listAllMentee">Mentee List</a></li>
 							<li><a href="index.php?cmd=course/list">Course List</a></li>
+							<li><a href="index.php?cmd=mentee/listMenteesThatWantToBeMentor">Mentee->Mentor</a></li>
 						</ul>
 					</li>
 	<?php		
@@ -34,6 +35,7 @@
 							<li><a href="index.php?cmd=mentee/listMatchedMentee">Matched Mentees</a></li>
 							<li><a href="index.php?cmd=mentor/listActiveMentor">Mentor set Limit</a></li>
 							<li><a href="index.php?cmd=mentormentee/listAllMentorMentee">Contact confirmed ?</a></li>
+							<li><a href="index.php?cmd=mentee/listMenteesThatWantToBeMentor">Mentee->Mentor</a></li>
 						</ul>
 					</li>
 	<?php		

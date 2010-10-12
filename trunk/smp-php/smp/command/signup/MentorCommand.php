@@ -101,8 +101,6 @@ class smp_command_signup_MentorCommand extends smp_command_Command {
 					$student->setPreferOnCampus($validator->getProperty('preferOnCampus'));
 					$student->setInterests($validator->getProperty('interests'));
 					$student->setComments($validator->getProperty('comments'));
-					// Set account status for new registered Mentor
-					$student->setAccountStatus(Constants::AS_NEW_MENTOR);	
 					
 					$contact = new smp_domain_Contact();
 					$contact->setAddress($validator->getProperty('address'));

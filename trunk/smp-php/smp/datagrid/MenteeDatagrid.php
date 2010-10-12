@@ -8,10 +8,9 @@
  */
 require_once('smp/datagrid/Datagrid.php');
 
-
 class smp_datagrid_MenteeDatagrid extends smp_datagrid_Datagrid {
 	
-	function getMenteeDatagrid($mentee = null, $paging=ture) {
+	function getMenteeDatagrid($mentee = null, $paging = true) {
 		self::$options['fields'] = array ('id','firstname', 'lastname', 'student_number', 'course_id', 'gender', 'study_mode');			 
 		self::$options['labels'] = array (
 			'id' => 'Id',

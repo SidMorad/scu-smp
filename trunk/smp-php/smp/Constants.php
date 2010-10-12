@@ -36,8 +36,6 @@ class Constants {
 	// Messaging constants
 	const MESSAGE_MENTOR = 'MESSAGE_MENTOR';
 	const MESSAGE_MENTEE = 'MESSAGE_MENTEE';
-	const MS_FOR_MENTOR = 'MS_FOR_MENTOR';
-	const MS_FOR_MENTEE = 'MS_FOR_MENTEE';
 	
 	// Actions constants
 	const ACTION = 'ACTION';

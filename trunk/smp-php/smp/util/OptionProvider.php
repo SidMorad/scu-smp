@@ -48,21 +48,6 @@ class smp_util_OptionProvider {
 				$array['nowork'] = 'Do not work';
 				return $array;
 				break;
-			case 'account_status':
-				$array[Constants::AS_NEW_MENTOR] = 'New Mentor'; 
-				$array[Constants::AS_NEW_MENTEE] = 'New Mentee';
-				$array[Constants::AS_MATCHED_MENTOR] = 'Matched Mentor';
-				$array[Constants::AS_MATCHED_MENTEE] = 'Matched Mentee';
-				$array[Constants::AS_TRAINED_MENTOR] = 'Trained Mentor';
-				$array[Constants::AS_EXPIRED_MENTOR] = 'Expired Mentor';
-				$array[Constants::AS_EXPIRED_MENTEE] = 'Expired Mentee';      
-				return $array;
-				break;
-			case Constants::MESSAGE_MENTOR:
-				$array[Constants::MS_FOR_MENTEE] = 'my Mentee(s)';
-				$array[Constants::MS_FOR_COORDINATOR] = 'my Coordinator';  
-				return $array;
-				break;
 			case 'role':
 				$array[Constants::ROLE_ADMIN] = Constants::ROLE_ADMIN;
 				$array[Constants::ROLE_MANAGER] = Constants::ROLE_MANAGER;
