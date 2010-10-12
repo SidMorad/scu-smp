@@ -42,8 +42,8 @@ class smp_service_UserService {
 	 * @param $scuEmail
 	 * @return smp_domain_User  
 	 */
-	function findUserByScuEmail($username) {
-		return $this->userMapper->findUserByScuEmail($username);	
+	function findUserByScuEmail($scuEmail) {
+		return $this->userMapper->findUserByScuEmail($scuEmail);	
 	}
 	
 	/**

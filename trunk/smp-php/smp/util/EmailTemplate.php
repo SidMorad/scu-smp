@@ -62,4 +62,16 @@ class smp_util_EmailTemplate {
 		$body .=Constants::APPLICATION_DOMAIN."index.php?cmd=public/login";
 		return $body;
 	}
+
+	static function subjectForForgotPassword(){
+		return "Forgot your Password ?";
+	}
+
+	static function bodyForForgotPassword($user){
+		$body="Dear " . $user->getUsername() . "\n\n";
+		$body .="Please click below url for reset your password.\n";
+		$body .=Constants::APPLICATION_DOMAIN."index.php?cmd=public/resetPassword&scuEmail=".$user->getScuEmail()."&key=".$user->getPassword()."\n\n";
+		$body .="Sent from SMP application.\n";
+		return $body;
+	}
 }

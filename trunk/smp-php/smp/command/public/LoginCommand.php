@@ -7,8 +7,8 @@
  */
 require_once('smp/util/Validator.php');
 require_once('smp/service/UserService.php');
-require_once('smp/mapper/UserMapper.php');
 require_once('smp/base/SessionRegistry.php');
+
 class smp_command_public_LoginCommand extends smp_command_Command {
 	
 	function doExecute(smp_controller_Request $request) {
