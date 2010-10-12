@@ -60,6 +60,13 @@ SMTP is default settings for sending email.
 
 for different config you can have a look at [http://pear.php.net/package/Mail/docs here]. 
 
+== Constants ==
+{project_root}/smp/[http://code.google.com/p/scu-smp/source/browse/trunk/smp-php/smp/Constants.php Constants.php]
+
+You should modify APPLICATION_DOMAIN const to yours.
+
+You may want to modify other consts but be careful about change Role's constants (If you change them , then you need to update the data of Role's table from database too). 
+
 == Others == 
 If you installed local copy of PEAR on a shared host, then
 you need to make sure line 6 of [http://code.google.com/p/scu-smp/source/browse/trunk/smp-php/index.php index.php] refers to PEAR directory correctly.
