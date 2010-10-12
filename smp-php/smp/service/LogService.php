@@ -15,7 +15,7 @@ class smp_service_LogService {
 	}
 	
 	function getDatagrid() {
-		return $this->genericDatagrid->getDatagrid(Constants::TABLE_LOG);	
+		return $this->genericDatagrid->getDatagrid(Constants::TABLE_LOG, null, 'id', 'DESC');	
 	}
 	
 }
