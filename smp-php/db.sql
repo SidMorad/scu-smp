@@ -135,9 +135,12 @@ CREATE TABLE smp_mentee (
 	contact_id BIGINT NOT NULL,
 	matched BOOLEAN DEFAULT FALSE,
 	expired BOOLEAN DEFAULT FALSE,
+	want_to_be_mentor BOOLEAN DEFAULT FALSE,
+	copied_as_mentor BOOLEAN DEFAULT FALSE,
 	CONSTRAINT smp_fk_mentee_user FOREIGN KEY (user_id) REFERENCES smp_user(id) ON DELETE CASCADE,
 	CONSTRAINT smp_fk_mentee_student FOREIGN KEY (student_id) REFERENCES smp_student(id) ON DELETE CASCADE,
 	CONSTRAINT smp_fk_mentee_contact FOREIGN KEY (contact_id) REFERENCES smp_contact(id) ON DELETE CASCADE,
+	CONSTRAINT smp_unique_mentee_fks UNIQUE (user_id,student_id),
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

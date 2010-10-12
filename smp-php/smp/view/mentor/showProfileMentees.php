@@ -78,7 +78,7 @@ foreach($mentor->getMentees() as $mentee) {
 		print $indent."	</div>\r\n";
 		print $indent."	<div class=\"grid_10\">\r\n";
 		print $indent."		<img src=\"static/images/no.png\" >\r\n";
-		print $indent."		<a href=\"index.php?cmd=mentor/confirmContactMentee&relation_id=$relationId\" onClick=\"return confirmSubmit()\">Click here if contact with $fullName has been achieved!</a>";
+		print $indent."		<a href=\"index.php?cmd=mentor/confirmContactMentee&relation_id=$relationId\" onClick=\"return confirmSubmit()\">Click here if contact with $fullName has been achieved?</a>";
 		print $indent."	</div>\r\n";
 		if (!is_null($mentee->getRelation()->getCreateTime())) {
 			print $indent."	<div class=\"grid_2\">\r\n";

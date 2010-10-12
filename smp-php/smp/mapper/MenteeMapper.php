@@ -10,11 +10,14 @@ require_once('smp/mapper/Mapper.php');
 require_once('smp/domain/Mentee.php');
 require_once('smp/domain/Mentor.php');
 require_once('smp/mapper/Mapper.php');
+require_once('smp/mapper/RoleMapper.php');
 require_once('smp/mapper/UserMapper.php');
 require_once('smp/mapper/StudentMapper.php');
 require_once('smp/mapper/ContactMapper.php');
 require_once('smp/mapper/MentorMenteeMapper.php');
+
 class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
+	private $roleMapper;
 	private $userMapper;
 	private $studentMapper;
 	private $contactMapper;
@@ -22,11 +25,44 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 
 	function __construct($adodb = null) {
 		parent::__construct($adodb);
+		$this->roleMapper = new smp_mapper_RoleMapper(self::$ADODB);
 		$this->userMapper = new smp_mapper_UserMapper(self::$ADODB);
 		$this->studentMapper = new smp_mapper_StudentMapper(self::$ADODB);
 		$this->contactMapper = new smp_mapper_ContactMapper(self::$ADODB);
 		$this->mentorMenteeMapper = new smp_mapper_MentorMenteeMapper(self::$ADODB);
 		$this->insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentee (user_id, student_id, contact_id, matched, expired) VALUES (?,?,?,?,?)');
+	}
+	/**
+	 * Copy Mentee information to the Mentor table and
+	 * Change User's role from Mentee to Mentor.
+	 * 
+	 * @param Mentee id $id
+	 */
+	function copyMenteeInfoAsMentor($id) {
+		self::$ADODB->StartTrans();
+		$mentee = self::find($id);
+		
+		$insertStmt = self::$ADODB->Prepare('INSERT INTO smp_mentor(user_id, student_id, contact_id) VALUES(?,?,?)');
+		self::$ADODB->Execute($insertStmt, array($mentee->getUserId(), $mentee->getStudentId(), $mentee->getContactId()));
+		
+		$deleteStmt = self::$ADODB->Prepare('DELETE FROM smp_user_role WHERE user_id=?');
+		self::$ADODB->Execute($deleteStmt, array($mentee->getUserId()));
+		
+		// Update user's role to ROLE_MENTOR
+		$role = $this->roleMapper->findRoleByName(Constants::ROLE_MENTOR);
+		$insertStmt2 = self::$ADODB->Prepare('INSERT INTO smp_user_role(user_id, role_id) VALUES(?,?)');
+		self::$ADODB->Execute($insertStmt2, array($mentee->getUserId(), $role->getId()));
+		
+		// Update Mentee table as it's already copied
+		$updateStmt = self::$ADODB->Prepare('UPDATE smp_mentee SET copied_as_mentor=? WHERE id=?');
+		self::$ADODB->Execute($updateStmt, array(true, $id));
+		
+		return self::$ADODB->CompleteTrans();
+	}
+
+	function markMenteeForWantToBeMentor($id) {
+		$updateStmt = self::$ADODB->Prepare("UPDATE smp_mentee SET want_to_be_mentor=? WHERE id=?");
+		return self::$ADODB->Execute($updateStmt, array(true, $id));
 	}
 	
 	function markMenteeAsExpired($id) {
@@ -193,6 +229,8 @@ class smp_mapper_MenteeMapper extends smp_mapper_Mapper {
 		$obj->setContactId($array['contact_id']);
 		$obj->setMatched($array['matched']);
 		$obj->setExpired($array['expired']);
+		$obj->setWantToBeMentor($array['want_to_be_mentor']);
+		$obj->setCopiedAsMentor($array['copied_as_mentor']);
 		return $obj;
 	}
 	

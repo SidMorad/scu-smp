@@ -12,6 +12,7 @@ require_once('smp/mapper/UserMapper.php');
 require_once('smp/mapper/ContactMapper.php');
 require_once('smp/datagrid/MenteeDatagrid.php');
 require_once('smp/domain/Mentee.php');
+
 class smp_service_MenteeService {
 	protected $studentMapper;
 	protected $menteeMapper;
@@ -25,6 +26,14 @@ class smp_service_MenteeService {
 		$this->contactMapper = new smp_mapper_ContactMapper();
 		$this->menteeDatagrid = new smp_datagrid_MenteeDatagrid();
 		$this->mentorMenteeMapper = new smp_mapper_MentorMenteeMapper();	
+	}
+	
+	function copyMenteeInfoAsMentor($menteeId) {
+		return $this->menteeMapper->copyMenteeInfoAsMentor($menteeId);
+	}
+	
+	function markMenteeForWantToBeMentor($menteeId) {
+		return $this->menteeMapper->markMenteeForWantToBeMentor($menteeId);
 	}
 	
 	function markMenteeAsExpired($menteeId) {
