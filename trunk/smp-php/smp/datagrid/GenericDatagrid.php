@@ -9,7 +9,7 @@
 require_once('smp/datagrid/Datagrid.php');
 class smp_datagrid_GenericDatagrid extends smp_datagrid_Datagrid {
 	
-	function getDatagrid($tableName, $domain = null) {
+	function getDatagrid($tableName, $domain = null, $sortField = 'id', $sortDir = 'ASC') {
 		
 		$searchCriteria = (!is_null($domain) ? self::getSearchCriteria($domain, '', false) : "");
 		
@@ -17,6 +17,7 @@ class smp_datagrid_GenericDatagrid extends smp_datagrid_Datagrid {
 		
 		$query = "SELECT * FROM ".$tableName.$whereCondition;
 		
+		self::$datagrid->setDefaultSort(array($sortField => $sortDir));
 		self::$datagrid->bind($query, self::$options);
 		
 		return self::$datagrid;
